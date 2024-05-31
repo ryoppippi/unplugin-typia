@@ -1,86 +1,11 @@
 {
-  "name": "unplugin-typia",
+  "name": "unplugin-typia-monorepo",
   "type": "module",
-  "version": "0.1.0",
-  "packageManager": "pnpm@8.6.12",
   "description": "",
-  "license": "MIT",
   "author": "ryoppippi",
-  "homepage": "https://github.com/antfu/unplugin-starter#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/antfu/unplugin-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/antfu/unplugin-starter/issues"
-  },
-  "keywords": [
-    "unplugin",
-    "vite",
-    "webpack",
-    "rollup",
-    "transform"
-  ],
-  "exports": {
-    ".": {
-      "import": "./src/index.ts"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "lint": "eslint .",
-    "test": "vitest"
-  },
-  "peerDependencies": {
-    "@nuxt/kit": "^3",
-    "@nuxt/schema": "^3",
-    "esbuild": "*",
-    "rollup": "^3",
-    "vite": ">=3",
-    "webpack": "^4 || ^5"
-  },
-  "peerDependenciesMeta": {
-    "webpack": {
-      "optional": true
-    },
-    "rollup": {
-      "optional": true
-    },
-    "vite": {
-      "optional": true
-    },
-    "esbuild": {
-      "optional": true
-    },
-    "@nuxt/kit": {
-      "optional": true
-    },
-    "@nuxt/schema": {
-      "optional": true
-    }
-  },
-  "dependencies": {
-    "unplugin": "^1.5.1"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^2.2.2",
-    "@nuxt/kit": "^3.8.2",
-    "@nuxt/schema": "^3.8.2",
-    "@types/node": "^20.10.3",
-    "bumpp": "^9.2.0",
-    "chalk": "^5.3.0",
-    "eslint": "^8.55.0",
-    "fast-glob": "^3.3.2",
-    "nodemon": "^3.0.2",
-    "rimraf": "^5.0.5",
-    "rollup": "^4.6.1",
-    "typescript": "^5.3.2",
-    "typia": "^6.0.3",
-    "vite": "^5.0.4",
-    "vitest": "^0.34.6",
-    "webpack": "^5.89.0"
-  }
+  "license": "MIT",
+  "workspaces": [
+    "examples/*",
+    "packages/*"
+  ]
 }

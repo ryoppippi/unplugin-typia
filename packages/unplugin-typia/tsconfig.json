@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"lib": ["esnext", "esnext.asynciterable", "DOM"],
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"resolveJsonModule": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"esModuleInterop": true
+	},
+	"exclude": ["dist", "eslint.config.js"]
+}
