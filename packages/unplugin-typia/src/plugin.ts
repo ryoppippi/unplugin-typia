@@ -37,7 +37,7 @@ const unpluginFactory: UnpluginFactory<Options> = (
 			const serviceHost = new LanguageServiceHost({
 				...tsconfig,
 				fileNames: [id],
-				options: tsconfig.compilerOptions,
+				options: { ...tsconfig.compilerOptions, moduleResolution: undefined },
 				errors: [],
 			}, options.cwd ?? process.cwd());
 
