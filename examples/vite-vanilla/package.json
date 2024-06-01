@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "vanilla-vite",
+  "name": "vite-vanilla",
   "type": "module",
   "scripts": {
     "build": "bun -b vite build",
