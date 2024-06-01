@@ -3,7 +3,7 @@ import { type UnpluginFactory, type UnpluginInstance, createUnplugin } from 'unp
 import { readTSConfig } from 'pkg-types';
 import { createFilter } from '@rollup/pluginutils';
 import * as U from '@core/unknownutil';
-import * as ts from 'typescript';
+import ts from 'typescript';
 import { type Options, resolveOptions } from './options.js';
 import { LanguageServiceHost } from './language_service.js';
 import { transformTypia } from './typia.js';
