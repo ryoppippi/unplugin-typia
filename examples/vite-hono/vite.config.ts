@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     UnpluginTypia(),
     devServer({
-      entry: "src/index.ts",
+      entry: "main.ts",
     }),
   ],
 });
