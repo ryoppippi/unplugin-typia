@@ -1,81 +1,82 @@
 {
-	"name": "unplugin-typia",
-	"type": "module",
-	"version": "0.1.0",
-	"description": "unplugin for typia",
-	"author": "ryoppippi",
-	"license": "MIT",
-	"keywords": [
-		"unplugin",
-		"vite",
-		"webpack",
-		"rollup",
-		"transform"
-	],
-	"exports": {
-		".": {
-			"import": "./src/index.ts"
-		},
-		"./package.json": "./package.json"
-	},
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"lint": "eslint .",
-		"test": "vitest"
-	},
-	"peerDependencies": {
-		"@nuxt/kit": "^3",
-		"@nuxt/schema": "^3",
-		"esbuild": "*",
-		"rollup": "^3",
-		"vite": ">=3",
-		"webpack": "^4 || ^5"
-	},
-	"peerDependenciesMeta": {
-		"@nuxt/kit": {
-			"optional": true
-		},
-		"@nuxt/schema": {
-			"optional": true
-		},
-		"esbuild": {
-			"optional": true
-		},
-		"rollup": {
-			"optional": true
-		},
-		"vite": {
-			"optional": true
-		},
-		"webpack": {
-			"optional": true
-		}
-	},
-	"dependencies": {
-		"@core/unknownutil": "npm:@jsr/core__unknownutil",
-		"unplugin": "^1.5.1"
-	},
-	"devDependencies": {
-		"@antfu/eslint-config": "^2.2.2",
-		"@nuxt/kit": "^3.8.2",
-		"@nuxt/schema": "^3.8.2",
-		"@types/node": "^20.10.3",
-		"bumpp": "^9.2.0",
-		"chalk": "^5.3.0",
-		"eslint": "^8.55.0",
-		"eslint-plugin-format": "^0.1.1",
-		"fast-glob": "^3.3.2",
-		"magic-string": "^0.30.10",
-		"nodemon": "^3.0.2",
-		"pkg-types": "^1.1.1",
-		"rimraf": "^5.0.5",
-		"rollup": "^4.6.1",
-		"typescript": "^5.3.2",
-		"typia": "^6.0.3",
-		"vite": "^5.0.4",
-		"vitest": "^0.34.6",
-		"webpack": "^5.89.0"
-	}
+  "name": "unplugin-typia",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "unplugin for typia",
+  "author": "ryoppippi",
+  "license": "MIT",
+  "keywords": [
+    "unplugin",
+    "vite",
+    "webpack",
+    "rollup",
+    "transform"
+  ],
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "@nuxt/kit": "^3",
+    "@nuxt/schema": "^3",
+    "esbuild": "*",
+    "rollup": "^3",
+    "vite": ">=3",
+    "webpack": "^4 || ^5"
+  },
+  "peerDependenciesMeta": {
+    "@nuxt/kit": {
+      "optional": true
+    },
+    "@nuxt/schema": {
+      "optional": true
+    },
+    "esbuild": {
+      "optional": true
+    },
+    "rollup": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@core/unknownutil": "npm:@jsr/core__unknownutil@3.18.1",
+    "@rollup/pluginutils": "^5.1.0",
+    "unplugin": "^1.5.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.2.2",
+    "@nuxt/kit": "^3.8.2",
+    "@nuxt/schema": "^3.8.2",
+    "@types/node": "^20.10.3",
+    "bumpp": "^9.2.0",
+    "chalk": "^5.3.0",
+    "eslint": "^8.55.0",
+    "eslint-plugin-format": "^0.1.1",
+    "fast-glob": "^3.3.2",
+    "magic-string": "^0.30.10",
+    "nodemon": "^3.0.2",
+    "pkg-types": "^1.1.1",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.6.1",
+    "typescript": "^5.3.2",
+    "typia": "^6.0.3",
+    "vite": "^5.0.4",
+    "vitest": "^0.34.6",
+    "webpack": "^5.89.0"
+  }
 }
