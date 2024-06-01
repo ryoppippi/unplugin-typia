@@ -38,9 +38,11 @@ function InputForm() {
       />
       </div>
       <div>
-        {(result?.success ?? true)
+        {(result?.success === true)
           ? <p style={{color: 'green'}}>Valid</p> 
-          : <p style={{color: 'red'}}>{JSON.stringify(result?.errors)}</p>}
+          : <p style={{color: 'red'}}>
+            { result?.errors != null ? JSON.stringify(result.errors) : 'Invalid' }
+          </p>}
       </div>
     </form>
   )
