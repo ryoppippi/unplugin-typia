@@ -10,7 +10,9 @@ export function next(nextConfig: Record<string, any> = {}, options: Options) {
 		webpack(config: Record<string, any>, webpackOptions: Record<string, any>) {
 			config.plugins.unshift(webpack(options));
 
-			if (typeof nextConfig.webpack === 'function') { return nextConfig.webpack(config, webpackOptions); }
+			if (typeof nextConfig.webpack === 'function') {
+				return nextConfig.webpack(config, webpackOptions);
+			}
 
 			return config;
 		},

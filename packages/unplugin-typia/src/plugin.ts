@@ -13,10 +13,10 @@ const name = 'unplugin-typia' as const;
 /**
  * The main unplugin instance.
  */
-
-const unpluginFactory: UnpluginFactory<Options> = (
-	rawOptions,
-) => {
+const unpluginFactory: UnpluginFactory<
+	Options | undefined,
+	false
+> = (rawOptions = {}) => {
 	const options = resolveOptions(rawOptions);
 	const filter = createFilter(options.include, options.exclude);
 
