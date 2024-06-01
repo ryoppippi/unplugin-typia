@@ -18,7 +18,7 @@ First, install `unplugin-typia`:
 
 ```bash
 # jsr
-npx jsr add -D @unplugin/macros
+npx jsr add -D @ryoppippi/unplugin-typia
 ```
 
 Then, install `typia`:
@@ -41,7 +41,7 @@ Then, add the unplugin to your favorite bundler:
 
 ```ts
 // vite.config.ts
-import UnpluginTypia from 'unplugin-typia';
+import UnpluginTypia from '@ryoppippi/unplugin-typia';
 
 export default defineConfig({
 	plugins: [
@@ -59,7 +59,7 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import UnpluginTypia from 'unplugin-typia';
+import UnpluginTypia from '@ryoppippi/unplugin-typia';
 
 export default {
 	plugins: [
@@ -76,7 +76,7 @@ export default {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild';
-import UnpluginTypia from 'unplugin-typia';
+import UnpluginTypia from '@ryoppippi/unplugin-typia';
 
 export default {
 	plugins: [
@@ -92,7 +92,7 @@ export default {
 
 ```ts
 // webpack.config.js
-const UnpluginTypia = require('unplugin-typia');
+const UnpluginTypia = require('@ryoppippi/unplugin-typia');
 
 module.exports = {
 	plugins: [
