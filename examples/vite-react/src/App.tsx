@@ -1,32 +1,56 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import typia, { tags } from "typia";
-import { v4 } from "uuid";
- 
-export const check = typia.createIs<IMember>();
- 
-interface IMember {
-  id: string & tags.Format<"uuid">;
-  email: string & tags.Format<"email">;
-  age: number & tags.ExclusiveMinimum<19> & tags.Maximum<100>;
-}
+import { v4 } from 'uuid'
+import { type IMember, type IValidation, validate } from './types.js'
 
+function InputForm() {
+  const [email, setEmail] = useState("example@example.com")
+  const [age, setAge] = useState(19)
+  const [result, setResult] = useState<IValidation | null>(null)
 
-const member = {
-  id: v4(),
-  email: "example@example.com",
-  age: 30,
-} as const satisfies IMember;
+  useEffect(() => {
+    const member = {
+      id: v4(),
+      email,
+      age,
+    } as const satisfies IMember;
+    const result = validate(member);
+    setResult(result);
+  }, [email, age])
 
-const result = check(member);
-
-function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      {result ? (<h1>Valid</h1>) : (<h1>Invalid</h1>)}
-    </>
+    <form style={ {display: 'flex', flexDirection: 'column', gap: '10px'} }>
+      <div>
+      <label>Email</label>
+        <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      </div>
+      <div>
+        <label>Age</label>
+        <input
+        type="number"
+        value={age}
+        onChange={(e) => setAge(Number(e.target.value))}
+      />
+      </div>
+      <div>
+        {(result?.success ?? true)
+          ? <p style={{color: 'green'}}>Valid</p> 
+          : <p style={{color: 'red'}}>{JSON.stringify(result?.errors)}</p>}
+      </div>
+    </form>
+  )
+}
+
+function App() {
+  return (
+    <div className="App">
+      <InputForm />
+    </div>
   )
 }
 

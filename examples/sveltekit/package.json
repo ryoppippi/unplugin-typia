@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "vite": "bun x -b vite",
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "bun -b vite dev",
+    "build": "bun -b vite build",
+    "preview": "bun -b vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "prepare": "ts-patch install && typia patch"
