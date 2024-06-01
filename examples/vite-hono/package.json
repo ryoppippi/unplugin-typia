@@ -13,7 +13,6 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@hono/typia-validator": "^0.0.4",
     "@hono/vite-cloudflare-pages": "^0.4.0",
     "@hono/vite-dev-server": "^0.12.1",
     "ts-node": "^10.9.2",

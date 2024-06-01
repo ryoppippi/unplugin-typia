@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { typiaValidator } from "@hono/typia-validator";
+import { validator } from 'hono/validator'
 import typia, { type tags } from "typia";
 
 /** define the author interface */
@@ -13,11 +13,20 @@ interface Author {
 }
 
 /** create a validate function */
-const validate = typia.createValidate<Author>();
+const check = typia.createIs<Author>();
+
 
 const app = new Hono();
 
-app.post("/", typiaValidator("json", validate), (c) => {
+app.post("/",
+  validator('json', (v, c)=>{
+    const result = check(v);
+    if (!result){
+      return c.json({success: false, message: 'Invalid data', data: v})
+    }
+    return v
+  })
+  , (c) => {
   const data = c.req.valid("json");
   return c.json({
     success: true,
