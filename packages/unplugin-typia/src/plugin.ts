@@ -48,6 +48,7 @@ const unpluginFactory: UnpluginFactory<Options> = (
 			return transformTypia(
 				id,
 				service,
+				this,
 			);
 		},
 	};

@@ -1,6 +1,7 @@
 import * as ts from 'typescript';
 import * as U from '@core/unknownutil';
 import MagicString from 'magic-string';
+import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform } from 'typia/lib/transform.js';
 
 const printer = ts.createPrinter();
@@ -8,6 +9,12 @@ const printer = ts.createPrinter();
 export function transformTypia(
 	id: string,
 	service: ts.LanguageService,
+	/**
+	 * **Use with caution.**
+	 *
+	 * This is an experimental feature and may be changed at any time.
+	 */
+	unpluginContext: UnpluginBuildContext & UnpluginContext,
 ): { code: string; map: any } | undefined {
 	const program = service.getProgram();
 
@@ -46,8 +53,8 @@ export function transformTypia(
 
 	const generatedSource = printer.printFile(file);
 	for (const diagnostic of diagnostics) {
-		console.warn(transformed.transformed.map(e => e.fileName).join(','));
-		console.warn(JSON.stringify(diagnostic.messageText));
+		unpluginContext.warn(transformed.transformed.map(e => e.fileName).join(','));
+		unpluginContext.warn(JSON.stringify(diagnostic.messageText));
 	}
 
 	const magic = new MagicString(generatedSource);
