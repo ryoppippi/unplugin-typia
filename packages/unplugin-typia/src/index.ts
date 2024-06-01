@@ -4,7 +4,7 @@ import type { Options } from './options.js';
 export const babel = '';
 export const { esbuild, webpack, rollup, rspack, vite } = unplugin;
 
-export function next(nextConfig: Record<string, any> = {}, options: Options) {
+export function next(nextConfig: Record<string, any> = {}, options: Options): Record<string, any> {
 	return {
 		...nextConfig,
 		webpack(config: Record<string, any>, webpackOptions: Record<string, any>) {
