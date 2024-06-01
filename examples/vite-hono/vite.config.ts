@@ -1,15 +1,13 @@
 import devServer from '@hono/vite-dev-server'
+import pages from '@hono/vite-cloudflare-pages'
 import { defineConfig } from "vite";
 import UnpluginTypia from "unplugin-typia/vite";
 
+const entry = "main.ts";
 export default defineConfig({
-  build: {
-    minify: false,
-  },
   plugins: [
     UnpluginTypia(),
-    devServer({
-      entry: "main.ts",
-    }),
+    pages({ entry }),
+    devServer({ entry }),
   ],
 });
