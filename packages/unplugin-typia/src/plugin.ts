@@ -1,5 +1,5 @@
 import process from 'node:process';
-import { type UnpluginFactory, createUnplugin } from 'unplugin';
+import { type UnpluginFactory, type UnpluginInstance, createUnplugin } from 'unplugin';
 import { readTSConfig } from 'pkg-types';
 import { createFilter } from '@rollup/pluginutils';
 import * as U from '@core/unknownutil';
@@ -54,6 +54,11 @@ const unpluginFactory: UnpluginFactory<
 	};
 };
 
-export const unplugin = /* #__PURE__ */ createUnplugin(unpluginFactory);
+/**
+ * This is the unplugin function that is exported.
+ *
+ * @module
+ */
+export const unplugin: UnpluginInstance<Options | undefined, false> = /* #__PURE__ */ createUnplugin(unpluginFactory);
 
 export default unplugin;

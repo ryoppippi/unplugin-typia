@@ -2,14 +2,13 @@
 
 **Unplugin for [Typia](https://typia.io/)**
 
-> ⚠️ Note: this is highly experimental software. 
+> ⚠️ Note: this is highly experimental software.
 
 ## Why
 
 Typia is fantastic, but it is hard to setup, even for frontend development.
 If you use some bundlers for frontend like `Vite`, it is even harder to setup.
 This unplugin aims to make it easier to use Typia in your projects.
-
 
 ## Install
 
@@ -21,6 +20,7 @@ npx jsr add -D @unplugin/macros
 ```
 
 Then, install `typia`:
+
 ```bash
 npm install --save typia
 npm install --save-dev typescript ts-patch ts-node
@@ -28,6 +28,7 @@ npm install --save-dev typescript ts-patch ts-node
 npx ts-patch install
 npx typia patch
 ```
+
 You should follow the [manual setup instructions](https://typia.io/docs/setup/#manual-setup) on the Typia website.
 However, you don't need to add plugins to the `tsconfig.json` file.
 
@@ -38,11 +39,11 @@ Then, add the unplugin to your favorite bundler:
 
 ```ts
 // vite.config.ts
-import UnpluginTypia from "unplugin-typia";
+import UnpluginTypia from 'unplugin-typia';
 
 export default defineConfig({
 	plugins: [
-        UnpluginTypia.vite({ /* options */ }),
+		UnpluginTypia.vite({ /* options */ }),
 	],
 });
 ```
@@ -56,32 +57,30 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import UnpluginTypia from "unplugin-typia";
+import UnpluginTypia from 'unplugin-typia';
 
 export default {
 	plugins: [
-        UnpluginTypia.rollup({ /* options */ }),
+		UnpluginTypia.rollup({ /* options */ }),
 	],
 };
 ```
 
 <br></details>
 
-
 <details>
 <summary>esbuild</summary><br>
 
 ```ts
 // esbuild.config.js
-import { build } from 'esbuild'
-import UnpluginTypia from "unplugin-typia";
+import { build } from 'esbuild';
+import UnpluginTypia from 'unplugin-typia';
 
 export default {
-    plugins: [
-        UnpluginTypia.esbuild({ /* options */ }),
-    ],
+	plugins: [
+		UnpluginTypia.esbuild({ /* options */ }),
+	],
 };
-
 ```
 
 <br></details>
@@ -94,11 +93,10 @@ export default {
 const UnpluginTypia = require('unplugin-typia');
 
 module.exports = {
-    plugins: [
-        UnpluginTypia.webpack({ /* options */ }),
-    ],
+	plugins: [
+		UnpluginTypia.webpack({ /* options */ }),
+	],
 };
-
 ```
 
 <br></details>
@@ -109,4 +107,4 @@ You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin
 
 ## LICENSE
 
-[MIT](./LICENSE) 
+[MIT](./LICENSE)

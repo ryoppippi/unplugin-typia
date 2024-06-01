@@ -1,8 +1,11 @@
 import unplugin from './plugin.js';
 import type { Options } from './options.js';
 
-export const babel = '';
-export const { esbuild, webpack, rollup, rspack, vite } = unplugin;
+const esbuild = unplugin.esbuild;
+const webpack = unplugin.webpack;
+const rollup = unplugin.rollup;
+const rspack = unplugin.rspack;
+const vite = unplugin.vite;
 
 export function next(nextConfig: Record<string, any> = {}, options: Options): Record<string, any> {
 	return {
@@ -19,6 +22,15 @@ export function next(nextConfig: Record<string, any> = {}, options: Options): Re
 	};
 }
 
+export {
+	vite,
+	webpack,
+	rollup,
+	rspack,
+	esbuild,
+	unplugin,
+};
+
 export default {
 	vite,
 	webpack,
@@ -26,6 +38,5 @@ export default {
 	rspack,
 	esbuild,
 	next,
-	babel,
 	unplugin,
 };
