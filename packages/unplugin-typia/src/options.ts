@@ -53,10 +53,7 @@ export type OptionsResolved =
     Required<Options>,
     'enforce' | 'viteServer'
   >
-  & {
-  	enforce?: Options['enforce'];
-  	viteServer?: Options['viteServer'];
-  };
+  & { enforce?: Options['enforce']; viteServer?: Options['viteServer'] };
 
 /**
  * Resolves the options for the plugin.
