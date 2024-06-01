@@ -7,7 +7,7 @@
 import unplugin from './core/index.js';
 
 /**
- * Vite plugin
+ * Farm plugin
  *
  * @example
  * ```ts
