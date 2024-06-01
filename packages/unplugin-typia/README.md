@@ -2,6 +2,8 @@
 
 **Unplugin for [Typia](https://typia.io/)**
 
+[![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia>)](https://jsr.io/@ryoppippi/unplugin-typia)
+
 > ⚠️ Note: this is highly experimental software.
 
 ## Why
