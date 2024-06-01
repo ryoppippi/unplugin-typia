@@ -2,7 +2,6 @@ import process from 'node:process';
 import { type UnpluginFactory, type UnpluginInstance, createUnplugin } from 'unplugin';
 import { readTSConfig } from 'pkg-types';
 import { createFilter } from '@rollup/pluginutils';
-import * as U from '@core/unknownutil';
 import ts from 'typescript';
 import { type Options, resolveOptions } from './options.js';
 import { LanguageServiceHost } from './language_service.js';
@@ -31,7 +30,7 @@ const unpluginFactory: UnpluginFactory<
 		async transform(_, id) {
 			const tsconfig = await readTSConfig();
 
-			if (U.isNullish(tsconfig.compilerOptions)) {
+			if (tsconfig.compilerOptions == null) {
 				throw new Error('No compilerOptions found in tsconfig.json');
 			}
 			const serviceHost = new LanguageServiceHost({

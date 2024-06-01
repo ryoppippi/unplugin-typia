@@ -79,7 +79,6 @@
     }
   },
   "dependencies": {
-    "@core/unknownutil": "npm:@jsr/core__unknownutil@3.18.1",
     "@rollup/pluginutils": "^5.1.0",
     "typescript": "^5.3.2",
     "unplugin": "^1.5.1"

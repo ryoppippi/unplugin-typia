@@ -1,5 +1,4 @@
 import ts from 'typescript';
-import * as U from '@core/unknownutil';
 import MagicString from 'magic-string';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform } from 'typia/lib/transform.js';
@@ -20,11 +19,11 @@ export function transformTypia(
 
 	const tsSource = program?.getSourceFile(id);
 
-	if (U.isNullish(tsSource)) {
+	if (tsSource == null) {
 		throw new Error('No source found');
 	}
 
-	if (U.isNullish(program)) {
+	if (program == null) {
 		throw new Error('No program found');
 	}
 
@@ -47,7 +46,7 @@ export function transformTypia(
 
 	const file = transformed.transformed.find(t => t.fileName === id);
 
-	if (U.isNullish(file)) {
+	if (file == null) {
 		throw new Error('No file found');
 	}
 
