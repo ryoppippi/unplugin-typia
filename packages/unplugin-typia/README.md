@@ -41,11 +41,11 @@ Then, add the unplugin to your favorite bundler:
 
 ```ts
 // vite.config.ts
-import UnpluginTypia from '@ryoppippi/unplugin-typia';
+import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 
 export default defineConfig({
 	plugins: [
-		UnpluginTypia.vite({ /* options */ }),
+		UnpluginTypia({ /* options */ }),
 	],
 });
 ```
@@ -59,11 +59,11 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import UnpluginTypia from '@ryoppippi/unplugin-typia';
+import UnpluginTypia from '@ryoppippi/unplugin-typia/rollup';
 
 export default {
 	plugins: [
-		UnpluginTypia.rollup({ /* options */ }),
+		UnpluginTypia({ /* options */ }),
 	],
 };
 ```
@@ -76,11 +76,11 @@ export default {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild';
-import UnpluginTypia from '@ryoppippi/unplugin-typia';
+import UnpluginTypia from '@ryoppippi/unplugin-typia/esbuild';
 
 export default {
 	plugins: [
-		UnpluginTypia.esbuild({ /* options */ }),
+		UnpluginTypia({ /* options */ }),
 	],
 };
 ```
@@ -92,11 +92,11 @@ export default {
 
 ```ts
 // webpack.config.js
-const UnpluginTypia = require('@ryoppippi/unplugin-typia');
+const UnpluginTypia = require('@ryoppippi/unplugin-typia/webpack');
 
 module.exports = {
 	plugins: [
-		UnpluginTypia.webpack({ /* options */ }),
+		UnpluginTypia({ /* options */ }),
 	],
 };
 ```
