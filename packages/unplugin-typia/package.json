@@ -2,7 +2,7 @@
 	"name": "unplugin-typia",
 	"type": "module",
 	"version": "0.1.0",
-	"description": "",
+	"description": "unplugin for typia",
 	"author": "ryoppippi",
 	"license": "MIT",
 	"keywords": [
