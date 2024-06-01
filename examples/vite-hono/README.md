@@ -1,5 +1,6 @@
+# unplugin-typia example for Hono + Vite
 ```txt
-npm install
-npm run dev
+bun i && bun prepare
+bun run dev
+bun run build
 ```
-
