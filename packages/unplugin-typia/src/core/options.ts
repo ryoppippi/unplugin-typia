@@ -1,5 +1,8 @@
+import process from 'node:process';
+
 import type { InlineConfig, ViteDevServer } from 'vite';
 import type { FilterPattern } from '@rollup/pluginutils';
+import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
 
 /**
  * Represents the options for the plugin.
@@ -43,6 +46,11 @@ export interface Options {
 	 * @default process.cwd()
 	 */
 	cwd?: string;
+
+	/**
+	 * The options for the typia transformer.
+	 */
+	typia?: ITransformOptions;
 }
 
 /**
@@ -53,7 +61,7 @@ export type OptionsResolved =
     Required<Options>,
     'enforce' | 'viteServer'
   >
-  & { enforce?: Options['enforce']; viteServer?: Options['viteServer'] };
+  & { enforce?: Options['enforce']; viteServer?: Options['viteServer']; typia?: Options['typia'] };
 
 /**
  * Resolves the options for the plugin.
@@ -68,6 +76,7 @@ export function resolveOptions(options: Options): OptionsResolved {
 		viteServer: options.viteServer,
 		viteConfig: options.viteConfig || {},
 		enforce: 'enforce' in options ? options.enforce : 'pre',
-		cwd: options.cwd,
+		cwd: options.cwd ?? process.cwd(),
+		typia: options.typia ?? {},
 	};
 }

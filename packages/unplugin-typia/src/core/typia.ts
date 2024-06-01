@@ -2,6 +2,7 @@ import ts from 'typescript';
 import MagicString from 'magic-string';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform } from 'typia/lib/transform.js';
+import type { Options } from './options.ts';
 
 const printer = ts.createPrinter();
 
@@ -14,6 +15,7 @@ export function transformTypia(
 	 * This is an experimental feature and may be changed at any time.
 	 */
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
+	options: Options,
 ): { code: string; map: any } | undefined {
 	const program = service.getProgram();
 
@@ -29,7 +31,7 @@ export function transformTypia(
 
 	const diagnostics: ts.Diagnostic[] = [];
 
-	const typiaTransformed = transform(program, {}, {
+	const typiaTransformed = transform(program, options.typia, {
 		addDiagnostic(diag) {
 			return diagnostics.push(diag);
 		},
@@ -52,7 +54,9 @@ export function transformTypia(
 
 	const generatedSource = printer.printFile(file);
 	for (const diagnostic of diagnostics) {
-		unpluginContext.warn(transformed.transformed.map(e => e.fileName).join(','));
+		unpluginContext.warn(
+			transformed.transformed.map(e => e.fileName).join(','),
+		);
 		unpluginContext.warn(JSON.stringify(diagnostic.messageText));
 	}
 

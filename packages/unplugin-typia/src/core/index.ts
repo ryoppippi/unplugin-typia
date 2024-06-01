@@ -1,5 +1,8 @@
-import process from 'node:process';
-import { type UnpluginFactory, type UnpluginInstance, createUnplugin } from 'unplugin';
+import {
+	type UnpluginFactory,
+	type UnpluginInstance,
+	createUnplugin,
+} from 'unplugin';
 import { readTSConfig } from 'pkg-types';
 import { createFilter } from '@rollup/pluginutils';
 import ts from 'typescript';
@@ -13,8 +16,8 @@ const name = 'unplugin-typia' as const;
  * The main unplugin instance.
  */
 const unpluginFactory: UnpluginFactory<
-	Options | undefined,
-	false
+  Options | undefined,
+  false
 > = (rawOptions = {}) => {
 	const options = resolveOptions(rawOptions);
 	const filter = createFilter(options.include, options.exclude);
@@ -38,7 +41,7 @@ const unpluginFactory: UnpluginFactory<
 				fileNames: [id],
 				options: { ...tsconfig.compilerOptions, moduleResolution: undefined },
 				errors: [],
-			}, options.cwd ?? process.cwd());
+			}, options.cwd);
 
 			const documentRegistry = ts.createDocumentRegistry();
 			const service = ts.createLanguageService(serviceHost, documentRegistry);
@@ -48,6 +51,7 @@ const unpluginFactory: UnpluginFactory<
 				id,
 				service,
 				this,
+				options,
 			);
 		},
 	};
@@ -58,6 +62,7 @@ const unpluginFactory: UnpluginFactory<
  *
  * @module
  */
-export const unplugin: UnpluginInstance<Options | undefined, false> = /* #__PURE__ */ createUnplugin(unpluginFactory);
+export const unplugin: UnpluginInstance<Options | undefined, false>
+/* #__PURE__ */ = createUnplugin(unpluginFactory);
 
 export default unplugin;
