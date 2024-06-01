@@ -23,7 +23,8 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "test": "vitest"
+    "test": "vitest",
+    "publish": "bun x jsr publish"
   },
   "peerDependencies": {
     "@nuxt/kit": "^3",
