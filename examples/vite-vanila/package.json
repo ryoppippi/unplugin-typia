@@ -9,13 +9,13 @@
   "devDependencies": {
     "vite": "^5.0.4",
     "vite-plugin-inspect": "^0.8.1",
-    "unplugin-typia": "workspace:*"
-  },
-  "dependencies": {
     "ts-node": "^10.9.2",
     "ts-patch": "^3.1.2",
     "typescript": "^5.4.5",
     "typia": "^6.0.4",
+    "unplugin-typia": "workspace:*"
+  },
+  "dependencies": {
     "uuid": "^9.0.1"
   }
 }
