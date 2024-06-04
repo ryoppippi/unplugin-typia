@@ -5,12 +5,17 @@
   "scripts": {
     "build": "tsx build.ts",
     "watch": "tsx watch build.ts",
-    "preview": "node dist/main.mjs"
+    "preview": "node dist/main.mjs",
+    "prepare": "ts-patch install && typia patch"
   },
   "devDependencies": {
     "dax-sh": "^0.41.0",
     "esbuild": "^0.20.2",
     "tsx": "^4.7.2",
+    "ts-node": "^10.9.2",
+    "ts-patch": "^3.1.2",
+    "tslib": "^2.4.1",
+    "typescript": "^5.0.0",
     "unplugin-typia": "workspace:*"
   }
 }
