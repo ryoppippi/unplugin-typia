@@ -1,7 +1,6 @@
 import typia, { type tags } from "typia";
-import { v4 } from "uuid";
 
-export const check = typia.createIs<IMember>();
+export const random = typia.createRandom<IMember>();
 
 interface IMember {
   email: string & tags.Format<"email">;
@@ -9,11 +8,5 @@ interface IMember {
   age: number & tags.ExclusiveMinimum<19> & tags.Maximum<100>;
 }
 
-const member = {
-  id: v4(),
-  email: "example@example.com",
-  age: 30,
-} as const satisfies IMember;
-
-const result = check(member);
-document.getElementById("app")!.innerHTML = JSON.stringify(result);
+const dummy = random();
+document.getElementById("app")!.innerHTML = JSON.stringify(dummy);
