@@ -7,6 +7,7 @@
     "dev": "bun -b vite",
     "build": "bun -b tsc && bun -b vite build",
     "preview": "bun -b vite preview",
+    "deploy": "bun run build && npx wrangler pages deploy dist",
     "prepare": "ts-patch install && typia patch"
   },
   "dependencies": {
