@@ -16,6 +16,9 @@
 		".": {
 			"import": "./src/index.ts"
 		},
+		"./api": {
+			"import": "./src/api.ts"
+		},
 		"./vite": {
 			"import": "./src/vite.ts"
 		},

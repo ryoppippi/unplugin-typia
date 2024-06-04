@@ -3,6 +3,7 @@
 	"version": "0.1.6",
 	"exports": {
 		".": "./src/index.ts",
+		"./api": "./src/api.ts",
 		"./vite": "./src/vite.ts",
 		"./webpack": "./src/webpack.ts",
 		"./rollup": "./src/rollup.ts",
