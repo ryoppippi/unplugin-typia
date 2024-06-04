@@ -3,11 +3,9 @@ import {
 	type UnpluginInstance,
 	createUnplugin,
 } from 'unplugin';
-import { readTSConfig } from 'pkg-types';
 import { createFilter } from '@rollup/pluginutils';
-import ts from 'typescript';
+
 import { type Options, resolveOptions } from './options.js';
-import { LanguageServiceHost } from './language_service.js';
 import { transformTypia } from './typia.js';
 
 const name = 'unplugin-typia' as const;
@@ -31,25 +29,8 @@ const unpluginFactory: UnpluginFactory<
 		},
 
 		async transform(_, id) {
-			const tsconfig = await readTSConfig();
-
-			if (tsconfig.compilerOptions == null) {
-				throw new Error('No compilerOptions found in tsconfig.json');
-			}
-			const serviceHost = new LanguageServiceHost({
-				...tsconfig,
-				fileNames: [id],
-				options: { ...tsconfig.compilerOptions, moduleResolution: undefined },
-				errors: [],
-			}, options.cwd);
-
-			const documentRegistry = ts.createDocumentRegistry();
-			const service = ts.createLanguageService(serviceHost, documentRegistry);
-			serviceHost.setLanguageService(service);
-
-			return transformTypia(
+			return await transformTypia(
 				id,
-				service,
 				this,
 				options,
 			);
@@ -62,7 +43,12 @@ const unpluginFactory: UnpluginFactory<
  *
  * @module
  */
-export const unplugin: UnpluginInstance<Options | undefined, false>
+const unplugin: UnpluginInstance<Options | undefined, false>
 /* #__PURE__ */ = createUnplugin(unpluginFactory);
+
+export {
+	transformTypia,
+	unplugin,
+};
 
 export default unplugin;

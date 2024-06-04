@@ -1,22 +1,48 @@
 import ts from 'typescript';
+import { readTSConfig } from 'pkg-types';
 import MagicString from 'magic-string';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform } from 'typia/lib/transform.js';
-import type { Options } from './options.ts';
+
+import { LanguageServiceHost } from './language_service.js';
+import type { OptionsResolved } from './options.ts';
 
 const printer = ts.createPrinter();
 
-export function transformTypia(
+/**
+ * Transform a TypeScript file with Typia.
+ *
+ * @param id - The file path.
+ * @param unpluginContext - The unplugin context.
+ * @param options - The resolved options.
+ * @returns The transformed code and source map.
+ */
+export async function transformTypia(
 	id: string,
-	service: ts.LanguageService,
 	/**
 	 * **Use with caution.**
 	 *
 	 * This is an experimental feature and may be changed at any time.
 	 */
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
-	options: Options,
-): { code: string; map: any } | undefined {
+	options: OptionsResolved,
+): Promise<{ code: string; map: any } | undefined> {
+	/** define serviceHost */
+	const tsconfig = await readTSConfig();
+	if (tsconfig.compilerOptions == null) {
+		throw new Error('No compilerOptions found in tsconfig.json');
+	}
+	const serviceHost = new LanguageServiceHost({
+		...tsconfig,
+		fileNames: [id],
+		options: { ...tsconfig.compilerOptions, moduleResolution: undefined },
+		errors: [],
+	}, options.cwd);
+
+	const documentRegistry = ts.createDocumentRegistry();
+	const service = ts.createLanguageService(serviceHost, documentRegistry);
+	serviceHost.setLanguageService(service);
+
 	const program = service.getProgram();
 
 	const tsSource = program?.getSourceFile(id);
