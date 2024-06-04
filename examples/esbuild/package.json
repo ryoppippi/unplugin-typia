@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "name": "example-esbuild",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsx build.ts",
+    "watch": "tsx watch build.ts",
+    "preview": "node dist/main.mjs"
+  },
+  "devDependencies": {
+    "dax-sh": "^0.41.0",
+    "esbuild": "^0.20.2",
+    "tsx": "^4.7.2",
+    "unplugin-typia": "workspace:*"
+  }
+}
