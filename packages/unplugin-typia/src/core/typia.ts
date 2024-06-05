@@ -35,7 +35,10 @@ export async function transformTypia(
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
 	options: OptionsResolved,
 ): Promise<{ code: string; map: any } | undefined> {
-	const { program, tsSource } = await getProgramAndSource(id, source, options.cache.enable);
+	/** parse tsconfig compilerOptions */
+	compilerOptions = await getTsCompilerOption();
+
+	const { program, tsSource } = await getProgramAndSource(id, source, compilerOptions, options.cache.enable);
 
 	const {
 		diagnostics,
@@ -60,7 +63,7 @@ export async function transformTypia(
 /**
  * Read tsconfig.json and get compilerOptions.
  */
-async function getTsConfig(): Promise<ts.CompilerOptions> {
+async function getTsCompilerOption(): Promise<ts.CompilerOptions> {
 	compilerOptions = compilerOptions
 	?? ({
 		...(await readTSConfig())?.compilerOptions,
@@ -77,17 +80,16 @@ async function getTsConfig(): Promise<ts.CompilerOptions> {
  *
  * @param id - The file path.
  * @param source - The source code.
+ * @param compilerOptions - The compiler options.
  * @param cacheEnable - Whether to enable cache. @default true
  * @returns The program and source.
  */
 async function getProgramAndSource(
 	id: string,
 	source: string,
+	compilerOptions: ts.CompilerOptions,
 	cacheEnable = true,
 ): Promise<{ program: ts.Program; tsSource: ts.SourceFile }> {
-	/** parse tsconfig compilerOptions */
-	compilerOptions = await getTsConfig();
-
 	const tsSource = ts.createSourceFile(
 		id,
 		source,
