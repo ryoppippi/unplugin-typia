@@ -118,7 +118,7 @@ export default unTypiaNext(config);
 
 <br></details>
 
-More examples can be found in the [`JSR Doc`](https://jsr.io/@ryoppippi/unplugin-typia/doc)
+More integration guides can be found in the [`JSR Doc`](https://jsr.io/@ryoppippi/unplugin-typia/doc)
 
 ## Examples
 
