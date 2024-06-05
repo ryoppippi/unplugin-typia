@@ -7,7 +7,7 @@
 import unplugin from './core/index.js';
 
 /**
- * Esbuild plugin
+ * esbuild plugin
  *
  * @example
  * ```ts

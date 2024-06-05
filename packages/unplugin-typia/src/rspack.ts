@@ -7,7 +7,7 @@
 import unplugin from './core/index.js';
 
 /**
- * Webpack plugin
+ * rspack plugin
  *
  * @example
  * ```ts
