@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import { readTSConfig } from 'pkg-types';
+import { type TSConfig, readTSConfig } from 'pkg-types';
 import MagicString from 'magic-string';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform } from 'typia/lib/transform.js';
@@ -8,6 +8,8 @@ import { LanguageServiceHost } from './language_service.js';
 import type { OptionsResolved } from './options.ts';
 
 const printer = ts.createPrinter();
+
+let tsconfig: TSConfig | undefined;
 
 /**
  * Transform a TypeScript file with Typia.
@@ -28,7 +30,7 @@ export async function transformTypia(
 	options: OptionsResolved,
 ): Promise<{ code: string; map: any } | undefined> {
 	/** define serviceHost */
-	const tsconfig = await readTSConfig();
+	tsconfig = tsconfig ?? await readTSConfig();
 	if (tsconfig.compilerOptions == null) {
 		throw new Error('No compilerOptions found in tsconfig.json');
 	}
