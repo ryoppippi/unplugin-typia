@@ -54,8 +54,12 @@ export interface Options {
 
 	/**
 	 * The optiosn for cache.
+	 * if `true`, it will enable cache with default path.
+	 * if `false`, it will disable cache.
+	 * if object, it will enable cache with custom path.
+	 * @default { enable: true, base: '/tmp'}
 	 */
-	cache?: CacheOptions;
+	cache?: CacheOptions | boolean;
 
 	/**
 	 * Enable debug mode.
@@ -113,10 +117,16 @@ export interface CacheOptions {
 
 export type ResolvedCacheOptions = Required<CacheOptions>;
 
-export function resolvedCacheOptions(options: CacheOptions | undefined): ResolvedCacheOptions {
+export function resolvedCacheOptions(options: CacheOptions | boolean | undefined): ResolvedCacheOptions {
+	if (typeof options === 'boolean' || options == null) {
+		return {
+			enable: options ?? true,
+			base: '/tmp',
+		};
+	}
+
 	return {
 		enable: true,
 		base: '/tmp',
-		...options,
 	};
 }
