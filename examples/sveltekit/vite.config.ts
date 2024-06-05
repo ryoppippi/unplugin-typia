@@ -5,7 +5,12 @@ import UnpluginTypia from "../../packages/unplugin-typia/src/vite";
 export default defineConfig({
   clearScreen: false,
   plugins: [
-    UnpluginTypia(),
+    UnpluginTypia({
+      verbose: true,
+      cache: {
+        enable: true,
+      }
+    }),
     sveltekit(),
   ],
 });
