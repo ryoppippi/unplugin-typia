@@ -5,7 +5,7 @@ export const validate = typia.createValidate<IMember>();
 export interface IMember {
   id: string & tags.Format<"uuid">;
   email: string & tags.Format<"email">;
-  age: number & tags.ExclusiveMinimum<19> & tags.Maximum<100>;
+  age: number & tags.Type<"uint32"> & tags.ExclusiveMinimum<19> & tags.Maximum<100>;
 }
 
 export type { IValidation };
