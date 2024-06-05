@@ -22,7 +22,7 @@
     "ts-patch": "^3.1.2",
     "tslib": "^2.4.1",
     "typescript": "^5.0.0",
-    "typia": "^6.0.4",
+    "typia": "^6.0.6",
     "vite": "^5.0.3"
   },
   "type": "module",
