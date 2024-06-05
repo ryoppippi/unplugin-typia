@@ -1,5 +1,7 @@
 # misc
 .DS_Store
+.turbo/
+.wrangler/
 
 # build artifacts
 dist

@@ -6,7 +6,6 @@
     "dev": "bun -b next dev",
     "build": "bun -b next build",
     "start": "bun -b next start",
-    "lint": "bun -b next lint",
     "prepare": "ts-patch install && typia patch"
   },
   "dependencies": {

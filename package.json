@@ -4,6 +4,11 @@
   "description": "",
   "author": "ryoppippi",
   "license": "MIT",
+  "scripts": {
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test"
+  },
   "workspaces": [
     "examples/*",
     "packages/*"
@@ -18,5 +23,9 @@
     "vite-react",
     "vite-vanilla",
     "workerd"
-  ]
+  ],
+  "devDependencies": {
+    "turbo": "^2.0.1"
+  },
+  "packageManager": "bun@1.1.12"
 }
