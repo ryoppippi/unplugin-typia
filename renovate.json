@@ -1,0 +1,23 @@
+{
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  },
+  "rangeStrategy": "bump",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "platformAutomerge": true,
+  "dependencyDashboard": false,
+  "automerge": true,
+  "branchConcurrentLimit": 0,
+  "labels": ["dependencies", "renovate"],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "stabilityDays": 22,
+  "packageRules": [
+    {
+      "matchPackageNames": ["typia", "ts-patch"],
+      "stabilityDays": 0,
+      "labels": ["peerDependencies", "typia", "renovate"]
+    }
+  ]
+}
