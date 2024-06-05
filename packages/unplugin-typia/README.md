@@ -103,6 +103,23 @@ module.exports = {
 
 <br></details>
 
+<details>
+<summary>Next.js</summary><br>
+
+```js
+// next.config.mjs
+import unTypiaNext from 'unplugin-typia/next';
+
+/** @type {import('next').NextConfig} */
+const config = {};
+
+export default unTypiaNext(config);
+```
+
+<br></details>
+
+More examples can be found in the [`JSR Doc`](https://jsr.io/@ryoppippi/unplugin-typia/doc)
+
 ## Examples
 
 You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples).

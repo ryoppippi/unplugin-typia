@@ -9,7 +9,16 @@ import type { Options } from './core/options.js';
 
 /**
  * unplugin-typia for next.
- * @function
+ *
+ * @example
+ * ```js
+ * // next.config.mjs
+ * import unTypiaNext from "unplugin-typia/next";
+ *
+ * export default unTypiaNext({
+ *   // your next.js config @type {import('next').NextConfig}
+ * })
+ * ```
  */
 function next(nextConfig: Record<string, any> = {}, options: Options): Record<string, any> {
 	return {
