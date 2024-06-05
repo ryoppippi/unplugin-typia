@@ -3,12 +3,22 @@ import {
 	type UnpluginInstance,
 	createUnplugin,
 } from 'unplugin';
-import { createFilter } from '@rollup/pluginutils';
+import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 
 import { type Options, resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 
 const name = 'unplugin-typia' as const;
+
+/**
+ * Create a filter function from the given include and exclude patterns.
+ */
+function createFilter(
+	include: Options['include'],
+	exclude: Options['exclude'],
+): ReturnType<typeof rollupCreateFilter> {
+	return rollupCreateFilter(include, exclude);
+}
 
 /**
  * The main unplugin instance.
@@ -47,6 +57,8 @@ const unplugin: UnpluginInstance<Options | undefined, false>
 /* #__PURE__ */ = createUnplugin(unpluginFactory);
 
 export {
+	resolveOptions,
+	createFilter,
 	transformTypia,
 	unplugin,
 };
