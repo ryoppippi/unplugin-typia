@@ -58,10 +58,10 @@ export interface Options {
 	cache?: CacheOptions;
 
 	/**
-	 * Log verbose information.
-	 * @default false
+	 * Enable debug mode.
+	 * @default true
 	 */
-	verbose?: boolean;
+	log?: boolean | 'verbose';
 }
 
 /**
@@ -89,7 +89,7 @@ export function resolveOptions(options: Options): OptionsResolved {
 		enforce: 'enforce' in options ? options.enforce : 'pre',
 		cwd: options.cwd ?? process.cwd(),
 		typia: options.typia ?? {},
-		verbose: options.verbose ?? false,
+		log: options?.log ?? true,
 		cache: resolvedCacheOptions(options.cache),
 	};
 }

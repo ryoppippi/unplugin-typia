@@ -32,14 +32,16 @@ const unpluginFactory: UnpluginFactory<
 	const options = resolveOptions(rawOptions);
 	const filter = createFilter(options.include, options.exclude);
 
-	const { cache: cacheOptions, verbose } = options;
+	const { cache: cacheOptions, log } = options;
 
-	const showLog = verbose && cacheOptions.enable;
-
-	consola.box(
+	if (log) {
+		consola.box(
 		`[unplugin-typia]`,
 		cacheOptions.enable ? `Cache enabled` : `Cache disabled`,
-	);
+		);
+	}
+
+	const showLog = log === 'verbose' && cacheOptions.enable;
 
 	return {
 		name,
