@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  push:
+  pull_request:
+
+jobs:
+  build-examples:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun i --frozen-lockfile
+      - run: bun run build
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun i --frozen-lockfile
+      - run: bun run lint
+
+  action-timeline:
+    needs:
+      - lint
+      - build-examples
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Kesin11/actions-timeline@v2
