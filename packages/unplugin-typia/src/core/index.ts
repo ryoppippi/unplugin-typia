@@ -70,7 +70,7 @@ const unpluginFactory: UnpluginFactory<
 			}
 
 			/** transform if cache not exists */
-			const generated = await transformTypia(id, this, options);
+			const generated = await transformTypia(id, source, this, options);
 
 			if (showLog) {
 				if (generated != null) {
