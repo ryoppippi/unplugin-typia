@@ -92,6 +92,8 @@
 		"eslint-plugin-format": "^0.1.1",
 		"magic-string": "^0.30.10",
 		"pkg-types": "^1.1.1",
-		"typia": "^6.0.4"
+		"rollup": "^4.6.1",
+		"typia": "^6.0.4",
+		"vite": "^5.2.12"
 	}
 }
