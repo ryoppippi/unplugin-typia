@@ -6,7 +6,7 @@ export default defineConfig({
   clearScreen: false,
   plugins: [
     UnpluginTypia({
-      verbose: true,
+      log: "verbose",
       cache: {
         enable: true,
       }
