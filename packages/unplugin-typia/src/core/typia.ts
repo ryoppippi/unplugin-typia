@@ -12,6 +12,9 @@ const printer = ts.createPrinter();
 /** cache compilerOptions */
 let compilerOptions: ts.CompilerOptions | undefined;
 
+/** cache source files */
+const sourceCache = new Map<string, ts.SourceFile>();
+
 /**
  * Transform a TypeScript file with Typia.
  *
@@ -32,7 +35,7 @@ export async function transformTypia(
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
 	options: OptionsResolved,
 ): Promise<{ code: string; map: any } | undefined> {
-	const { program, tsSource } = await getProgramAndSource(id, source);
+	const { program, tsSource } = await getProgramAndSource(id, source, options.cache.enable);
 
 	const {
 		diagnostics,
@@ -74,11 +77,13 @@ async function getTsConfig(): Promise<ts.CompilerOptions> {
  *
  * @param id - The file path.
  * @param source - The source code.
+ * @param cacheEnable - Whether to enable cache. @default true
  * @returns The program and source.
  */
 async function getProgramAndSource(
 	id: string,
 	source: string,
+	cacheEnable = true,
 ): Promise<{ program: ts.Program; tsSource: ts.SourceFile }> {
 	/** parse tsconfig compilerOptions */
 	compilerOptions = await getTsConfig();
@@ -95,11 +100,24 @@ async function getProgramAndSource(
 			return tsSource;
 		}
 
+		if (cacheEnable) {
+			const cache = sourceCache.get(fileName);
+			if (cache != null) {
+				return cache;
+			}
+		}
+
 		const source = ts.sys.readFile(fileName);
 		if (source == null) {
 			return undefined;
 		}
-		return ts.createSourceFile(fileName, source, languageVersion);
+		const result = ts.createSourceFile(fileName, source, languageVersion);
+
+		if (cacheEnable) {
+			sourceCache.set(fileName, result);
+		}
+
+		return result;
 	};
 	const program = ts.createProgram([id], compilerOptions, host);
 
