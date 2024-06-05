@@ -24,15 +24,14 @@ npx jsr add -D @ryoppippi/unplugin-typia
 Then, install `typia`:
 
 ```bash
+npx jsr add -D @ryoppippi/unplugin-typia
 npm install --save typia
-npm install --save-dev typescript ts-patch ts-node
+npx typia setup
 
-npx ts-patch install
-npx typia patch
+npm run prepare
 ```
 
-You should follow the [manual setup instructions](https://typia.io/docs/setup/#manual-setup) on the Typia website.
-However, you don't need to add plugins to the `tsconfig.json` file.
+You should follow the [Setup Instruction](https://typia.io/docs/setup/#unplugin-typia) on the Typia website.
 
 Then, add the unplugin to your favorite bundler:
 
