@@ -18,6 +18,17 @@ jobs:
       - run: bun i --frozen-lockfile
       - run: bun run build
 
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun i --frozen-lockfile
+      - run: bun run test
+
   lint:
     runs-on: ubuntu-latest
 
@@ -32,6 +43,7 @@ jobs:
   action-timeline:
     needs:
       - lint
+      - test
       - build-examples
     if: ${{ always() }}
     runs-on: ubuntu-latest
