@@ -12,7 +12,12 @@ await build({
   entryPoints: ['main.ts'],
   bundle: true,
   outfile: `${outDir}/main.mjs`,
-  plugins: [UnpluginTypia()],
+  plugins: [UnpluginTypia({
+    log: 'verbose',
+    cache: {
+      enable: false,
+    }
+  })],
   format: 'esm'
 })
 
