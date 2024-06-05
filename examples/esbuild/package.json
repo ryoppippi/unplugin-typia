@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsx build.ts",
     "watch": "tsx watch build.ts",
-    "preview": "node dist/main.mjs",
+    "test": "node dist/main.mjs",
     "prepare": "ts-patch install && typia patch"
   },
   "devDependencies": {

@@ -3,5 +3,5 @@
 ```sh
 bun i && bun prepare
 bun run build
-bun preview
+bun run test
 ```
