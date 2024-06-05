@@ -35,10 +35,13 @@ export async function transformTypia(
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
 	options: OptionsResolved,
 ): Promise<{ code: string; map: any } | undefined> {
-	/** parse tsconfig compilerOptions */
-	compilerOptions = await getTsCompilerOption();
+	/** Whether to enable cache */
+	const cacheEnable = options.cache.enable;
 
-	const { program, tsSource } = await getProgramAndSource(id, source, compilerOptions, options.cache.enable);
+	/** parse tsconfig compilerOptions */
+	compilerOptions = await getTsCompilerOption(cacheEnable);
+
+	const { program, tsSource } = await getProgramAndSource(id, source, compilerOptions, cacheEnable);
 
 	const {
 		diagnostics,
@@ -62,13 +65,16 @@ export async function transformTypia(
 
 /**
  * Read tsconfig.json and get compilerOptions.
+ * @param cacheEnable - Whether to enable cache. @default true
  */
-async function getTsCompilerOption(): Promise<ts.CompilerOptions> {
-	compilerOptions = compilerOptions
-	?? ({
-		...(await readTSConfig())?.compilerOptions,
-		moduleResolution: undefined,
-	});
+async function getTsCompilerOption(cacheEnable = true): Promise<ts.CompilerOptions> {
+	const parseTsComilerOptions = async () => (({ ...(await readTSConfig())?.compilerOptions, moduleResolution: undefined }));
+
+	/** parse tsconfig compilerOptions */
+	compilerOptions = cacheEnable
+		? (compilerOptions ?? await parseTsComilerOptions())
+		: await parseTsComilerOptions();
+
 	if (compilerOptions == null) {
 		throw new Error('No compilerOptions found in tsconfig.json');
 	}
