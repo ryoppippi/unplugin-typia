@@ -4,9 +4,11 @@ import {
 	createUnplugin,
 } from 'unplugin';
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
+import { consola } from 'consola';
 
 import { type Options, resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
+import { getCache, setCache } from './cache.js';
 
 const name = 'unplugin-typia' as const;
 
@@ -30,6 +32,15 @@ const unpluginFactory: UnpluginFactory<
 	const options = resolveOptions(rawOptions);
 	const filter = createFilter(options.include, options.exclude);
 
+	const { cache: cacheOptions, verbose } = options;
+
+	const showLog = verbose && cacheOptions.enable;
+
+	consola.box(
+		`[unplugin-typia]`,
+		cacheOptions.enable ? `Cache enabled` : `Cache disabled`,
+	);
+
 	return {
 		name,
 		enforce: options.enforce,
@@ -38,12 +49,44 @@ const unpluginFactory: UnpluginFactory<
 			return filter(id);
 		},
 
-		async transform(_, id) {
-			return await transformTypia(
-				id,
-				this,
-				options,
-			);
+		async transform(source, id) {
+			/** get cache */
+			const cache = await getCache(id, source, cacheOptions);
+
+			if (showLog) {
+				if (cache != null) {
+					consola.success(`[unplugin-typia] Cache hit: ${id}`);
+				}
+				else {
+					consola.warn(`[unplugin-typia] Cache miss: ${id}`);
+				}
+			}
+
+			/** return cache if exists */
+			if (cache != null) {
+				return cache;
+			}
+
+			/** transform if cache not exists */
+			const generated = await transformTypia(id, this, options);
+
+			if (showLog) {
+				if (generated != null) {
+					consola.warn(`[unplugin-typia] Transformed: ${id}`);
+				}
+				else {
+					consola.error(`[unplugin-typia] Transform is null: ${id}`);
+				}
+			}
+
+			/** save cache */
+			await setCache(id, source, generated, cacheOptions);
+
+			if (showLog) {
+				consola.success(`[unplugin-typia] Cache set: ${id}`);
+			}
+
+			return generated;
 		},
 	};
 };

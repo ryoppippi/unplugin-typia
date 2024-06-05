@@ -51,6 +51,17 @@ export interface Options {
 	 * The options for the typia transformer.
 	 */
 	typia?: ITransformOptions;
+
+	/**
+	 * The optiosn for cache.
+	 */
+	cache?: CacheOptions;
+
+	/**
+	 * Log verbose information.
+	 * @default false
+	 */
+	verbose?: boolean;
 }
 
 /**
@@ -59,9 +70,9 @@ export interface Options {
 export type OptionsResolved =
 	& Omit<
     Required<Options>,
-    'enforce' | 'viteServer'
+    'enforce' | 'viteServer' | 'cache' | 'typia'
   >
-  & { enforce?: Options['enforce']; viteServer?: Options['viteServer']; typia?: Options['typia'] };
+  & { enforce?: Options['enforce']; viteServer?: Options['viteServer']; typia?: Options['typia']; cache: ResolvedCacheOptions };
 
 /**
  * Resolves the options for the plugin.
@@ -78,5 +89,34 @@ export function resolveOptions(options: Options): OptionsResolved {
 		enforce: 'enforce' in options ? options.enforce : 'pre',
 		cwd: options.cwd ?? process.cwd(),
 		typia: options.typia ?? {},
+		verbose: options.verbose ?? false,
+		cache: resolvedCacheOptions(options.cache),
+	};
+}
+
+/**
+ * Options for cache.
+ */
+export interface CacheOptions {
+	/**
+	 * Enable cache.
+	 * @default true
+	 */
+	enable?: boolean;
+
+	/**
+	 * The base directory for cache.
+	 * @default '/tmp'
+	 */
+	base?: string;
+};
+
+export type ResolvedCacheOptions = Required<CacheOptions>;
+
+export function resolvedCacheOptions(options: CacheOptions | undefined): ResolvedCacheOptions {
+	return {
+		enable: true,
+		base: '/tmp',
+		...options,
 	};
 }
