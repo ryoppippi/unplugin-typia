@@ -17,7 +17,10 @@
     {
       "matchPackageNames": ["typia", "ts-patch"],
       "stabilityDays": 0,
-      "labels": ["peerDependencies", "typia", "renovate"]
+      "labels": ["peerDependencies", "typia", "renovate"],
+      "lockFileMaintenance": {
+        "enabled": true
+      }
     }
   ]
 }
