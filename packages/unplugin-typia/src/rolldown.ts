@@ -7,7 +7,7 @@
 import unplugin from './core/index.js';
 
 /**
- * Rollup plugin
+ * Rolldown plugin
  *
  * @example
  * ```ts

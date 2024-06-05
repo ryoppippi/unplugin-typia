@@ -8,7 +8,7 @@ import webpack from './webpack.js';
 import type { Options } from './core/options.js';
 
 /**
- * unplugin-typia for next.
+ * Next.js plugin
  *
  * @example
  * ```js
