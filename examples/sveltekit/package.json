@@ -8,7 +8,7 @@
     "preview": "bun -b vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "deploy": "bun run build && npx wrangler pages deploy .svelte-kit/cloudflare",
+    "deploy": "bun run build && npx wrangler pages deploy",
     "prepare": "ts-patch install && typia patch"
   },
   "devDependencies": {
