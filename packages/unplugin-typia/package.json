@@ -53,7 +53,7 @@
 		"publish": "bun x jsr publish"
 	},
 	"peerDependencies": {
-		"@nuxt/kit": "^3",
+		"@nuxt/kit": "^3.11.2",
 		"@nuxt/schema": "^3",
 		"esbuild": "*",
 		"rollup": "^3",
