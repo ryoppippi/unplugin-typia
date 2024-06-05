@@ -71,9 +71,12 @@ async function getTsCompilerOption(cacheEnable = true): Promise<ts.CompilerOptio
 	const parseTsComilerOptions = async () => (({ ...(await readTSConfig())?.compilerOptions, moduleResolution: undefined }));
 
 	/** parse tsconfig compilerOptions */
-	compilerOptions = cacheEnable
-		? (compilerOptions ?? await parseTsComilerOptions())
-		: await parseTsComilerOptions();
+	if (cacheEnable) {
+		compilerOptions ??= await parseTsComilerOptions();
+	}
+	else {
+		compilerOptions = await parseTsComilerOptions();
+	}
 
 	if (compilerOptions == null) {
 		throw new Error('No compilerOptions found in tsconfig.json');
