@@ -2,12 +2,14 @@ import { type Storage, createStorage } from 'unstorage';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
 import { isEqual, sha256 } from 'ohash';
 import type { transformTypia } from './typia.js';
-import type { CacheOptions, ResolvedCacheOptions } from './options.js';
+import type { ResolvedOptions } from './options.js';
+
+type ResolvedCacheOptions = ResolvedOptions['cache'];
 
 type Data = Awaited<ReturnType<typeof transformTypia>>;
 
 let globalStorage: Storage | undefined;
-let globalOption: CacheOptions | undefined;
+let globalOption: ResolvedCacheOptions | undefined;
 
 /**
  * Get storage
