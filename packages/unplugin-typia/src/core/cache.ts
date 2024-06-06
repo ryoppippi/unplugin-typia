@@ -28,7 +28,7 @@ function getStorage(option: ResolvedCacheOptions): Storage {
 	});
 
 	if (globalStorage == null) {
-		throw new Error('Storage is not initialized');
+		throw new Error('Storage cannot be created');
 	}
 
 	return globalStorage;
