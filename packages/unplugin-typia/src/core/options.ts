@@ -1,4 +1,5 @@
-import { type Defu, defu } from 'defu';
+import type { RequiredDeep } from 'type-fest';
+import { createDefu } from 'defu';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
 
@@ -45,33 +46,6 @@ export interface Options {
 	log?: boolean | 'verbose';
 }
 
-/**
- * Represents the resolved options for the plugin.
- */
-export type OptionsResolved =
-	& Omit<
-    Required<Options>,
-    'enforce' | 'cache' | 'typia'
-  >
-  & { enforce?: Options['enforce']; typia?: Options['typia']; cache: ResolvedCacheOptions };
-
-/**
- * Resolves the options for the plugin.
- *
- * @param options - The options to resolve.
- * @returns The resolved options.
- */
-export function resolveOptions(options: Options): OptionsResolved {
-	return {
-		include: options.include || [/\.[cm]?[jt]sx?$/],
-		exclude: options.exclude || [/node_modules/],
-		enforce: 'enforce' in options ? options.enforce : 'pre',
-		typia: options.typia ?? {},
-		log: options?.log ?? true,
-		cache: resolvedCacheOptions(options.cache),
-	};
-}
-
 /* Options for cache. */
 export interface CacheOptions {
 	/**
@@ -87,21 +61,40 @@ export interface CacheOptions {
 	base?: string;
 };
 
-/** Default cache options */
-const defaultCacheOptions = ({
-	enable: true,
-	base: '/tmp',
-}) as const satisfies Required<CacheOptions>;
+/** Default options */
+export const defaultOptions = ({
+	include: [/\.[cm]?[jt]sx?$/],
+	exclude: [/node_modules/],
+	enforce: 'pre',
+	typia: { },
+	cache: { enable: true, base: '/tmp' },
+	log: true,
+}) as const satisfies RequiredDeep<Omit<Options, 'typia'>> & { typia: Options['typia'] };
 
-type DefaultCacheOptions = typeof defaultCacheOptions;
+/** Create custom defu instance */
+const defu = createDefu((obj, key, value) => {
+	/** replace array instead of concat */
+	if (Array.isArray(obj[key])) {
+		obj[key] = value;
+		return true;
+	}
+});
 
-/** Resolved cache options */
-export type ResolvedCacheOptions = Defu<CacheOptions, [DefaultCacheOptions]>;
-
-/** Resolves cache options */
-function resolvedCacheOptions(options: boolean | undefined | CacheOptions): ResolvedCacheOptions {
+/**
+ * Resolves the options for the plugin.
+ *
+ * @param options - The options to resolve.
+ * @returns The resolved options.
+ */
+export function resolveOptions(options: Options) {
 	return defu(
-		typeof options === 'boolean' ? { enable: options } : options,
-		defaultCacheOptions,
+		{
+			...options,
+			cache:
+				typeof options.cache === 'boolean'
+					? { enable: options.cache }
+					: options.cache,
+		},
+		defaultOptions,
 	);
 }
