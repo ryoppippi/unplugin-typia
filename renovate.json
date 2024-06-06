@@ -12,12 +12,15 @@
   "branchConcurrentLimit": 0,
   "labels": ["dependencies", "renovate"],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "stabilityDays": 22,
+  "stabilityDays": 2,
+  "timezone": "Europe/London",
+  "schedule": "before 2pm on Monday",
   "packageRules": [
     {
       "matchPackageNames": ["typia", "ts-patch"],
-      "stabilityDays": 0,
       "labels": ["peerDependencies", "typia", "renovate"],
+      "stabilityDays": 0,
+      "schedule": ["before 4am"],
       "lockFileMaintenance": {
         "enabled": true
       }
