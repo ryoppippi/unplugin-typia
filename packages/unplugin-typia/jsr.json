@@ -12,6 +12,7 @@
 		"./rolldown": "./src/rolldown.ts",
 		"./farm": "./src/farm.ts",
 		"./rspack": "./src/rspack.ts",
+		"./bun": "./src/bun.ts",
 		"./package.json": "./package.json"
 	},
 	"publish": {
