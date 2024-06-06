@@ -1,5 +1,3 @@
-import process from 'node:process';
-
 import type { InlineConfig, ViteDevServer } from 'vite';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
@@ -40,12 +38,6 @@ export interface Options {
 	 * @default 'pre'
 	 */
 	enforce?: 'pre' | 'post' | undefined;
-
-	/**
-	 * The current working directory.
-	 * @default process.cwd()
-	 */
-	cwd?: string;
 
 	/**
 	 * The options for the typia transformer.
@@ -91,7 +83,6 @@ export function resolveOptions(options: Options): OptionsResolved {
 		viteServer: options.viteServer,
 		viteConfig: options.viteConfig || {},
 		enforce: 'enforce' in options ? options.enforce : 'pre',
-		cwd: options.cwd ?? process.cwd(),
 		typia: options.typia ?? {},
 		log: options?.log ?? true,
 		cache: resolvedCacheOptions(options.cache),
