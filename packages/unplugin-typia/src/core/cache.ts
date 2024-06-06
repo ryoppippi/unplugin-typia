@@ -55,7 +55,7 @@ export async function getCache(
 		return null;
 	}
 	const storage = getStorage(option);
-	const key = sha256(`${id}:${source}`);
+	const key = getKey(id, source);
 	const data = await storage.getItem<StoreData>(key);
 
 	/** validate cache */
@@ -87,7 +87,7 @@ export async function setCache(
 		return;
 	}
 	const storage = getStorage(option);
-	const key = sha256(`${id}:${source}`);
+	const key = getKey(id, source);
 
 	if (data == null) {
 		await storage.removeItem(key);
@@ -95,4 +95,13 @@ export async function setCache(
 	}
 
 	await storage.setItem(key, { data, id, source });
+}
+
+/**
+ * Get cache key
+ * @param id
+ * @param source
+ */
+function getKey(id: string, source: string): string {
+	return sha256(`${id}:${source}`);
 }
