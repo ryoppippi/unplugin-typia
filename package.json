@@ -7,7 +7,8 @@
   "scripts": {
     "build": "turbo build",
     "lint": "turbo lint",
-    "test": "turbo test"
+    "test": "turbo test",
+    "deploy": "turbo deploy"
   },
   "workspaces": [
     "examples/*",
