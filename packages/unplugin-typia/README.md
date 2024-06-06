@@ -24,9 +24,6 @@ npx jsr add -D @ryoppippi/unplugin-typia
 Then, install `typia`:
 
 ```bash
-# install unplugin-typia!
-npx jsr add -D @ryoppippi/unplugin-typia
-
 # install typia! (nypm detects your PM ✨)
 npx nypm add typia  
 
