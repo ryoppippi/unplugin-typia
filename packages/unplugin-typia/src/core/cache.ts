@@ -8,6 +8,12 @@ type ResolvedCacheOptions = ResolvedOptions['cache'];
 
 type Data = Awaited<ReturnType<typeof transformTypia>>;
 
+interface StoreData {
+	data: NonNullable<Data>;
+	id: string;
+	source: string;
+}
+
 let globalStorage: Storage | undefined;
 let globalOption: ResolvedCacheOptions | undefined;
 
@@ -46,13 +52,22 @@ export async function getCache(
 	option: ResolvedCacheOptions,
 ): Promise<Data | null> {
 	if (!option.enable) {
-		return undefined;
+		return null;
 	}
 	const storage = getStorage(option);
 	const key = sha256(`${id}:${source}`);
-	const data = await storage.getItem<NonNullable<Data>>(key);
+	const data = await storage.getItem<StoreData>(key);
 
-	return data;
+	/** validate cache */
+	if (data == null) {
+		return null;
+	}
+
+	if (data.id !== id || data.source !== source) {
+		return null;
+	}
+
+	return data.data;
 }
 
 /**
@@ -73,5 +88,11 @@ export async function setCache(
 	}
 	const storage = getStorage(option);
 	const key = sha256(`${id}:${source}`);
-	await storage.setItem(key, data ?? null);
+
+	if (data == null) {
+		await storage.removeItem(key);
+		return;
+	}
+
+	await storage.setItem(key, { data, id, source });
 }
