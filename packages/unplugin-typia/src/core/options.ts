@@ -61,6 +61,8 @@ export interface CacheOptions {
 	base?: string;
 };
 
+type ResolvedOptions = RequiredDeep<Omit<Options, 'typia'>> & { typia: Options['typia'] };
+
 /** Default options */
 export const defaultOptions = ({
 	include: [/\.[cm]?[jt]sx?$/],
@@ -69,7 +71,7 @@ export const defaultOptions = ({
 	typia: { },
 	cache: { enable: true, base: '/tmp' },
 	log: true,
-}) as const satisfies RequiredDeep<Omit<Options, 'typia'>> & { typia: Options['typia'] };
+}) as const satisfies ResolvedOptions;
 
 /** Create custom defu instance */
 const defu = createDefu((obj, key, value) => {
@@ -86,7 +88,7 @@ const defu = createDefu((obj, key, value) => {
  * @param options - The options to resolve.
  * @returns The resolved options.
  */
-export function resolveOptions(options: Options) {
+export function resolveOptions(options: Options): ResolvedOptions {
 	return defu(
 		{
 			...options,
