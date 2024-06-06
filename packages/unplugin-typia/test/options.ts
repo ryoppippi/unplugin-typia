@@ -1,4 +1,4 @@
-import { test } from '@cross/test';
+import { test } from 'bun:test';
 import {
 	assertEquals,
 	assertNotEquals,
