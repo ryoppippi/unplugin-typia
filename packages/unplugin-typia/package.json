@@ -50,6 +50,7 @@
 	],
 	"scripts": {
 		"lint": "eslint .",
+		"test": "bun test ./test/*",
 		"publish": "bun x jsr publish"
 	},
 	"peerDependencies": {
@@ -85,6 +86,8 @@
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^2.2.2",
+		"@cross/test": "npm:@jsr/cross__test",
+		"@std/assert": "npm:@jsr/std__assert",
 		"@types/node": "^20.10.3",
 		"consola": "^3.2.3",
 		"defu": "^6.1.4",
