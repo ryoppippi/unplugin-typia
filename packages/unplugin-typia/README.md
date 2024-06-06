@@ -25,7 +25,7 @@ Then, install `typia`:
 
 ```bash
 # install typia! (nypm detects your PM ✨)
-npx nypm add typia  
+npx nypm add typia
 
 # setup typia!
 npx typia setup
@@ -54,7 +54,8 @@ export default defineConfig({
 });
 ```
 
-Examples: 
+Examples:
+
 - [`examples/vite-vanilla`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-vanilla)
 - [`examples/vite-react`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-react)
 - [`examples/vite-hono`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-hono)
@@ -78,6 +79,7 @@ export default {
 ```
 
 Examples:
+
 - [`examples/esbuild`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/esbuild)
 
 <br></details>
@@ -96,6 +98,7 @@ export default unTypiaNext(config);
 ```
 
 Examples:
+
 - [`examples/nextjs`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/nextjs)
 
 <br></details>
