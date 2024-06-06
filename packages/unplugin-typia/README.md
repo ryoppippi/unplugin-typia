@@ -58,22 +58,6 @@ Examples:
 <br></details>
 
 <details>
-<summary>Rollup</summary><br>
-
-```ts
-// rollup.config.js
-import UnpluginTypia from '@ryoppippi/unplugin-typia/rollup';
-
-export default {
-	plugins: [
-		UnpluginTypia({ /* options */ }),
-	],
-};
-```
-
-<br></details>
-
-<details>
 <summary>esbuild</summary><br>
 
 ```ts
@@ -90,22 +74,6 @@ export default {
 
 Examples:
 - [`examples/esbuild`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/esbuild)
-
-<br></details>
-
-<details>
-<summary>Webpack</summary><br>
-
-```ts
-// webpack.config.js
-const UnpluginTypia = require('@ryoppippi/unplugin-typia/webpack');
-
-module.exports = {
-	plugins: [
-		UnpluginTypia({ /* options */ }),
-	],
-};
-```
 
 <br></details>
 
@@ -127,9 +95,39 @@ Examples:
 
 <br></details>
 
-More integration guides can be found in the [`JSR Doc`](https://jsr.io/@ryoppippi/unplugin-typia/doc)
+<details>
+<summary>Rollup</summary><br>
 
-## Examples
+```ts
+// rollup.config.js
+import UnpluginTypia from '@ryoppippi/unplugin-typia/rollup';
+
+export default {
+	plugins: [
+		UnpluginTypia({ /* options */ }),
+	],
+};
+```
+
+<br></details>
+
+<details>
+<summary>Webpack</summary><br>
+
+```ts
+// webpack.config.js
+const UnpluginTypia = require('@ryoppippi/unplugin-typia/webpack');
+
+module.exports = {
+	plugins: [
+		UnpluginTypia({ /* options */ }),
+	],
+};
+```
+
+<br></details>
+
+More integration guides can be found in the [`JSR Doc`](https://jsr.io/@ryoppippi/unplugin-typia/doc)
 
 You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples).
 
