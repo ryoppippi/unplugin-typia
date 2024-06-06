@@ -24,14 +24,22 @@ npx jsr add -D @ryoppippi/unplugin-typia
 Then, install `typia`:
 
 ```bash
+# install unplugin-typia!
 npx jsr add -D @ryoppippi/unplugin-typia
-npm install --save typia
-npx typia setup
 
+# install typia! (nypm detects your PM ✨)
+npx nypm add typia  
+
+# setup typia!
+npx typia setup
+# pnpm dlx typia setup
+# yarn dlx typia setup
+
+# after installing typia, run prepare script
 npm run prepare
 ```
 
-You should follow the [Setup Instruction](https://typia.io/docs/setup/#unplugin-typia) on the Typia website.
+More details about setting up Typia can be found in the [Typia Docs](https://typia.io/docs/setup/#unplugin-typia).
 
 Then, add the unplugin to your favorite bundler:
 
@@ -49,23 +57,11 @@ export default defineConfig({
 });
 ```
 
-Example: [`playground/`](./playground/)
-
-<br></details>
-
-<details>
-<summary>Rollup</summary><br>
-
-```ts
-// rollup.config.js
-import UnpluginTypia from '@ryoppippi/unplugin-typia/rollup';
-
-export default {
-	plugins: [
-		UnpluginTypia({ /* options */ }),
-	],
-};
-```
+Examples: 
+- [`examples/vite-vanilla`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-vanilla)
+- [`examples/vite-react`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-react)
+- [`examples/vite-hono`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-hono)
+- [`examples/sveltekit`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/sveltekit)
 
 <br></details>
 
@@ -76,6 +72,43 @@ export default {
 // esbuild.config.js
 import { build } from 'esbuild';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/esbuild';
+
+export default {
+	plugins: [
+		UnpluginTypia({ /* options */ }),
+	],
+};
+```
+
+Examples:
+- [`examples/esbuild`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/esbuild)
+
+<br></details>
+
+<details>
+<summary>Next.js</summary><br>
+
+```js
+// next.config.mjs
+import unTypiaNext from 'unplugin-typia/next';
+
+/** @type {import('next').NextConfig} */
+const config = {};
+
+export default unTypiaNext(config);
+```
+
+Examples:
+- [`examples/nextjs`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/nextjs)
+
+<br></details>
+
+<details>
+<summary>Rollup</summary><br>
+
+```ts
+// rollup.config.js
+import UnpluginTypia from '@ryoppippi/unplugin-typia/rollup';
 
 export default {
 	plugins: [
@@ -102,24 +135,7 @@ module.exports = {
 
 <br></details>
 
-<details>
-<summary>Next.js</summary><br>
-
-```js
-// next.config.mjs
-import unTypiaNext from 'unplugin-typia/next';
-
-/** @type {import('next').NextConfig} */
-const config = {};
-
-export default unTypiaNext(config);
-```
-
-<br></details>
-
 More integration guides can be found in the [`JSR Doc`](https://jsr.io/@ryoppippi/unplugin-typia/doc)
-
-## Examples
 
 You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples).
 
