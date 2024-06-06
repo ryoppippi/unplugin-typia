@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: main-example-deploy
 
     steps:
       - uses: actions/checkout@v4
