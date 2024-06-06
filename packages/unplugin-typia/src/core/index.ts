@@ -102,6 +102,7 @@ const unplugin: UnpluginInstance<Options | undefined, false>
 /* #__PURE__ */ = createUnplugin(unpluginFactory);
 
 export {
+	type Options,
 	resolveOptions,
 	createFilter,
 	transformTypia,
