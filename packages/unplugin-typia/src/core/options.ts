@@ -61,7 +61,7 @@ export interface CacheOptions {
 	base?: string;
 };
 
-type ResolvedOptions = RequiredDeep<Omit<Options, 'typia'>> & { typia: Options['typia'] };
+export type ResolvedOptions = RequiredDeep<Omit<Options, 'typia' | 'cache'>> & { typia: Options['typia']; cache: Required<CacheOptions> };
 
 /** Default options */
 export const defaultOptions = ({
