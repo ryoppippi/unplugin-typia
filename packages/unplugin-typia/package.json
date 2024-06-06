@@ -55,7 +55,7 @@
 	},
 	"peerDependencies": {
 		"esbuild": "*",
-		"rollup": "^3",
+		"rollup": "^3.29.4",
 		"vite": ">=3",
 		"webpack": "^4 || ^5"
 	},
