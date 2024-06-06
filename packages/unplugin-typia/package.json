@@ -94,7 +94,6 @@
 		"pkg-types": "^1.1.1",
 		"rollup": "^4.6.1",
 		"typia": "^6.0.6",
-		"unstorage": "^1.10.2",
-		"vite": "^5.2.12"
+		"unstorage": "^1.10.2"
 	}
 }
