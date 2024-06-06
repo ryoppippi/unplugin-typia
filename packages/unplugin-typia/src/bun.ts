@@ -15,6 +15,8 @@ if (globalThis.Bun == null) {
 /**
  * bun plugin
  *
+ * some typia functions does not works because of bun/typia internal implementation. see the [issse](https://github.com/ryoppippi/unplugin-typia/issues/44)
+ * @experimental
  * @example
  * ```ts
  * // preload.ts
