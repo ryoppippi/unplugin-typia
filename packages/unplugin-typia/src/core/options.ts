@@ -1,4 +1,3 @@
-import type { InlineConfig, ViteDevServer } from 'vite';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
 
@@ -17,21 +16,6 @@ export interface Options {
 	 * @default [/node_modules/]
 	 */
 	exclude?: FilterPattern;
-
-	/**
-	 * The Vite dev server instance.
-	 *
-	 * If not provided and the bundler is Vite, it will reuse the current dev server.
-	 * If not provided, it will try to use `viteConfig` to create one.
-	 */
-	viteServer?: ViteDevServer | false;
-
-	/**
-	 * The Vite configuration.
-	 * Available when `viteServer` is not provided.
-	 * @see https://vitejs.dev/config/
-	 */
-	viteConfig?: InlineConfig;
 
 	/**
 	 * Adjusts the plugin order (only works for Vite and Webpack).
@@ -66,9 +50,9 @@ export interface Options {
 export type OptionsResolved =
 	& Omit<
     Required<Options>,
-    'enforce' | 'viteServer' | 'cache' | 'typia'
+    'enforce' | 'cache' | 'typia'
   >
-  & { enforce?: Options['enforce']; viteServer?: Options['viteServer']; typia?: Options['typia']; cache: ResolvedCacheOptions };
+  & { enforce?: Options['enforce']; typia?: Options['typia']; cache: ResolvedCacheOptions };
 
 /**
  * Resolves the options for the plugin.
@@ -80,8 +64,6 @@ export function resolveOptions(options: Options): OptionsResolved {
 	return {
 		include: options.include || [/\.[cm]?[jt]sx?$/],
 		exclude: options.exclude || [/node_modules/],
-		viteServer: options.viteServer,
-		viteConfig: options.viteConfig || {},
 		enforce: 'enforce' in options ? options.enforce : 'pre',
 		typia: options.typia ?? {},
 		log: options?.log ?? true,
