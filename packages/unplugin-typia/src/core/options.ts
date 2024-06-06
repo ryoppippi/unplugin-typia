@@ -1,3 +1,4 @@
+import { type Defu, defu } from 'defu';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
 
@@ -71,9 +72,7 @@ export function resolveOptions(options: Options): OptionsResolved {
 	};
 }
 
-/**
- * Options for cache.
- */
+/* Options for cache. */
 export interface CacheOptions {
 	/**
 	 * Enable cache.
@@ -88,18 +87,21 @@ export interface CacheOptions {
 	base?: string;
 };
 
-export type ResolvedCacheOptions = Required<CacheOptions>;
+/** Default cache options */
+const defaultCacheOptions = ({
+	enable: true,
+	base: '/tmp',
+}) as const satisfies Required<CacheOptions>;
 
-export function resolvedCacheOptions(options: CacheOptions | boolean | undefined): ResolvedCacheOptions {
-	if (typeof options === 'boolean' || options == null) {
-		return {
-			enable: options ?? true,
-			base: '/tmp',
-		};
-	}
+type DefaultCacheOptions = typeof defaultCacheOptions;
 
-	return {
-		enable: true,
-		base: '/tmp',
-	};
+/** Resolved cache options */
+export type ResolvedCacheOptions = Defu<CacheOptions, [DefaultCacheOptions]>;
+
+/** Resolves cache options */
+function resolvedCacheOptions(options: boolean | undefined | CacheOptions): ResolvedCacheOptions {
+	return defu(
+		typeof options === 'boolean' ? { enable: options } : options,
+		defaultCacheOptions,
+	);
 }
