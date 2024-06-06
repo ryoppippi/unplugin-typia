@@ -91,7 +91,7 @@
 		"@types/node": "^20.10.3",
 		"consola": "^3.2.3",
 		"defu": "^6.1.4",
-		"eslint": "^8.55.0",
+		"eslint": "^8.57.0",
 		"eslint-plugin-format": "^0.1.1",
 		"magic-string": "^0.30.10",
 		"ohash": "^1.1.3",
