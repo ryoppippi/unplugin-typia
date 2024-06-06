@@ -24,14 +24,22 @@ npx jsr add -D @ryoppippi/unplugin-typia
 Then, install `typia`:
 
 ```bash
+# install unplugin-typia!
 npx jsr add -D @ryoppippi/unplugin-typia
-npm install --save typia
-npx typia setup
 
+# install typia! (nypm detects your PM ✨)
+npx nypm add typia  
+
+# setup typia!
+npx typia setup
+# pnpm dlx typia setup
+# yarn dlx typia setup
+
+# after installing typia, run prepare script
 npm run prepare
 ```
 
-You should follow the [Setup Instruction](https://typia.io/docs/setup/#unplugin-typia) on the Typia website.
+More details about setting up Typia can be found in the [Typia Docs](https://typia.io/docs/setup/#unplugin-typia).
 
 Then, add the unplugin to your favorite bundler:
 
