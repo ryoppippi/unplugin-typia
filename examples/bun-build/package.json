@@ -1,0 +1,21 @@
+{
+  "name": "bunbuild",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "prepare": "ts-patch install && typia patch",
+    "test": "bun run ./index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "dax-sh": "^0.41.0",
+    "typia": "^6.0.6-dev.20240604"
+  },
+  "peerDependencies": {
+    "ts-node": "^10.9.2",
+    "ts-patch": "^3.1.2",
+    "tslib": "^2.4.1",
+    "typescript": "^5.0.0",
+    "unplugin-typia": "workspace:*"
+  }
+}

@@ -43,6 +43,9 @@
 		"./rspack": {
 			"import": "./src/rspack.ts"
 		},
+		"./bun": {
+			"import": "./src/bun.ts"
+		},
 		"./package.json": "./package.json"
 	},
 	"files": [
