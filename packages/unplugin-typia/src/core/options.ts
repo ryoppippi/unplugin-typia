@@ -26,6 +26,13 @@ export interface Options {
 	enforce?: 'pre' | 'post' | undefined;
 
 	/**
+	 * The path to the tsconfig file.
+	 * If not specified, the plugin will try to find it automatically.
+	 * @default undefined
+	 */
+	tsconfig?: string;
+
+	/**
 	 * The options for the typia transformer.
 	 */
 	typia?: ITransformOptions;
@@ -61,7 +68,7 @@ export interface CacheOptions {
 	base?: string;
 };
 
-export type ResolvedOptions = RequiredDeep<Omit<Options, 'typia' | 'cache'>> & { typia: Options['typia']; cache: Required<CacheOptions> };
+export type ResolvedOptions = RequiredDeep<Omit<Options, 'typia' | 'cache' | 'tsconfig'>> & { typia: Options['typia']; cache: Required<CacheOptions>; tsconfig?: string };
 
 /** Default options */
 export const defaultOptions = ({
