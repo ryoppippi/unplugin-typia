@@ -32,7 +32,7 @@ export async function transformTypia(
 	 * This is an experimental feature and may be changed at any time.
 	 */
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
-	options: OptionsResolved,
+	options: ResolvedOptions,
 ): Promise<string> {
 	/** Whether to enable cache */
 	const cacheEnable = options.cache.enable;
