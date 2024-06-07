@@ -9,7 +9,7 @@
   "devDependencies": {
     "@types/bun": "latest",
     "dax-sh": "^0.41.0",
-    "typia": "^6.0.6-dev.20240604"
+    "typia": "^6.0.6"
   },
   "peerDependencies": {
     "ts-node": "^10.9.2",
