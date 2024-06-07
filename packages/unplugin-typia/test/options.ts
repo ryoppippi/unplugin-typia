@@ -49,7 +49,7 @@ test('Return cache object if cache key is object and not base passed', () => {
 	);
 	assertObjectMatch(options, {
 		...defaultOptions,
-		cache: { enable: false, base: '/tmp' },
+		cache: { enable: false, base: '/tmp/unplugin_typia' },
 	});
 });
 

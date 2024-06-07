@@ -63,7 +63,7 @@ export interface CacheOptions {
 
 	/**
 	 * The base directory for cache.
-	 * @default '/tmp'
+	 * @default '/tmp/unplugin_typia'
 	 */
 	base?: string;
 };
@@ -76,7 +76,7 @@ export const defaultOptions = ({
 	exclude: [/node_modules/],
 	enforce: 'pre',
 	typia: { },
-	cache: { enable: true, base: '/tmp' },
+	cache: { enable: true, base: '/tmp/unplugin_typia' },
 	log: true,
 }) as const satisfies ResolvedOptions;
 
