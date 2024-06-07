@@ -1,6 +1,5 @@
 import ts from 'typescript';
 import { readTSConfig } from 'pkg-types';
-import MagicString from 'magic-string';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
@@ -22,7 +21,7 @@ const sourceCache = new Map<string, ts.SourceFile>();
  * @param source - The source code.
  * @param unpluginContext - The unplugin context.
  * @param options - The resolved options.
- * @returns The transformed code and source map.
+ * @returns The transformed code.
  */
 export async function transformTypia(
 	id: string,
@@ -34,7 +33,7 @@ export async function transformTypia(
 	 */
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
 	options: OptionsResolved,
-): Promise<{ code: string; map: any } | undefined> {
+): Promise<string> {
 	/** Whether to enable cache */
 	const cacheEnable = options.cache.enable;
 
@@ -51,16 +50,7 @@ export async function transformTypia(
 
 	warnDiagnostic(diagnostics, transformed, unpluginContext);
 
-	const generatedSource = printer.printFile(file);
-	const magic = new MagicString(generatedSource);
-
-	return {
-		code: magic.toString(),
-		map: magic.generateMap({
-			source: id,
-			file: `${id}.map`,
-		}),
-	};
+	return printer.printFile(file);
 }
 
 /**
