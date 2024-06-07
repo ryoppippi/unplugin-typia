@@ -4,7 +4,7 @@ import MagicString from 'magic-string';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
-import type { OptionsResolved } from './options.ts';
+import type { ResolvedOptions } from './options.ts';
 
 /** create a printer */
 const printer = ts.createPrinter();
@@ -33,7 +33,7 @@ export async function transformTypia(
 	 * This is an experimental feature and may be changed at any time.
 	 */
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
-	options: OptionsResolved,
+	options: ResolvedOptions,
 ): Promise<{ code: string; map: any } | undefined> {
 	/** Whether to enable cache */
 	const cacheEnable = options.cache.enable;
@@ -148,7 +148,7 @@ function transform(
 	id: string,
 	program: ts.Program,
 	tsSource: ts.SourceFile,
-	typiaOptions?: OptionsResolved['typia'],
+	typiaOptions?: ResolvedOptions['typia'],
 ): {
 	/** The diagnostics */
 		diagnostics: ts.Diagnostic[];
