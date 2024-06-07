@@ -30,6 +30,7 @@ function getStorage(option: ResolvedCacheOptions): Storage {
 	globalOption = globalOption ?? option;
 
 	globalStorage = globalStorage ?? createStorage({
+		// @ts-expect-error fsLiteDriver is not callable in bun, but it works!
 		driver: fsLiteDriver({ base: option.base }),
 	});
 
