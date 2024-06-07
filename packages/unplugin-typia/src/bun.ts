@@ -54,7 +54,7 @@ function bunTypiaPlugin(
 
 				const source = await Bun.file(path).text();
 
-				const res = await transformTypia(
+				const code = await transformTypia(
 					path,
 					source,
 					{ warn: console.warn } as Parameters<typeof transformTypia>[2],
@@ -62,8 +62,7 @@ function bunTypiaPlugin(
 				);
 
 				return {
-
-					contents: res?.code ?? source,
+					contents: code ?? source,
 				};
 			});
 		},
