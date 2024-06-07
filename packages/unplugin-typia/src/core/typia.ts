@@ -38,7 +38,7 @@ export async function transformTypia(
 	const cacheEnable = options.cache.enable;
 
 	/** parse tsconfig compilerOptions */
-	compilerOptions = await getTsCompilerOption(cacheEnable);
+	compilerOptions = await getTsCompilerOption(cacheEnable, options?.tsconfig);
 
 	const { program, tsSource } = await getProgramAndSource(id, source, compilerOptions, cacheEnable);
 
@@ -56,9 +56,10 @@ export async function transformTypia(
 /**
  * Read tsconfig.json and get compilerOptions.
  * @param cacheEnable - Whether to enable cache. @default true
+ * @param tsconfigId - The tsconfig.json path. @default undefined
  */
-async function getTsCompilerOption(cacheEnable = true): Promise<ts.CompilerOptions> {
-	const parseTsComilerOptions = async () => (({ ...(await readTSConfig())?.compilerOptions, moduleResolution: undefined }));
+async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Promise<ts.CompilerOptions> {
+	const parseTsComilerOptions = async () => (({ ...(await readTSConfig(tsconfigId))?.compilerOptions, moduleResolution: undefined }));
 
 	/** parse tsconfig compilerOptions */
 	if (cacheEnable) {
