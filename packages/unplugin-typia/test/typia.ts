@@ -57,7 +57,6 @@ console.log({ res });
 	});
 
 	assertNotEquals(result, undefined);
-	assertNotEquals(result?.code, undefined);
 
 	if (result == null) {
 		throw new Error(
@@ -65,9 +64,9 @@ console.log({ res });
 		);
 	}
 
-	assertEquals(result?.code, expectedTs);
+	assertEquals(result, expectedTs);
 
-	const js = ts.transpile(result?.code, { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.NodeNext });
+	const js = ts.transpile(result, { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.NodeNext });
 
 	assertEquals(js, expectedJs);
 });

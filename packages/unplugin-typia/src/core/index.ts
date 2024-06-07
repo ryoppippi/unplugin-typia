@@ -5,6 +5,7 @@ import {
 } from 'unplugin';
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import { consola } from 'consola';
+import MagicString from 'magic-string';
 
 import { type Options, resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
@@ -53,10 +54,10 @@ const unpluginFactory: UnpluginFactory<
 
 		async transform(source, id) {
 			/** get cache */
-			const cache = await getCache(id, source, cacheOptions);
+			let code = await getCache(id, source, cacheOptions);
 
 			if (showLog) {
-				if (cache != null) {
+				if (code != null) {
 					consola.success(`[unplugin-typia] Cache hit: ${id}`);
 				}
 				else {
@@ -64,31 +65,35 @@ const unpluginFactory: UnpluginFactory<
 				}
 			}
 
-			/** return cache if exists */
-			if (cache != null) {
-				return cache;
-			}
-
 			/** transform if cache not exists */
-			const generated = await transformTypia(id, source, this, options);
+			if (code == null) {
+				code = await transformTypia(id, source, this, options);
 
-			if (showLog) {
-				if (generated != null) {
-					consola.warn(`[unplugin-typia] Transformed: ${id}`);
+				if (showLog) {
+					if (code != null) {
+						consola.warn(`[unplugin-typia] Transformed: ${id}`);
+					}
+					else {
+						consola.error(`[unplugin-typia] Transform is null: ${id}`);
+					}
 				}
-				else {
-					consola.error(`[unplugin-typia] Transform is null: ${id}`);
+
+				/** save cache */
+				await setCache(id, source, code, cacheOptions);
+
+				if (showLog) {
+					consola.success(`[unplugin-typia] Cache set: ${id}`);
 				}
 			}
 
-			/** save cache */
-			await setCache(id, source, generated, cacheOptions);
+			/** create source map */
+			const magic = new MagicString(code);
+			const map = magic.generateMap({
+				source: id,
+				file: `${id}.map`,
+			});
 
-			if (showLog) {
-				consola.success(`[unplugin-typia] Cache set: ${id}`);
-			}
-
-			return generated;
+			return { code, map };
 		},
 	};
 };
