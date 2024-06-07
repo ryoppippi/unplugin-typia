@@ -7,6 +7,7 @@ import {
 
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transformTypia } from '../src/core/typia.js';
+import { resolveOptions } from '../src/api.js';
 
 class DummyContext {
 	warn(args: unknown) {
@@ -49,13 +50,7 @@ const res = check({});
 console.log({ res });
 `;
 
-	const result = await transformTypia('test.ts', code, new DummyContext() as UnpluginContext & UnpluginBuildContext, {
-		cache: { enable: false },
-		typia: {
-			plugins: [],
-		},
-	});
-
+	const result = await transformTypia('test.ts', code, new DummyContext() as UnpluginContext & UnpluginBuildContext, resolveOptions({ cache: false }));
 	assertNotEquals(result, undefined);
 
 	if (result == null) {

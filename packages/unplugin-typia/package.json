@@ -53,7 +53,8 @@
 	],
 	"scripts": {
 		"lint": "eslint .",
-		"test": "bun test ./test/*.ts",
+		"test": "npm run check && bun test ./test/*.ts",
+		"check": "bun tsc --noEmit",
 		"publish": "bun x jsr publish"
 	},
 	"peerDependencies": {
