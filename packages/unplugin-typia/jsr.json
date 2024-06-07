@@ -2,7 +2,7 @@
 	"name": "@ryoppippi/unplugin-typia",
 	"version": "0.3.0",
 	"exports": {
-		"./index": "./src/index.ts",
+		".": "./src/index.ts",
 		"./api": "./src/api.ts",
 		"./vite": "./src/vite.ts",
 		"./webpack": "./src/webpack.ts",
