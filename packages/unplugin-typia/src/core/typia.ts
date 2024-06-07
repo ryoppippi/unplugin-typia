@@ -3,7 +3,7 @@ import { readTSConfig } from 'pkg-types';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
-import type { OptionsResolved } from './options.ts';
+import type { ResolvedOptions } from './options.ts';
 
 /** create a printer */
 const printer = ts.createPrinter();
@@ -138,7 +138,7 @@ function transform(
 	id: string,
 	program: ts.Program,
 	tsSource: ts.SourceFile,
-	typiaOptions?: OptionsResolved['typia'],
+	typiaOptions?: ResolvedOptions['typia'],
 ): {
 	/** The diagnostics */
 		diagnostics: ts.Diagnostic[];
