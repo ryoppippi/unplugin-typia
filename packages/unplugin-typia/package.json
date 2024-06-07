@@ -52,7 +52,7 @@
 		"dist"
 	],
 	"scripts": {
-		"lint": "eslint .",
+		"lint": "npm run check && eslint .",
 		"test": "npm run check && bun test ./test/*.ts",
 		"check": "bun tsc --noEmit",
 		"publish": "bun x jsr publish"
