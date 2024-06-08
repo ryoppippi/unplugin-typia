@@ -53,7 +53,9 @@ export interface Options {
 	log?: boolean | 'verbose';
 }
 
-/* Options for cache. */
+/**
+ * Options for cache.
+ */
 export interface CacheOptions {
 	/**
 	 * Enable cache.
