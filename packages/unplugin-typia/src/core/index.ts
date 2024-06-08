@@ -7,7 +7,8 @@ import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import { consola } from 'consola';
 import MagicString from 'magic-string';
 
-import { type Options, resolveOptions } from './options.js';
+import type { CacheOptions, Options } from './options.js';
+import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { getCache, setCache } from './cache.js';
 
@@ -106,8 +107,8 @@ const unpluginFactory: UnpluginFactory<
 const unplugin: UnpluginInstance<Options | undefined, false>
 /* #__PURE__ */ = createUnplugin(unpluginFactory);
 
+export type { Options, CacheOptions };
 export {
-	type Options,
 	resolveOptions,
 	createFilter,
 	transformTypia,

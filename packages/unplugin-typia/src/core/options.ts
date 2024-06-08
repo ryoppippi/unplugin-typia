@@ -42,9 +42,9 @@ export interface Options {
 	 * if `true`, it will enable cache with default path.
 	 * if `false`, it will disable cache.
 	 * if object, it will enable cache with custom path.
-	 * @default { enable: true, base: '/tmp'}
+	 * @default { enable: true, base: '/tmp/unplugin_typia' }
 	 */
-	cache?: CacheOptions | boolean;
+	cache?: CacheOptions | true | false;
 
 	/**
 	 * Enable debug mode.
