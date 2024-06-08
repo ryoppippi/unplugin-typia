@@ -110,6 +110,61 @@ Examples:
 <br></details>
 
 <details>
+<summary>Bun.build</summary><br>
+
+### Example 1: Using for running script
+
+```ts
+// preload.ts
+import { plugin } from 'bun';
+import UnpluginTypia from 'unplugin-typia/bun';
+
+plugin(UnpluginTypia({ /* your options */}));
+```
+
+```toml
+# bun.toml
+preload = "preload.ts"
+
+[test]
+preload = "preload.ts"
+```
+
+For running the script:
+
+```sh
+bun run ./index.ts
+```
+
+Check the [Plugins – Runtime | Bun Docs](https://bun.sh/docs/runtime/plugins) for more details.
+
+### Example 2: Using for building script
+
+```ts
+// build.ts
+import UnpluginTypia from 'unplugin-typia/bun';
+
+await Bun.build({
+	entrypoints: ['./index.ts'],
+	outdir: './out',
+	plugins: [
+		UnpluginTypia({ /* your options */})
+	]
+});
+```
+
+For building the script:
+
+```sh
+bun run ./build.ts
+node ./out/index.js
+```
+
+Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) for more details.
+
+<br></details>
+
+<details>
 <summary>Rollup</summary><br>
 
 ```ts

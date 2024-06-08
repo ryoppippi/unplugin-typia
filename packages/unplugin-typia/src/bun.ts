@@ -17,6 +17,8 @@ if (globalThis.Bun == null) {
  *
  * some typia functions does not works because of bun/typia internal implementation. see the [issse](https://github.com/ryoppippi/unplugin-typia/issues/44)
  * @experimental
+ * also check out hte [Bun.build docc](https://bun.sh/docs/bundler)
+ *
  * @example
  * ```ts
  * // preload.ts
@@ -26,12 +28,26 @@ if (globalThis.Bun == null) {
  * plugin(UnpluginTypia({ /* your options *\/}))
  * ```
  * ```toml
- * // bunfig.toml
+ * # bunfig.toml
  * preload = ["./preload.ts"]
  *
  * [test]
  * preload = ["./preload.ts"]
  * ```
+ *
+ * @example
+ * ```ts
+ * // build.ts
+ *
+ * import UnpluginTypia from 'unplugin-typia/bun'
+ *
+ * Bun.build({
+ *   entrypoints: ['./index.ts'],
+ *   outdir: './out',
+ *   plugins: [
+ *     UnpluginTypia({ /* your options *\/})
+ *  ]
+ * })
  */
 function bunTypiaPlugin(
 	options?: Options,
