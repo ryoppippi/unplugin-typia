@@ -28,5 +28,6 @@
   "devDependencies": {
     "turbo": "^2.0.1"
   },
-  "packageManager": "bun@1.1.12"
+  "packageManager": "bun@1.1.12",
+  "private": true
 }
