@@ -5,7 +5,8 @@
  */
 
 import type { BunPlugin } from 'bun';
-import { type Options, resolveOptions, transformTypia } from './api.js';
+import type { UnpluginContextMeta } from 'unplugin';
+import { type Options, resolveOptions, unplugin } from './api.js';
 import { defaultOptions } from './core/options.js';
 
 if (globalThis.Bun == null) {
@@ -52,11 +53,23 @@ if (globalThis.Bun == null) {
 function bunTypiaPlugin(
 	options?: Options,
 ): BunPlugin {
+	const unpluginRaw = unplugin.raw(
+		options,
+		{} as UnpluginContextMeta,
+	);
+
+	const { transform } = unpluginRaw;
+
+	if (transform == null) {
+		throw new Error('transform is not defined');
+	}
+
 	const bunPlugin = ({
 		name: 'unplugin-typia',
 		setup(build) {
 			const resolvedOptions = resolveOptions(options ?? {});
 			const { include } = resolvedOptions;
+
 			const filter = include instanceof RegExp
 				? include
 				: typeof include === 'string'
@@ -70,16 +83,17 @@ function bunTypiaPlugin(
 
 				const source = await Bun.file(path).text();
 
-				const code = await transformTypia(
-					path,
-					source,
-					{ warn: console.warn } as Parameters<typeof transformTypia>[2],
-					resolvedOptions,
-				);
+				// @ts-expect-error type of this function is not correct
+				const result = await transform(source, path);
 
-				return {
-					contents: code ?? source,
-				};
+				switch (true) {
+					case result == null:
+						return { contents: source };
+					case typeof result === 'string':
+						return { contents: source };
+					default:
+						return { contents: result.code };
+				}
 			});
 		},
 	}) as const satisfies BunPlugin;
