@@ -29,6 +29,7 @@ if (globalThis.Bun == null) {
  *     UnpluginTypia({ /* your options *\/})
  *  ]
  * })
+ * ```
  *
  * ```sh
  * $ node build.ts
@@ -47,6 +48,7 @@ if (globalThis.Bun == null) {
  *
  * plugin(UnpluginTypia({ /* your options *\/}))
  * ```
+ *
  * ```toml
  * # bunfig.toml
  * preload = ["./preload.ts"]
