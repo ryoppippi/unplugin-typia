@@ -13,7 +13,7 @@ import unplugin from './core/index.js';
  * ```ts
  * // rspack.config.js
  * module.exports = {
- *  plugins: [require('unplugin-typia/rspack')()],
+ *  plugins: [require('@ryoppippi/unplugin-typia/rspack')()],
  * }
  * ```
  */

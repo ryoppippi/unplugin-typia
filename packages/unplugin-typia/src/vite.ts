@@ -12,7 +12,7 @@ import unplugin from './core/index.js';
  * @example
  * ```ts
  * // vite.config.ts
- * import UnpluginTypia from 'unplugin-typia/vite'
+ * import UnpluginTypia from '@ryoppippi/unplugin-typia/vite'
  *
  * export default defineConfig({
  *   plugins: [UnpluginTypia()],

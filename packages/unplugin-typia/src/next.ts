@@ -13,7 +13,7 @@ import type { Options } from './core/options.js';
  * @example
  * ```js
  * // next.config.mjs
- * import unTypiaNext from "unplugin-typia/next";
+ * import unTypiaNext from "@ryoppippi/unplugin-typia/next";
  *
  * /** @type {import("next").NextConfig} *\/
  * const nextConfig = { /* your next.js config *\/ };
