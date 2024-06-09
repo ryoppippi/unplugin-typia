@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import Inspect from "vite-plugin-inspect";
-import UnpluginTypia from "unplugin-typia/vite";
+import UnpluginTypia from "@ryoppippi/unplugin-typia/vite";
 
 export default defineConfig({
   clearScreen: false,
