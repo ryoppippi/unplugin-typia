@@ -1,5 +1,5 @@
 {
-	"name": "unplugin-typia",
+	"name": "@ryoppippi/unplugin-typia",
 	"type": "module",
 	"version": "0.3.8",
 	"description": "unplugin for typia",
