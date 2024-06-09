@@ -112,7 +112,33 @@ Examples:
 <details>
 <summary>Bun.build</summary><br>
 
-### Example 1: Using for running script
+### Example 1: Using for building script
+
+```ts
+// build.ts
+import UnpluginTypia from 'unplugin-typia/bun';
+
+await Bun.build({
+	entrypoints: ['./index.ts'],
+	outdir: './out',
+	plugins: [
+		UnpluginTypia({ /* your options */})
+	]
+});
+```
+
+For building the script:
+
+```sh
+bun run ./build.ts
+node ./out/index.js
+```
+
+Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) for more details.
+
+### Example 2: Using for running script
+
+> ⚠️ Note: Experimental feature. Some typia functions does not works because of bun/typia/randexp internal implementation. see the [issse](https://github.com/ryoppippi/unplugin-typia/issues/44)
 
 ```ts
 // preload.ts
@@ -137,30 +163,6 @@ bun run ./index.ts
 ```
 
 Check the [Plugins – Runtime | Bun Docs](https://bun.sh/docs/runtime/plugins) for more details.
-
-### Example 2: Using for building script
-
-```ts
-// build.ts
-import UnpluginTypia from 'unplugin-typia/bun';
-
-await Bun.build({
-	entrypoints: ['./index.ts'],
-	outdir: './out',
-	plugins: [
-		UnpluginTypia({ /* your options */})
-	]
-});
-```
-
-For building the script:
-
-```sh
-bun run ./build.ts
-node ./out/index.js
-```
-
-Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) for more details.
 
 <br></details>
 

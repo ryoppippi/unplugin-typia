@@ -16,11 +16,30 @@ if (globalThis.Bun == null) {
 /**
  * bun plugin
  *
- * some typia functions does not works because of bun/typia internal implementation. see the [issse](https://github.com/ryoppippi/unplugin-typia/issues/44)
- * @experimental
- * also check out hte [Bun.build docc](https://bun.sh/docs/bundler)
+ * @example
+ * ```ts
+ * // build.ts
+ *
+ * import UnpluginTypia from 'unplugin-typia/bun'
+ *
+ * Bun.build({
+ *   entrypoints: ['./index.ts'],
+ *   outdir: './out',
+ *   plugins: [
+ *     UnpluginTypia({ /* your options *\/})
+ *  ]
+ * })
+ *
+ * ```sh
+ * $ node build.ts
+ * ```
+ *
+ * Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) for more details.
  *
  * @example
+ * @experimental
+ * some typia functions does not works because of bun/typia/randexp internal implementation. see the [issse](https://github.com/ryoppippi/unplugin-typia/issues/44)
+ *
  * ```ts
  * // preload.ts
  * import { plugin } from 'bun';
@@ -36,19 +55,11 @@ if (globalThis.Bun == null) {
  * preload = ["./preload.ts"]
  * ```
  *
- * @example
- * ```ts
- * // build.ts
+ * ```sh
+ * $ bun run ./index.ts
+ * ```
+ * Check the [Plugins – Runtime | Bun Docs](https://bun.sh/docs/runtime/plugins) for more details.
  *
- * import UnpluginTypia from 'unplugin-typia/bun'
- *
- * Bun.build({
- *   entrypoints: ['./index.ts'],
- *   outdir: './out',
- *   plugins: [
- *     UnpluginTypia({ /* your options *\/})
- *  ]
- * })
  */
 function bunTypiaPlugin(
 	options?: Options,
