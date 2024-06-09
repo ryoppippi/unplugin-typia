@@ -53,6 +53,7 @@
 	],
 	"scripts": {
 		"lint": "npm run check && eslint .",
+		"format": "eslint --fix .",
 		"test": "npm run check && bun test ./test/*.ts",
 		"check": "bun tsc --noEmit",
 		"publish": "bun x jsr publish"
