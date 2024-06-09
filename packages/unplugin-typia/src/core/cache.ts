@@ -1,6 +1,6 @@
+import { createHash } from 'node:crypto';
 import { type Storage, createStorage } from 'unstorage';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
-import { isEqual, sha256 } from 'ohash';
 import type { transformTypia } from './typia.js';
 import type { ResolvedOptions } from './options.js';
 
@@ -22,7 +22,7 @@ let globalOption: ResolvedCacheOptions | undefined;
  * @param option - The cache options.
  */
 function getStorage(option: ResolvedCacheOptions): Storage {
-	if (!isEqual(option, globalOption)) {
+	if (!isDeepEqual(option, globalOption)) {
 		globalStorage = undefined;
 		globalOption = undefined;
 	}
@@ -104,5 +104,48 @@ export async function setCache(
  * @param source
  */
 function getKey(id: string, source: string): string {
-	return sha256(`${id}:${source}`);
+	return hash(`${id}:${source}`);
+}
+
+/**
+ * Compare two values deeply.
+ * @param a - The first value to compare.
+ * @param b - The second value to compare.
+ * @returns Whether the two values are deeply equal.
+ */
+function isDeepEqual<T>(a: T, b: T): boolean {
+	if (a === b) {
+		return true;
+	}
+
+	if (typeof a !== 'object' || a === null || typeof b !== 'object' || b === null) {
+		return false;
+	}
+
+	const keysA = Object.keys(a) as (keyof T)[];
+	const keysB = Object.keys(b) as (keyof T)[];
+
+	if (keysA.length !== keysB.length) {
+		return false;
+	}
+
+	for (const key of keysA) {
+		if (!(key in b) || !isDeepEqual(a[key], b[key])) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * Create hash string
+ * @param input
+ * @returns The hash string.
+ */
+function hash(input: string): string {
+	if (globalThis.Bun != null) {
+		return Bun.hash(input).toString();
+	}
+	return createHash('md5').update(input).digest('hex');
 }
