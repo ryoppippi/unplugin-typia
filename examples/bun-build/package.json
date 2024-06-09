@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "prepare": "ts-patch install && typia patch",
-    "test": "bun run ./index.ts",
+    "test": "run-s test:*",
+    "test:runtime": "bun run ./index.ts",
+    "test:build": "npm run build && bun run ./out/*.js",
     "build": "bun run ./build.ts"
   },
   "devDependencies": {
