@@ -116,7 +116,7 @@ Examples:
 
 ```ts
 // build.ts
-import UnpluginTypia from 'unplugin-typia/bun';
+import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
 
 await Bun.build({
 	entrypoints: ['./index.ts'],
@@ -143,7 +143,7 @@ Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) 
 ```ts
 // preload.ts
 import { plugin } from 'bun';
-import UnpluginTypia from 'unplugin-typia/bun';
+import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
 
 plugin(UnpluginTypia({ /* your options */}));
 ```

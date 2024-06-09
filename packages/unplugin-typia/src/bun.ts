@@ -20,7 +20,7 @@ if (globalThis.Bun == null) {
  * ```ts
  * // build.ts
  *
- * import UnpluginTypia from 'unplugin-typia/bun'
+ * import UnpluginTypia from '@ryoppippi/unplugin-typia/bun'
  *
  * Bun.build({
  *   entrypoints: ['./index.ts'],
@@ -44,7 +44,7 @@ if (globalThis.Bun == null) {
  * ```ts
  * // preload.ts
  * import { plugin } from 'bun';
- * import UnpluginTypia from 'unplugin-typia/bun'
+ * import UnpluginTypia from '@ryoppippi/unplugin-typia/bun'
  *
  * plugin(UnpluginTypia({ /* your options *\/}))
  * ```
