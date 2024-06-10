@@ -168,6 +168,10 @@ function transform(
 		},
 	);
 
+	transformationResult.transformed.forEach((t) => {
+		console.log({ fileName: t.fileName, id });
+	});
+
 	const file = transformationResult.transformed.find(t => t.fileName === id);
 
 	if (file == null) {
