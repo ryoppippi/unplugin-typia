@@ -54,6 +54,7 @@
 	"scripts": {
 		"lint": "npm run check && eslint .",
 		"format": "eslint --fix .",
+		"build": "bun run build.ts",
 		"test": "npm run check && bun test ./test/*.ts",
 		"check": "bun tsc --noEmit",
 		"publish": "bun x jsr publish"

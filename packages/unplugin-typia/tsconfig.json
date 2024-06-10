@@ -7,8 +7,13 @@
 		"resolveJsonModule": true,
 		"strict": true,
 		"strictNullChecks": true,
+		"declaration": true,
+		"outDir": "dist-esm/",
+		"sourceMap": true,
 		"esModuleInterop": true,
+		"isolatedModules": true,
 		"skipLibCheck": true
 	},
+	"include": ["src"],
 	"exclude": ["dist", "eslint.config.js"]
 }
