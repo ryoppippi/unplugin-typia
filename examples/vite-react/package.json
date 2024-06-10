@@ -24,6 +24,6 @@
     "typescript": "^5.4.5",
     "typia": "^6.0.6",
     "vite": "^5.2.0",
-    "@ryoppippi/unplugin-typia": "workspace:*"
+    "unplugin-typia": "workspace:*"
   }
 }

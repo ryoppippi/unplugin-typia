@@ -17,8 +17,10 @@ This unplugin aims to make it easier to use Typia in your projects.
 First, install `unplugin-typia`:
 
 ```bash
-# jsr
-npx jsr add -D @ryoppippi/unplugin-typia
+npx jsr add -D @ryoppippi/unplugin-typia # jsr recommended
+# or
+npx nypm add unplugin-typia
+
 ```
 
 Then, install `typia`:
@@ -45,7 +47,7 @@ Then, add the unplugin to your favorite bundler:
 
 ```ts
 // vite.config.ts
-import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
+import UnpluginTypia from 'unplugin-typia/vite';
 
 export default defineConfig({
 	plugins: [
@@ -116,7 +118,7 @@ Examples:
 
 ```ts
 // build.ts
-import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
+import UnpluginTypia from 'unplugin-typia/bun';
 
 await Bun.build({
 	entrypoints: ['./index.ts'],
@@ -143,7 +145,7 @@ Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) 
 ```ts
 // preload.ts
 import { plugin } from 'bun';
-import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
+import UnpluginTypia from 'unplugin-typia/bun';
 
 plugin(UnpluginTypia({ /* your options */}));
 ```
@@ -171,7 +173,7 @@ Check the [Plugins – Runtime | Bun Docs](https://bun.sh/docs/runtime/plugins) 
 
 ```ts
 // rollup.config.js
-import UnpluginTypia from '@ryoppippi/unplugin-typia/rollup';
+import UnpluginTypia from 'unplugin-typia/rollup';
 
 export default {
 	plugins: [
@@ -187,7 +189,7 @@ export default {
 
 ```ts
 // webpack.config.js
-const UnpluginTypia = require('@ryoppippi/unplugin-typia/webpack');
+const UnpluginTypia = require('unplugin-typia/webpack');
 
 module.exports = {
 	plugins: [

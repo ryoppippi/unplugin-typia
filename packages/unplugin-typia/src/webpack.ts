@@ -13,7 +13,7 @@ import unplugin from './core/index.js';
  * ```ts
  * // webpack.config.js
  * module.exports = {
- *  plugins: [require("@ryoppippi/unplugin-typia/webpack")()],
+ *  plugins: [require("unplugin-typia/webpack")()],
  * }
  * ```
  */
