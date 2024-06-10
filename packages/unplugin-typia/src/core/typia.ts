@@ -94,7 +94,7 @@ async function getProgramAndSource(
 	const tsSource = ts.createSourceFile(
 		id,
 		source,
-		ts.ScriptTarget.ES2020,
+		compilerOptions.target ?? ts.ScriptTarget.ES2020,
 	);
 	const host = ts.createCompilerHost(compilerOptions);
 
