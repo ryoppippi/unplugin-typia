@@ -53,7 +53,10 @@
 		"./package.json": "./package.json"
 	},
 	"files": [
-		"dist"
+		"README.md",
+		"dist-cjs/",
+		"dist-esm/",
+		"src/"
 	],
 	"scripts": {
 		"lint": "npm run check && eslint .",
