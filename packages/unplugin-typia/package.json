@@ -1,7 +1,7 @@
 {
 	"name": "@ryoppippi/unplugin-typia",
 	"type": "module",
-	"version": "0.3.8",
+	"version": "0.3.9",
 	"description": "unplugin for typia",
 	"author": "ryoppippi",
 	"license": "MIT",
