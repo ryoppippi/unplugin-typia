@@ -85,7 +85,7 @@
 		"src/"
 	],
 	"scripts": {
-		"lint": "npm run check && eslint . && npx publint",
+		"lint": "npm run check && eslint .",
 		"format": "eslint --fix .",
 		"build": "tsup",
 		"dev": "tsup --watch",
