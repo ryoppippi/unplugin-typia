@@ -5,7 +5,8 @@
       "dependsOn": ["^prepare"]
     },
     "build": {
-      "dependsOn": ["^prepare", "^build"]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -14,14 +15,15 @@
       "dependsOn": ["^format"]
     },
     "test": {
-      "dependsOn": ["^test"]
+      "dependsOn": ["^build", "^test"]
     },
     "dev": {
+      "dependsOn": ["^dev"],
       "persistent": true,
       "cache": false
     },
     "deploy": {
-      "dependsOn": ["^deploy"],
+      "dependsOn": ["build-lib", "^deploy"],
       "env": ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN"]
     }
   }
