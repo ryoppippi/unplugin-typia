@@ -3,6 +3,8 @@
 	"type": "module",
 	"version": "0.3.8",
 	"description": "unplugin for typia",
+	"homepage": "https://jsr.io/@ryoppippi/unplugin-typia",
+	"repository": "https://github.com/ryoppippi/unplugin-typia",
 	"author": "ryoppippi",
 	"license": "MIT",
 	"keywords": [
