@@ -1,12 +1,12 @@
 {
-	"name": "@ryoppippi/unplugin-typia",
+	"name": "unplugin-typia",
 	"type": "module",
 	"version": "0.3.8",
 	"description": "unplugin for typia",
-	"homepage": "https://jsr.io/@ryoppippi/unplugin-typia",
-	"repository": "https://github.com/ryoppippi/unplugin-typia",
 	"author": "ryoppippi",
 	"license": "MIT",
+	"homepage": "https://jsr.io/@ryoppippi/unplugin-typia",
+	"repository": "https://github.com/ryoppippi/unplugin-typia",
 	"keywords": [
 		"unplugin",
 		"vite",
@@ -21,77 +21,77 @@
 	"exports": {
 		".": {
 			"bun": "./src/index.ts",
-			"import": "./dist-esm/index.js",
-			"default": "./dist-cjs/index.js"
+			"import": "./dist/index.js",
+			"default": "./dist/index.cjs"
 		},
 		"./api": {
 			"bun": "./src/api.ts",
-			"import": "./dist-esm/api.js",
-			"default": "./dist-cjs/api.js"
+			"import": "./dist/api.js",
+			"default": "./dist/api.cjs"
 		},
 		"./vite": {
 			"bun": "./src/vite.ts",
-			"import": "./dist-esm/vite.js",
-			"default": "./dist-cjs/vite.js"
+			"import": "./dist/vite.js",
+			"default": "./dist/vite.cjs"
 		},
 		"./webpack": {
 			"bun": "./src/webpack.ts",
-			"import": "./dist-esm/webpack.js",
-			"default": "./dist-cjs/webpack.js"
+			"import": "./dist/webpack.js",
+			"default": "./dist/webpack.cjs"
 		},
 		"./rollup": {
 			"bun": "./src/rollup.ts",
-			"import": "./dist-esm/rollup.js",
-			"default": "./dist-cjs/rollup.js"
+			"import": "./dist/rollup.js",
+			"default": "./dist/rollup.cjs"
 		},
 		"./esbuild": {
 			"bun": "./src/esbuild.ts",
-			"import": "./dist-esm/esbuild.js",
-			"default": "./dist-cjs/esbuild.js"
+			"import": "./dist/esbuild.js",
+			"default": "./dist/esbuild.cjs"
 		},
 		"./next": {
 			"bun": "./src/next.ts",
-			"import": "./dist-esm/next.js",
-			"default": "./dist-cjs/next.js"
+			"import": "./dist/next.js",
+			"default": "./dist/next.cjs"
 		},
 		"./rolldown": {
 			"bun": "./src/rolldown.ts",
-			"import": "./dist-esm/rolldown.js",
-			"default": "./dist-cjs/rolldown.js"
+			"import": "./dist/rolldown.js",
+			"default": "./dist/rolldown.cjs"
 		},
 		"./farm": {
 			"bun": "./src/farm.ts",
-			"import": "./dist-esm/farm.js",
-			"default": "./dist-cjs/farm.js"
+			"import": "./dist/farm.js",
+			"default": "./dist/farm.cjs"
 		},
 		"./rspack": {
 			"bun": "./src/rspack.ts",
-			"import": "./dist-esm/rspack.js",
-			"default": "./dist-cjs/rspack.js"
+			"import": "./dist/rspack.js",
+			"default": "./dist/rspack.cjs"
 		},
 		"./bun": {
 			"bun": "./src/bun.ts",
-			"import": "./dist-esm/bun.js",
-			"default": "./dist-cjs/bun.js"
+			"import": "./dist/bun.js",
+			"default": "./dist/bun.cjs"
 		},
 		"./package.json": "./package.json"
 	},
-	"main": "./dist-cjs/index.js",
-	"module": "./dist-esm/index.js",
-	"types": "./dist-esm/index.d.ts",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"files": [
 		"README.md",
-		"dist-cjs/",
-		"dist-esm/",
+		"dist/",
 		"src/"
 	],
 	"scripts": {
 		"lint": "npm run check && eslint . && npx publint",
 		"format": "eslint --fix .",
-		"build": "rimraf dist-cjs dist-esm && npx tsc -p tsconfig.json && npx tsc -p tsconfig.cjs.json",
+		"build": "tsup",
 		"test": "npm run check && bun test ./test/*.ts",
 		"check": "bun tsc --noEmit",
-		"publish": "bun x jsr publish",
+		"npm:publish": "npm publish --access public",
+		"jsr:publish": "bun x jsr publish",
 		"jsr:version": "jq -r '.version' package.json | xargs -I {} jq '.version = \"{}\"' jsr.json > temp.json && mv temp.json jsr.json && npm run format"
 	},
 	"peerDependencies": {
@@ -142,7 +142,7 @@
 		"@types/node": "^20.10.3",
 		"eslint": "^8.55.0",
 		"eslint-plugin-format": "^0.1.1",
-		"rimraf": "^5.0.7",
-		"rollup": "^4.6.1"
+		"rollup": "^4.6.1",
+		"tsup": "^8.1.0"
 	}
 }
