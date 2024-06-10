@@ -59,7 +59,7 @@
 		"src/"
 	],
 	"scripts": {
-		"lint": "npm run check && eslint .",
+		"lint": "npm run check && eslint . && npx publint",
 		"format": "eslint --fix .",
 		"build": "rimraf dist-cjs dist-esm && npx tsc -p tsconfig.json && npx tsc -p tsconfig.cjs.json",
 		"test": "npm run check && bun test ./test/*.ts",
