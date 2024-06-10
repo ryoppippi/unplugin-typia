@@ -18,40 +18,65 @@
 	],
 	"exports": {
 		".": {
-			"import": "./src/index.ts"
+			"bun": "./src/index.ts",
+			"import": "./dist-esm/index.js",
+			"default": "./dist-cjs/index.js"
 		},
 		"./api": {
-			"import": "./src/api.ts"
+			"bun": "./src/api.ts",
+			"import": "./dist-esm/api.js",
+			"default": "./dist-cjs/api.js"
 		},
 		"./vite": {
-			"import": "./src/vite.ts"
+			"bun": "./src/vite.ts",
+			"import": "./dist-esm/vite.js",
+			"default": "./dist-cjs/vite.js"
 		},
 		"./webpack": {
-			"import": "./src/webpack.ts"
+			"bun": "./src/webpack.ts",
+			"import": "./dist-esm/webpack.js",
+			"default": "./dist-cjs/webpack.js"
 		},
 		"./rollup": {
-			"import": "./src/rollup.ts"
+			"bun": "./src/rollup.ts",
+			"import": "./dist-esm/rollup.js",
+			"default": "./dist-cjs/rollup.js"
 		},
 		"./esbuild": {
-			"import": "./src/esbuild.ts"
+			"bun": "./src/esbuild.ts",
+			"import": "./dist-esm/esbuild.js",
+			"default": "./dist-cjs/esbuild.js"
 		},
 		"./next": {
-			"import": "./src/next.ts"
+			"bun": "./src/next.ts",
+			"import": "./dist-esm/next.js",
+			"default": "./dist-cjs/next.js"
 		},
 		"./rolldown": {
-			"import": "./src/rolldown.ts"
+			"bun": "./src/rolldown.ts",
+			"import": "./dist-esm/rolldown.js",
+			"default": "./dist-cjs/rolldown.js"
 		},
 		"./farm": {
-			"import": "./src/farm.ts"
+			"bun": "./src/farm.ts",
+			"import": "./dist-esm/farm.js",
+			"default": "./dist-cjs/farm.js"
 		},
 		"./rspack": {
-			"import": "./src/rspack.ts"
+			"bun": "./src/rspack.ts",
+			"import": "./dist-esm/rspack.js",
+			"default": "./dist-cjs/rspack.js"
 		},
 		"./bun": {
-			"import": "./src/bun.ts"
+			"bun": "./src/bun.ts",
+			"import": "./dist-esm/bun.js",
+			"default": "./dist-cjs/bun.js"
 		},
 		"./package.json": "./package.json"
 	},
+	"main": "./dist-cjs/index.js",
+	"module": "./dist-esm/index.js",
+	"types": "./dist-esm/index.d.ts",
 	"files": [
 		"README.md",
 		"dist-cjs/",
