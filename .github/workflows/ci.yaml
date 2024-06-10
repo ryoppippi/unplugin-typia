@@ -60,7 +60,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun i --frozen-lockfile
-      - run: bun run publish --dry-run
+      - run: bun run jsr:publish --dry-run
         working-directory: packages/unplugin-typia
 
   action-timeline:
