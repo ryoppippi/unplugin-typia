@@ -1,4 +1,5 @@
 import ts from 'typescript';
+import { resolve } from 'pathe';
 import { readTSConfig } from 'pkg-types';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
@@ -168,7 +169,8 @@ function transform(
 		},
 	);
 
-	const file = transformationResult.transformed.find(t => t.fileName === id);
+	const resolvedId = resolve(id);
+	const file = transformationResult.transformed.find(t => resolve(t.fileName) === resolvedId);
 
 	if (file == null) {
 		throw new Error('No file found');
