@@ -57,7 +57,8 @@
 		"build": "rimraf dist-cjs dist-esm && npx tsc -p tsconfig.json && npx tsc -p tsconfig.cjs.json",
 		"test": "npm run check && bun test ./test/*.ts",
 		"check": "bun tsc --noEmit",
-		"publish": "bun x jsr publish"
+		"publish": "bun x jsr publish",
+		"jsr:version": "jq -r '.version' package.json | xargs -I {} jq '.version = \"{}\"' jsr.json > temp.json && mv temp.json jsr.json && npm run format"
 	},
 	"peerDependencies": {
 		"esbuild": "*",
