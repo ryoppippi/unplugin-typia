@@ -54,7 +54,7 @@
 	"scripts": {
 		"lint": "npm run check && eslint .",
 		"format": "eslint --fix .",
-		"build": "bun run build.ts",
+		"build": "rimraf dist-cjs dist-esm && npx tsc -p tsconfig.json && npx tsc -p tsconfig.cjs.json",
 		"test": "npm run check && bun test ./test/*.ts",
 		"check": "bun tsc --noEmit",
 		"publish": "bun x jsr publish"
@@ -107,6 +107,7 @@
 		"@types/node": "^20.10.3",
 		"eslint": "^8.55.0",
 		"eslint-plugin-format": "^0.1.1",
+		"rimraf": "^5.0.7",
 		"rollup": "^4.6.1"
 	}
 }
