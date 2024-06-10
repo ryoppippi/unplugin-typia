@@ -9,12 +9,20 @@ import unplugin from './core/index.js';
 /**
  * Webpack plugin
  *
+ * Currently, this plugin works only with 'esm' target. If you want to use 'cjs' target, please use with [`jiti`](https://github.com/unjs/jiti).
+ *
+ * Refer this issue https://github.com/samchon/typia/issues/1094
+ *
  * @example
- * ```ts
+ * ```js
  * // webpack.config.js
+ * const jiti = require("jiti")();
+ * const UnpluginTypia = jiti("@ryoppippi/unplugin-typia/webpack").default;
+ *
  * module.exports = {
- *  plugins: [require("@ryoppippi/unplugin-typia/webpack")()],
+ *  plugins: [UnpluginTypia({ /* your config *\/ })],
  * }
  * ```
+ *
  */
 export default unplugin.webpack;

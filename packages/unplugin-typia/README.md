@@ -185,9 +185,16 @@ export default {
 <details>
 <summary>Webpack</summary><br>
 
-```ts
+> ⚠️ Note: Currently, this plugin works only with 'esm' target. If you want to use 'cjs' target, please use with [`jiti`](https://github.com/unjs/jiti). Refer [this issue](https://github.com/samchon/typia/issues/1094).
+
+```sh
+npm install jiti
+```
+
+```js
 // webpack.config.js
-const UnpluginTypia = require('@ryoppippi/unplugin-typia/webpack');
+const jiti = require('jiti')();
+const UnpluginTypia = jiti('@ryoppippi/unplugin-typia/webpack').default;
 
 module.exports = {
 	plugins: [
