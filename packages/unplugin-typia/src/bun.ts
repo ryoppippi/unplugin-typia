@@ -7,8 +7,8 @@
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta } from 'unplugin';
 import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
-import { babelParse, getLang, isDts, resolveString } from '@sxzz/ast-kit';
-import { MagicStringAST } from '@sxzz/magic-string-ast';
+import { babelParse, getLang, isDts, resolveString } from 'ast-kit';
+import { MagicStringAST } from 'magic-string-ast';
 import { dirname, join } from 'pathe';
 import { type Options, resolveOptions, unplugin } from './api.js';
 import { defaultOptions } from './core/options.js';
