@@ -6,11 +6,46 @@
 
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta } from 'unplugin';
+import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
+import { babelParse, getLang } from '@sxzz/ast-kit';
+import { MagicStringAST } from '@sxzz/magic-string-ast';
+import { dirname, join } from 'pathe';
 import { type Options, resolveOptions, unplugin } from './api.js';
 import { defaultOptions } from './core/options.js';
 
 if (globalThis.Bun == null) {
 	throw new Error('You must use this plugin with bun');
+}
+
+/* cache typia mjs path */
+let typiaMjsPath: string | undefined;
+/**
+ * Read typia mjs path.
+ * TODO: delete after [this issue](https://github.com/oven-sh/bun/issues/11783) is resolved.
+ */
+async function resolveTypiaPath(id: string, code: string) {
+	if (typiaMjsPath == null) {
+		const typiaPackageJson = await readPackageJSON('typia');
+		const typiaDirName = dirname(await resolvePackageJSON('typia'));
+		typiaMjsPath = join(typiaDirName, typiaPackageJson?.module ?? '');
+	}
+
+	const ms = new MagicStringAST(code);
+
+	const program = babelParse(code, getLang(id), {});
+	for (const node of program.body) {
+		if (
+			node.type === 'ImportDeclaration'
+			&& node.importKind !== 'type'
+			&& ms.sliceNode(node.source) === 'typia'
+		) {
+			ms.overwriteNode(node.source, `${typiaMjsPath}"`);
+		}
+	}
+
+	const r = ms.toString();
+
+	return r;
 }
 
 /**
@@ -79,7 +114,7 @@ function bunTypiaPlugin(
 
 	const bunPlugin = ({
 		name: 'unplugin-typia',
-		setup(build) {
+		async setup(build) {
 			const resolvedOptions = resolveOptions(options ?? {});
 			const { include } = resolvedOptions;
 
@@ -105,7 +140,7 @@ function bunTypiaPlugin(
 					case typeof result === 'string':
 						return { contents: source };
 					default:
-						return { contents: result.code };
+						return { contents: await resolveTypiaPath(path, result.code) };
 				}
 			});
 		},
