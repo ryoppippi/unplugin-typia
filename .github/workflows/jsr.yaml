@@ -1,0 +1,35 @@
+name: jsr
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - run: bun i --frozen-lockfile
+      - id: get_version
+        name: Get version
+        uses: jannemattila/get-version-from-tag@v3
+      - name: jsr.json version to packge.json verion
+        run: |
+          jq --arg new_version "${{ steps.get_version.outputs.version }}" '.version = $new_version' package.json > package.tmp.json && mv package.tmp.json package.json
+          jq --arg new_version "${{ steps.get_version.outputs.version }}" '.version = $new_version' jsr.json > jsr.tmp.json && mv jsr.tmp.json jsr.json
+        working-directory: packages/unplugin-typia
+      - name: Publish
+        if: github.ref == 'refs/tags/v*'
+        run: bun run publish
+        working-directory: packages/unplugin-typia
