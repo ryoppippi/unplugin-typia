@@ -100,7 +100,6 @@
 		"defu": "^6.1.4",
 		"eslint": "^8.55.0",
 		"eslint-plugin-format": "^0.1.1",
-		"magic-string": "^0.30.10",
 		"magic-string-ast": "^0.6.1",
 		"pkg-types": "^1.1.1",
 		"rollup": "^4.6.1",
