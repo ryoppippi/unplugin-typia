@@ -86,6 +86,8 @@
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
+		"@sxzz/ast-kit": "npm:@jsr/sxzz__ast-kit",
+		"@sxzz/magic-string-ast": "npm:@jsr/sxzz__magic-string-ast",
 		"pathe": "^1.1.2",
 		"typescript": "^5.3.2",
 		"unplugin": "^1.5.1"
