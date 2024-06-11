@@ -7,7 +7,7 @@
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta } from 'unplugin';
 import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
-import { babelParse, getLang } from '@sxzz/ast-kit';
+import { babelParse, getLang, isDts, resolveString } from '@sxzz/ast-kit';
 import { MagicStringAST } from '@sxzz/magic-string-ast';
 import { dirname, join } from 'pathe';
 import { type Options, resolveOptions, unplugin } from './api.js';
@@ -17,6 +17,12 @@ if (globalThis.Bun == null) {
 	throw new Error('You must use this plugin with bun');
 }
 
+type QuotedString = `"${string}"` | `'${string}'`;
+function isQuotedString(input: string): input is QuotedString {
+	const quotedRegex = /^(["']).*\1$/;
+	return quotedRegex.test(input);
+}
+
 /* cache typia mjs path */
 let typiaMjsPath: string | undefined;
 /**
@@ -24,6 +30,10 @@ let typiaMjsPath: string | undefined;
  * TODO: delete after [this issue](https://github.com/oven-sh/bun/issues/11783) is resolved.
  */
 async function resolveTypiaPath(id: string, code: string) {
+	if (isDts(id)) {
+		return code;
+	}
+
 	if (typiaMjsPath == null) {
 		const typiaPackageJson = await readPackageJSON('typia');
 		const typiaDirName = dirname(await resolvePackageJSON('typia'));
@@ -34,12 +44,20 @@ async function resolveTypiaPath(id: string, code: string) {
 
 	const program = babelParse(code, getLang(id), {});
 	for (const node of program.body) {
-		if (
-			node.type === 'ImportDeclaration'
-			&& node.importKind !== 'type'
-			&& ms.sliceNode(node.source) === 'typia'
-		) {
-			ms.overwriteNode(node.source, `${typiaMjsPath}"`);
+		if (node.type !== 'ImportDeclaration' || node.importKind === 'type') {
+			continue;
+			;
+		}
+		const moduleNameQuoted = resolveString(ms.sliceNode(node.source));
+		if (!isQuotedString(moduleNameQuoted)) {
+			continue;
+		}
+
+		const moduleName = moduleNameQuoted.slice(1, -1);
+
+		if (moduleName === 'typia') {
+			const replaceModuleString = moduleNameQuoted.replace('typia', typiaMjsPath);
+			ms.overwriteNode(node.source, replaceModuleString);
 		}
 	}
 
