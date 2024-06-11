@@ -5,7 +5,7 @@ import {
 } from 'unplugin';
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import { consola } from 'consola';
-import MagicString from 'magic-string';
+import { MagicString } from 'magic-string-ast';
 
 import type { CacheOptions, Options } from './options.js';
 import { resolveOptions } from './options.js';
