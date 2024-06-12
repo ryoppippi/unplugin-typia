@@ -17,14 +17,38 @@ if (globalThis.Bun == null) {
 	throw new Error('You must use this plugin with bun');
 }
 
+/**
+ * Options for the bun plugin.
+ */
+export interface BunOptions extends Options {
+
+	/**
+	 * Whether to resolve the typia mjs path absolutely.
+	 *
+	 * @default true
+	 */
+	resolveAbsoluteTypiaPath?: boolean;
+}
+
+type ResolvedBunOptions = ResolvedOptions & Required<Pick<BunOptions, 'resolveAbsoluteTypiaPath'>>;
+
+function resolveBunOptions(options: BunOptions) {
+	const resolvedOptions = resolveOptions(options);
+
+	return {
+		...resolvedOptions,
+		resolveAbsoluteTypiaPath: options.resolveAbsoluteTypiaPath ?? true,
+	};
+}
+
 /* cache typia mjs path */
 let typiaMjsPath: string | undefined;
 /**
  * Read typia mjs path.
  * TODO: delete after [this issue](https://github.com/oven-sh/bun/issues/11783) is resolved.
  */
-async function resolveTypiaPath(id: string, code: string, options: ResolvedOptions) {
-	if (isDts(id)) {
+async function resolveTypiaPath(id: string, code: string, options: ResolvedBunOptions) {
+	if (!options.resolveAbsoluteTypiaPath && isDts(id)) {
 		return code;
 	}
 
@@ -104,7 +128,7 @@ async function resolveTypiaPath(id: string, code: string, options: ResolvedOptio
  *
  */
 function bunTypiaPlugin(
-	options?: Options,
+	options?: BunOptions,
 ): BunPlugin {
 	const unpluginRaw = unplugin.raw(
 		options,
@@ -120,7 +144,7 @@ function bunTypiaPlugin(
 	const bunPlugin = ({
 		name: 'unplugin-typia',
 		async setup(build) {
-			const resolvedOptions = resolveOptions(options ?? {});
+			const resolvedOptions = resolveBunOptions(options ?? {});
 			const { include } = resolvedOptions;
 
 			const filter = include instanceof RegExp
