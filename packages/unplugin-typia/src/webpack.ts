@@ -16,8 +16,8 @@ import unplugin from './core/index.js';
  * @example
  * ```js
  * // webpack.config.js
- * const jiti = require("jiti")();
- * const UnpluginTypia = jiti("@ryoppippi/unplugin-typia/webpack").default;
+ * const jiti = require("jiti")(__filename);
+ * const { default: UnpluginTypia } = jiti("@ryoppippi/unplugin-typia/webpack");
  *
  * module.exports = {
  *  plugins: [UnpluginTypia({ /* your config *\/ })],
