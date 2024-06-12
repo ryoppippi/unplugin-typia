@@ -138,8 +138,6 @@ Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) 
 
 ### Example 2: Using for running script
 
-> ⚠️ Note: Experimental feature. Some typia functions does not works because of bun/typia/randexp internal implementation. see the [issse](https://github.com/ryoppippi/unplugin-typia/issues/44)
-
 ```ts
 // preload.ts
 import { plugin } from 'bun';

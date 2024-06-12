@@ -109,3 +109,6 @@ console.log(MemberSchema)
 const MemberJsonSchema = typia.json.application<[IMember], '3.0'>()
 console.log(JSON.stringify(MemberJsonSchema, null, 2))
 
+/** generate random member */
+const random = typia.createRandom<IMember>();
+console.log(random())
