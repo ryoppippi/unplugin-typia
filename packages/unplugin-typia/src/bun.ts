@@ -99,7 +99,7 @@ async function resolveTypiaPath(id: string, code: string) {
  * import { plugin } from 'bun';
  * import UnpluginTypia from '@ryoppippi/unplugin-typia/bun'
  *
- * plugin(UnpluginTypia({ /* your options *\/}))
+ * plugin(UnpluginTypia({ /* your options */ }))
  * ```
  *
  * ```toml
