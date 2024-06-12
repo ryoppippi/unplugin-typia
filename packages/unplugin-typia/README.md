@@ -116,14 +116,13 @@ Examples:
 
 ```ts
 // build.ts
-import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
 
-await Bun.build({
-	entrypoints: ['./index.ts'],
-	outdir: './out',
-	plugins: [
-		UnpluginTypia({ /* your options */})
-	]
+import UnpluginTypia from "@ryoppippi/unplugin-typia/bun";
+
+Bun.build({
+  entrypoints: ["./index.ts"],
+  outdir: "./out",
+  plugins: [UnpluginTypia(/* your options */)],
 });
 ```
 
