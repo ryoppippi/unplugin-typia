@@ -79,7 +79,7 @@ async function resolveTypiaPath(id: string, code: string) {
  *   entrypoints: ['./index.ts'],
  *   outdir: './out',
  *   plugins: [
- *     UnpluginTypia({ /* your options *\/})
+ *     UnpluginTypia(/* your options */)
  *  ]
  * })
  * ```
