@@ -7,20 +7,38 @@
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta } from 'unplugin';
 import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
-import { babelParse, getLang, isDts, resolveString } from 'ast-kit';
-import { MagicStringAST } from 'magic-string-ast';
+import { isDts } from 'ast-kit';
 import { dirname, join } from 'pathe';
-import { type Options, resolveOptions, unplugin } from './api.js';
-import { defaultOptions } from './core/options.js';
+import { Project } from 'ts-morph';
+import { resolveOptions, unplugin } from './api.js';
+import { type Options, type ResolvedOptions, defaultOptions } from './core/options.js';
 
 if (globalThis.Bun == null) {
 	throw new Error('You must use this plugin with bun');
 }
 
-type QuotedString = `"${string}"` | `'${string}'`;
-function isQuotedString(input: string): input is QuotedString {
-	const quotedRegex = /^(["']).*\1$/;
-	return quotedRegex.test(input);
+/**
+ * Options for the bun plugin.
+ */
+export interface BunOptions extends Options {
+
+	/**
+	 * Whether to resolve the typia mjs path absolutely.
+	 *
+	 * @default true
+	 */
+	resolveAbsoluteTypiaPath?: boolean;
+}
+
+type ResolvedBunOptions = ResolvedOptions & Required<Pick<BunOptions, 'resolveAbsoluteTypiaPath'>>;
+
+function resolveBunOptions(options: BunOptions) {
+	const resolvedOptions = resolveOptions(options);
+
+	return {
+		...resolvedOptions,
+		resolveAbsoluteTypiaPath: options.resolveAbsoluteTypiaPath ?? true,
+	};
 }
 
 /* cache typia mjs path */
@@ -29,8 +47,8 @@ let typiaMjsPath: string | undefined;
  * Read typia mjs path.
  * TODO: delete after [this issue](https://github.com/oven-sh/bun/issues/11783) is resolved.
  */
-async function resolveTypiaPath(id: string, code: string) {
-	if (isDts(id)) {
+async function resolveTypiaPath(id: string, code: string, options: ResolvedBunOptions) {
+	if (!options.resolveAbsoluteTypiaPath && isDts(id)) {
 		return code;
 	}
 
@@ -40,30 +58,26 @@ async function resolveTypiaPath(id: string, code: string) {
 		typiaMjsPath = join(typiaDirName, typiaPackageJson?.module ?? '');
 	}
 
-	const ms = new MagicStringAST(code);
+	const project = new Project({
+		tsConfigFilePath: options.tsconfig,
+	});
 
-	const program = babelParse(code, getLang(id), {});
-	for (const node of program.body) {
-		if (node.type !== 'ImportDeclaration' || node.importKind === 'type') {
-			continue;
-			;
-		}
-		const moduleNameQuoted = resolveString(ms.sliceNode(node.source));
-		if (!isQuotedString(moduleNameQuoted)) {
-			continue;
-		}
+	const sourceFile = project.createSourceFile('', code, { overwrite: false });
 
-		const moduleName = moduleNameQuoted.slice(1, -1);
+	const typiaImport = sourceFile.getImportDeclaration(i => i.getDefaultImport() != null && i.getModuleSpecifierValue() === 'typia');
 
-		if (moduleName === 'typia') {
-			const replaceModuleString = moduleNameQuoted.replace('typia', typiaMjsPath);
-			ms.overwriteNode(node.source, replaceModuleString);
-		}
+	if (typiaImport == null) {
+		return code;
 	}
 
-	const r = ms.toString();
+	typiaImport.removeDefaultImport();
 
-	return r;
+	sourceFile.addImportDeclaration({
+		defaultImport: 'typia',
+		moduleSpecifier: typiaMjsPath,
+	});
+
+	return sourceFile.getText();
 }
 
 /**
@@ -114,7 +128,7 @@ async function resolveTypiaPath(id: string, code: string) {
  *
  */
 function bunTypiaPlugin(
-	options?: Options,
+	options?: BunOptions,
 ): BunPlugin {
 	const unpluginRaw = unplugin.raw(
 		options,
@@ -130,7 +144,7 @@ function bunTypiaPlugin(
 	const bunPlugin = ({
 		name: 'unplugin-typia',
 		async setup(build) {
-			const resolvedOptions = resolveOptions(options ?? {});
+			const resolvedOptions = resolveBunOptions(options ?? {});
 			const { include } = resolvedOptions;
 
 			const filter = include instanceof RegExp
@@ -155,7 +169,7 @@ function bunTypiaPlugin(
 					case typeof result === 'string':
 						return { contents: source };
 					default:
-						return { contents: await resolveTypiaPath(path, result.code) };
+						return { contents: await resolveTypiaPath(path, result.code, resolvedOptions) };
 				}
 			});
 		},

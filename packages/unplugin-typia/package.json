@@ -85,7 +85,9 @@
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
+		"magic-string": "^0.30.10",
 		"pathe": "^1.1.2",
+		"ts-morph": "^22.0.0",
 		"typescript": "^5.3.2",
 		"unplugin": "^1.5.1"
 	},
@@ -99,7 +101,6 @@
 		"defu": "^6.1.4",
 		"eslint": "^8.55.0",
 		"eslint-plugin-format": "^0.1.1",
-		"magic-string-ast": "^0.6.1",
 		"pkg-types": "^1.1.1",
 		"rollup": "^4.6.1",
 		"type-fest": "^4.19.0",
