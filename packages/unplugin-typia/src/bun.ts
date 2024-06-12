@@ -69,6 +69,8 @@ async function resolveTypiaPath(id: string, code: string) {
 /**
  * bun plugin
  *
+ * Also, check the [Plugins – Runtime | Bun Docs](https://bun.sh/docs/runtime/plugins) & [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) for more details.
+ *
  * @example
  * ```ts
  * // build.ts
@@ -88,11 +90,7 @@ async function resolveTypiaPath(id: string, code: string) {
  * $ node build.ts
  * ```
  *
- * Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) for more details.
- *
  * @example
- * @experimental
- * some typia functions does not works because of bun/typia/randexp internal implementation. see the [issse](https://github.com/ryoppippi/unplugin-typia/issues/44)
  *
  * ```ts
  * // preload.ts
@@ -113,7 +111,6 @@ async function resolveTypiaPath(id: string, code: string) {
  * ```sh
  * $ bun run ./index.ts
  * ```
- * Check the [Plugins – Runtime | Bun Docs](https://bun.sh/docs/runtime/plugins) for more details.
  *
  */
 function bunTypiaPlugin(
