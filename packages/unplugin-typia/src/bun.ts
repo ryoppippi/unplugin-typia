@@ -126,6 +126,7 @@ async function resolveTypiaPath(id: string, code: string, options: ResolvedBunOp
  * $ bun run ./index.ts
  * ```
  *
+ * When you run your scripts on Bun.runtime, You cannot use named import for typia value in the source code. Check out the README.md.
  */
 function bunTypiaPlugin(
 	options?: BunOptions,
