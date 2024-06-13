@@ -1,6 +1,7 @@
+import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { type Storage, createStorage } from 'unstorage';
-import fsLiteDriver from 'unstorage/drivers/fs-lite';
+import { basename, dirname, join } from 'pathe';
+import type { Tagged } from 'type-fest';
 import type { transformTypia } from './typia.js';
 import type { ResolvedOptions } from './options.js';
 
@@ -14,32 +15,17 @@ interface StoreData {
 	source: string;
 }
 
-let globalStorage: Storage | undefined;
-let globalOption: ResolvedCacheOptions | undefined;
-
-/**
- * Get storage
- * @param option - The cache options.
- */
-function getStorage(option: ResolvedCacheOptions): Storage {
-	if (!isDeepEqual(option, globalOption)) {
-		globalStorage = undefined;
-		globalOption = undefined;
+function isStoreData(value: unknown): value is StoreData {
+	if (typeof value !== 'object' || value === null) {
+		return false;
 	}
-
-	globalOption = globalOption ?? option;
-
-	globalStorage = globalStorage ?? createStorage({
-		// @ts-expect-error fsLiteDriver is not callable in bun, but it works!
-		driver: fsLiteDriver({ base: option.base }),
-	});
-
-	if (globalStorage == null) {
-		throw new Error('Storage cannot be created');
-	}
-
-	return globalStorage;
+	const data = value as StoreData;
+	return data.data != null
+		&& typeof data.id === 'string'
+		&& typeof data.source === 'string';
 }
+
+let cacheDir: string | null = null;
 
 /**
  * Get cache
@@ -55,16 +41,27 @@ export async function getCache(
 	if (!option.enable) {
 		return null;
 	}
-	const storage = getStorage(option);
+	prepareCacheDir(option);
+
 	const key = getKey(id, source);
-	const data = await storage.getItem<StoreData>(key);
+	const path = getCachePath(key, option);
+
+	let data: StoreData | null = null;
+	if (existsSync(path)) {
+		const cache = readFileSync(path, 'utf8');
+		const json = JSON.parse(cache);
+		if (!isStoreData(json)) {
+			return null;
+		}
+		data = json;
+	}
 
 	/** validate cache */
-	if (data == null) {
+	if (!isStoreData(data)) {
 		return null;
 	}
 
-	if (data.id !== id || data.source !== source) {
+	if (data.source !== source || data.id !== id) {
 		return null;
 	}
 
@@ -87,55 +84,69 @@ export async function setCache(
 	if (!option.enable) {
 		return;
 	}
-	const storage = getStorage(option);
+	prepareCacheDir(option);
+
 	const key = getKey(id, source);
+	const path = getCachePath(key, option);
 
 	if (data == null) {
-		await storage.removeItem(key);
+		rmSync(path);
 		return;
 	}
 
-	await storage.setItem(key, { data, id, source });
+	// await storage.setItem(key, { data, id, source });
+	const json = JSON.stringify({ data, id, source });
+	writeFileSync(path, json, { encoding: 'utf8' });
 }
+
+type CacheKey = Tagged<string, 'cache-key'>;
+type CachePath = Tagged<string, 'cache-path'>;
 
 /**
  * Get cache key
  * @param id
  * @param source
  */
-function getKey(id: string, source: string): string {
-	return hash(`${id}:${source}`);
+function getKey(id: string, source: string): CacheKey {
+	const h = hash(source);
+	const filebase = `${basename(dirname(id))}_${basename(id)}`;
+
+	return `${filebase}_${h}` as CacheKey;
 }
 
 /**
- * Compare two values deeply.
- * @param a - The first value to compare.
- * @param b - The second value to compare.
- * @returns Whether the two values are deeply equal.
+ * Get storage
+ * @param key
+ * @param option
  */
-function isDeepEqual<T>(a: T, b: T): boolean {
-	if (a === b) {
+function getCachePath(
+	key: CacheKey,
+	option: ResolvedCacheOptions,
+): CachePath {
+	return join(option.base, key) as CachePath;
+}
+
+function prepareCacheDir(option: ResolvedCacheOptions): void {
+	if (cacheDir != null) {
+		return;
+	}
+	mkdirSync(option.base, { recursive: true });
+
+	if (!isWritable) {
+		throw new Error('Cache directory is not writable.');
+	}
+
+	cacheDir = option.base;
+}
+
+function isWritable(filename: string): boolean {
+	try {
+		accessSync(filename, constants.W_OK);
 		return true;
 	}
-
-	if (typeof a !== 'object' || a === null || typeof b !== 'object' || b === null) {
+	catch {
 		return false;
 	}
-
-	const keysA = Object.keys(a) as (keyof T)[];
-	const keysB = Object.keys(b) as (keyof T)[];
-
-	if (keysA.length !== keysB.length) {
-		return false;
-	}
-
-	for (const key of keysA) {
-		if (!(key in b) || !isDeepEqual(a[key], b[key])) {
-			return false;
-		}
-	}
-
-	return true;
 }
 
 /**
