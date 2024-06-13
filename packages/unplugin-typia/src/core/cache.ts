@@ -1,6 +1,6 @@
-import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { join } from 'pathe';
+import { basename, dirname, join } from 'pathe';
 import type { Tagged } from 'type-fest';
 import type { transformTypia } from './typia.js';
 import type { ResolvedOptions } from './options.js';
@@ -25,6 +25,8 @@ function isStoreData(value: unknown): value is StoreData {
 		&& typeof data.source === 'string';
 }
 
+let cacheDir: string | null = null;
+
 /**
  * Get cache
  * @param id
@@ -39,6 +41,8 @@ export async function getCache(
 	if (!option.enable) {
 		return null;
 	}
+	prepareCacheDir(option);
+
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
 
@@ -54,6 +58,10 @@ export async function getCache(
 
 	/** validate cache */
 	if (!isStoreData(data)) {
+		return null;
+	}
+
+	if (data.source !== source || data.id !== id) {
 		return null;
 	}
 
@@ -76,6 +84,8 @@ export async function setCache(
 	if (!option.enable) {
 		return;
 	}
+	prepareCacheDir(option);
+
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
 
@@ -98,7 +108,10 @@ type CachePath = Tagged<string, 'cache-path'>;
  * @param source
  */
 function getKey(id: string, source: string): CacheKey {
-	return hash(`${id}:${source}`) as CacheKey;
+	const h = hash(source);
+	const filebase = `${basename(dirname(id))}_${basename(id)}`;
+
+	return `${filebase}_${h}` as CacheKey;
 }
 
 /**
@@ -111,6 +124,29 @@ function getCachePath(
 	option: ResolvedCacheOptions,
 ): CachePath {
 	return join(option.base, key) as CachePath;
+}
+
+function prepareCacheDir(option: ResolvedCacheOptions): void {
+	if (cacheDir != null) {
+		return;
+	}
+	mkdirSync(option.base, { recursive: true });
+
+	if (!isWritable) {
+		throw new Error('Cache directory is not writable.');
+	}
+
+	cacheDir = option.base;
+}
+
+function isWritable(filename: string): boolean {
+	try {
+		accessSync(filename, constants.W_OK);
+		return true;
+	}
+	catch {
+		return false;
+	}
 }
 
 /**
