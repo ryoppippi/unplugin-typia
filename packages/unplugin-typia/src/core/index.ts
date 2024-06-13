@@ -4,13 +4,13 @@ import {
 	createUnplugin,
 } from 'unplugin';
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
-import { consola } from 'consola';
 import MagicString from 'magic-string';
 
 import type { CacheOptions, Options } from './options.js';
 import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { getCache, setCache } from './cache.js';
+import { log } from './utils.js';
 
 const name = 'unplugin-typia' as const;
 
@@ -34,16 +34,16 @@ const unpluginFactory: UnpluginFactory<
 	const options = resolveOptions(rawOptions);
 	const filter = createFilter(options.include, options.exclude);
 
-	const { cache: cacheOptions, log } = options;
+	const { cache: cacheOptions, log: logOption } = options;
 
-	if (log) {
-		consola.box(
-		`[unplugin-typia]`,
-		cacheOptions.enable ? `Cache enabled` : `Cache disabled`,
+	if (logOption) {
+		log(
+			'box',
+			cacheOptions.enable ? `Cache enabled` : `Cache disabled`,
 		);
 	}
 
-	const showLog = log === 'verbose' && cacheOptions.enable;
+	const showLog = logOption === 'verbose' && cacheOptions.enable;
 
 	return {
 		name,
@@ -59,10 +59,10 @@ const unpluginFactory: UnpluginFactory<
 
 			if (showLog) {
 				if (code != null) {
-					consola.success(`[unplugin-typia] Cache hit: ${id}`);
+					log('success', `Cache hit: ${id}`);
 				}
 				else {
-					consola.warn(`[unplugin-typia] Cache miss: ${id}`);
+					log('warn', `Cache miss: ${id}`);
 				}
 			}
 
@@ -72,10 +72,10 @@ const unpluginFactory: UnpluginFactory<
 
 				if (showLog) {
 					if (code != null) {
-						consola.warn(`[unplugin-typia] Transformed: ${id}`);
+						log('success', `Transformed: ${id}`);
 					}
 					else {
-						consola.error(`[unplugin-typia] Transform is null: ${id}`);
+						log('error', `Transform is null: ${id}`);
 					}
 				}
 
@@ -83,7 +83,7 @@ const unpluginFactory: UnpluginFactory<
 				await setCache(id, source, code, cacheOptions);
 
 				if (showLog) {
-					consola.success(`[unplugin-typia] Cache set: ${id}`);
+					log('success', `Cache set: ${id}`);
 				}
 			}
 
