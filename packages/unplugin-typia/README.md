@@ -138,6 +138,20 @@ Check the [Plugins – Bundler | Bun Docs](https://bun.sh/docs/bundler/plugins) 
 
 ### Example 2: Using for running script
 
+> ⚠️ Limitation: you need import `typia` module as default import in your script.
+> Type named import is fine
+>
+> ```ts
+> import type { tag } from 'typia'; // do
+> import typia from 'typia'; // do
+> ```
+>
+> ```ts
+> import { createIs } from 'typia'; // don't
+> ```
+>
+> This is due to `Bun`'s bug. See [this issue](https://github.com/ryoppippi/unplugin-typia/issues/44)
+
 ```ts
 // preload.ts
 import { plugin } from 'bun';
