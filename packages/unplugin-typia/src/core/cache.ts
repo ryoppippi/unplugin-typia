@@ -11,7 +11,6 @@ type Data = Awaited<ReturnType<typeof transformTypia>>;
 
 interface StoreData {
 	data: NonNullable<Data>;
-	id: string;
 	source: string;
 }
 
@@ -21,7 +20,6 @@ function isStoreData(value: unknown): value is StoreData {
 	}
 	const data = value as StoreData;
 	return data.data != null
-		&& typeof data.id === 'string'
 		&& typeof data.source === 'string';
 }
 
@@ -61,7 +59,7 @@ export async function getCache(
 		return null;
 	}
 
-	if (data.source !== source || data.id !== id) {
+	if (data.source !== source) {
 		return null;
 	}
 
@@ -94,8 +92,7 @@ export async function setCache(
 		return;
 	}
 
-	// await storage.setItem(key, { data, id, source });
-	const json = JSON.stringify({ data, id, source });
+	const json = JSON.stringify({ data, source });
 	writeFileSync(path, json, { encoding: 'utf8' });
 }
 
