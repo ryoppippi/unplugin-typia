@@ -1,4 +1,5 @@
 import antfu from '@antfu/eslint-config';
+import { join } from 'pathe';
 
 export default antfu({
 	formatters: true,
@@ -15,5 +16,9 @@ export default antfu({
 		indent: 'tab',
 		quotes: 'single',
 		semi: true,
+	},
+
+	typescript: {
+		tsconfigPath: join(import.meta.dirname, 'tsconfig.json'),
 	},
 });
