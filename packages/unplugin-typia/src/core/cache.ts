@@ -1,5 +1,5 @@
-import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { access, constants, exists, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, join } from 'pathe';
 import type { Tagged } from 'type-fest';
 import { readPackageJSON } from 'pkg-types';
@@ -33,8 +33,8 @@ export async function getCache(
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
 
-	if (existsSync(path)) {
-		const data = readFileSync(path, 'utf8');
+	if (await exists(path)) {
+		const data = await readFile(path, { encoding: 'utf8' });
 
 		const hashComment = await getHashComment(key);
 
@@ -69,12 +69,12 @@ export async function setCache(
 	const hashComment = await getHashComment(key);
 
 	if (data == null) {
-		rmSync(path);
+		await rm(path);
 		return;
 	}
 
 	const cache = data + hashComment;
-	writeFileSync(path, cache, { encoding: 'utf8' });
+	writeFile(path, cache, { encoding: 'utf8' });
 }
 
 type CacheKey = Tagged<string, 'cache-key'>;
@@ -104,11 +104,11 @@ function getCachePath(
 	return join(option.base, key) as CachePath;
 }
 
-function prepareCacheDir(option: ResolvedCacheOptions): void {
+async function prepareCacheDir(option: ResolvedCacheOptions) {
 	if (cacheDir != null) {
 		return;
 	}
-	mkdirSync(option.base, { recursive: true });
+	await mkdir(option.base, { recursive: true });
 
 	if (!isWritable) {
 		throw new Error('Cache directory is not writable.');
@@ -117,9 +117,9 @@ function prepareCacheDir(option: ResolvedCacheOptions): void {
 	cacheDir = option.base;
 }
 
-function isWritable(filename: string): boolean {
+async function isWritable(filename: string): Promise<boolean> {
 	try {
-		accessSync(filename, constants.W_OK);
+		await access(filename, constants.W_OK);
 		return true;
 	}
 	catch {
