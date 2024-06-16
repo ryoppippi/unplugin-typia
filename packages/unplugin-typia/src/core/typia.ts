@@ -146,6 +146,7 @@ function transform(
 	typiaOptions?: ResolvedOptions['typia'],
 ): {
 	/** The diagnostics */
+		/** The diagnostics */
 		diagnostics: ts.Diagnostic[];
 		/** The transformed source files */
 		transformed: ts.SourceFile[];
