@@ -43,7 +43,7 @@ export interface Options {
 	 * if `true`, it will enable cache with and will use node_modules/.cache/unplugin_typia (if exists) or {TMP_DIR}/unplugin_typia
 	 * if `false`, it will disable cache.
 	 * if object, it will enable cache with custom path.
-	 * @default { enable: true, base: /* TMP_DIR *\/ }
+	 * @default { enable: true, base: TMP_DIR }
 	 */
 	cache?: CacheOptions | true | false;
 
@@ -66,7 +66,7 @@ export interface CacheOptions {
 
 	/**
 	 * The base directory for cache.
-	 * @default '/tmp/unplugin_typia'
+	 * @default  will use node_modules/.cache/unplugin_typia (if exists) or {TMP_DIR}/unplugin_typia
 	 */
 	base?: string;
 };
