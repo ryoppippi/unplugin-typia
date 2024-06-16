@@ -45,11 +45,8 @@ export async function transformTypia(
 
 	const { program, tsSource } = await getProgramAndSource(id, source, compilerOptions, cacheEnable);
 
-	const {
-		diagnostics,
-		transformed,
-		file,
-	} = transform(id, program, tsSource, options.typia);
+	using result = transform(id, program, tsSource, options.typia);
+	const { diagnostics, transformed, file } = result;
 
 	warnDiagnostic(diagnostics, transformed, unpluginContext);
 
@@ -145,13 +142,14 @@ function transform(
 	tsSource: ts.SourceFile,
 	typiaOptions?: ResolvedOptions['typia'],
 ): {
-	/** The diagnostics */
 		/** The diagnostics */
 		diagnostics: ts.Diagnostic[];
 		/** The transformed source files */
 		transformed: ts.SourceFile[];
 		/** The transformed source file we need */
 		file: ts.SourceFile;
+		/** Dispose the transformation */
+		[Symbol.dispose]: () => void;
 	} {
 	const diagnostics: ts.Diagnostic[] = [];
 
@@ -180,12 +178,14 @@ function transform(
 		throw new Error('No file found');
 	}
 
-	/** dispose transformation result */
-	transformationResult.dispose();
-
 	const { transformed } = transformationResult;
 
-	return { diagnostics, transformed, file };
+	return {
+		diagnostics,
+		transformed,
+		file,
+		[Symbol.dispose]: () => transformationResult.dispose(),
+	};
 }
 
 /** Warn diagnostics */
