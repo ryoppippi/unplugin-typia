@@ -3,6 +3,7 @@ import { createDefu } from 'defu';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
 import { getCacheDir } from './cache.js';
+import { type FilePath, wrap } from './types.js';
 
 /**
  * Represents the options for the plugin.
@@ -71,7 +72,7 @@ export interface CacheOptions {
 	base?: string;
 };
 
-export type ResolvedOptions = RequiredDeep<Omit<Options, 'typia' | 'cache' | 'tsconfig'>> & { typia: Options['typia']; cache: Required<CacheOptions>; tsconfig?: string };
+export type ResolvedOptions = RequiredDeep<Omit<Options, 'typia' | 'cache' | 'tsconfig'>> & { typia: Options['typia']; cache: Pick<Required<CacheOptions>, 'enable'> & { base: FilePath }; tsconfig?: string };
 
 /** Default options */
 export const defaultOptions = ({
@@ -99,13 +100,15 @@ const defu = createDefu((obj, key, value) => {
  * @returns The resolved options.
  */
 export function resolveOptions(options: Options): ResolvedOptions {
+	const { cache } = options;
+
 	return defu(
 		{
 			...options,
 			cache:
-				typeof options.cache === 'boolean'
-					? { enable: options.cache }
-					: options.cache,
+				typeof cache === 'boolean'
+					? { enable: cache }
+					: { ...cache, base: cache?.base != null ? wrap<FilePath>(cache.base) : undefined },
 		},
 		defaultOptions,
 	);

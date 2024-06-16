@@ -3,10 +3,12 @@ import { test } from 'bun:test';
 import { assertEquals, assertNotEquals } from '@std/assert';
 
 import * as cache from '../src/core/cache.js';
+import type { FilePath, ID, Source } from '../src/core/types.js';
+import { wrap } from '../src/core/types.js';
 
 type Data = Parameters<typeof cache.setCache>[2];
 
-const tmp = tmpdir();
+const tmp = wrap<FilePath>(tmpdir());
 
 function removeComments(data: string | null) {
 	if (data == null) {
@@ -20,21 +22,23 @@ function removeComments(data: string | null) {
 test('return null if cache is not found', async () => {
 	const option = { enable: true, base: tmp } as const;
 	const random = Math.random().toString();
-	const data = await cache.getCache(random, random, option);
+	const source = wrap<Source>(random);
+	const data = await cache.getCache(wrap<ID>(random), source, option);
 	assertEquals(data, null);
 });
 
 test('set and get cache', async () => {
 	const option = { enable: true, base: tmp } as const;
 	const random = Math.random().toString();
-	const filename = `${random}-${random}.json`;
+	const source = wrap<Source>(random);
+	const filename = wrap<ID>(`${random}-${random}.json`);
 	const data = `${random};` as const satisfies Data;
 
 	/* set cache */
-	await cache.setCache(filename, random, data, option);
+	await cache.setCache(filename, source, data, option);
 
 	/* get cache */
-	const cacheData = await cache.getCache(filename, random, option);
+	const cacheData = await cache.getCache(filename, source, option);
 
 	/* delete js asterisk comments */
 	const cacheDataStr = removeComments(cacheData);
@@ -45,14 +49,15 @@ test('set and get cache', async () => {
 test('set and get null with different id', async () => {
 	const option = { enable: true, base: tmp } as const;
 	const random = Math.random().toString();
-	const filename = `${random}-${random}.json`;
+	const source = wrap<Source>(random);
+	const filename = wrap<ID>(`${random}-${random}.json`);
 	const data = `${random};` as const satisfies Data;
 
 	/* set cache */
-	await cache.setCache(filename, random, data, option);
+	await cache.setCache(filename, source, data, option);
 
 	/* get cache */
-	const cacheData = await cache.getCache(`111;${random}`, random, option);
+	const cacheData = await cache.getCache(`111;${random}` as ID, source, option);
 
 	/* delete js asterisk comments */
 	const cacheDataStr = removeComments(cacheData);
@@ -64,14 +69,15 @@ test('set and get null with different id', async () => {
 test('set and get null with cache disabled', async () => {
 	const option = { enable: false, base: tmp } as const;
 	const random = Math.random().toString();
-	const filename = `${random}-${random}.json`;
+	const source = wrap<Source>(random);
+	const filename = wrap<ID>(`${random}-${random}.json`);
 	const data = `${random};` as const satisfies Data;
 
 	/* set cache */
-	await cache.setCache(filename, random, data, option);
+	await cache.setCache(filename, source, data, option);
 
 	/* get cache */
-	const cacheData = await cache.getCache(filename, random, option);
+	const cacheData = await cache.getCache(filename, source, option);
 
 	assertEquals(cacheData, null);
 });

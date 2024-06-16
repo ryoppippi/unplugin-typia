@@ -5,6 +5,7 @@ import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
 import type { ResolvedOptions } from './options.ts';
+import type { ID, Source } from './types.js';
 
 /** create a printer */
 const printer = ts.createPrinter();
@@ -25,8 +26,8 @@ const sourceCache = new Map<string, ts.SourceFile>();
  * @returns The transformed code.
  */
 export async function transformTypia(
-	id: string,
-	source: string,
+	id: ID,
+	source: Source,
 	/**
 	 * **Use with caution.**
 	 *
@@ -86,8 +87,8 @@ async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Pro
  * @returns The program and source.
  */
 async function getProgramAndSource(
-	id: string,
-	source: string,
+	id: ID,
+	source: Source,
 	compilerOptions: ts.CompilerOptions,
 	cacheEnable = true,
 ): Promise<{ program: ts.Program; tsSource: ts.SourceFile }> {
@@ -137,7 +138,7 @@ async function getProgramAndSource(
  * @returns The transformed code and source map.
  */
 function transform(
-	id: string,
+	id: ID,
 	program: ts.Program,
 	tsSource: ts.SourceFile,
 	typiaOptions?: ResolvedOptions['typia'],
