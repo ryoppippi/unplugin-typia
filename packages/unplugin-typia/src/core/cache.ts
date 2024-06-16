@@ -4,6 +4,7 @@ import { basename, dirname, join } from 'pathe';
 import type { Tagged } from 'type-fest';
 import type { transformTypia } from './typia.js';
 import type { ResolvedOptions } from './options.js';
+import { isBun } from './utils.js';
 
 type ResolvedCacheOptions = ResolvedOptions['cache'];
 
@@ -152,7 +153,7 @@ function isWritable(filename: string): boolean {
  * @returns The hash string.
  */
 function hash(input: string): string {
-	if (globalThis.Bun != null) {
+	if (isBun()) {
 		return Bun.hash(input).toString();
 	}
 	return createHash('md5').update(input).digest('hex');
