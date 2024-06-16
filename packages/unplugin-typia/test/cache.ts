@@ -8,6 +8,13 @@ type Data = Parameters<typeof cache.setCache>[2];
 
 const tmp = tmpdir();
 
+function removeComments(data: string | null) {
+	if (data == null) {
+		return data;
+	}
+	return data.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');
+}
+
 test('return null if cache is not found', async () => {
 	const option = { enable: true, base: tmp } as const;
 	const random = Math.random().toString();
@@ -27,7 +34,10 @@ test('set and get cache', async () => {
 	/* get cache */
 	const cacheData = await cache.getCache(filename, random, option);
 
-	assertEquals(cacheData, data);
+	/* delete js asterisk comments */
+	const cacheDataStr = removeComments(cacheData);
+
+	assertEquals(data, cacheDataStr);
 });
 
 test('set and get null with different id', async () => {
@@ -40,9 +50,13 @@ test('set and get null with different id', async () => {
 	await cache.setCache(filename, random, data, option);
 
 	/* get cache */
-	const cacheData = await cache.getCache(`${random}-1`, random, option);
+	const cacheData = await cache.getCache(`111;${random}`, random, option);
 
-	assertNotEquals(cacheData, data);
+	/* delete js asterisk comments */
+	const cacheDataStr = removeComments(cacheData);
+
+	assertEquals(cacheDataStr, null);
+	assertNotEquals(data, cacheDataStr);
 });
 
 test('set and get null with cache disabled', async () => {

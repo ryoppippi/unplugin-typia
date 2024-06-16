@@ -2,28 +2,17 @@ import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, wri
 import { createHash } from 'node:crypto';
 import { basename, dirname, join } from 'pathe';
 import type { Tagged } from 'type-fest';
+import { readPackageJSON } from 'pkg-types';
 import type { transformTypia } from './typia.js';
 import type { ResolvedOptions } from './options.js';
+import { isBun } from './utils.js';
 
 type ResolvedCacheOptions = ResolvedOptions['cache'];
 
 type Data = Awaited<ReturnType<typeof transformTypia>>;
 
-interface StoreData {
-	data: NonNullable<Data>;
-	source: string;
-}
-
-function isStoreData(value: unknown): value is StoreData {
-	if (typeof value !== 'object' || value === null) {
-		return false;
-	}
-	const data = value as StoreData;
-	return data.data != null
-		&& typeof data.source === 'string';
-}
-
 let cacheDir: string | null = null;
+let typiaVersion: string | undefined;
 
 /**
  * Get cache
@@ -44,26 +33,17 @@ export async function getCache(
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
 
-	let data: StoreData | null = null;
 	if (existsSync(path)) {
-		const cache = readFileSync(path, 'utf8');
-		const json = JSON.parse(cache);
-		if (!isStoreData(json)) {
-			return null;
+		const data = readFileSync(path, 'utf8');
+
+		const hashComment = await getHashComment(key);
+
+		if (data.endsWith(hashComment)) {
+			return data;
 		}
-		data = json;
 	}
 
-	/** validate cache */
-	if (!isStoreData(data)) {
-		return null;
-	}
-
-	if (data.source !== source) {
-		return null;
-	}
-
-	return data.data;
+	return null;
 }
 
 /**
@@ -86,14 +66,15 @@ export async function setCache(
 
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
+	const hashComment = await getHashComment(key);
 
 	if (data == null) {
 		rmSync(path);
 		return;
 	}
 
-	const json = JSON.stringify({ data, source });
-	writeFileSync(path, json, { encoding: 'utf8' });
+	const cache = data + hashComment;
+	writeFileSync(path, cache, { encoding: 'utf8' });
 }
 
 type CacheKey = Tagged<string, 'cache-key'>;
@@ -152,8 +133,13 @@ function isWritable(filename: string): boolean {
  * @returns The hash string.
  */
 function hash(input: string): string {
-	if (globalThis.Bun != null) {
+	if (isBun()) {
 		return Bun.hash(input).toString();
 	}
 	return createHash('md5').update(input).digest('hex');
+}
+
+export async function getHashComment(cachePath: CacheKey) {
+	typiaVersion = typiaVersion ?? await readPackageJSON('typia').then(pkg => pkg.version);
+	return `/* unplugin-typia-${typiaVersion ?? ''}-${cachePath} */`;
 }
