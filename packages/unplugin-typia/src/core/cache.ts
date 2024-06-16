@@ -33,14 +33,25 @@ export async function getCache(
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
 
-	if (await exists(path)) {
-		const data = await readFile(path, { encoding: 'utf8' });
-
-		const hashComment = await getHashComment(key);
-
-		if (data.endsWith(hashComment)) {
-			return data;
+	let data: Data | null = null;
+	if (isBun()) {
+		const file = Bun.file(path);
+		if (!(await file.exists())) {
+			return null;
 		}
+		data = await file.text();
+	}
+	else {
+		if (!(await exists(path))) {
+			return null;
+		}
+		data = await readFile(path, { encoding: 'utf8' });
+	}
+
+	const hashComment = await getHashComment(key);
+
+	if (data.endsWith(hashComment)) {
+		return data;
 	}
 
 	return null;
@@ -74,7 +85,12 @@ export async function setCache(
 	}
 
 	const cache = data + hashComment;
-	writeFile(path, cache, { encoding: 'utf8' });
+	if (isBun()) {
+		Bun.write(path, cache, { createPath: true });
+	}
+	else {
+		await writeFile(path, cache, { encoding: 'utf8' });
+	}
 }
 
 type CacheKey = Tagged<string, 'cache-key'>;
