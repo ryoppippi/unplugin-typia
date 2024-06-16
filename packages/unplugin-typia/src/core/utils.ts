@@ -6,3 +6,7 @@ export function log(
 ) {
 	consola[type](`[unplugin-typia]`, ...args);
 }
+
+export function isBun() {
+	return globalThis.Bun != null;
+}
