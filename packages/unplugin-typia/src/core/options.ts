@@ -1,8 +1,9 @@
-import type { RequiredDeep } from 'type-fest';
+import type { OverrideProperties, RequiredDeep } from 'type-fest';
 import { createDefu } from 'defu';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
 import { getCacheDir } from './cache.js';
+import { type FilePath, wrap } from './types.js';
 
 /**
  * Represents the options for the plugin.
@@ -71,7 +72,15 @@ export interface CacheOptions {
 	base?: string;
 };
 
-export type ResolvedOptions = RequiredDeep<Omit<Options, 'typia' | 'cache' | 'tsconfig'>> & { typia: Options['typia']; cache: Required<CacheOptions>; tsconfig?: string };
+export type ResolvedOptions
+	= OverrideProperties<
+		RequiredDeep<Options>,
+		{
+			typia: Options['typia'];
+			tsconfig: Options['tsconfig'];
+			cache: RequiredDeep<OverrideProperties<CacheOptions, { base: FilePath } >>;
+		}
+	>;
 
 /** Default options */
 export const defaultOptions = ({
@@ -81,6 +90,7 @@ export const defaultOptions = ({
 	typia: { },
 	cache: { enable: true, base: getCacheDir() },
 	log: true,
+	tsconfig: undefined,
 }) as const satisfies ResolvedOptions;
 
 /** Create custom defu instance */
@@ -99,13 +109,15 @@ const defu = createDefu((obj, key, value) => {
  * @returns The resolved options.
  */
 export function resolveOptions(options: Options): ResolvedOptions {
+	const { cache } = options;
+
 	return defu(
 		{
 			...options,
 			cache:
-				typeof options.cache === 'boolean'
-					? { enable: options.cache }
-					: options.cache,
+				typeof cache === 'boolean'
+					? { enable: cache }
+					: { ...cache, base: cache?.base != null ? wrap<FilePath>(cache.base) : undefined },
 		},
 		defaultOptions,
 	);

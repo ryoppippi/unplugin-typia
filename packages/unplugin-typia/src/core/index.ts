@@ -11,6 +11,7 @@ import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { getCache, setCache } from './cache.js';
 import { log } from './utils.js';
+import { type ID, type Source, wrap } from './types.js';
 
 const name = `unplugin-typia`;
 
@@ -53,7 +54,10 @@ const unpluginFactory: UnpluginFactory<
 			return filter(id);
 		},
 
-		async transform(source, id) {
+		async transform(_source, _id) {
+			const source = wrap<Source>(_source);
+			const id = wrap<ID>(_id);
+
 			/** get cache */
 			let code = await getCache(id, source, cacheOptions);
 

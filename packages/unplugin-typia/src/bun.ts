@@ -8,11 +8,42 @@ import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta } from 'unplugin';
 import { hasCJSSyntax } from 'mlly';
 import { resolveOptions, unplugin } from './api.js';
-import { type Options, defaultOptions } from './core/options.js';
+import { type Options, type ResolvedOptions, defaultOptions } from './core/options.js';
 import { isBun } from './core/utils.js';
+import { type ID, type Source, wrap } from './core/types.js';
 
 if (!isBun()) {
 	throw new Error('You must use this plugin with bun');
+}
+
+/** typia transform function with tagged types */
+async function taggedTransform(
+	id: ID,
+	source: Source,
+	options: ResolvedOptions,
+): Promise<undefined | Source> {
+	const unpluginRaw = unplugin.raw(options, {} as UnpluginContextMeta);
+	const { transform } = unpluginRaw;
+
+	if (transform == null) {
+		throw new Error('transform is not defined');
+	}
+
+	// @ts-expect-error type of this function is not correct
+	const _transform = (source: Source, id: ID) => transform(source, id);
+
+	const result = await _transform(source, id);
+
+	switch (true) {
+		case result == null:
+			return undefined;
+		case typeof result === 'string':
+			return undefined;
+		case typeof result === 'object':
+			return wrap<Source>(result.code);
+		default:
+			return result satisfies never;
+	}
 }
 
 /**
@@ -66,17 +97,6 @@ if (!isBun()) {
 function bunTypiaPlugin(
 	options?: Options,
 ): BunPlugin {
-	const unpluginRaw = unplugin.raw(
-		options,
-		{} as UnpluginContextMeta,
-	);
-
-	const { transform } = unpluginRaw;
-
-	if (transform == null) {
-		throw new Error('transform is not defined');
-	}
-
 	const bunPlugin = ({
 		name: 'unplugin-typia',
 		async setup(build) {
@@ -92,30 +112,26 @@ function bunTypiaPlugin(
 						: defaultOptions.include[0];
 
 			build.onLoad({ filter }, async (args) => {
-				const { path } = args;
+				const id = wrap<ID>(args.path);
 
-				const source = await Bun.file(path).text();
+				const source = wrap<Source>(await Bun.file(id).text());
 
 				/* TODO: delete after [this issue](https://github.com/oven-sh/bun/issues/11783) is resolved. */
-				if (path.includes('node_modules/typia/lib/index.js') && hasCJSSyntax(source)) {
-					const mjsFile = Bun.file(path.replace(/\.js$/, '.mjs'));
+				if (id.includes('node_modules/typia/lib/index.js') && hasCJSSyntax(source)) {
+					const mjsFile = Bun.file(id.replace(/\.js$/, '.mjs'));
 
 					if (await mjsFile.exists()) {
 						return { contents: await mjsFile.text() };
 					}
 				}
 
-				// @ts-expect-error type of this function is not correct
-				const result = await transform(source, path);
+				const code = await taggedTransform(
+					id,
+					source,
+					resolvedOptions,
+				);
 
-				switch (true) {
-					case result == null:
-						return { contents: source };
-					case typeof result === 'string':
-						return { contents: source };
-					default:
-						return { contents: result.code };
-				}
+				return { contents: code ?? source };
 			});
 		},
 	}) as const satisfies BunPlugin;

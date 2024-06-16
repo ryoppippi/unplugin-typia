@@ -4,8 +4,9 @@ import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import process from 'node:process';
 import { basename, dirname, join } from 'pathe';
-import type { Tagged } from 'type-fest';
 import { readPackageJSON } from 'pkg-types';
+import type { CacheKey, CachePath, FilePath, ID, Source } from './types.js';
+import { wrap } from './types.js';
 import type { transformTypia } from './typia.js';
 import type { ResolvedOptions } from './options.js';
 import { isBun } from './utils.js';
@@ -24,8 +25,8 @@ let typiaVersion: string | undefined;
  * @param option
  */
 export async function getCache(
-	id: string,
-	source: string,
+	id: ID,
+	source: Source,
 	option: ResolvedCacheOptions,
 ): Promise<Data | null> {
 	if (!option.enable) {
@@ -68,8 +69,8 @@ export async function getCache(
  * @param option
  */
 export async function setCache(
-	id: string,
-	source: string,
+	id: ID,
+	source: Source,
 	data: Data,
 	option: ResolvedCacheOptions,
 ): Promise<void> {
@@ -96,19 +97,16 @@ export async function setCache(
 	}
 }
 
-type CacheKey = Tagged<string, 'cache-key'>;
-type CachePath = Tagged<string, 'cache-path'>;
-
 /**
  * Get cache key
  * @param id
  * @param source
  */
-function getKey(id: string, source: string): CacheKey {
+function getKey(id: ID, source: Source): CacheKey {
 	const h = hash(source);
 	const filebase = `${basename(dirname(id))}_${basename(id)}`;
 
-	return `${filebase}_${h}` as CacheKey;
+	return wrap<CacheKey>(`${filebase}_${h}`);
 }
 
 /**
@@ -120,7 +118,7 @@ function getCachePath(
 	key: CacheKey,
 	option: ResolvedCacheOptions,
 ): CachePath {
-	return join(option.base, key) as CachePath;
+	return wrap<CachePath>(join(option.base, key));
 }
 
 async function prepareCacheDir(option: ResolvedCacheOptions) {
@@ -168,7 +166,7 @@ async function getHashComment(cachePath: CacheKey) {
  * Get cache directory
  * copy from https://github.com/unjs/jiti/blob/690b727d7c0c0fa721b80f8085cafe640c6c2a40/src/cache.ts
  */
-export function getCacheDir() {
+export function getCacheDir(): FilePath {
 	let _tmpDir = tmpdir();
 
 	// Workaround for pnpm setting an incorrect `TMPDIR`.
@@ -184,5 +182,6 @@ export function getCacheDir() {
 		process.env.TMPDIR = _env;
 	}
 
-	return join(_tmpDir, 'unplugin_typia');
+	const path = join(_tmpDir, 'unplugin_typia');
+	return wrap<FilePath>(path);
 }
