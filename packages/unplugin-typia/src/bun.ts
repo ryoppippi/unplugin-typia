@@ -8,35 +8,11 @@ import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta } from 'unplugin';
 import { hasCJSSyntax } from 'mlly';
 import { resolveOptions, unplugin } from './api.js';
-import { type Options, type ResolvedOptions, defaultOptions } from './core/options.js';
+import { type Options, defaultOptions } from './core/options.js';
 import { isBun } from './core/utils.js';
 
 if (!isBun()) {
 	throw new Error('You must use this plugin with bun');
-}
-
-/**
- * Options for the bun plugin.
- */
-export interface BunOptions extends Options {
-
-	/**
-	 * Whether to resolve the typia mjs path absolutely.
-	 *
-	 * @default true
-	 */
-	resolveAbsoluteTypiaPath?: boolean;
-}
-
-type ResolvedBunOptions = ResolvedOptions & Required<Pick<BunOptions, 'resolveAbsoluteTypiaPath'>>;
-
-function resolveBunOptions(options: BunOptions) {
-	const resolvedOptions = resolveOptions(options);
-
-	return {
-		...resolvedOptions,
-		resolveAbsoluteTypiaPath: options.resolveAbsoluteTypiaPath ?? true,
-	} satisfies ResolvedBunOptions;
 }
 
 /**
@@ -88,7 +64,7 @@ function resolveBunOptions(options: BunOptions) {
  * When you run your scripts on Bun.runtime, You cannot use named import for typia value in the source code. Check out the README.md.
  */
 function bunTypiaPlugin(
-	options?: BunOptions,
+	options?: Options,
 ): BunPlugin {
 	const unpluginRaw = unplugin.raw(
 		options,
@@ -104,7 +80,7 @@ function bunTypiaPlugin(
 	const bunPlugin = ({
 		name: 'unplugin-typia',
 		async setup(build) {
-			const resolvedOptions = resolveBunOptions(options ?? {});
+			const resolvedOptions = resolveOptions(options ?? {});
 			const { include } = resolvedOptions;
 
 			const filter = include instanceof RegExp
