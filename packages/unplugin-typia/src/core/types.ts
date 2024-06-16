@@ -5,6 +5,7 @@ export type CachePath = Tagged<string, 'cache-path'>;
 export type ID = Tagged<string, 'id'>;
 export type Source = Tagged<string, 'source'>;
 export type FilePath = Tagged<string, 'file-path'>;
+export type Data = Tagged<string, 'data'>;
 
 export function wrap<T extends Tagged<PropertyKey, any>>(value: UnwrapTagged<T>): T {
 	return value as T;
