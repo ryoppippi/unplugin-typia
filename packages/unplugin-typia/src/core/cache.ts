@@ -51,11 +51,12 @@ export async function getCache(
 
 	const hashComment = await getHashComment(key);
 
-	if (data.endsWith(hashComment)) {
-		return wrap<Data>(data);
+	/* if data does not end with hashComment, the cache is invalid */
+	if (!data.endsWith(hashComment)) {
+		return null;
 	}
 
-	return null;
+	return wrap<Data>(data);
 }
 
 /**
