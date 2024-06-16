@@ -1,4 +1,5 @@
-import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
+import { access, constants, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { basename, dirname, join } from 'pathe';
 import type { Tagged } from 'type-fest';
@@ -33,14 +34,25 @@ export async function getCache(
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
 
-	if (existsSync(path)) {
-		const data = readFileSync(path, 'utf8');
-
-		const hashComment = await getHashComment(key);
-
-		if (data.endsWith(hashComment)) {
-			return data;
+	let data: Data | null = null;
+	if (isBun()) {
+		const file = Bun.file(path);
+		if (!(await file.exists())) {
+			return null;
 		}
+		data = await file.text();
+	}
+	else {
+		if (!(existsSync(path))) {
+			return null;
+		}
+		data = await readFile(path, { encoding: 'utf8' });
+	}
+
+	const hashComment = await getHashComment(key);
+
+	if (data.endsWith(hashComment)) {
+		return data;
 	}
 
 	return null;
@@ -69,12 +81,17 @@ export async function setCache(
 	const hashComment = await getHashComment(key);
 
 	if (data == null) {
-		rmSync(path);
+		await rm(path);
 		return;
 	}
 
 	const cache = data + hashComment;
-	writeFileSync(path, cache, { encoding: 'utf8' });
+	if (isBun()) {
+		Bun.write(path, cache, { createPath: true });
+	}
+	else {
+		await writeFile(path, cache, { encoding: 'utf8' });
+	}
 }
 
 type CacheKey = Tagged<string, 'cache-key'>;
@@ -104,11 +121,11 @@ function getCachePath(
 	return join(option.base, key) as CachePath;
 }
 
-function prepareCacheDir(option: ResolvedCacheOptions): void {
+async function prepareCacheDir(option: ResolvedCacheOptions) {
 	if (cacheDir != null) {
 		return;
 	}
-	mkdirSync(option.base, { recursive: true });
+	await mkdir(option.base, { recursive: true });
 
 	if (!isWritable) {
 		throw new Error('Cache directory is not writable.');
@@ -117,9 +134,9 @@ function prepareCacheDir(option: ResolvedCacheOptions): void {
 	cacheDir = option.base;
 }
 
-function isWritable(filename: string): boolean {
+async function isWritable(filename: string): Promise<boolean> {
 	try {
-		accessSync(filename, constants.W_OK);
+		await access(filename, constants.W_OK);
 		return true;
 	}
 	catch {
