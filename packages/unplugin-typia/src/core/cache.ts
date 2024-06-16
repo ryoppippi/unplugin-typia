@@ -1,6 +1,8 @@
 import { existsSync } from 'node:fs';
 import { access, constants, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { tmpdir } from 'node:os';
+import process from 'node:process';
 import { basename, dirname, join } from 'pathe';
 import type { Tagged } from 'type-fest';
 import { readPackageJSON } from 'pkg-types';
@@ -157,7 +159,30 @@ function hash(input: string): string {
 	return createHash('md5').update(input).digest('hex');
 }
 
-export async function getHashComment(cachePath: CacheKey) {
+async function getHashComment(cachePath: CacheKey) {
 	typiaVersion = typiaVersion ?? await readPackageJSON('typia').then(pkg => pkg.version);
 	return `/* unplugin-typia-${typiaVersion ?? ''}-${cachePath} */`;
+}
+
+/**
+ * Get cache directory
+ * copy from https://github.com/unjs/jiti/blob/690b727d7c0c0fa721b80f8085cafe640c6c2a40/src/cache.ts
+ */
+export function getCacheDir() {
+	let _tmpDir = tmpdir();
+
+	// Workaround for pnpm setting an incorrect `TMPDIR`.
+	// https://github.com/pnpm/pnpm/issues/6140
+	// https://github.com/unjs/jiti/issues/120
+	if (
+		process.env.TMPDIR != null
+		&& _tmpDir === process.cwd()
+	) {
+		const _env = process.env.TMPDIR;
+		delete process.env.TMPDIR;
+		_tmpDir = tmpdir();
+		process.env.TMPDIR = _env;
+	}
+
+	return join(_tmpDir, 'unplugin_typia');
 }

@@ -2,6 +2,7 @@ import type { RequiredDeep } from 'type-fest';
 import { createDefu } from 'defu';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
+import { getCacheDir } from './cache.js';
 
 /**
  * Represents the options for the plugin.
@@ -39,10 +40,10 @@ export interface Options {
 
 	/**
 	 * The optiosn for cache.
-	 * if `true`, it will enable cache with default path.
+	 * if `true`, it will enable cache with and will use node_modules/.cache/unplugin_typia (if exists) or {TMP_DIR}/unplugin_typia
 	 * if `false`, it will disable cache.
 	 * if object, it will enable cache with custom path.
-	 * @default { enable: true, base: '/tmp/unplugin_typia' }
+	 * @default { enable: true, base: /* TMP_DIR *\/ }
 	 */
 	cache?: CacheOptions | true | false;
 
@@ -78,7 +79,7 @@ export const defaultOptions = ({
 	exclude: [/node_modules/],
 	enforce: 'pre',
 	typia: { },
-	cache: { enable: true, base: '/tmp/unplugin_typia' },
+	cache: { enable: true, base: getCacheDir() },
 	log: true,
 }) as const satisfies ResolvedOptions;
 
