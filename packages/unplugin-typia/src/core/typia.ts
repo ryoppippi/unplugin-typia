@@ -5,7 +5,8 @@ import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
 import type { ResolvedOptions } from './options.ts';
-import type { ID, Source } from './types.js';
+import type { Data, ID, Source } from './types.js';
+import { wrap } from './types.js';
 
 /** create a printer */
 const printer = ts.createPrinter();
@@ -35,7 +36,7 @@ export async function transformTypia(
 	 */
 	unpluginContext: UnpluginBuildContext & UnpluginContext,
 	options: ResolvedOptions,
-): Promise<string> {
+): Promise<Data> {
 	/** Whether to enable cache */
 	const cacheEnable = options.cache.enable;
 
@@ -52,7 +53,8 @@ export async function transformTypia(
 
 	warnDiagnostic(diagnostics, transformed, unpluginContext);
 
-	return printer.printFile(file);
+	const data = printer.printFile(file);
+	return wrap<Data>(data);
 }
 
 /**

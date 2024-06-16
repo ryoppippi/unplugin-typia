@@ -11,7 +11,8 @@ import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { getCache, setCache } from './cache.js';
 import { log } from './utils.js';
-import { type ID, type Source, wrap } from './types.js';
+import type { ID, Source } from './types.js';
+import { wrap } from './types.js';
 
 const name = `unplugin-typia`;
 

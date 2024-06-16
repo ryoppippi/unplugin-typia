@@ -5,15 +5,12 @@ import { tmpdir } from 'node:os';
 import process from 'node:process';
 import { basename, dirname, join } from 'pathe';
 import { readPackageJSON } from 'pkg-types';
-import type { CacheKey, CachePath, FilePath, ID, Source } from './types.js';
+import type { CacheKey, CachePath, Data, FilePath, ID, Source } from './types.js';
 import { wrap } from './types.js';
-import type { transformTypia } from './typia.js';
 import type { ResolvedOptions } from './options.js';
 import { isBun } from './utils.js';
 
 type ResolvedCacheOptions = ResolvedOptions['cache'];
-
-type Data = Awaited<ReturnType<typeof transformTypia>>;
 
 let cacheDir: string | null = null;
 let typiaVersion: string | undefined;
@@ -37,7 +34,7 @@ export async function getCache(
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
 
-	let data: Data | null = null;
+	let data: string | null = null;
 	if (isBun()) {
 		const file = Bun.file(path);
 		if (!(await file.exists())) {
@@ -55,7 +52,7 @@ export async function getCache(
 	const hashComment = await getHashComment(key);
 
 	if (data.endsWith(hashComment)) {
-		return data;
+		return wrap<Data>(data);
 	}
 
 	return null;
