@@ -12,6 +12,8 @@ function removeComments(data: string | null) {
 	if (data == null) {
 		return data;
 	}
+
+	// eslint-disable-next-line regexp/no-unused-capturing-group
 	return data.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');
 }
 

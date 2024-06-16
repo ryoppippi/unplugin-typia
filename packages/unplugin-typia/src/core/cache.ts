@@ -29,7 +29,7 @@ export async function getCache(
 	if (!option.enable) {
 		return null;
 	}
-	prepareCacheDir(option);
+	await prepareCacheDir(option);
 
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
@@ -74,7 +74,7 @@ export async function setCache(
 	if (!option.enable) {
 		return;
 	}
-	prepareCacheDir(option);
+	await prepareCacheDir(option);
 
 	const key = getKey(id, source);
 	const path = getCachePath(key, option);
@@ -87,7 +87,7 @@ export async function setCache(
 
 	const cache = data + hashComment;
 	if (isBun()) {
-		Bun.write(path, cache, { createPath: true });
+		await Bun.write(path, cache, { createPath: true });
 	}
 	else {
 		await writeFile(path, cache, { encoding: 'utf8' });
@@ -125,13 +125,14 @@ async function prepareCacheDir(option: ResolvedCacheOptions) {
 	if (cacheDir != null) {
 		return;
 	}
-	await mkdir(option.base, { recursive: true });
+	const _cacheDir = option.base;
+	await mkdir(_cacheDir, { recursive: true });
 
-	if (!isWritable) {
+	if (!await isWritable(_cacheDir)) {
 		throw new Error('Cache directory is not writable.');
 	}
 
-	cacheDir = option.base;
+	cacheDir = _cacheDir;
 }
 
 async function isWritable(filename: string): Promise<boolean> {
