@@ -11,7 +11,7 @@ import { resolveOptions, unplugin } from './api.js';
 import { type Options, type ResolvedOptions, defaultOptions } from './core/options.js';
 import { isBun } from './core/utils.js';
 
-if (isBun()) {
+if (!isBun()) {
 	throw new Error('You must use this plugin with bun');
 }
 
