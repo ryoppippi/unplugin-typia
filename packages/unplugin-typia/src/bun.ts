@@ -6,10 +6,7 @@
 
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta } from 'unplugin';
-import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
-import { isDts } from 'ast-kit';
-import { dirname, join } from 'pathe';
-import { Project } from 'ts-morph';
+import { hasCJSSyntax } from 'mlly';
 import { resolveOptions, unplugin } from './api.js';
 import { type Options, type ResolvedOptions, defaultOptions } from './core/options.js';
 
@@ -38,46 +35,7 @@ function resolveBunOptions(options: BunOptions) {
 	return {
 		...resolvedOptions,
 		resolveAbsoluteTypiaPath: options.resolveAbsoluteTypiaPath ?? true,
-	};
-}
-
-/* cache typia mjs path */
-let typiaMjsPath: string | undefined;
-/**
- * Read typia mjs path.
- * TODO: delete after [this issue](https://github.com/oven-sh/bun/issues/11783) is resolved.
- */
-async function resolveTypiaPath(id: string, code: string, options: ResolvedBunOptions) {
-	if (!options.resolveAbsoluteTypiaPath && isDts(id)) {
-		return code;
-	}
-
-	if (typiaMjsPath == null) {
-		const typiaPackageJson = await readPackageJSON('typia');
-		const typiaDirName = dirname(await resolvePackageJSON('typia'));
-		typiaMjsPath = join(typiaDirName, typiaPackageJson?.module ?? '');
-	}
-
-	const project = new Project({
-		tsConfigFilePath: options.tsconfig,
-	});
-
-	const sourceFile = project.createSourceFile('', code, { overwrite: false });
-
-	const typiaImport = sourceFile.getImportDeclaration(i => i.getDefaultImport() != null && i.getModuleSpecifierValue() === 'typia');
-
-	if (typiaImport == null) {
-		return code;
-	}
-
-	typiaImport.removeDefaultImport();
-
-	sourceFile.addImportDeclaration({
-		defaultImport: 'typia',
-		moduleSpecifier: typiaMjsPath,
-	});
-
-	return sourceFile.getText();
+	} satisfies ResolvedBunOptions;
 }
 
 /**
@@ -161,6 +119,15 @@ function bunTypiaPlugin(
 
 				const source = await Bun.file(path).text();
 
+				/* TODO: delete after [this issue](https://github.com/oven-sh/bun/issues/11783) is resolved. */
+				if (path.includes('node_modules/typia/lib/index.js') && hasCJSSyntax(source)) {
+					const mjsFile = Bun.file(path.replace(/\.js$/, '.mjs'));
+
+					if (await mjsFile.exists()) {
+						return { contents: await mjsFile.text() };
+					}
+				}
+
 				// @ts-expect-error type of this function is not correct
 				const result = await transform(source, path);
 
@@ -170,7 +137,7 @@ function bunTypiaPlugin(
 					case typeof result === 'string':
 						return { contents: source };
 					default:
-						return { contents: await resolveTypiaPath(path, result.code, resolvedOptions) };
+						return { contents: result.code };
 				}
 			});
 		},
