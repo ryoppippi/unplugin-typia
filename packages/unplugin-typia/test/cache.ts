@@ -3,10 +3,8 @@ import { test } from 'bun:test';
 import { assertEquals, assertNotEquals } from '@std/assert';
 
 import * as cache from '../src/core/cache.js';
-import type { FilePath, ID, Source } from '../src/core/types.js';
+import type { Data, FilePath, ID, Source } from '../src/core/types.js';
 import { wrap } from '../src/core/types.js';
-
-type Data = Parameters<typeof cache.setCache>[2];
 
 const tmp = wrap<FilePath>(tmpdir());
 
@@ -32,7 +30,7 @@ test('set and get cache', async () => {
 	const random = Math.random().toString();
 	const source = wrap<Source>(random);
 	const filename = wrap<ID>(`${random}-${random}.json`);
-	const data = `${random};` as const satisfies Data;
+	const data = wrap<Data>(`${random};`);
 
 	/* set cache */
 	await cache.setCache(filename, source, data, option);
@@ -51,7 +49,7 @@ test('set and get null with different id', async () => {
 	const random = Math.random().toString();
 	const source = wrap<Source>(random);
 	const filename = wrap<ID>(`${random}-${random}.json`);
-	const data = `${random};` as const satisfies Data;
+	const data = wrap<Data>(`${random};`);
 
 	/* set cache */
 	await cache.setCache(filename, source, data, option);
@@ -71,7 +69,7 @@ test('set and get null with cache disabled', async () => {
 	const random = Math.random().toString();
 	const source = wrap<Source>(random);
 	const filename = wrap<ID>(`${random}-${random}.json`);
-	const data = `${random};` as const satisfies Data;
+	const data = wrap<Data>(`${random};`);
 
 	/* set cache */
 	await cache.setCache(filename, source, data, option);
