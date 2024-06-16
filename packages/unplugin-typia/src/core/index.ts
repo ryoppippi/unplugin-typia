@@ -12,7 +12,7 @@ import { transformTypia } from './typia.js';
 import { getCache, setCache } from './cache.js';
 import { log } from './utils.js';
 
-const name = 'unplugin-typia' as const;
+const name = `unplugin-typia`;
 
 /**
  * Create a filter function from the given include and exclude patterns.
@@ -36,7 +36,7 @@ const unpluginFactory: UnpluginFactory<
 
 	const { cache: cacheOptions, log: logOption } = options;
 
-	if (logOption) {
+	if (logOption !== false) {
 		log(
 			'box',
 			cacheOptions.enable ? `Cache enabled` : `Cache disabled`,

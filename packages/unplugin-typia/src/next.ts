@@ -28,14 +28,16 @@ import type { Options } from './core/options.js';
  * );
  * ```
  */
-function next(nextConfig: Record<string, any> = {}, options: Options): Record<string, any> {
+function next(nextConfig: Record<string, unknown> = {}, options: Options): Record<string, unknown> {
 	return {
 		...nextConfig,
-		webpack(config: Record<string, any>, webpackOptions: Record<string, any>) {
-			config.plugins.unshift(webpack(options));
+		webpack(config: Record<string, unknown>, webpackOptions: Record<string, unknown>) {
+			if (Array.isArray(config?.plugins)) {
+				config.plugins.unshift(webpack(options));
+			}
 
-			if (typeof nextConfig.webpack === 'function') {
-				return nextConfig.webpack(config, webpackOptions);
+			if (typeof nextConfig?.webpack === 'function') {
+				return nextConfig.webpack(config, webpackOptions) as Record<string, unknown>;
 			}
 
 			return config;
