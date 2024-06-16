@@ -1,5 +1,6 @@
+import { existsSync } from 'node:fs';
+import { access, constants, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { access, constants, exists, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, join } from 'pathe';
 import type { Tagged } from 'type-fest';
 import { readPackageJSON } from 'pkg-types';
@@ -42,7 +43,7 @@ export async function getCache(
 		data = await file.text();
 	}
 	else {
-		if (!(await exists(path))) {
+		if (!(existsSync(path))) {
 			return null;
 		}
 		data = await readFile(path, { encoding: 'utf8' });
