@@ -9,10 +9,10 @@ import MagicString from 'magic-string';
 import type { CacheOptions, Options } from './options.js';
 import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
-import { getCache, setCache } from './cache.js';
 import { log } from './utils.js';
 import type { ID, Source } from './types.js';
 import { wrap } from './types.js';
+import { Cache } from './cache.js';
 
 const name = `unplugin-typia`;
 
@@ -60,7 +60,8 @@ const unpluginFactory: UnpluginFactory<
 			const id = wrap<ID>(_id);
 
 			/** get cache */
-			let code = await getCache(id, source, cacheOptions);
+			using cache = cacheOptions.enable ? new Cache(id, source, cacheOptions) : undefined;
+			let code = cache?.data;
 
 			if (showLog) {
 				if (code != null) {
@@ -85,7 +86,9 @@ const unpluginFactory: UnpluginFactory<
 				}
 
 				/** save cache */
-				await setCache(id, source, code, cacheOptions);
+				if (cache != null) {
+					cache.data = code;
+				}
 
 				if (showLog) {
 					log('success', `Cache set: ${id}`);

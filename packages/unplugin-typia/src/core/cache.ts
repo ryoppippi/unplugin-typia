@@ -1,5 +1,4 @@
-import { existsSync } from 'node:fs';
-import { access, constants, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import process from 'node:process';
@@ -10,154 +9,106 @@ import { wrap } from './types.js';
 import type { ResolvedOptions } from './options.js';
 import { isBun } from './utils.js';
 
+const typiaVersion: Readonly<string> | undefined = await readPackageJSON('typia').then(pkg => pkg.version);
+
 type ResolvedCacheOptions = ResolvedOptions['cache'];
 
-let cacheDir: string | null = null;
-let typiaVersion: string | undefined;
-
 /**
- * Get cache
- * @param id
- * @param source
- * @param option
+ * Cache class
+ *
+ * @caution: CacheOptions.enable is ignored
  */
-export async function getCache(
-	id: ID,
-	source: Source,
-	option: ResolvedCacheOptions,
-): Promise<Data | null> {
-	if (!option.enable) {
-		return null;
+export class Cache {
+	#data: Data | undefined;
+	#hashKey: CacheKey;
+	#hashPath: CachePath;
+
+	constructor(id: ID, source: Source, options: ResolvedCacheOptions) {
+		this.#hashKey = this.getHashKey(id, source);
+		this.#hashPath = wrap<CachePath>(join(options.base, this.#hashKey));
+		this.#data = this.getCache();
 	}
-	await prepareCacheDir(option);
 
-	const key = getKey(id, source);
-	const path = getCachePath(key, option);
+	[Symbol.dispose]() {
+		this.setCache();
+	}
 
-	let data: string | null = null;
-	if (isBun()) {
-		const file = Bun.file(path);
-		if (!(await file.exists())) {
-			return null;
+	/**
+	 * Get cache data
+	 */
+	get data() {
+		return this.#data;
+	}
+
+	/**
+	 * Set cache data
+	 */
+	set data(value: Data | undefined) {
+		this.#data = value;
+	}
+
+	private getCache() {
+		if (!(existsSync(this.#hashPath))) {
+			return undefined;
 		}
-		data = await file.text();
-	}
-	else {
-		if (!(existsSync(path))) {
-			return null;
+
+		const data = readFileSync(this.#hashPath, { encoding: 'utf8' });
+
+		/* if data does not end with hashComment, the cache is invalid */
+		if (!data.endsWith(this.hashComment)) {
+			return undefined;
 		}
-		data = await readFile(path, { encoding: 'utf8' });
+
+		return wrap<Data>(data);
 	}
 
-	const hashComment = await getHashComment(key);
+	private setCache() {
+		const isExist = existsSync(this.#hashPath);
+		const cacheDir = dirname(this.#hashPath);
+		if (this.#data == null && isExist) {
+			rmSync(this.#hashPath);
+			return;
+		}
 
-	/* if data does not end with hashComment, the cache is invalid */
-	if (!data.endsWith(hashComment)) {
-		return null;
+		if (!existsSync(cacheDir)) {
+			mkdirSync(cacheDir, { recursive: true });
+		}
+
+		if (!this.isWritable(cacheDir)) {
+			throw new Error('Cache directory is not writable.');
+		}
+
+		const cache = this.#data + this.hashComment;
+		writeFileSync(this.#hashPath, cache, { encoding: 'utf8' });
 	}
 
-	return wrap<Data>(data);
-}
+	private getHashKey(id: ID, source: Source): CacheKey {
+		const h = this.hash(source);
+		const filebase = `${basename(dirname(id))}_${basename(id)}`;
 
-/**
- * Set cache
- * @param id
- * @param source
- * @param data
- * @param option
- */
-export async function setCache(
-	id: ID,
-	source: Source,
-	data: Data,
-	option: ResolvedCacheOptions,
-): Promise<void> {
-	if (!option.enable) {
-		return;
-	}
-	await prepareCacheDir(option);
-
-	const key = getKey(id, source);
-	const path = getCachePath(key, option);
-	const hashComment = await getHashComment(key);
-
-	if (data == null) {
-		await rm(path);
-		return;
+		return wrap<CacheKey>(`${filebase}_${h}`);
 	}
 
-	const cache = data + hashComment;
-	if (isBun()) {
-		await Bun.write(path, cache, { createPath: true });
-	}
-	else {
-		await writeFile(path, cache, { encoding: 'utf8' });
-	}
-}
-
-/**
- * Get cache key
- * @param id
- * @param source
- */
-function getKey(id: ID, source: Source): CacheKey {
-	const h = hash(source);
-	const filebase = `${basename(dirname(id))}_${basename(id)}`;
-
-	return wrap<CacheKey>(`${filebase}_${h}`);
-}
-
-/**
- * Get storage
- * @param key
- * @param option
- */
-function getCachePath(
-	key: CacheKey,
-	option: ResolvedCacheOptions,
-): CachePath {
-	return wrap<CachePath>(join(option.base, key));
-}
-
-async function prepareCacheDir(option: ResolvedCacheOptions) {
-	if (cacheDir != null) {
-		return;
-	}
-	const _cacheDir = option.base;
-	await mkdir(_cacheDir, { recursive: true });
-
-	if (!await isWritable(_cacheDir)) {
-		throw new Error('Cache directory is not writable.');
+	private hash(input: string): string {
+		if (isBun()) {
+			return Bun.hash(input).toString();
+		}
+		return createHash('md5').update(input).digest('hex');
 	}
 
-	cacheDir = _cacheDir;
-}
-
-async function isWritable(filename: string): Promise<boolean> {
-	try {
-		await access(filename, constants.W_OK);
-		return true;
+	private get hashComment() {
+		return `/* unplugin-typia-${typiaVersion ?? ''}-${this.#hashKey} */`;
 	}
-	catch {
-		return false;
-	}
-}
 
-/**
- * Create hash string
- * @param input
- * @returns The hash string.
- */
-function hash(input: string): string {
-	if (isBun()) {
-		return Bun.hash(input).toString();
+	private isWritable(filename: string): boolean {
+		try {
+			accessSync(filename, constants.W_OK);
+			return true;
+		}
+		catch {
+			return false;
+		}
 	}
-	return createHash('md5').update(input).digest('hex');
-}
-
-async function getHashComment(cachePath: CacheKey) {
-	typiaVersion = typiaVersion ?? await readPackageJSON('typia').then(pkg => pkg.version);
-	return `/* unplugin-typia-${typiaVersion ?? ''}-${cachePath} */`;
 }
 
 /**
