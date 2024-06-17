@@ -63,9 +63,8 @@ export class Cache {
 	}
 
 	private setCache() {
-		const isExist = existsSync(this.#hashPath);
 		const cacheDir = dirname(this.#hashPath);
-		if (this.#data == null && isExist) {
+		if (this.#data == null && existsSync(this.#hashPath)) {
 			rmSync(this.#hashPath);
 			return;
 		}
