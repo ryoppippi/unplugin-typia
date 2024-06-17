@@ -92,14 +92,13 @@
 		"unplugin": "^1.5.1"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "^2.21.1",
+		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
 		"@std/assert": "npm:@jsr/std__assert",
 		"@types/bun": "^1.1.4",
 		"@types/node": "^20.10.3",
 		"consola": "^3.2.3",
 		"defu": "^6.1.4",
 		"eslint": "^9.5.0",
-		"eslint-plugin-format": "^0.1.1",
 		"pkg-types": "^1.1.1",
 		"rollup": "^4.6.1",
 		"type-fest": "^4.19.0",
