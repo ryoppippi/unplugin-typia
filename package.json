@@ -29,9 +29,6 @@
   "devDependencies": {
     "turbo": "^2.0.4"
   },
-  "peerDependencies": {
-    "typescript": ">=4.8.0 <5.5.0"
-  },
   "packageManager": "bun@1.1.12",
   "private": true
 }
