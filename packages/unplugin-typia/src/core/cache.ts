@@ -3,13 +3,11 @@ import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import process from 'node:process';
 import { basename, dirname, join } from 'pathe';
-import { readPackageJSON } from 'pkg-types';
+import { version as typiaVersion } from 'typia/package.json';
 import type { CacheKey, CachePath, Data, FilePath, ID, Source } from './types.js';
 import { wrap } from './types.js';
 import type { ResolvedOptions } from './options.js';
 import { isBun } from './utils.js';
-
-const typiaVersion: Readonly<string> | undefined = await readPackageJSON('typia').then(pkg => pkg.version);
 
 type ResolvedCacheOptions = ResolvedOptions['cache'];
 
