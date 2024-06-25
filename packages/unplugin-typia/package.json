@@ -51,8 +51,8 @@
 		"dist"
 	],
 	"scripts": {
-		"lint": "npm run check && eslint .",
-		"format": "eslint --fix .",
+		"lint": "npm run check && eslint --cache .",
+		"format": "eslint --cache --fix .",
 		"test": "npm run check && bun test ./test/*.ts",
 		"check": "bun tsc --noEmit",
 		"publish": "bun x jsr publish"
