@@ -1,4 +1,4 @@
-name: jsr
+name: release
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 jobs:
-  publish:
+  jsr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
