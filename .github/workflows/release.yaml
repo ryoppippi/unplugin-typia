@@ -21,8 +21,13 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
       - run: bun i --frozen-lockfile
-      - run: bun run publish
+      - run: |
+          deno run -A jsr:@david/publish-on-tag@0.1.4 >> /dev/null # just use for version extraction
+          bun run publish
         working-directory: packages/unplugin-typia
 
   release:
