@@ -31,7 +31,7 @@ function createFilter(
  */
 const unpluginFactory: UnpluginFactory<
   Options | undefined,
-  false
+	false
 > = (rawOptions = {}) => {
 	const options = resolveOptions(rawOptions);
 	const filter = createFilter(options.include, options.exclude);
