@@ -69,7 +69,6 @@ Examples:
 
 ```ts
 // esbuild.config.js
-import { build } from 'esbuild';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/esbuild';
 
 export default {
