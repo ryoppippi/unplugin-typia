@@ -6,8 +6,7 @@ on:
       - "v*"
 
 permissions:
-  contents: read
-  id-token: write
+  contents: write
 
 jobs:
   jsr:
@@ -22,3 +21,25 @@ jobs:
       - run: bun i --frozen-lockfile
       - run: bun run publish
         working-directory: packages/unplugin-typia
+
+  release:
+    needs:
+      - jsr
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - run: bunx changelogithub
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
