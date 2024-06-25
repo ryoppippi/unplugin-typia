@@ -8,7 +8,7 @@ import { type FilePath, wrap } from './types.js';
 /**
  * Represents the options for the plugin.
  */
-export interface Options {
+export type Options = {
 	/**
 	 * The patterns of files to include.
 	 * @default [/\.[cm]?[jt]sx?$/]
@@ -53,12 +53,12 @@ export interface Options {
 	 * @default true
 	 */
 	log?: boolean | 'verbose';
-}
+};
 
 /**
  * Options for cache.
  */
-export interface CacheOptions {
+export type CacheOptions = {
 	/**
 	 * Enable cache.
 	 * @default true
