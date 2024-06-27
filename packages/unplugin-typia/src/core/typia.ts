@@ -1,6 +1,6 @@
 import ts from 'typescript';
 import { resolve } from 'pathe';
-import { readTSConfig } from 'pkg-types';
+import { resolveTSConfig } from 'pkg-types';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
@@ -60,7 +60,19 @@ export async function transformTypia(
  * @param tsconfigId - The tsconfig.json path. @default undefined
  */
 async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Promise<ts.CompilerOptions> {
-	const parseTsComilerOptions = async () => (({ ...(await readTSConfig(tsconfigId))?.compilerOptions, moduleResolution: undefined }));
+	const parseTsComilerOptions = async () => {
+		const readFile = (path: string) => ts.sys.readFile(path);
+		const id = await resolveTSConfig(tsconfigId);
+
+		const tsconfigParseResult = ts.readConfigFile(id, readFile);
+		if (tsconfigParseResult.error != null) {
+			throw new Error(tsconfigParseResult.error.messageText.toString());
+		}
+
+		const tsconfig = ts.parseJsonConfigFileContent(tsconfigParseResult.config, ts.sys, id);
+
+		return tsconfig.options;
+	};
 
 	/** parse tsconfig compilerOptions */
 	if (cacheEnable) {
@@ -70,9 +82,6 @@ async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Pro
 		compilerOptions = await parseTsComilerOptions();
 	}
 
-	if (compilerOptions == null) {
-		throw new Error('No compilerOptions found in tsconfig.json');
-	}
 	return compilerOptions;
 }
 
