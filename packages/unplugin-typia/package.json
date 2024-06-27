@@ -88,7 +88,8 @@
 		"magic-string": "^0.30.10",
 		"mlly": "^1.7.1",
 		"pathe": "^1.1.2",
-		"typescript": "~5.4.5",
+		"ts-patch": "^3.2.1",
+		"typescript": "~5.5.2",
 		"unplugin": "^1.5.1"
 	},
 	"devDependencies": {
