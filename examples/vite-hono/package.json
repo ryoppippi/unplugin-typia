@@ -17,9 +17,9 @@
     "@hono/typia-validator": "^0.0.4",
     "@hono/vite-cloudflare-pages": "^0.4.1",
     "@hono/vite-dev-server": "^0.12.1",
-    "ts-patch": "^3.1.2",
-    "typescript": "^5.4.5",
-    "typia": "^6.1.0",
+    "ts-patch": "^3.2.1",
+    "typescript": "~5.5.2",
+    "typia": "^6.3.1",
     "vite": "^5.2.12",
     "@ryoppippi/unplugin-typia": "workspace:*"
   }
