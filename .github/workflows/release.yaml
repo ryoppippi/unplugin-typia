@@ -11,6 +11,7 @@ permissions:
 jobs:
   jsr:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       id-token: write
@@ -29,6 +30,7 @@ jobs:
     needs:
       - jsr
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
