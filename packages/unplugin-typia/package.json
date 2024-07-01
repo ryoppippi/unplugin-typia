@@ -59,7 +59,7 @@
 	},
 	"peerDependencies": {
 		"esbuild": "*",
-		"rollup": "^3",
+		"rollup": "^4.18.0",
 		"vite": ">=3.2.10",
 		"webpack": "^4 || ^5"
 	},
@@ -103,7 +103,7 @@
 		"eslint-plugin-format": "^0.1.2",
 		"find-cache-dir": "^5.0.0",
 		"pkg-types": "^1.1.1",
-		"rollup": "^4.6.1",
+		"rollup": "^4.18.0",
 		"type-fest": "^4.19.0",
 		"typia": "^6.3.1"
 	}
