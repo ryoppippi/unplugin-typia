@@ -31,37 +31,17 @@ test('Return default options if enforce option is passed', () => {
 	assertObjectMatch(options, { ...defaultOptions, enforce: 'post' });
 });
 
-test('Return cache object if cache key is boolean', () => {
+test('Return cache is false if cache key is false', () => {
 	const options = resolveOptions({ cache: false });
-	assertEquals(typeof options.cache, 'object');
-	assertObjectMatch(
-		options.cache as Record<string, unknown>,
-		{ ...defaultOptions.cache, enable: false },
-	);
+	assertEquals(options.cache, false);
 });
 
-test('Return cache object if cache key is object and not base passed', () => {
-	const options = resolveOptions({ cache: { enable: false } });
-	assertEquals(typeof options.cache, 'object');
-	assertObjectMatch(
-		options.cache as Record<string, unknown>,
-		{ ...defaultOptions.cache, enable: false },
-	);
-	assertObjectMatch(options, {
-		...defaultOptions,
-		cache: { enable: false, base: defaultOptions.cache.base },
-	});
+test('Return cache is true if cache key is true', () => {
+	const options = resolveOptions({ cache: true });
+	assertEquals(options.cache, true);
 });
 
-test('Return cache object if cache key is object and base passed', () => {
-	const options = resolveOptions({ cache: { base: '/tmp2' } });
-	assertEquals(typeof options.cache, 'object');
-	assertObjectMatch(
-		options.cache as Record<string, unknown>,
-		{ ...defaultOptions.cache, base: '/tmp2' },
-	);
-	assertObjectMatch(options, {
-		...defaultOptions,
-		cache: { enable: true, base: '/tmp2' },
-	});
+test('Return cache is true if cache key is not passed', () => {
+	const options = resolveOptions({});
+	assertEquals(options.cache, true);
 });

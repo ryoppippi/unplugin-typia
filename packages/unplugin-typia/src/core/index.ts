@@ -6,7 +6,7 @@ import {
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import MagicString from 'magic-string';
 
-import type { CacheOptions, Options } from './options.js';
+import type { Options } from './options.js';
 import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { log } from './utils.js';
@@ -41,11 +41,11 @@ const unpluginFactory: UnpluginFactory<
 	if (logOption !== false) {
 		log(
 			'box',
-			cacheOptions.enable ? `Cache enabled` : `Cache disabled`,
+			cacheOptions ? `Cache enabled` : `Cache disabled`,
 		);
 	}
 
-	const showLog = logOption === 'verbose' && cacheOptions.enable;
+	const showLog = logOption === 'verbose' && cacheOptions;
 
 	return {
 		name,
@@ -60,7 +60,7 @@ const unpluginFactory: UnpluginFactory<
 			const id = wrap<ID>(_id);
 
 			/** get cache */
-			using cache = cacheOptions.enable ? new Cache(id, source, cacheOptions) : undefined;
+			using cache = cacheOptions ? new Cache(id, source) : undefined;
 			let code = cache?.data;
 
 			if (showLog) {
@@ -115,7 +115,7 @@ const unpluginFactory: UnpluginFactory<
 const unplugin: UnpluginInstance<Options | undefined, false>
 /* #__PURE__ */ = createUnplugin(unpluginFactory);
 
-export type { Options, CacheOptions };
+export type { Options };
 export {
 	resolveOptions,
 	createFilter,
