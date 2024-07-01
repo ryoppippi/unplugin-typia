@@ -2,8 +2,6 @@ import type { OverrideProperties, RequiredDeep } from 'type-fest';
 import { createDefu } from 'defu';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
-import { getCacheDir } from './cache.js';
-import { type FilePath, wrap } from './types.js';
 
 /**
  * Represents the options for the plugin.
@@ -41,12 +39,12 @@ export type Options = {
 
 	/**
 	 * The optiosn for cache.
-	 * if `true`, it will enable cache with and will use node_modules/.cache/unplugin_typia (if exists) or {TMP_DIR}/unplugin_typia
+	 * The cache-dir-searching feature is powered by [find-cache-dir](https://github.com/sindresorhus/find-cache-dir). If you want to change cache dir, set an environment variable `CACHE_DIR`.
+	 * if `true`, it will enable cache with and will use node_modules/.cache/unplugin_typia.
 	 * if `false`, it will disable cache.
-	 * if object, it will enable cache with custom path.
-	 * @default { enable: true, base: TMP_DIR }
+	 * @default true
 	 */
-	cache?: CacheOptions | true | false;
+	cache?: true | false;
 
 	/**
 	 * Enable debug mode.
@@ -55,30 +53,12 @@ export type Options = {
 	log?: boolean | 'verbose';
 };
 
-/**
- * Options for cache.
- */
-export type CacheOptions = {
-	/**
-	 * Enable cache.
-	 * @default true
-	 */
-	enable?: boolean;
-
-	/**
-	 * The base directory for cache.
-	 * @default  will use node_modules/.cache/unplugin_typia (if exists) or {TMP_DIR}/unplugin_typia
-	 */
-	base?: string;
-};
-
 export type ResolvedOptions
 	= OverrideProperties<
 		RequiredDeep<Options>,
 		{
 			typia: Options['typia'];
 			tsconfig: Options['tsconfig'];
-			cache: RequiredDeep<OverrideProperties<CacheOptions, { base: FilePath } >>;
 		}
 	>;
 
@@ -88,7 +68,7 @@ export const defaultOptions = ({
 	exclude: [/node_modules/],
 	enforce: 'pre',
 	typia: { },
-	cache: { enable: true, base: getCacheDir() },
+	cache: true,
 	log: true,
 	tsconfig: undefined,
 }) as const satisfies ResolvedOptions;
@@ -109,16 +89,8 @@ const defu = createDefu((obj, key, value) => {
  * @returns The resolved options.
  */
 export function resolveOptions(options: Options): ResolvedOptions {
-	const { cache } = options;
-
 	return defu(
-		{
-			...options,
-			cache:
-				typeof cache === 'boolean'
-					? { enable: cache }
-					: { ...cache, base: cache?.base != null ? wrap<FilePath>(cache.base) : undefined },
-		},
+		options,
 		defaultOptions,
 	);
 }

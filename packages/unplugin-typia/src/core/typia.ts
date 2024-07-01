@@ -38,7 +38,7 @@ export async function transformTypia(
 	options: ResolvedOptions,
 ): Promise<Data> {
 	/** Whether to enable cache */
-	const cacheEnable = options.cache.enable;
+	const cacheEnable = options.cache;
 
 	/** parse tsconfig compilerOptions */
 	compilerOptions = await getTsCompilerOption(cacheEnable, options?.tsconfig);

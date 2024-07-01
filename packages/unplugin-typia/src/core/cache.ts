@@ -1,17 +1,13 @@
 import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { tmpdir } from 'node:os';
-import process from 'node:process';
 import { basename, dirname, join } from 'pathe';
-import typiaPackageJson from 'typia/package.json' with {type: 'json'};
+import findCacheDirectory from 'find-cache-dir';
+import typiaPackageJson from 'typia/package.json' with { type: 'json' };
 import type { CacheKey, CachePath, Data, FilePath, ID, Source } from './types.js';
 import { wrap } from './types.js';
-import type { ResolvedOptions } from './options.js';
 import { isBun } from './utils.js';
 
 const { version: typiaVersion } = typiaPackageJson;
-
-type ResolvedCacheOptions = ResolvedOptions['cache'];
 
 /**
  * Cache class
@@ -23,9 +19,9 @@ export class Cache {
 	#hashKey: CacheKey;
 	#hashPath: CachePath;
 
-	constructor(id: ID, source: Source, options: ResolvedCacheOptions) {
+	constructor(id: ID, source: Source) {
 		this.#hashKey = this.getHashKey(id, source);
-		this.#hashPath = wrap<CachePath>(join(options.base, this.#hashKey));
+		this.#hashPath = wrap<CachePath>(join(getCacheDir(), this.#hashKey));
 		this.#data = this.getCache();
 	}
 
@@ -114,22 +110,12 @@ export class Cache {
  * Get cache directory
  * copy from https://github.com/unjs/jiti/blob/690b727d7c0c0fa721b80f8085cafe640c6c2a40/src/cache.ts
  */
-export function getCacheDir(): FilePath {
-	let _tmpDir = tmpdir();
+function getCacheDir(): FilePath {
+	const cacheDir = findCacheDirectory({ name: 'unplugin_typia', create: true });
 
-	// Workaround for pnpm setting an incorrect `TMPDIR`.
-	// https://github.com/pnpm/pnpm/issues/6140
-	// https://github.com/unjs/jiti/issues/120
-	if (
-		process.env.TMPDIR != null
-		&& _tmpDir === process.cwd()
-	) {
-		const _env = process.env.TMPDIR;
-		delete process.env.TMPDIR;
-		_tmpDir = tmpdir();
-		process.env.TMPDIR = _env;
+	if (cacheDir == null) {
+		throw new Error('Cache directory is not found.');
 	}
 
-	const path = join(_tmpDir, 'unplugin_typia');
-	return wrap<FilePath>(path);
+	return wrap<FilePath>(cacheDir);
 }
