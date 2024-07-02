@@ -7,9 +7,7 @@ export default defineConfig({
   plugins: [
     UnpluginTypia({
       log: "verbose",
-      cache: {
-        enable: true,
-      }
+      cache: false,
     }),
     sveltekit(),
   ],
