@@ -14,9 +14,7 @@ await build({
   outfile: `${outDir}/main.mjs`,
   plugins: [UnpluginTypia({
     log: 'verbose',
-    cache: {
-      enable: false,
-    }
+    cache: false,
   })],
   format: 'esm'
 })
