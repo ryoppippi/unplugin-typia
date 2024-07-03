@@ -90,7 +90,7 @@
 		"pathe": "^1.1.2",
 		"ts-patch": "^3.2.1",
 		"typescript": "~5.5.2",
-		"unplugin": "^1.5.1"
+		"unplugin": "^1.11.0"
 	},
 	"devDependencies": {
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
