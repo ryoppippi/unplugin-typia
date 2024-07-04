@@ -38,18 +38,20 @@ const unpluginFactory: UnpluginFactory<
 
 	const { cache: cacheOptions, log: logOption } = options;
 
-	if (logOption !== false) {
-		log(
-			'box',
-			cacheOptions ? `Cache enabled` : `Cache disabled`,
-		);
-	}
-
 	const showLog = logOption === 'verbose' && cacheOptions;
 
 	return {
 		name,
 		enforce: options.enforce,
+
+		buildStart() {
+			if (logOption !== false) {
+				log(
+					'box',
+					cacheOptions ? `Cache enabled` : `Cache disabled`,
+				);
+			}
+		},
 
 		transformInclude(id) {
 			return filter(id);
