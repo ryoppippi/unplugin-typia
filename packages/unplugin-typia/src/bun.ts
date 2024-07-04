@@ -5,10 +5,10 @@
  */
 
 import type { BunPlugin } from 'bun';
-import type { UnpluginContextMeta } from 'unplugin';
+import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
 import { hasCJSSyntax } from 'mlly';
 import { resolveOptions, unplugin } from './api.js';
-import { type Options, type ResolvedOptions, defaultOptions } from './core/options.js';
+import { type Options, defaultOptions } from './core/options.js';
 import { isBun } from './core/utils.js';
 import { type ID, type Source, wrap } from './core/types.js';
 
@@ -20,9 +20,8 @@ if (!isBun()) {
 async function taggedTransform(
 	id: ID,
 	source: Source,
-	options: ResolvedOptions,
+	unpluginRaw: UnpluginOptions,
 ): Promise<undefined | Source> {
-	const unpluginRaw = unplugin.raw(options, {} as UnpluginContextMeta);
 	const { transform } = unpluginRaw;
 
 	if (transform == null) {
@@ -103,6 +102,8 @@ function bunTypiaPlugin(
 			const resolvedOptions = resolveOptions(options ?? {});
 			const { include } = resolvedOptions;
 
+			const unpluginRaw = unplugin.raw(options, {} as UnpluginContextMeta);
+
 			const filter = include instanceof RegExp
 				? include
 				: typeof include === 'string'
@@ -110,6 +111,11 @@ function bunTypiaPlugin(
 					: Array.isArray(include) && include[0] instanceof RegExp
 						? include[0]
 						: defaultOptions.include[0];
+
+			if (unpluginRaw?.buildStart != null) {
+				// @ts-expect-error context type is invalid
+				await unpluginRaw?.buildStart();
+			}
 
 			build.onLoad({ filter }, async (args) => {
 				const id = wrap<ID>(args.path);
@@ -128,7 +134,7 @@ function bunTypiaPlugin(
 				const code = await taggedTransform(
 					id,
 					source,
-					resolvedOptions,
+					unpluginRaw,
 				);
 
 				return { contents: code ?? source };
