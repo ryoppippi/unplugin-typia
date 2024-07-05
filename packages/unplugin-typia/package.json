@@ -89,7 +89,7 @@
 		"mlly": "^1.7.1",
 		"pathe": "^1.1.2",
 		"ts-patch": "^3.2.1",
-		"typescript": "~5.5.2",
+		"typescript": "~5.5.3",
 		"unplugin": "^1.11.0"
 	},
 	"devDependencies": {
