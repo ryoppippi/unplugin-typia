@@ -14,7 +14,7 @@
     "tsx": "^4.7.2",
     "ts-patch": "^3.2.1",
     "tslib": "^2.4.1",
-    "typescript": "~5.5.2",
+    "typescript": "~5.5.3",
     "@ryoppippi/unplugin-typia": "workspace:*"
   },
   "dependencies": {
