@@ -6,7 +6,6 @@
 
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
-import { hasCJSSyntax } from 'mlly';
 import { resolveOptions, unplugin } from './api.js';
 import { type Options, defaultOptions } from './core/options.js';
 import { isBun } from './core/utils.js';
@@ -121,15 +120,6 @@ function bunTypiaPlugin(
 				const id = wrap<ID>(args.path);
 
 				const source = wrap<Source>(await Bun.file(id).text());
-
-				/* TODO: delete after [this issue](https://github.com/oven-sh/bun/issues/11783) is resolved. */
-				if (id.includes('node_modules/typia/lib/index.js') && hasCJSSyntax(source)) {
-					const mjsFile = Bun.file(id.replace(/\.js$/, '.mjs'));
-
-					if (await mjsFile.exists()) {
-						return { contents: await mjsFile.text() };
-					}
-				}
 
 				const code = await taggedTransform(
 					id,

@@ -86,7 +86,6 @@
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
 		"magic-string": "^0.30.10",
-		"mlly": "^1.7.1",
 		"pathe": "^1.1.2",
 		"ts-patch": "^3.2.1",
 		"typescript": "~5.5.3",

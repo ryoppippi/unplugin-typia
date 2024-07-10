@@ -64,7 +64,7 @@ export type ResolvedOptions
 
 /** Default options */
 export const defaultOptions = ({
-	include: [/\.[cm]?[jt]sx?$/],
+	include: [/\.[cm]?tsx?$/],
 	exclude: [/node_modules/],
 	enforce: 'pre',
 	typia: { },
