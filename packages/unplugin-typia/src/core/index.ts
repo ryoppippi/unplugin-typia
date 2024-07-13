@@ -97,14 +97,17 @@ const unpluginFactory: UnpluginFactory<
 				}
 			}
 
-			/** create source map */
-			const magic = new MagicString(code);
-			const map = magic.generateMap({
-				source: id,
-				file: `${id}.map`,
-			});
+			/** generate Magic string */
+			const s = new MagicString(source);
+			s.overwrite(0, source.length, code);
 
-			return { code, map };
+			return {
+				code: s.toString(),
+				map: s.generateMap({
+					source: id,
+					file: `${id}.map`,
+				}),
+			};
 		},
 	};
 };
