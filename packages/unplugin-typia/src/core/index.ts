@@ -1,8 +1,5 @@
-import {
-	type UnpluginFactory,
-	type UnpluginInstance,
-	createUnplugin,
-} from 'unplugin';
+import type { UnpluginFactory, UnpluginInstance } from 'unplugin';
+import { createUnplugin } from 'unplugin';
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import MagicString from 'magic-string';
 
