@@ -1,14 +1,22 @@
 <script lang="ts">
-import {check, type IMember} from "$lib";
-import { v4 } from "uuid";
+  import { v4 } from "uuid";
+  import typia, { type tags } from "typia";
 
-let member = $state<IMember>({
-  id: v4(),
-  email: "samchon.github@gmai19l.com",
-  age: 20,
-})
+  interface IMember {
+    id: string & tags.Format<"uuid">;
+    email: string & tags.Format<"email">;
+    age: number & tags.ExclusiveMinimum<19> & tags.Maximum<100>;
+  }
 
-let isValid = $derived(check(member))
+  const check = typia.createIs<IMember>();
+
+  let member = $state<IMember>({
+    id: v4(),
+    email: "samchon.github@gmai19l.com",
+    age: 20,
+  })
+
+  let isValid = $derived(check(member))
 </script>
 
 <h1>
