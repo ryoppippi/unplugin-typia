@@ -1,4 +1,7 @@
 import type { Tagged, UnwrapTagged } from 'type-fest';
+import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
+
+export type UnContext = UnpluginBuildContext & UnpluginContext;
 
 export type CacheKey = Tagged<string, 'cache-key'>;
 export type CachePath = Tagged<string, 'cache-path'>;

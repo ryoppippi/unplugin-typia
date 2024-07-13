@@ -1,11 +1,10 @@
 import ts from 'typescript';
 import { resolve } from 'pathe';
 import { resolveTSConfig } from 'pkg-types';
-import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
 import type { ResolvedOptions } from './options.ts';
-import type { Data, ID, Source } from './types.js';
+import type { Data, ID, Source, UnContext } from './types.js';
 import { wrap } from './types.js';
 
 /** create a printer */
@@ -34,7 +33,7 @@ export async function transformTypia(
 	 *
 	 * This is an experimental feature and may be changed at any time.
 	 */
-	unpluginContext: UnpluginBuildContext & UnpluginContext,
+	unpluginContext: UnContext,
 	options: ResolvedOptions,
 ): Promise<Data> {
 	/** Whether to enable cache */
@@ -201,7 +200,7 @@ function transform(
 function warnDiagnostic(
 	diagnostics: ts.Diagnostic[],
 	transformed: ts.SourceFile[],
-	unpluginContext: UnpluginBuildContext & UnpluginContext,
+	unpluginContext: UnContext,
 ) {
 	for (const diagnostic of diagnostics) {
 		unpluginContext.warn(
