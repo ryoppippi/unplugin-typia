@@ -9,7 +9,7 @@ import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { log } from './utils.js';
 import type { Data, ID, Source, UnContext } from './types.js';
-import { wrap } from './types.js';
+import { unwrap, wrap } from './types.js';
 import { Cache } from './cache.js';
 
 const name = `unplugin-typia`;
@@ -123,7 +123,13 @@ const unpluginFactory: UnpluginFactory<
 				{ id, source, ctx: this, options },
 			);
 
+			/** skip if code is null */
 			if (code == null) {
+				return;
+			}
+
+			/** skip if source is same as code */
+			if (unwrap(source) === unwrap(code)) {
 				return;
 			}
 
