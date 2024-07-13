@@ -21,7 +21,7 @@
     "tslib": "^2.4.1",
     "type-fest": "^4.19.0",
     "typescript": "~5.5.3",
-    "typia": "^6.4.3",
+    "typia": "^6.5.0",
     "@ryoppippi/unplugin-typia": "workspace:*"
   }
 }
