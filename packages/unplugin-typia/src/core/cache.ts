@@ -2,7 +2,7 @@ import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, wri
 import { createHash } from 'node:crypto';
 import { basename, dirname, join } from 'pathe';
 import findCacheDirectory from 'find-cache-dir';
-import typiaPackageJson from 'typia/package.json' with { type: 'json' };
+import typiaPackageJson from 'typia/package.json' assert { type: 'json' };
 import type { CacheKey, CachePath, Data, FilePath, ID, Source } from './types.js';
 import { wrap } from './types.js';
 import { isBun } from './utils.js';
