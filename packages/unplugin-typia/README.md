@@ -207,11 +207,18 @@ More integration guides can be found in the [`JSR Doc`](https://jsr.io/@ryoppipp
 
 You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples).
 
+## Supported File Extensions
+
+- `.ts`
+- `.tsx`
+- `mts`
+- `mtsx`
+- `.svelte` (only script tag with `lang="ts"`)
+
 ## Limitations
 
 - This plugin is highly experimental and may not work as expected.
 - This plugin is not officially supported by Typia.
-- This plugin parse only `.ts`, `.tsx`, `.js`, `.jsx` files. If you want to use typia in markup files such as `.svelte`, `.astro`, `.vue`, and so on, you first create typia validation functions in `.ts` files, then import them in the markup files.
 
 ## LICENSE
 
