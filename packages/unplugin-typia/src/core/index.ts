@@ -11,6 +11,7 @@ import { log } from './utils.js';
 import type { Data, ID, Source, UnContext } from './types.js';
 import { unwrap, wrap } from './types.js';
 import { Cache } from './cache.js';
+import { isSvelteFile, preprocess as sveltePreprocess } from './languages/svelte.js';
 
 const name = `unplugin-typia`;
 
@@ -119,9 +120,18 @@ const unpluginFactory: UnpluginFactory<
 			const source = wrap<Source>(_source);
 			const id = wrap<ID>(_id);
 
-			const { code } = await transformCodeWithTypiaTransform(
-				{ id, source, ctx: this, options },
-			);
+			const _transform = async ({ source, id }: { source: Source; id: ID }) => transformCodeWithTypiaTransform({ id, source, ctx: this, options });
+
+			/** transform code */
+			let code: Data | undefined;
+			switch (true) {
+				case isSvelteFile(id):
+					({ code } = await sveltePreprocess({ id, source, transform: _transform }));
+					break;
+				default:
+					({ code } = await _transform({ source, id }));
+					break;
+			}
 
 			/** skip if code is null */
 			if (code == null) {
