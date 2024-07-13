@@ -1,4 +1,3 @@
-import { preprocess as sveltePreprocess } from 'svelte/compiler';
 import type { Data, ID, Source } from '../types.js';
 import { wrap } from '../types.js';
 
@@ -24,6 +23,7 @@ export async function preprocess(
 	{ source, id, transform }:
 	{ source: Source; id: ID; transform: TransformFunction },
 ): Promise<{ code: Data }> {
+	const { preprocess: sveltePreprocess } = await import('svelte/compiler');
 	const { code } = await sveltePreprocess(source, {
 		script: async ({ content, filename, attributes }) => {
 			if (filename == null) {
