@@ -10,7 +10,7 @@ import type { Options } from './options.js';
 import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { log } from './utils.js';
-import type { ID, Source } from './types.js';
+import type { Data, ID, Source } from './types.js';
 import { wrap } from './types.js';
 import { Cache } from './cache.js';
 
@@ -39,6 +39,23 @@ const unpluginFactory: UnpluginFactory<
 	const { cache: cacheOptions, log: logOption } = options;
 
 	const showLog = logOption === 'verbose' && cacheOptions;
+
+	/**
+	 * Generate code with source map.
+	 */
+	function generateCodeWithMap({ source, code, id }: { source: Source; code: Data; id: ID }) {
+		/** generate Magic string */
+		const s = new MagicString(source);
+		s.overwrite(0, source.length, code);
+
+		return {
+			code: s.toString(),
+			map: s.generateMap({
+				source: id,
+				file: `${id}.map`,
+			}),
+		};
+	}
 
 	return {
 		name,
@@ -97,17 +114,7 @@ const unpluginFactory: UnpluginFactory<
 				}
 			}
 
-			/** generate Magic string */
-			const s = new MagicString(source);
-			s.overwrite(0, source.length, code);
-
-			return {
-				code: s.toString(),
-				map: s.generateMap({
-					source: id,
-					file: `${id}.map`,
-				}),
-			};
+			return generateCodeWithMap({ source, code, id });
 		},
 	};
 };
