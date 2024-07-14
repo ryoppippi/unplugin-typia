@@ -10,6 +10,8 @@ permissions:
 
 jobs:
   jsr:
+    env:
+      PACKAGE_DIR: ${{github.workspace}}/packages/unplugin-typia
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -23,8 +25,11 @@ jobs:
         with:
           bun-version: latest
       - run: bun i --frozen-lockfile
-      - run: bun run publish
-        working-directory: packages/unplugin-typia
+      - name: copy files
+        run: |
+          cp LICENSE $PACKAGE_DIR
+      - run: bun run publish --allow-dirty
+        working-directory: ${{env.PACKAGE_DIR}}
 
   release:
     needs:
