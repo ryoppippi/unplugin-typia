@@ -105,7 +105,6 @@
 		"eslint": "^9.5.0",
 		"eslint-plugin-format": "^0.1.2",
 		"find-cache-dir": "^5.0.0",
-		"jiti": "^1.21.6",
 		"pkg-types": "^1.1.1",
 		"rollup": "^4.6.1",
 		"type-fest": "^4.19.0",
