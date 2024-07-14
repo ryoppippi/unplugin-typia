@@ -1,5 +1,9 @@
+import jiti from 'jiti';
 import type { Data, ID, Source } from '../types.js';
 import { wrap } from '../types.js';
+
+const createJiti = ('default' in jiti ? jiti.default : jiti);
+const { import: jitiImport } = createJiti(import.meta.url);
 
 /**
  * Check if a file is a Svelte file.
@@ -23,7 +27,7 @@ export async function preprocess(
 	{ source, id, transform }:
 	{ source: Source; id: ID; transform: TransformFunction },
 ): Promise<{ code: Data }> {
-	const { preprocess: sveltePreprocess } = await import('svelte/compiler');
+	const { preprocess: sveltePreprocess } = await jitiImport('svelte/compiler', {}) as { preprocess: typeof import('svelte/compiler').preprocess };
 	const { code } = await sveltePreprocess(source, {
 		script: async ({ content, filename, attributes }) => {
 			if (filename == null) {
