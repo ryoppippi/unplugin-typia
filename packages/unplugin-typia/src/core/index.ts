@@ -9,7 +9,7 @@ import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { log } from './utils.js';
 import type { Data, ID, Source, UnContext } from './types.js';
-import { unwrap, wrap } from './types.js';
+import { wrap } from './types.js';
 import { Cache } from './cache.js';
 import { isSvelteFile, preprocess as sveltePreprocess } from './languages/svelte.js';
 
