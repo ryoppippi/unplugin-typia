@@ -223,3 +223,5 @@ You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin
 ## LICENSE
 
 [MIT](./LICENSE)
+
+![analytics](https://repobeats.axiom.co/api/embed/30d90d6f9ab91e8b06159ba792765a1377ea7d3e.svg 'Repobeats analytics image')
