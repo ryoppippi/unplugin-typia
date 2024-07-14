@@ -138,11 +138,6 @@ const unpluginFactory: UnpluginFactory<
 				return;
 			}
 
-			/** skip if source is same as code */
-			if (unwrap(source) === unwrap(code)) {
-				return;
-			}
-
 			return generateCodeWithMap({ source, code, id });
 		},
 	};
