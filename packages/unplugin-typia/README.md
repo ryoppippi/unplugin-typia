@@ -211,8 +211,8 @@ You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin
 
 - `.ts`
 - `.tsx`
-- `mts`
-- `mtsx`
+- `.mts`
+- `.mtsx`
 - `.svelte` (only script tag with `lang="ts"`)
 
 ## Limitations
