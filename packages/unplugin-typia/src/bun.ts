@@ -7,7 +7,7 @@
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
 import { resolveOptions, unplugin } from './api.js';
-import { type Options, defaultOptions } from './core/options.js';
+import type { Options } from './core/options.js';
 import { isBun } from './core/utils.js';
 import { type ID, type Source, wrap } from './core/types.js';
 
@@ -103,32 +103,39 @@ function bunTypiaPlugin(
 
 			const unpluginRaw = unplugin.raw(options, {} as UnpluginContextMeta);
 
-			const filter = include instanceof RegExp
-				? include
-				: typeof include === 'string'
-					? new RegExp(include)
-					: Array.isArray(include) && include[0] instanceof RegExp
-						? include[0]
-						: defaultOptions.include[0];
+			const filters: readonly RegExp[] | undefined
+				= include instanceof RegExp
+					? [include]
+					: typeof include === 'string'
+						? [new RegExp(include)]
+						: Array.isArray(include) && include.every(i => i instanceof RegExp) && include.length > 0
+							? include
+							: undefined;
+
+			if (filters == null) {
+				throw new Error('include option should be a string, RegExp, or an array of RegExp with at least one element');
+			}
 
 			if (unpluginRaw?.buildStart != null) {
 				// @ts-expect-error context type is invalid
 				await unpluginRaw?.buildStart();
 			}
 
-			build.onLoad({ filter }, async (args) => {
-				const id = wrap<ID>(args.path);
+			for (const filter of filters) {
+				build.onLoad({ filter }, async (args) => {
+					const id = wrap<ID>(args.path);
 
-				const source = wrap<Source>(await Bun.file(id).text());
+					const source = wrap<Source>(await Bun.file(id).text());
 
-				const code = await taggedTransform(
-					id,
-					source,
-					unpluginRaw,
-				);
+					const code = await taggedTransform(
+						id,
+						source,
+						unpluginRaw,
+					);
 
-				return { contents: code ?? source };
-			});
+					return { contents: code ?? source };
+				});
+			}
 		},
 	}) as const satisfies BunPlugin;
 
