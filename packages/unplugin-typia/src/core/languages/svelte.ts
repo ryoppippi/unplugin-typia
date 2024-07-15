@@ -38,7 +38,7 @@ export async function preprocess(
 			const id = wrap<ID>(filename);
 			const source = wrap<Source>(content);
 
-			const tsID = wrap<ID>(id.replace(/\.svelte$/, '.ts'));
+			const tsID = wrap<ID>(`${id}.ts`);
 
 			const { code } = await transform({ source, id: tsID });
 
