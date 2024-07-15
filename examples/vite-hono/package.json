@@ -16,7 +16,7 @@
   "devDependencies": {
     "@hono/typia-validator": "^0.0.5",
     "@hono/vite-cloudflare-pages": "^0.4.1",
-    "@hono/vite-dev-server": "^0.12.2",
+    "@hono/vite-dev-server": "^0.13.1",
     "ts-patch": "^3.2.1",
     "typescript": "~5.5.3",
     "typia": "^6.4.3",
