@@ -1,13 +1,14 @@
 import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { createRequire } from 'node:module';
 import { basename, dirname, join } from 'pathe';
 import findCacheDirectory from 'find-cache-dir';
-import typiaPackageJson from 'typia/package.json' with { type: 'json' };
 import type { CacheKey, CachePath, Data, FilePath, ID, Source } from './types.js';
 import { wrap } from './types.js';
 import { isBun } from './utils.js';
 
-const { version: typiaVersion } = typiaPackageJson;
+/** get typia version */
+const { version: typiaVersion } = createRequire(import.meta.url)('typia/package.json') as typeof import('typia/package.json');
 
 /**
  * Cache class
