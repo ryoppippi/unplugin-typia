@@ -45,7 +45,7 @@ const unpluginFactory: UnpluginFactory<
 	function generateCodeWithMap({ source, code, id }: { source: Source; code: Data; id: ID }) {
 		/** generate Magic string */
 		const s = new MagicString(source);
-		s.overwrite(0, source.length, code);
+		s.overwrite(0, -1, code);
 
 		if (!s.hasChanged()) {
 			return;
