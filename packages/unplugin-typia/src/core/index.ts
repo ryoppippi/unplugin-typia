@@ -124,6 +124,11 @@ const unpluginFactory: UnpluginFactory<
 			const source = wrap<Source>(_source);
 			const id = wrap<ID>(_id);
 
+			/** skip if source does not include typia */
+			if (!source.includes('typia')) {
+				return;
+			}
+
 			const _transform = async ({ source, id }: { source: Source; id: ID }) => transformCodeWithTypiaTransform({ id, source, ctx: this, options });
 
 			/** transform code */
