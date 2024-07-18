@@ -47,6 +47,10 @@ const unpluginFactory: UnpluginFactory<
 		const s = new MagicString(source);
 		s.overwrite(0, source.length, code);
 
+		if (!s.hasChanged()) {
+			return;
+		}
+
 		return {
 			code: s.toString(),
 			map: s.generateMap({
