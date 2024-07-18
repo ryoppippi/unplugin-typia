@@ -12,7 +12,7 @@
     "@types/bun": "latest",
     "npm-run-all2": "^6.2.0",
     "std-env": "^3.7.0",
-    "typia": "^6.4.3"
+    "typia": "^6.5.1"
   },
   "peerDependencies": {
     "ts-patch": "^3.2.1",
