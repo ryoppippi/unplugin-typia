@@ -42,7 +42,7 @@ export type Options = {
 	 * The cache-dir-searching feature is powered by [find-cache-dir](https://github.com/sindresorhus/find-cache-dir). If you want to change cache dir, set an environment variable `CACHE_DIR`.
 	 * if `true`, it will enable cache with and will use node_modules/.cache/unplugin_typia.
 	 * if `false`, it will disable cache.
-	 * @default true
+	 * @default false
 	 */
 	cache?: true | false;
 
@@ -68,7 +68,7 @@ export const defaultOptions = ({
 	exclude: [/node_modules/],
 	enforce: 'pre',
 	typia: { },
-	cache: true,
+	cache: false,
 	log: true,
 	tsconfig: undefined,
 }) as const satisfies ResolvedOptions;
