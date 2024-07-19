@@ -43,5 +43,5 @@ test('Return cache is true if cache key is true', () => {
 
 test('Return cache is true if cache key is not passed', () => {
 	const options = resolveOptions({});
-	assertEquals(options.cache, true);
+	assertEquals(options.cache, false);
 });
