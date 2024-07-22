@@ -56,6 +56,7 @@ const unpluginFactory: UnpluginFactory<
 			map: s.generateMap({
 				source: id,
 				file: `${id}.map`,
+				includeContent: true,
 			}),
 		};
 	}
