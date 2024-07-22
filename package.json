@@ -27,7 +27,7 @@
     "workerd"
   ],
   "devDependencies": {
-    "turbo": "^2.0.6"
+    "turbo": "^2.0.9"
   },
   "packageManager": "bun@1.1.12",
   "private": true
