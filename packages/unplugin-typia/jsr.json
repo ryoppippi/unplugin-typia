@@ -1,6 +1,6 @@
 {
 	"name": "@ryoppippi/unplugin-typia",
-	"version": "0.6.10",
+	"version": "0.6.11",
 	"exports": {
 		".": "./src/index.ts",
 		"./api": "./src/api.ts",
