@@ -2,6 +2,7 @@ import type { UnpluginFactory, UnpluginInstance } from 'unplugin';
 import { createUnplugin } from 'unplugin';
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import MagicString from 'magic-string';
+import { resolve } from 'pathe';
 
 import type { ResolvedOptions } from './options.ts';
 import type { Options } from './options.js';
@@ -123,7 +124,7 @@ const unpluginFactory: UnpluginFactory<
 
 		async transform(_source, _id) {
 			const source = wrap<Source>(_source);
-			const id = wrap<ID>(_id);
+			const id = wrap<ID>(resolve(_id));
 
 			/** skip if source does not include typia */
 			if (!source.includes('typia')) {
