@@ -107,7 +107,7 @@
 		"find-cache-dir": "^5.0.0",
 		"pkg-types": "^1.1.1",
 		"rollup": "^4.6.1",
-		"type-fest": "^4.19.0",
+		"type-fest": "^4.23.0",
 		"typia": "^6.5.2"
 	}
 }
