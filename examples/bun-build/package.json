@@ -4,13 +4,14 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --watch ./index.ts",
-    "start": "bun run ./index.ts",
+    "test": "npm run test:build-run && npm run test:jit",
+    "test:jit": "bun run ./index.ts",
+    "test:build-run": "npm run build && node ./out/index.js",
     "build": "bun run ./build.ts",
     "prepare": "ts-patch install && typia patch"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "npm-run-all2": "^6.2.0",
     "std-env": "^3.7.0",
     "typia": "^6.5.2"
   },
