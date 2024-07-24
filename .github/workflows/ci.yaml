@@ -31,6 +31,9 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - run: bun i --frozen-lockfile
       - run: bun run test
 
