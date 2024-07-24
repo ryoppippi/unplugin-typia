@@ -26,8 +26,8 @@ const sourceCache = new Map<string, ts.SourceFile>();
  * @returns The transformed code.
  */
 export async function transformTypia(
-	id: ID,
-	source: Source,
+	_id: ID,
+	_source: Source,
 	/**
 	 * **Use with caution.**
 	 *
@@ -36,6 +36,9 @@ export async function transformTypia(
 	unpluginContext: UnContext,
 	options: ResolvedOptions,
 ): Promise<Data> {
+	const id = wrap<ID>(resolve(_id));
+	const source = wrap<Source>(_source);
+
 	/** Whether to enable cache */
 	const cacheEnable = options.cache;
 
@@ -179,8 +182,7 @@ function transform(
 		},
 	);
 
-	const resolvedId = resolve(id);
-	const file = transformationResult.transformed.find(t => resolve(t.fileName) === resolvedId);
+	const file = transformationResult.transformed.find(t => resolve(t.fileName) === id);
 
 	if (file == null) {
 		throw new Error('No file found');
