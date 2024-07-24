@@ -179,7 +179,8 @@ function transform(
 		},
 	);
 
-	const file = transformationResult.transformed.find(t => resolve(t.fileName) === id);
+	const resolvedId = resolve(id);
+	const file = transformationResult.transformed.find(t => resolve(t.fileName) === resolvedId);
 
 	if (file == null) {
 		throw new Error('No file found');
