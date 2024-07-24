@@ -19,7 +19,7 @@
     "@hono/vite-dev-server": "^0.12.2",
     "ts-patch": "^3.2.1",
     "typescript": "~5.5.3",
-    "typia": "^6.5.2",
+    "typia": "^6.5.4",
     "vite": "^5.2.12",
     "@ryoppippi/unplugin-typia": "workspace:*"
   }
