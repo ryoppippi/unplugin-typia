@@ -19,8 +19,8 @@ const sourceCache = new Map<string, ts.SourceFile>();
 /**
  * Transform a TypeScript file with Typia.
  *
- * @param id - The file path.
- * @param source - The source code.
+ * @param _id - The file path.
+ * @param _source - The source code.
  * @param unpluginContext - The unplugin context.
  * @param options - The resolved options.
  * @returns The transformed code.
