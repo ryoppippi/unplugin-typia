@@ -7,7 +7,6 @@
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
 import { consola } from 'consola';
-import { UnknownRecord } from 'type-fest';
 import { resolveOptions, unplugin } from './api.js';
 import type { Options } from './core/options.js';
 import { isBun } from './core/utils.js';
