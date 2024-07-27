@@ -3,6 +3,7 @@ import { resolve } from 'pathe';
 import { resolveTSConfig } from 'pkg-types';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
+import { consola } from 'consola';
 import type { ResolvedOptions } from './options.ts';
 import type { Data, ID, Source, UnContext } from './types.js';
 import { wrap } from './types.js';
@@ -205,9 +206,10 @@ function warnDiagnostic(
 	unpluginContext: UnContext,
 ) {
 	for (const diagnostic of diagnostics) {
-		unpluginContext.warn(
+		const warn = unpluginContext?.warn ?? consola.warn;
+		warn(
 			transformed.map(e => e.fileName).join(','),
 		);
-		unpluginContext.warn(JSON.stringify(diagnostic.messageText));
+		warn(JSON.stringify(diagnostic.messageText));
 	}
 }
