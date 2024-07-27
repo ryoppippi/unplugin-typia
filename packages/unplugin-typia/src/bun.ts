@@ -6,6 +6,8 @@
 
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
+import { consola } from 'consola';
+import { UnknownRecord } from 'type-fest';
 import { resolveOptions, unplugin } from './api.js';
 import type { Options } from './core/options.js';
 import { isBun } from './core/utils.js';
@@ -101,7 +103,12 @@ function bunTypiaPlugin(
 			const resolvedOptions = resolveOptions(options ?? {});
 			const { include } = resolvedOptions;
 
-			const unpluginRaw = unplugin.raw(options, {} as UnpluginContextMeta);
+			const unpluginRaw = unplugin.raw(
+				options,
+				{
+					...consola,
+				} as unknown as UnpluginContextMeta,
+			);
 
 			const filters: readonly RegExp[] | undefined
 				= include instanceof RegExp
