@@ -1,8 +1,8 @@
 /* eslint-disable no-console, unicorn/prefer-top-level-await */
 
 import { build } from 'esbuild'
+import { $ } from 'bun';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/esbuild';
-import $ from 'dax-sh';
 
 const outDir = 'dist' as const
 

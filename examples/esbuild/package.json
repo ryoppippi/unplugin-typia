@@ -3,19 +3,17 @@
   "name": "example-esbuild",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsx build.ts",
-    "watch": "tsx watch build.ts",
+    "build": "bun build.ts",
     "test": "npm run build && node dist/main.mjs",
     "prepare": "ts-patch install && typia patch"
   },
   "devDependencies": {
-    "dax-sh": "^0.41.0",
+    "@ryoppippi/unplugin-typia": "workspace:*",
+    "@types/bun": "^1.1.6",
     "esbuild": "^0.20.2",
-    "tsx": "^4.7.2",
     "ts-patch": "^3.2.1",
     "tslib": "^2.4.1",
-    "typescript": "~5.5.3",
-    "@ryoppippi/unplugin-typia": "workspace:*"
+    "typescript": "~5.5.3"
   },
   "dependencies": {
     "typia": "^6.5.2"
