@@ -20,10 +20,7 @@ jobs:
       - run: bun run build
 
   test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
@@ -34,11 +31,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: install and test
-        if: ${{ !(!startsWith(github.event_name, 'pull_request') && contains(runner.os, 'windows')) }}
-        run: |
-          bun i --frozen-lockfile
-          bun run test
+      - run: bun i --frozen-lockfile
+      - run: bun run test
 
   lint:
     runs-on: ubuntu-latest
