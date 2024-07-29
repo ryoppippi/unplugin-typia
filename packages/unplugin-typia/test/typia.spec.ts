@@ -1,5 +1,7 @@
-import { join } from 'node:path';
+import { basename, join } from 'pathe';
+
 import { expect, test } from 'bun:test';
+import { $ } from 'bun';
 
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transformTypia } from '../src/core/typia.js';
@@ -10,13 +12,19 @@ class DummyContext {
 	warn(args: unknown) {
 		console.warn(args);
 	}
+};
+
+function slash(str: string) {
+	return str.replace(/\\/g, '/');
 }
 
-const id = join(import.meta.dirname, './fixtures/index.ts') as ID;
-const code = await Bun.file(id).text() as Source;
+const ids = await $`ls ${join(import.meta.dirname, './fixtures')}/*.ts`.text().then(x => x.split('\n').filter(Boolean)) as ID[ ];
+const ctx = new DummyContext() as UnpluginContext & UnpluginBuildContext;
 
-test('Transform Typia', async () => {
-	const result = await transformTypia(id, code, new DummyContext() as UnpluginContext & UnpluginBuildContext, resolveOptions({ cache: false })).then(code => JSON.stringify(code, null, 2));
-
-	expect(result).toMatchSnapshot();
-});
+for (const id of ids) {
+	test(`Transform ${basename(id)}`, async () => {
+		const code = await $`cat ${id}`.text() as Source;
+		const transformed = await transformTypia(id, code, ctx, resolveOptions({ cache: false })).then(x => slash(x).trim());
+		expect(transformed).toMatchSnapshot();
+	});
+}
