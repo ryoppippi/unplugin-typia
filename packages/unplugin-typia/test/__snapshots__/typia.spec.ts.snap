@@ -1,3 +1,127 @@
 // Bun Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Transform Typia 1`] = `""import typia, { type tags } from 'typia';\nconst check = (input: any): input is IMember => {\n    return \"object\" === typeof input && null !== input && (\"string\" === typeof (input as any).email && /^[a-z0-9!#$%&'*+/=?^_\`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test((input as any).email) && (\"string\" === typeof (input as any).id && /^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test((input as any).id)) && (\"number\" === typeof (input as any).age && (Math.floor((input as any).age) === (input as any).age && 0 <= (input as any).age && (input as any).age <= 4294967295 && 19 < (input as any).age && (input as any).age <= 100)));\n};\ntype IMember = {\n    email: string & tags.Format<'email'>;\n    id: string & tags.Format<'uuid'>;\n    age: number & tags.Type<'uint32'> & tags.ExclusiveMinimum<19> & tags.Maximum<100>;\n};\ncheck({});\n""`;
+exports[`Transform validate.ts 1`] = `
+"import typia from 'typia';
+import type { IMember } from './type.js';
+const validate = (input: any): typia.IValidation<IMember> => {
+    const errors = [] as any[];
+    const __is = (input: any): input is IMember => {
+        return "object" === typeof input && null !== input && ("string" === typeof (input as any).email && /^[a-z0-9!#$%&'*+/=?^_\`{|}~-]+(?:/.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test((input as any).email) && ("string" === typeof (input as any).id && /^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test((input as any).id)) && ("number" === typeof (input as any).age && (Math.floor((input as any).age) === (input as any).age && 0 <= (input as any).age && (input as any).age <= 4294967295 && 19 < (input as any).age && (input as any).age <= 100)));
+    };
+    if (false === __is(input)) {
+        const $report = (typia.createValidate as any).report(errors);
+        ((input: any, _path: string, _exceptionable: boolean = true): input is IMember => {
+            const $vo0 = (input: any, _path: string, _exceptionable: boolean = true): boolean => ["string" === typeof input.email && (/^[a-z0-9!#$%&'*+/=?^_\`{|}~-]+(?:/.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(input.email) || $report(_exceptionable, {
+                    path: _path + ".email",
+                    expected: "string & Format</"email/">",
+                    value: input.email
+                })) || $report(_exceptionable, {
+                    path: _path + ".email",
+                    expected: "(string & Format</"email/">)",
+                    value: input.email
+                }), "string" === typeof input.id && (/^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(input.id) || $report(_exceptionable, {
+                    path: _path + ".id",
+                    expected: "string & Format</"uuid/">",
+                    value: input.id
+                })) || $report(_exceptionable, {
+                    path: _path + ".id",
+                    expected: "(string & Format</"uuid/">)",
+                    value: input.id
+                }), "number" === typeof input.age && (Math.floor(input.age) === input.age && 0 <= input.age && input.age <= 4294967295 || $report(_exceptionable, {
+                    path: _path + ".age",
+                    expected: "number & Type</"uint32/">",
+                    value: input.age
+                })) && (19 < input.age || $report(_exceptionable, {
+                    path: _path + ".age",
+                    expected: "number & ExclusiveMinimum<19>",
+                    value: input.age
+                })) && (input.age <= 100 || $report(_exceptionable, {
+                    path: _path + ".age",
+                    expected: "number & Maximum<100>",
+                    value: input.age
+                })) || $report(_exceptionable, {
+                    path: _path + ".age",
+                    expected: "(number & Type</"uint32/"> & ExclusiveMinimum<19> & Maximum<100>)",
+                    value: input.age
+                })].every((flag: boolean) => flag);
+            return ("object" === typeof input && null !== input || $report(true, {
+                path: _path + "",
+                expected: "IMember",
+                value: input
+            })) && $vo0(input, _path + "", true) || $report(true, {
+                path: _path + "",
+                expected: "IMember",
+                value: input
+            });
+        })(input, "$input", true);
+    }
+    const success = 0 === errors.length;
+    return {
+        success,
+        errors,
+        data: success ? input : undefined
+    } as any;
+};
+validate({});"
+`;
+
+exports[`Transform type.d.ts 1`] = `
+"import type { tags } from 'typia';
+export type IMember = {
+    email: string & tags.Format<'email'>;
+    id: string & tags.Format<'uuid'>;
+    age: number & tags.Type<'uint32'> & tags.ExclusiveMinimum<19> & tags.Maximum<100>;
+};"
+`;
+
+exports[`Transform random.ts 1`] = `
+"import typia from 'typia';
+import type { IMember } from './type.js';
+const random = (generator?: Partial<typia.IRandomGenerator>): import("typia").Resolved<IMember> => {
+    const $generator = (typia.createRandom as any).generator;
+    const $ro0 = (_recursive: boolean = false, _depth: number = 0): any => ({
+        email: (generator?.customs ?? $generator.customs)?.string?.([
+            {
+                name: "Format</"email/">",
+                kind: "format",
+                value: "email"
+            }
+        ]) ?? (generator?.email ?? $generator.email)(),
+        id: (generator?.customs ?? $generator.customs)?.string?.([
+            {
+                name: "Format</"uuid/">",
+                kind: "format",
+                value: "uuid"
+            }
+        ]) ?? (generator?.uuid ?? $generator.uuid)(),
+        age: (generator?.customs ?? $generator.customs)?.number?.([
+            {
+                name: "Type</"uint32/">",
+                kind: "type",
+                value: "uint32"
+            },
+            {
+                name: "ExclusiveMinimum<19>",
+                kind: "exclusiveMinimum",
+                value: 19
+            },
+            {
+                name: "Maximum<100>",
+                kind: "maximum",
+                value: 100
+            }
+        ]) ?? (generator?.integer ?? $generator.integer)(19, 100)
+    });
+    return $ro0();
+};
+random();"
+`;
+
+exports[`Transform is.ts 1`] = `
+"import typia from 'typia';
+import type { IMember } from './type.js';
+const is = (input: any): input is IMember => {
+    return "object" === typeof input && null !== input && ("string" === typeof (input as any).email && /^[a-z0-9!#$%&'*+/=?^_\`{|}~-]+(?:/.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test((input as any).email) && ("string" === typeof (input as any).id && /^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test((input as any).id)) && ("number" === typeof (input as any).age && (Math.floor((input as any).age) === (input as any).age && 0 <= (input as any).age && (input as any).age <= 4294967295 && 19 < (input as any).age && (input as any).age <= 100)));
+};
+is({});"
+`;
