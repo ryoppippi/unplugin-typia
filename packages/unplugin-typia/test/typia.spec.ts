@@ -1,5 +1,4 @@
 import { join } from 'node:path';
-import { unescape } from 'node:querystring';
 import { expect, test } from 'bun:test';
 
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';

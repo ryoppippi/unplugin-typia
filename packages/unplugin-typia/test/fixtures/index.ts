@@ -6,4 +6,4 @@ type IMember = {
 	id: string & tags.Format<'uuid'>;
 	age: number & tags.Type<'uint32'> & tags.ExclusiveMinimum<19> & tags.Maximum<100>;
 };
-const res = check({});
+check({});
