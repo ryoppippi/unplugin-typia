@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/bun": "latest",
     "std-env": "^3.7.0",
-    "typia": "^6.5.2"
+    "typia": "^6.6.1"
   },
   "peerDependencies": {
     "ts-patch": "^3.2.1",

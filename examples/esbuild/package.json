@@ -16,6 +16,6 @@
     "typescript": "~5.5.3"
   },
   "dependencies": {
-    "typia": "^6.5.2"
+    "typia": "^6.6.1"
   }
 }

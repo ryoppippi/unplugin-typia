@@ -54,7 +54,7 @@
 		"ts-patch": "^3.2.1",
 		"type-fest": "^4.19.0",
 		"typescript": "~5.5.3",
-		"typia": "^6.5.2",
+		"typia": "^6.6.1",
 		"unplugin": "^1.11.0"
 	},
 	"devDependencies": {
