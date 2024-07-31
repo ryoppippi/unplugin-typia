@@ -89,10 +89,16 @@
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
+		"consola": "^3.2.3",
+		"defu": "^6.1.4",
+		"find-cache-dir": "^5.0.0",
 		"magic-string": "^0.30.10",
 		"pathe": "^1.1.2",
+		"pkg-types": "^1.1.1",
 		"ts-patch": "^3.2.1",
 		"typescript": "~5.5.3",
+		"type-fest": "^4.19.0",
+		"typia": "^6.5.2",
 		"unplugin": "^1.11.0"
 	},
 	"devDependencies": {
@@ -102,14 +108,7 @@
 		"@types/bun": "^1.1.6",
 		"@types/node": "^20.10.3",
 		"bumpp": "^9.4.1",
-		"consola": "^3.2.3",
-		"defu": "^6.1.4",
 		"eslint": "^9.5.0",
-		"eslint-plugin-format": "^0.1.2",
-		"find-cache-dir": "^5.0.0",
-		"pkg-types": "^1.1.1",
-		"rollup": "^4.6.1",
-		"type-fest": "^4.19.0",
-		"typia": "^6.5.2"
+		"eslint-plugin-format": "^0.1.2"
 	}
 }
