@@ -1,6 +1,7 @@
 {
 	"name": "@ryoppippi/unplugin-typia",
 	"type": "module",
+	"version": "0.6.15",
 	"description": "unplugin for typia",
 	"author": "ryoppippi",
 	"license": "MIT",
@@ -12,102 +13,58 @@
 		"transform"
 	],
 	"exports": {
-		".": {
-			"import": "./src/index.ts"
-		},
-		"./api": {
-			"import": "./src/api.ts"
-		},
-		"./vite": {
-			"import": "./src/vite.ts"
-		},
-		"./webpack": {
-			"import": "./src/webpack.ts"
-		},
-		"./rollup": {
-			"import": "./src/rollup.ts"
-		},
-		"./esbuild": {
-			"import": "./src/esbuild.ts"
-		},
-		"./next": {
-			"import": "./src/next.ts"
-		},
-		"./rolldown": {
-			"import": "./src/rolldown.ts"
-		},
-		"./farm": {
-			"import": "./src/farm.ts"
-		},
-		"./rspack": {
-			"import": "./src/rspack.ts"
-		},
-		"./bun": {
-			"import": "./src/bun.ts"
-		},
+		".": "./src/index.ts",
+		"./api": "./src/api.ts",
+		"./vite": "./src/vite.ts",
+		"./webpack": "./src/webpack.ts",
+		"./rollup": "./src/rollup.ts",
+		"./esbuild": "./src/esbuild.ts",
+		"./next": "./src/next.ts",
+		"./rolldown": "./src/rolldown.ts",
+		"./farm": "./src/farm.ts",
+		"./rspack": "./src/rspack.ts",
+		"./bun": "./src/bun.ts",
 		"./package.json": "./package.json"
 	},
 	"files": [
-		"dist"
+		"LICENSE",
+		"README.md",
+		"jsr.json",
+		"package.json",
+		"src"
 	],
 	"scripts": {
-		"lint": "npm run check && eslint --cache .",
+		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
-		"test": "npm run check && bun test ./test/*.ts",
-		"check": "bun tsc --noEmit",
-		"publish": "bun x jsr publish"
-	},
-	"peerDependencies": {
-		"esbuild": "*",
-		"rollup": "^3",
-		"svelte": "^3 || ^4 || ^5",
-		"vite": ">=3.2.10",
-		"webpack": "^4 || ^5"
-	},
-	"peerDependenciesMeta": {
-		"@nuxt/kit": {
-			"optional": true
-		},
-		"@nuxt/schema": {
-			"optional": true
-		},
-		"esbuild": {
-			"optional": true
-		},
-		"rollup": {
-			"optional": true
-		},
-		"svelte": {
-			"optional": true
-		},
-		"vite": {
-			"optional": true
-		},
-		"webpack": {
-			"optional": true
-		}
+		"test": "nr lint && bun test ./test/*.ts",
+		"check": "nr tsc --noEmit",
+		"release": "nr test && bumpp",
+		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
+		"publish:prepare": "bun run ./scripts/gen_jsr_json.ts && bun run --shell bun publish:copy_license",
+		"publish:copy_license": "cp ../../LICENSE ."
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
+		"consola": "^3.2.3",
+		"defu": "^6.1.4",
+		"find-cache-dir": "^5.0.0",
 		"magic-string": "^0.30.10",
 		"pathe": "^1.1.2",
+		"pkg-types": "^1.1.1",
 		"ts-patch": "^3.2.1",
+		"type-fest": "^4.19.0",
 		"typescript": "~5.5.3",
+		"typia": "^6.5.2",
 		"unplugin": "^1.11.0"
 	},
 	"devDependencies": {
+		"@antfu/ni": "^0.22.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
 		"@std/assert": "npm:@jsr/std__assert",
 		"@types/bun": "^1.1.6",
 		"@types/node": "^20.10.3",
-		"consola": "^3.2.3",
-		"defu": "^6.1.4",
+		"bumpp": "^9.4.1",
 		"eslint": "^9.5.0",
-		"eslint-plugin-format": "^0.1.2",
-		"find-cache-dir": "^5.0.0",
-		"pkg-types": "^1.1.1",
-		"rollup": "^4.6.1",
-		"type-fest": "^4.19.0",
-		"typia": "^6.5.2"
+		"eslint-plugin-format": "^0.1.2"
 	}
 }
