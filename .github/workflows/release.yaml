@@ -25,10 +25,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun i --frozen-lockfile
-      - name: copy files
-        run: |
-          cp LICENSE $PACKAGE_DIR
-      - run: bun run publish --allow-dirty
+      - run: bun run publish
         working-directory: ${{env.PACKAGE_DIR}}
 
   release:
