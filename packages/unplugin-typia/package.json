@@ -1,7 +1,7 @@
 {
 	"name": "@ryoppippi/unplugin-typia",
-	"version": "0.6.15",
 	"type": "module",
+	"version": "0.6.15",
 	"description": "unplugin for typia",
 	"author": "ryoppippi",
 	"license": "MIT",
@@ -11,13 +11,6 @@
 		"webpack",
 		"rollup",
 		"transform"
-	],
-	"files": [
-		"src",
-		"package.json",
-		"jsr.json",
-		"README.md",
-		"LICENSE"
 	],
 	"exports": {
 		".": "./src/index.ts",
@@ -33,13 +26,20 @@
 		"./bun": "./src/bun.ts",
 		"./package.json": "./package.json"
 	},
+	"files": [
+		"LICENSE",
+		"README.md",
+		"jsr.json",
+		"package.json",
+		"src"
+	],
 	"scripts": {
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
-		"test": "nr check && bun test ./test/*.ts",
+		"test": "nr lint && bun test ./test/*.ts",
 		"check": "nr tsc --noEmit",
-		"release": "bumpp",
-		"publish": "nr publish:prepare && nlx jsr publish --allow-dirty",
+		"release": "nr test && bumpp",
+		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
 		"publish:prepare": "bun run ./scripts/gen_jsr_json.ts && bun run --shell bun publish:copy_license",
 		"publish:copy_license": "cp ../../LICENSE ."
 	},
@@ -52,8 +52,8 @@
 		"pathe": "^1.1.2",
 		"pkg-types": "^1.1.1",
 		"ts-patch": "^3.2.1",
-		"typescript": "~5.5.3",
 		"type-fest": "^4.19.0",
+		"typescript": "~5.5.3",
 		"typia": "^6.5.2",
 		"unplugin": "^1.11.0"
 	},
