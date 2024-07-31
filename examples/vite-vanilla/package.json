@@ -10,7 +10,7 @@
     "vite": "^5.0.4",
     "vite-plugin-inspect": "^0.8.4",
     "ts-patch": "^3.2.1",
-    "typescript": "~5.5.3",
+    "typescript": "~5.5.4",
     "typia": "^6.5.2",
     "@ryoppippi/unplugin-typia": "workspace:*"
   }
