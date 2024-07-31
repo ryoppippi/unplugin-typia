@@ -26,6 +26,6 @@
   },
   "type": "module",
   "dependencies": {
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   }
 }
