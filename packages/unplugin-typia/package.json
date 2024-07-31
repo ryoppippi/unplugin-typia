@@ -38,6 +38,7 @@
 		"format": "eslint --cache --fix .",
 		"test": "nr check && bun test ./test/*.ts",
 		"check": "nr tsc --noEmit",
+		"release": "bumpp",
 		"publish": "nr publish:prepare && nlx jsr publish --allow-dirty",
 		"publish:prepare": "bun run ./scripts/gen_jsr_json.ts && bun run --shell bun publish:copy_license",
 		"publish:copy_license": "cp ../../LICENSE ."
