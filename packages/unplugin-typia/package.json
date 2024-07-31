@@ -64,7 +64,7 @@
 		"@types/bun": "^1.1.6",
 		"@types/node": "^20.10.3",
 		"bumpp": "^9.4.1",
-		"eslint": "^9.5.0",
+		"eslint": "^9.8.0",
 		"eslint-plugin-format": "^0.1.2"
 	}
 }
