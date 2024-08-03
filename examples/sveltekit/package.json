@@ -13,16 +13,16 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.2.2",
-    "@sveltejs/adapter-cloudflare": "^4.5.0",
-    "@sveltejs/kit": "^2.5.17",
-    "@sveltejs/vite-plugin-svelte": "^3.0.0",
-    "svelte": "^5.0.0-next.165",
-    "svelte-check": "^3.6.0",
+    "@sveltejs/adapter-cloudflare": "^4.7.0",
+    "@sveltejs/kit": "^2.5.20",
+    "@sveltejs/vite-plugin-svelte": "^3.1.1",
+    "svelte": "^5.0.0-next.208",
+    "svelte-check": "^3.8.5",
     "ts-patch": "^3.2.1",
-    "tslib": "^2.4.1",
-    "typescript": "~5.5.3",
-    "typia": "^6.5.2",
-    "vite": "^5.0.3"
+    "tslib": "^2.6.3",
+    "typescript": "~5.5.4",
+    "typia": "^6.7.0",
+    "vite": "^5.3.5"
   },
   "type": "module",
   "dependencies": {

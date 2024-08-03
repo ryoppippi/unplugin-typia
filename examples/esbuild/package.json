@@ -12,10 +12,10 @@
     "@types/bun": "^1.1.6",
     "esbuild": "^0.20.2",
     "ts-patch": "^3.2.1",
-    "tslib": "^2.4.1",
-    "typescript": "~5.5.3"
+    "tslib": "^2.6.3",
+    "typescript": "~5.5.4"
   },
   "dependencies": {
-    "typia": "^6.5.2"
+    "typia": "^6.7.0"
   }
 }
