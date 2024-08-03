@@ -9,11 +9,12 @@
     "prepare": "ts-patch install && typia patch"
   },
   "dependencies": {
+    "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.3"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@ryoppippi/unplugin-typia": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -21,7 +22,6 @@
     "tslib": "^2.4.1",
     "type-fest": "^4.19.0",
     "typescript": "~5.5.3",
-    "typia": "^6.5.2",
-    "@ryoppippi/unplugin-typia": "workspace:*"
+    "typia": "^6.7.0"
   }
 }

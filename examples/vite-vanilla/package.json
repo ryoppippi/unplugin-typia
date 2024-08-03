@@ -7,11 +7,11 @@
     "prepare": "ts-patch install && typia patch"
   },
   "devDependencies": {
-    "vite": "^5.0.4",
-    "vite-plugin-inspect": "^0.8.4",
+    "@ryoppippi/unplugin-typia": "workspace:*",
     "ts-patch": "^3.2.1",
     "typescript": "~5.5.3",
-    "typia": "^6.5.2",
-    "@ryoppippi/unplugin-typia": "workspace:*"
+    "typia": "^6.7.0",
+    "vite": "^5.0.4",
+    "vite-plugin-inspect": "^0.8.4"
   }
 }
