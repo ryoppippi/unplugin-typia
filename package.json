@@ -5,11 +5,11 @@
   "author": "ryoppippi",
   "license": "MIT",
   "scripts": {
-    "build": "turbo build",
-    "lint": "turbo lint",
-    "format": "turbo format",
-    "test": "turbo test",
-    "deploy": "turbo deploy"
+    "build": "bun run --filter '*' build",
+    "lint": "bun run --filter '*' lint",
+    "format": "bun run --filter '*' format",
+    "test": "bun run --filter '*' test",
+    "deploy": "bun run --filter '*' deploy"
   },
   "workspaces": [
     "examples/*",
@@ -26,9 +26,6 @@
     "vite-vanilla",
     "workerd"
   ],
-  "devDependencies": {
-    "turbo": "^2.0.9"
-  },
-  "packageManager": "bun@1.1.12",
+  "packageManager": "bun@1.1.21",
   "private": true
 }
