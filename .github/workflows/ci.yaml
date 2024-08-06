@@ -1,5 +1,9 @@
 name: CI
 
+env:
+  NODE_VERSION: lts/*
+  BUN_VERSION: latest
+
 on:
   schedule:
     - cron: "0 9 * * *"
@@ -15,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: ${{ env.BUN_VERSION }}
       - run: bun i --frozen-lockfile
       - run: bun run build
 
@@ -27,10 +31,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: ${{ env.BUN_VERSION }}
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
       - run: bun i --frozen-lockfile
       - run: bun run test
 
@@ -42,7 +46,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: ${{ env.BUN_VERSION }}
       - run: bun i --frozen-lockfile
       - run: bun run lint
 
@@ -54,10 +58,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: ${{ env.BUN_VERSION }}
       - run: bun i --frozen-lockfile
       - run: bun run publish --dry-run
         working-directory: packages/unplugin-typia
