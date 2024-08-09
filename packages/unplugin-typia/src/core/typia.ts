@@ -206,10 +206,14 @@ function warnDiagnostic(
 	unpluginContext: UnContext,
 ) {
 	for (const diagnostic of diagnostics) {
-		const warn = unpluginContext?.warn ?? consola.warn;
-		warn(
-			transformed.map(e => e.fileName).join(','),
-		);
+		const warn = ((message) => {
+			if (unpluginContext?.warn != null) {
+				return unpluginContext.warn(message);
+			}
+			return consola.warn(message);
+		}) satisfies typeof unpluginContext.warn;
+
+		warn(transformed.map(e => e.fileName).join(','));
 		warn(JSON.stringify(diagnostic.messageText));
 	}
 }
