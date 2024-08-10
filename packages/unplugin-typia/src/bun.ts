@@ -11,6 +11,18 @@ import type { Options } from './core/options.js';
 import { isBun } from './core/utils.js';
 import { type ID, type Source, wrap } from './core/types.js';
 
+/**
+ * Options for bun plugin
+ */
+export type BunOptions = {
+	/**
+	 * Convert path of typia to mjs
+	 * even though typia provides mjs, bun cannot handle it (because typia's package.json has "type": "commonjs").
+	 * @default true
+	 */
+	forceImportTypiaMjs?: boolean;
+} & Options;
+
 if (!isBun()) {
 	throw new Error('You must use this plugin with bun');
 }
@@ -93,11 +105,12 @@ async function taggedTransform(
  * When you run your scripts on Bun.runtime, You cannot use named import for typia value in the source code. Check out the README.md.
  */
 function bunTypiaPlugin(
-	options?: Options,
+	bunOptions?: BunOptions,
 ): BunPlugin {
 	const bunPlugin = ({
 		name: 'unplugin-typia',
 		async setup(build) {
+			const { forceImportTypiaMjs = true, ...options } = bunOptions ?? {};
 			const resolvedOptions = resolveOptions(options ?? {});
 			const { include } = resolvedOptions;
 
@@ -134,6 +147,16 @@ function bunTypiaPlugin(
 					);
 
 					return { contents: code ?? source };
+				});
+			}
+
+			/** if input is ./node_modules/typia/lib/*, convert js to mjs */
+			if (forceImportTypiaMjs) {
+				build.onLoad({ filter: /.+\/node_modules\/typia\/lib\/.*\.js$/ }, async (args) => {
+					const { path } = args;
+					const mjsPath = path.replace(/\.js$/, '.mjs');
+
+					return { contents: await Bun.file(mjsPath).text() };
 				});
 			}
 		},
