@@ -64,6 +64,7 @@
 		"@types/node": "^20.14.14",
 		"bumpp": "^9.4.2",
 		"dax-sh": "^0.41.0",
+		"esbuild": "^0.23.0",
 		"eslint": "^9.8.0",
 		"eslint-plugin-format": "^0.1.2",
 		"vitest": "^2.0.5"
