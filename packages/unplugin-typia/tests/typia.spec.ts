@@ -25,7 +25,7 @@ async function test(_id: string): Promise<Data> {
 for (const id of await getFixtureIDs()) {
 	it(`typia transform ${id}`, async () => {
 		const transformed = await test(id);
-		const snapshot = getSnapshotID(id);
+		const snapshot = getSnapshotID(id, 'ts');
 		await expect(transformed).toMatchFileSnapshot(snapshot);
 		await $`bun ${snapshot}`;
 	});

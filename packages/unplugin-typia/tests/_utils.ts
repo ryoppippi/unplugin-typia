@@ -9,7 +9,8 @@ export function getFixtureID(id: string): ID {
 	return resolve(root, id) as ID;
 }
 
-export function getSnapshotID(id: string): ID {
+export function getSnapshotID(_id: string, ext: string = 'js'): ID {
+	const id = _id.replace(/\.ts$/, `.${ext}`);
 	return resolve(root, '__snapshots__', id) as ID;
 }
 

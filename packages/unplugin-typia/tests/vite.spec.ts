@@ -35,6 +35,6 @@ for (const id of await getFixtureIDs()) {
 		const code = transformed[0].code;
 		const snapshot = getSnapshotID(id).replace('__snapshots__', '__snapshots__/vite');
 		await expect(code).toMatchFileSnapshot(snapshot);
-		await $`bun ${snapshot}`;
+		await $`node ${snapshot}`;
 	});
 }

@@ -28,6 +28,6 @@ for (const id of await getFixtureIDs()) {
 		const transformed = await transform(id);
 		const snapshot = getSnapshotID(id).replace('__snapshots__', '__snapshots__/esbuild');
 		await expect(transformed).toMatchFileSnapshot(snapshot);
-		await $`bun ${snapshot}`;
+		await $`node ${snapshot}`;
 	});
 }
