@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import { expect, it } from 'vitest';
-import { x } from 'tinyexec';
+import { $ } from 'dax-sh';
 
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { join } from 'pathe';
@@ -31,19 +31,19 @@ it('transform is', async () => {
 	const transformed = await test('is.ts');
 	const snapshot = getSnapshotPath('is.ts');
 	await expect(transformed).toMatchFileSnapshot(snapshot);
-	await x('bun', [snapshot]);
+	await $`bun ${snapshot}`;
 });
 
 it('transform validate', async () => {
 	const transformed = await test('validate.ts');
 	const snapshot = getSnapshotPath('validate.ts');
 	await expect(transformed).toMatchFileSnapshot(snapshot);
-	await x('bun', [snapshot]);
+	await $`bun ${snapshot}`;
 });
 
 it('transform random', async () => {
 	const transformed = await test('random.ts');
 	const snapshot = getSnapshotPath('random.ts');
 	await expect(transformed).toMatchFileSnapshot(snapshot);
-	await x('bun', [snapshot]);
+	await $`bun ${snapshot}`;
 });
