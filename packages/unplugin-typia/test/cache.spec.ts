@@ -1,7 +1,6 @@
 import process from 'node:process';
 import { tmpdir } from 'node:os';
-import { it } from 'vitest';
-import { assertEquals, assertNotEquals } from '@std/assert';
+import { expect, it } from 'vitest';
 
 import { Cache } from '../src/core/cache.js';
 import type { Data, ID, Source } from '../src/core/types.js';
@@ -22,7 +21,7 @@ it('return null if cache is not found', async () => {
 	const random = Math.random().toString();
 	const source = wrap<Source>(random);
 	using cache = new Cache(wrap<ID>(random), source);
-	assertEquals(cache.data, undefined);
+	expect(cache.data).toBe(undefined);
 });
 
 it('set and get cache', async () => {
@@ -43,7 +42,7 @@ it('set and get cache', async () => {
 	/* delete js asterisk comments */
 	const cacheDataStr = removeComments(cache.data);
 
-	assertEquals(cacheDataStr, data);
+	expect(cacheDataStr).toBe(data);
 });
 
 it('set and get null with different id', async () => {
@@ -64,6 +63,6 @@ it('set and get null with different id', async () => {
 	/* delete js asterisk comments */
 	const cacheDataStr = removeComments(cache.data);
 
-	assertEquals(cacheDataStr, undefined);
-	assertNotEquals(cacheDataStr, data);
+	expect(cacheDataStr).toBe(undefined);
+	expect(cacheDataStr).not.toBe(data);
 });
