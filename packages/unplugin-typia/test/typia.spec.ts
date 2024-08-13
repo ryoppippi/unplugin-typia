@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import { expect, it } from 'vitest';
+import { x } from 'tinyexec';
 
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { join } from 'pathe';
@@ -22,17 +23,27 @@ async function test(_id: string): Promise<Data> {
 	return transformed;
 }
 
+function getSnapshotPath(id: string): string {
+	return join(import.meta.dirname, './snapshot/', id);
+}
+
 it('transform is', async () => {
 	const transformed = await test('is.ts');
-	await expect(transformed).toMatchFileSnapshot('./snapshot/is.ts');
+	const snapshot = getSnapshotPath('is.ts');
+	await expect(transformed).toMatchFileSnapshot(snapshot);
+	await x('bun', [snapshot]);
 });
 
 it('transform validate', async () => {
 	const transformed = await test('validate.ts');
-	await expect(transformed).toMatchFileSnapshot('./snapshot/validate.ts');
+	const snapshot = getSnapshotPath('validate.ts');
+	await expect(transformed).toMatchFileSnapshot(snapshot);
+	await x('bun', [snapshot]);
 });
 
 it('transform random', async () => {
 	const transformed = await test('random.ts');
-	await expect(transformed).toMatchFileSnapshot('./snapshot/random.ts');
+	const snapshot = getSnapshotPath('random.ts');
+	await expect(transformed).toMatchFileSnapshot(snapshot);
+	await x('bun', [snapshot]);
 });
