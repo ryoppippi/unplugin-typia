@@ -24,15 +24,15 @@ async function test(_id: string): Promise<Data> {
 
 it('transform is', async () => {
 	const transformed = await test('is.ts');
-	expect(transformed).toMatchSnapshot();
+	await expect(transformed).toMatchFileSnapshot('./snapshot/is.ts');
 });
 
 it('transform validate', async () => {
 	const transformed = await test('validate.ts');
-	expect(transformed).toMatchSnapshot();
+	await expect(transformed).toMatchFileSnapshot('./snapshot/validate.ts');
 });
 
 it('transform random', async () => {
 	const transformed = await test('random.ts');
-	expect(transformed).toMatchSnapshot();
+	await expect(transformed).toMatchFileSnapshot('./snapshot/random.ts');
 });
