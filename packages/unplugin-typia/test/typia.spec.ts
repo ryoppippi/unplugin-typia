@@ -1,12 +1,11 @@
-import { basename, join } from 'pathe';
-
+import fs from 'node:fs/promises';
 import { expect, it } from 'vitest';
-import { $ } from 'bun';
 
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
+import { join } from 'pathe';
 import { transformTypia } from '../src/core/typia.js';
 import { resolveOptions } from '../src/api.js';
-import type { ID, Source } from '../src/core/types.js';
+import type { Data, ID, Source } from '../src/core/types.js';
 
 class DummyContext {
 	warn(args: unknown) {
@@ -14,17 +13,26 @@ class DummyContext {
 	}
 };
 
-function slash(str: string) {
-	return str.replace(/\\/g, '/');
-}
-
-const ids = await $`ls ${join(import.meta.dirname, './fixtures')}/*.ts`.text().then(x => x.split('\n').filter(Boolean)) as ID[ ];
 const ctx = new DummyContext() as UnpluginContext & UnpluginBuildContext;
 
-for (const id of ids) {
-	it(`transform `, async () => {
-		const code = await $`cat ${id}`.text() as Source;
-		const transformed = await transformTypia(id, code, ctx, resolveOptions({ cache: false })).then(x => slash(x).trim());
-		expect(transformed).toMatchSnapshot();
-	});
+async function test(_id: string): Promise<Data> {
+	const id = join(import.meta.dirname, './fixtures/', _id) as ID;
+	const code = await fs.readFile(id, 'utf-8') as Source;
+	const transformed = await transformTypia(id, code, ctx, resolveOptions({ cache: false }));
+	return transformed;
 }
+
+it('transform is', async () => {
+	const transformed = await test('is.ts');
+	expect(transformed).toMatchSnapshot();
+});
+
+it('transform validate', async () => {
+	const transformed = await test('validate.ts');
+	expect(transformed).toMatchSnapshot();
+});
+
+it('transform random', async () => {
+	const transformed = await test('random.ts');
+	expect(transformed).toMatchSnapshot();
+});
