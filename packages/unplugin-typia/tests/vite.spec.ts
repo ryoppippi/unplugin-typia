@@ -15,6 +15,7 @@ async function transform(_id: ID): Promise<RollupOutput['output']> {
 			minify: false,
 			rollupOptions: {
 				input: [id],
+				external: ['typia'],
 			},
 			write: false,
 		},
