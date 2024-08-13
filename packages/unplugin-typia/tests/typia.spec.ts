@@ -23,7 +23,7 @@ async function test(_id: string): Promise<Data> {
 }
 
 for (const id of await getFixtureIDs()) {
-	it(`transform ${id}`, async () => {
+	it(`typia transform ${id}`, async () => {
 		const transformed = await test(id);
 		const snapshot = getSnapshotID(id);
 		await expect(transformed).toMatchFileSnapshot(snapshot);
