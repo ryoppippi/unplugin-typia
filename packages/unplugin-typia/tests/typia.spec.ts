@@ -5,7 +5,7 @@ import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transformTypia } from '../src/core/typia.js';
 import { resolveOptions } from '../src/api.js';
 import type { Data } from '../src/core/types.js';
-import { getFixtureID, getSnapshotID, readFixture, root } from './_utils.js';
+import { getFixtureID, getFixtureIDs, getSnapshotID, readFixture } from './_utils.js';
 
 class DummyContext {
 	warn(args: unknown) {
@@ -15,8 +15,6 @@ class DummyContext {
 
 const ctx = new DummyContext() as UnpluginContext & UnpluginBuildContext;
 
-const ids = await $`ls ${root}`.lines().then(lines => lines.filter(line => line.endsWith('.ts')));
-
 async function test(_id: string): Promise<Data> {
 	const id = getFixtureID(_id);
 	const code = await readFixture(_id);
@@ -24,7 +22,7 @@ async function test(_id: string): Promise<Data> {
 	return transformed;
 }
 
-for (const id of ids) {
+for (const id of await getFixtureIDs()) {
 	it(`transform ${id}`, async () => {
 		const transformed = await test(id);
 		const snapshot = getSnapshotID(id);

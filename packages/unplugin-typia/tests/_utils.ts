@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import { $ } from 'dax-sh';
 import { resolve } from 'pathe';
 import type { ID, Source } from '../src/core/types.js';
 
@@ -15,4 +16,9 @@ export function getSnapshotID(id: string): ID {
 export async function readFixture(id: string): Promise<Source> {
 	const _id = getFixtureID(id);
 	return await fs.readFile(_id, 'utf-8') as Source;
+}
+
+export async function getFixtureIDs(): Promise<ID[]> {
+	const ids = await $`ls ${root}`.lines().then(lines => lines.filter(line => line.endsWith('.ts')));
+	return ids as ID[];
 }
