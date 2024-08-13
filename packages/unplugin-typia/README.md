@@ -57,7 +57,6 @@ export default defineConfig({
 
 Examples:
 
-- [`examples/vite-vanilla`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-vanilla)
 - [`examples/vite-react`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-react)
 - [`examples/vite-hono`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-hono)
 - [`examples/sveltekit`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/sveltekit)
@@ -80,7 +79,7 @@ export default {
 
 Examples:
 
-- [`examples/esbuild`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/esbuild)
+- [`tests/rollup.spec.ts`](https://github.com/ryoppippi/unplugin-typia/tree/main/packages/unplugin-typia/tests/esbuild.spec.ts)
 
 <br></details>
 
@@ -177,6 +176,10 @@ export default {
 	],
 };
 ```
+
+Examples:
+
+- [`tests/rollup.spec.ts`](https://github.com/ryoppippi/unplugin-typia/tree/main/packages/unplugin-typia/tests/rollup.spec.ts)
 
 <br></details>
 

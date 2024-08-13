@@ -37,7 +37,7 @@
 	"scripts": {
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
-		"test": "nr lint && bun test ./test/*.ts",
+		"test": "vitest --typecheck",
 		"check": "nr tsc --noEmit",
 		"release": "nr test && bumpp",
 		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
@@ -60,11 +60,16 @@
 	"devDependencies": {
 		"@antfu/ni": "^0.22.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
-		"@std/assert": "npm:@jsr/std__assert",
 		"@types/bun": "^1.1.6",
 		"@types/node": "^20.14.14",
+		"@vue-macros/test-utils": "^1.6.0",
 		"bumpp": "^9.4.2",
+		"dax-sh": "^0.41.0",
+		"esbuild": "^0.23.0",
 		"eslint": "^9.8.0",
-		"eslint-plugin-format": "^0.1.2"
+		"eslint-plugin-format": "^0.1.2",
+		"rollup": "^4.20.0",
+		"vite": "^5.4.0",
+		"vitest": "^2.0.5"
 	}
 }

@@ -10,5 +10,5 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true
 	},
-	"exclude": ["dist", "eslint.config.js"]
+	"exclude": ["dist", "eslint.config.js", "tests/fixtures"]
 }
