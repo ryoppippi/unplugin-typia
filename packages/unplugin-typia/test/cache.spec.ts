@@ -1,6 +1,6 @@
 import process from 'node:process';
 import { tmpdir } from 'node:os';
-import { test } from 'bun:test';
+import { it } from 'vitest';
 import { assertEquals, assertNotEquals } from '@std/assert';
 
 import { Cache } from '../src/core/cache.js';
@@ -18,14 +18,14 @@ function removeComments(data: string | undefined) {
 	return data.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');
 }
 
-test('return null if cache is not found', async () => {
+it('return null if cache is not found', async () => {
 	const random = Math.random().toString();
 	const source = wrap<Source>(random);
 	using cache = new Cache(wrap<ID>(random), source);
 	assertEquals(cache.data, undefined);
 });
 
-test('set and get cache', async () => {
+it('set and get cache', async () => {
 	const random = Math.random().toString();
 	const source = wrap<Source>(random);
 	const filename = wrap<ID>(`${random}-${random}.json`);
@@ -46,7 +46,7 @@ test('set and get cache', async () => {
 	assertEquals(cacheDataStr, data);
 });
 
-test('set and get null with different id', async () => {
+it('set and get null with different id', async () => {
 	const random = Math.random().toString();
 	const source = wrap<Source>(random);
 	const filename = wrap<ID>(`${random}-${random}.json`);

@@ -1,6 +1,6 @@
 import { basename, join } from 'pathe';
 
-import { expect, test } from 'bun:test';
+import { expect, it } from 'vitest';
 import { $ } from 'bun';
 
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
@@ -22,7 +22,7 @@ const ids = await $`ls ${join(import.meta.dirname, './fixtures')}/*.ts`.text().t
 const ctx = new DummyContext() as UnpluginContext & UnpluginBuildContext;
 
 for (const id of ids) {
-	test(`Transform ${basename(id)}`, async () => {
+	it(`transform `, async () => {
 		const code = await $`cat ${id}`.text() as Source;
 		const transformed = await transformTypia(id, code, ctx, resolveOptions({ cache: false })).then(x => slash(x).trim());
 		expect(transformed).toMatchSnapshot();

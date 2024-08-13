@@ -37,7 +37,7 @@
 	"scripts": {
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
-		"test": "nr lint && bun test ./test/*.ts",
+		"test": "vitest --typecheck",
 		"check": "nr tsc --noEmit",
 		"release": "nr test && bumpp",
 		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
@@ -65,6 +65,7 @@
 		"@types/node": "^20.14.14",
 		"bumpp": "^9.4.2",
 		"eslint": "^9.8.0",
-		"eslint-plugin-format": "^0.1.2"
+		"eslint-plugin-format": "^0.1.2",
+		"vitest": "^2.0.5"
 	}
 }
