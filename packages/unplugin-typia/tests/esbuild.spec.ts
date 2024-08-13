@@ -10,7 +10,7 @@ async function transform(_id: ID) {
 	const id = getFixtureID(_id);
 	const result = await build({
 		entryPoints: [id],
-		bundle: true,
+		bundle: false,
 		write: false,
 		format: 'esm',
 		plugins: [
