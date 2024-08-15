@@ -19,8 +19,7 @@ body:
   - type: input
     attributes:
       label: What platform is your computer?
-      description: |
-        run the command `npx envinfo --system -npmPackages cleye --binaries`
+        Copy the output of `npx envinfo --system -npmPackages cleye --binaries`
   - type: textarea
     id: bug-description
     attributes:
