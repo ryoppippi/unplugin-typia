@@ -57,7 +57,7 @@
 		"unplugin": "^1.12.0"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^0.22.0",
+		"@antfu/ni": "^0.22.1",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
 		"@types/bun": "^1.1.6",
 		"@types/node": "^20.14.14",
