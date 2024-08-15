@@ -60,7 +60,7 @@
 		"@antfu/ni": "^0.22.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
 		"@types/bun": "^1.1.6",
-		"@types/node": "^20.14.14",
+		"@types/node": "^20.14.15",
 		"@vue-macros/test-utils": "^1.6.0",
 		"bumpp": "^9.4.2",
 		"dax-sh": "^0.41.0",
