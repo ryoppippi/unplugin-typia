@@ -39,7 +39,7 @@
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
-		"release": "nr test && bumpp",
+		"release": "nr test run && nr lint && nr check && bumpp",
 		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
 		"publish:prepare": "nlx pkg-to-jsr && bun run --shell bun cp ../../LICENSE ."
 	},
