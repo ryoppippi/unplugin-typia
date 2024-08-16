@@ -1,7 +1,7 @@
 {
 	"name": "@ryoppippi/unplugin-typia",
 	"type": "module",
-	"version": "0.6.19",
+	"version": "0.6.20",
 	"private": true,
 	"description": "unplugin for typia",
 	"author": "ryoppippi",
