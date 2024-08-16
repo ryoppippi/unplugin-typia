@@ -4,8 +4,8 @@ import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import MagicString from 'magic-string';
 import { resolve } from 'pathe';
 
-import type { ResolvedOptions } from './options.ts';
-import type { Options } from './options.js';
+import type { ResolvedConfig } from 'vite';
+import type { Options, ResolvedOptions } from './options.js';
 import { resolveOptions } from './options.js';
 import { transformTypia } from './typia.js';
 import { log } from './utils.js';
@@ -39,6 +39,8 @@ const unpluginFactory: UnpluginFactory<
 	const { cache: cacheOptions, log: logOption } = options;
 
 	const showLog = logOption === 'verbose' && cacheOptions;
+
+	let viteConfig: ResolvedConfig | undefined;
 
 	/**
 	 * Generate code with source map.
@@ -81,7 +83,7 @@ const unpluginFactory: UnpluginFactory<
 
 		/** transform if cache not exists */
 		if (code == null) {
-			code = await transformTypia(id, source, ctx, options);
+			code = await transformTypia(id, source, ctx, options, viteConfig?.resolve?.alias);
 
 			if (showLog) {
 				if (code != null) {
@@ -108,6 +110,12 @@ const unpluginFactory: UnpluginFactory<
 	return {
 		name,
 		enforce: options.enforce,
+
+		vite: {
+			configResolved(config) {
+				viteConfig = config;
+			},
+		},
 
 		buildStart() {
 			if (logOption !== false) {

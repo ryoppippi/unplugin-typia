@@ -1,6 +1,7 @@
 import { expect, it } from 'vitest';
 import { $ } from 'dax-sh';
 
+import path from 'pathe';
 import type { UnpluginBuildContext, UnpluginContext } from 'unplugin';
 import { transformTypia } from '../src/core/typia.js';
 import { resolveOptions } from '../src/api.js';
@@ -18,7 +19,13 @@ const ctx = new DummyContext() as UnpluginContext & UnpluginBuildContext;
 async function test(_id: string): Promise<Data> {
 	const id = getFixtureID(_id);
 	const code = await readFixture(_id);
-	const transformed = await transformTypia(id, code, ctx, resolveOptions({ cache: false }));
+	const transformed = await transformTypia(
+		id,
+		code,
+		ctx,
+		resolveOptions({ cache: false }),
+		[{ find: '@', replacement: path.resolve('./tests/fixtures') }],
+	);
 	return transformed;
 }
 

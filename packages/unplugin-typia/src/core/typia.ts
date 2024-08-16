@@ -1,10 +1,11 @@
+import type { Alias } from 'vite';
 import ts from 'typescript';
-import { resolve } from 'pathe';
+import path, { resolve } from 'pathe';
 import { resolveTSConfig } from 'pkg-types';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
 import { consola } from 'consola';
-import type { ResolvedOptions } from './options.ts';
+import type { ResolvedOptions } from './options.js';
 import type { Data, ID, Source, UnContext } from './types.js';
 import { wrap } from './types.js';
 
@@ -36,6 +37,7 @@ export async function transformTypia(
 	 */
 	unpluginContext: UnContext,
 	options: ResolvedOptions,
+	aliases?: Alias[],
 ): Promise<Data> {
 	const id = wrap<ID>(resolve(_id));
 	const source = wrap<Source>(_source);
@@ -46,7 +48,7 @@ export async function transformTypia(
 	/** parse tsconfig compilerOptions */
 	compilerOptions = await getTsCompilerOption(cacheEnable, options?.tsconfig);
 
-	const { program, tsSource } = await getProgramAndSource(id, source, compilerOptions, cacheEnable);
+	const { program, tsSource } = await getProgramAndSource(id, source, compilerOptions, aliases, cacheEnable);
 
 	using result = transform(id, program, tsSource, options.typia);
 	const { diagnostics, transformed, file } = result;
@@ -94,6 +96,7 @@ async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Pro
  * @param id - The file path.
  * @param source - The source code.
  * @param compilerOptions - The compiler options.
+ * @param aliases - Alias list
  * @param cacheEnable - Whether to enable cache. @default true
  * @returns The program and source.
  */
@@ -101,6 +104,7 @@ async function getProgramAndSource(
 	id: ID,
 	source: Source,
 	compilerOptions: ts.CompilerOptions,
+	aliases?: Alias[],
 	cacheEnable = true,
 ): Promise<{ program: ts.Program; tsSource: ts.SourceFile }> {
 	const tsSource = ts.createSourceFile(
@@ -109,6 +113,29 @@ async function getProgramAndSource(
 		compilerOptions.target ?? ts.ScriptTarget.ES2020,
 	);
 	const host = ts.createCompilerHost(compilerOptions);
+
+	host.resolveModuleNameLiterals = (moduleLiterals, containingFile) => {
+		return moduleLiterals.map((lit) => {
+			let alias;
+			// eslint-disable-next-line no-cond-assign
+			if (aliases && !lit.text.startsWith('./') && (alias = findMatchingAlias(lit.text, aliases))) {
+				let extension;
+				if (lit.text.endsWith('.d.ts')) {
+					extension = '.d.ts';
+				}
+				else {
+					extension = path.extname(lit.text);
+				}
+				return {
+					resolvedModule: {
+						resolvedFileName: path.resolve(lit.text.replace(alias.find, alias.replacement)),
+						extension,
+					},
+				};
+			}
+			return ts.resolveModuleName(lit.text, containingFile, compilerOptions, host);
+		});
+	};
 
 	host.getSourceFile = (fileName, languageVersion) => {
 		if (fileName === id) {
@@ -166,7 +193,7 @@ function transform(
 	const diagnostics: ts.Diagnostic[] = [];
 
 	/** transform with Typia */
-	const typiaTransformed = typiaTransform(program, typiaOptions, {
+	const typiaTransformer = typiaTransform(program, typiaOptions, {
 		addDiagnostic(diag) {
 			return diagnostics.push(diag);
 		},
@@ -175,7 +202,7 @@ function transform(
 	/** transform with TypeScript */
 	const transformationResult = ts.transform(
 		tsSource,
-		[typiaTransformed],
+		[typiaTransformer],
 		{
 			...program.getCompilerOptions(),
 			sourceMap: true,
@@ -215,5 +242,16 @@ function warnDiagnostic(
 
 		warn(transformed.map(e => e.fileName).join(','));
 		warn(JSON.stringify(diagnostic.messageText));
+	}
+}
+
+function findMatchingAlias(text: string, aliases: Alias[]) {
+	if (aliases.length) {
+		return aliases.find((alias) => {
+			if (typeof alias.find === 'string') {
+				return text.startsWith(alias.find);
+			}
+			return alias.find.test(text);
+		});
 	}
 }
