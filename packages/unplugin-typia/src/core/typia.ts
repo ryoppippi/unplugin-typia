@@ -118,17 +118,28 @@ async function getProgramAndSource(
 	if (aliases != null && aliases.length > 0) {
 		host.resolveModuleNameLiterals = (moduleLiterals, containingFile, _, options) => {
 			return moduleLiterals.map((lit) => {
-				let module = ts.resolveModuleName(lit.text, containingFile, options, host, host.getModuleResolutionCache?.());
-				const alias = findMatchingAlias(lit.text, aliases);
-				if (module.resolvedModule == null && alias != null) {
-					module = ts.resolveModuleName(
-						resolve(lit.text.replace(alias.find, alias.replacement)),
-						containingFile,
-						options,
-						host,
-					);
+				const module = ts.resolveModuleName(lit.text, containingFile, options, host, host.getModuleResolutionCache?.());
+
+				/* if module is resolved, return it */
+				if (module.resolvedModule != null) {
+					return module;
 				}
-				return module;
+
+				/* find matching alias */
+				const alias = findMatchingAlias(lit.text, aliases);
+
+				/* if no matching alias, return module */
+				if (alias == null) {
+					return module;
+				}
+
+				/* resolve alias */
+				return ts.resolveModuleName(
+					resolve(lit.text.replace(alias.find, alias.replacement)),
+					containingFile,
+					options,
+					host,
+				);
 			});
 		};
 	}
