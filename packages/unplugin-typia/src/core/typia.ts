@@ -1,6 +1,6 @@
 import type { Alias } from 'vite';
 import ts from 'typescript';
-import path from 'pathe';
+import { resolve } from 'pathe';
 import { resolveTSConfig } from 'pkg-types';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
@@ -40,7 +40,7 @@ export async function transformTypia(
 	options: ResolvedOptions,
 	aliases?: Alias[],
 ): Promise<Data> {
-	const id = wrap<ID>(path.resolve(_id));
+	const id = wrap<ID>(resolve(_id));
 	const source = wrap<Source>(_source);
 
 	/** Whether to enable cache */
@@ -68,7 +68,7 @@ export async function transformTypia(
 async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Promise<ts.CompilerOptions> {
 	const parseTsComilerOptions = async () => {
 		const readFile = (path: string) => ts.sys.readFile(path);
-		const id = (tsconfigId != null) ? path.resolve(tsconfigId) : await resolveTSConfig();
+		const id = (tsconfigId != null) ? resolve(tsconfigId) : await resolveTSConfig();
 
 		const tsconfigParseResult = ts.readConfigFile(id, readFile);
 		if (tsconfigParseResult.error != null) {
@@ -122,7 +122,7 @@ async function getProgramAndSource(
 				const alias = findMatchingAlias(lit.text, aliases);
 				if (module.resolvedModule == null && alias != null) {
 					module = ts.resolveModuleName(
-						path.resolve(lit.text.replace(alias.find, alias.replacement)),
+						resolve(lit.text.replace(alias.find, alias.replacement)),
 						containingFile,
 						options,
 						host,
@@ -206,7 +206,7 @@ function transform(
 		},
 	);
 
-	const file = transformationResult.transformed.find(t => path.resolve(t.fileName) === id);
+	const file = transformationResult.transformed.find(t => resolve(t.fileName) === id);
 
 	if (file == null) {
 		throw new Error('No file found');
