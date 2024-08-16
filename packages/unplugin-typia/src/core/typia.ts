@@ -148,6 +148,7 @@ async function getProgramAndSource(
 					containingFile,
 					options,
 					host,
+					host.getModuleResolutionCache?.(),
 				);
 			});
 		};
