@@ -10,7 +10,8 @@
     "format": "bun run --filter '*' format",
     "test": "bun run --filter '*' test",
     "deploy": "bun run --filter '*' deploy",
-    "prepare": "npx bunpare"
+    "prepare": "bun x bunpare",
+    "taze": "bun x taze -r"
   },
   "workspaces": [
     "examples/*",
