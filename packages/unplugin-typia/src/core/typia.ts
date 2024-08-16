@@ -115,22 +115,24 @@ async function getProgramAndSource(
 	);
 	const host = ts.createCompilerHost(compilerOptions);
 
-	host.resolveModuleNameLiterals = (moduleLiterals, containingFile) => {
-		return moduleLiterals.map((lit) => {
-			let module = ts.resolveModuleName(lit.text, containingFile, compilerOptions, host);
-			let alias;
-			// eslint-disable-next-line no-cond-assign
-			if (!module.resolvedModule && aliases && (alias = findMatchingAlias(lit.text, aliases))) {
-				module = ts.resolveModuleName(
-					path.resolve(lit.text.replace(alias.find, alias.replacement)),
-					containingFile,
-					compilerOptions,
-					host,
-				);
-			}
-			return module;
-		});
-	};
+	if (aliases && aliases.length) {
+		host.resolveModuleNameLiterals = (moduleLiterals, containingFile, _, options) => {
+			return moduleLiterals.map((lit) => {
+				let module = ts.resolveModuleName(lit.text, containingFile, options, host, host.getModuleResolutionCache?.());
+				let alias;
+				// eslint-disable-next-line no-cond-assign
+				if (!module.resolvedModule && (alias = findMatchingAlias(lit.text, aliases))) {
+					module = ts.resolveModuleName(
+						path.resolve(lit.text.replace(alias.find, alias.replacement)),
+						containingFile,
+						options,
+						host,
+					);
+				}
+				return module;
+			});
+		};
+	}
 
 	host.getSourceFile = (fileName, languageVersion) => {
 		if (fileName === id) {

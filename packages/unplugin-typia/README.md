@@ -55,6 +55,10 @@ export default defineConfig({
 });
 ```
 
+> When using typia with types imported from non-relative paths like tsconfig `compilerOptions.paths` or relative to 
+> tsconfig `compilerOptions.baseUrl`, they must be defined in vite.config.ts under [resolve.alias](https://vitejs.dev/config/shared-options#resolve-alias)
+> in order to be resolved, according to vite's resolution mechanism.
+
 Examples:
 
 - [`examples/vite-react`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples/vite-react)
