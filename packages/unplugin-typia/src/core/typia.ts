@@ -115,9 +115,12 @@ async function getProgramAndSource(
 	);
 	const host = ts.createCompilerHost(compilerOptions);
 
+	/** when alias defined in config, resolve module with alias */
 	if (aliases != null && aliases.length > 0) {
+		/** resolve module with alias */
 		host.resolveModuleNameLiterals = (moduleLiterals, containingFile, _, options) => {
 			return moduleLiterals.map((lit) => {
+				/* resolve module witoout alias */
 				const module = ts.resolveModuleName(lit.text, containingFile, options, host, host.getModuleResolutionCache?.());
 
 				/* if module is resolved, return it */
@@ -133,7 +136,7 @@ async function getProgramAndSource(
 					return module;
 				}
 
-				/* resolve alias */
+				/* when alais is found and there is unresolved module, resolve it */
 				return ts.resolveModuleName(
 					resolve(lit.text.replace(alias.find, alias.replacement)),
 					containingFile,
@@ -252,6 +255,7 @@ function warnDiagnostic(
 	}
 }
 
+/** Find matching alias */
 function findMatchingAlias(text: string, aliases: Alias[]) {
 	if (aliases.length > 0) {
 		return aliases.find((alias) => {
