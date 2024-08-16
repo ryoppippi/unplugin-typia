@@ -46,6 +46,5 @@ for (const id of await getFixtureIDs()) {
 			await expect(code).toMatchFileSnapshot(snapshot);
 			await $`node ${snapshot}`;
 		},
-		{ timeout: 15_000 },
 	);
 }
