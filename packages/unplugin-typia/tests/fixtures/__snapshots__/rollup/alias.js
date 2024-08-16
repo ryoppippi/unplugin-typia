@@ -1,6 +1,13 @@
 // alias.js
 import typia from 'typia';
 
+const random = /* @__PURE__ */ (() => {
+  let _generator;
+  return (generator) => {
+    _generator = generator;
+    return "any type used...";
+  };
+})();
 const validate = /* @__PURE__ */ (() => {
   const __is = (input) => true;
   let errors;
@@ -23,3 +30,4 @@ const validate = /* @__PURE__ */ (() => {
   };
 })();
 validate({});
+random();

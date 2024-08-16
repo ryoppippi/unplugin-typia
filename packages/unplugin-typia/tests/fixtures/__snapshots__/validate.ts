@@ -32,7 +32,7 @@ const validate = (() => { const $io0 = (input: any): boolean => "string" === typ
         path: _path + ".age",
         expected: "(number & Type<\"uint32\"> & ExclusiveMinimum<19> & Maximum<100>)",
         value: input.age
-    })].every((flag: boolean) => flag); const __is = (input: any): input is IMember => "object" === typeof input && null !== input && $io0(input); let errors; let $report; return (input: any): typia.IValidation<IMember> => {
+    })].every((flag: boolean) => flag); const __is = (input: any): input is IMember => "object" === typeof input && null !== input && $io0(input); let errors: any; let $report: any; return (input: any): typia.IValidation<IMember> => {
     if (false === __is(input)) {
         errors = [];
         $report = (typia.createValidate as any).report(errors);

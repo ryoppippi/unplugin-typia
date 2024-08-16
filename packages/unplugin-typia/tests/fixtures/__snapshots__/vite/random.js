@@ -1,24 +1,24 @@
 import typia from "typia";
-const random = (generator) => {
+const random = (() => {
   const $generator = typia.createRandom.generator;
   const $ro0 = (_recursive = false, _depth = 0) => {
     var _a, _b, _c, _d, _e, _f;
     return {
-      email: ((_b = (_a = $generator.customs) == null ? void 0 : _a.string) == null ? void 0 : _b.call(_a, [
+      email: ((_b = (_a = (_generator == null ? void 0 : _generator.customs) ?? $generator.customs) == null ? void 0 : _a.string) == null ? void 0 : _b.call(_a, [
         {
           name: 'Format<"email">',
           kind: "format",
           value: "email"
         }
-      ])) ?? (0, $generator.email)(),
-      id: ((_d = (_c = $generator.customs) == null ? void 0 : _c.string) == null ? void 0 : _d.call(_c, [
+      ])) ?? ((_generator == null ? void 0 : _generator.email) ?? $generator.email)(),
+      id: ((_d = (_c = (_generator == null ? void 0 : _generator.customs) ?? $generator.customs) == null ? void 0 : _c.string) == null ? void 0 : _d.call(_c, [
         {
           name: 'Format<"uuid">',
           kind: "format",
           value: "uuid"
         }
-      ])) ?? (0, $generator.uuid)(),
-      age: ((_f = (_e = $generator.customs) == null ? void 0 : _e.number) == null ? void 0 : _f.call(_e, [
+      ])) ?? ((_generator == null ? void 0 : _generator.uuid) ?? $generator.uuid)(),
+      age: ((_f = (_e = (_generator == null ? void 0 : _generator.customs) ?? $generator.customs) == null ? void 0 : _e.number) == null ? void 0 : _f.call(_e, [
         {
           name: 'Type<"uint32">',
           kind: "type",
@@ -34,9 +34,13 @@ const random = (generator) => {
           kind: "maximum",
           value: 100
         }
-      ])) ?? (0, $generator.integer)(19, 100)
+      ])) ?? ((_generator == null ? void 0 : _generator.integer) ?? $generator.integer)(19, 100)
     };
   };
-  return $ro0();
-};
+  let _generator;
+  return (generator) => {
+    _generator = generator;
+    return $ro0();
+  };
+})();
 random();

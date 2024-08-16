@@ -2,9 +2,13 @@ import typia from "typia";
 const is = /* @__PURE__ */ (() => {
   return (input) => true;
 })();
-const random = (generator) => {
-  return "any type used...";
-};
+const random = /* @__PURE__ */ (() => {
+  let _generator;
+  return (generator) => {
+    _generator = generator;
+    return "any type used...";
+  };
+})();
 const validate = /* @__PURE__ */ (() => {
   const __is = (input) => true;
   let errors;
