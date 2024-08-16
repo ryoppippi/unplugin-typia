@@ -119,9 +119,8 @@ async function getProgramAndSource(
 		host.resolveModuleNameLiterals = (moduleLiterals, containingFile, _, options) => {
 			return moduleLiterals.map((lit) => {
 				let module = ts.resolveModuleName(lit.text, containingFile, options, host, host.getModuleResolutionCache?.());
-				let alias;
-				// eslint-disable-next-line no-cond-assign
-				if (!module.resolvedModule && (alias = findMatchingAlias(lit.text, aliases))) {
+				const alias = findMatchingAlias(lit.text, aliases);
+				if (module.resolvedModule == null && alias != null) {
 					module = ts.resolveModuleName(
 						path.resolve(lit.text.replace(alias.find, alias.replacement)),
 						containingFile,
@@ -243,7 +242,7 @@ function warnDiagnostic(
 }
 
 function findMatchingAlias(text: string, aliases: Alias[]) {
-	if (aliases.length) {
+	if (aliases.length > 0) {
 		return aliases.find((alias) => {
 			if (typeof alias.find === 'string') {
 				return text.startsWith(alias.find);
