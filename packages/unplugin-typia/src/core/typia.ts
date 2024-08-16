@@ -121,7 +121,13 @@ async function getProgramAndSource(
 		host.resolveModuleNameLiterals = (moduleLiterals, containingFile, _, options) => {
 			return moduleLiterals.map((lit) => {
 				/* resolve module witoout alias */
-				const module = ts.resolveModuleName(lit.text, containingFile, options, host, host.getModuleResolutionCache?.());
+				const module = ts.resolveModuleName(
+					lit.text,
+					containingFile,
+					options,
+					host,
+					host.getModuleResolutionCache?.(),
+				);
 
 				/* if module is resolved, return it */
 				if (module.resolvedModule != null) {
