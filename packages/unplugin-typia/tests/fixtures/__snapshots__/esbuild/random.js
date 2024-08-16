@@ -1,22 +1,22 @@
 import typia from "typia";
-const random = (generator) => {
+const random = (() => {
   const $generator = typia.createRandom.generator;
   const $ro0 = (_recursive = false, _depth = 0) => ({
-    email: (generator?.customs ?? $generator.customs)?.string?.([
+    email: (_generator?.customs ?? $generator.customs)?.string?.([
       {
         name: 'Format<"email">',
         kind: "format",
         value: "email"
       }
-    ]) ?? (generator?.email ?? $generator.email)(),
-    id: (generator?.customs ?? $generator.customs)?.string?.([
+    ]) ?? (_generator?.email ?? $generator.email)(),
+    id: (_generator?.customs ?? $generator.customs)?.string?.([
       {
         name: 'Format<"uuid">',
         kind: "format",
         value: "uuid"
       }
-    ]) ?? (generator?.uuid ?? $generator.uuid)(),
-    age: (generator?.customs ?? $generator.customs)?.number?.([
+    ]) ?? (_generator?.uuid ?? $generator.uuid)(),
+    age: (_generator?.customs ?? $generator.customs)?.number?.([
       {
         name: 'Type<"uint32">',
         kind: "type",
@@ -32,8 +32,12 @@ const random = (generator) => {
         kind: "maximum",
         value: 100
       }
-    ]) ?? (generator?.integer ?? $generator.integer)(19, 100)
+    ]) ?? (_generator?.integer ?? $generator.integer)(19, 100)
   });
-  return $ro0();
-};
+  let _generator;
+  return (generator) => {
+    _generator = generator;
+    return $ro0();
+  };
+})();
 random();
