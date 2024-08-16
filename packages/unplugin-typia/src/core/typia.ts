@@ -115,7 +115,7 @@ async function getProgramAndSource(
 	);
 	const host = ts.createCompilerHost(compilerOptions);
 
-	if (aliases && aliases.length) {
+	if (aliases != null && aliases.length > 0) {
 		host.resolveModuleNameLiterals = (moduleLiterals, containingFile, _, options) => {
 			return moduleLiterals.map((lit) => {
 				let module = ts.resolveModuleName(lit.text, containingFile, options, host, host.getModuleResolutionCache?.());
