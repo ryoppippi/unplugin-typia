@@ -1,4 +1,4 @@
-import type {IMember} from '@/type.d.ts';
+import type {IMember} from '@/type.js';
 import typia from 'typia';
 
 const is = typia.createIs<IMember>();

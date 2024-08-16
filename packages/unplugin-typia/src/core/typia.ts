@@ -1,6 +1,6 @@
 import type { Alias } from 'vite';
 import ts from 'typescript';
-import path, { resolve } from 'pathe';
+import path from 'pathe';
 import { resolveTSConfig } from 'pkg-types';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
@@ -25,6 +25,7 @@ const sourceCache = new Map<string, ts.SourceFile>();
  * @param _source - The source code.
  * @param unpluginContext - The unplugin context.
  * @param options - The resolved options.
+ * @param aliases - Path aliases to be resolved
  * @returns The transformed code.
  */
 export async function transformTypia(
@@ -39,7 +40,7 @@ export async function transformTypia(
 	options: ResolvedOptions,
 	aliases?: Alias[],
 ): Promise<Data> {
-	const id = wrap<ID>(resolve(_id));
+	const id = wrap<ID>(path.resolve(_id));
 	const source = wrap<Source>(_source);
 
 	/** Whether to enable cache */
@@ -67,7 +68,7 @@ export async function transformTypia(
 async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Promise<ts.CompilerOptions> {
 	const parseTsComilerOptions = async () => {
 		const readFile = (path: string) => ts.sys.readFile(path);
-		const id = (tsconfigId != null) ? resolve(tsconfigId) : await resolveTSConfig();
+		const id = (tsconfigId != null) ? path.resolve(tsconfigId) : await resolveTSConfig();
 
 		const tsconfigParseResult = ts.readConfigFile(id, readFile);
 		if (tsconfigParseResult.error != null) {
@@ -116,24 +117,18 @@ async function getProgramAndSource(
 
 	host.resolveModuleNameLiterals = (moduleLiterals, containingFile) => {
 		return moduleLiterals.map((lit) => {
+			let module = ts.resolveModuleName(lit.text, containingFile, compilerOptions, host);
 			let alias;
 			// eslint-disable-next-line no-cond-assign
-			if (aliases && !lit.text.startsWith('./') && (alias = findMatchingAlias(lit.text, aliases))) {
-				let extension;
-				if (lit.text.endsWith('.d.ts')) {
-					extension = '.d.ts';
-				}
-				else {
-					extension = path.extname(lit.text);
-				}
-				return {
-					resolvedModule: {
-						resolvedFileName: path.resolve(lit.text.replace(alias.find, alias.replacement)),
-						extension,
-					},
-				};
+			if (!module.resolvedModule && aliases && (alias = findMatchingAlias(lit.text, aliases))) {
+				module = ts.resolveModuleName(
+					path.resolve(lit.text.replace(alias.find, alias.replacement)),
+					containingFile,
+					compilerOptions,
+					host,
+				);
 			}
-			return ts.resolveModuleName(lit.text, containingFile, compilerOptions, host);
+			return module;
 		});
 	};
 
@@ -210,7 +205,7 @@ function transform(
 		},
 	);
 
-	const file = transformationResult.transformed.find(t => resolve(t.fileName) === id);
+	const file = transformationResult.transformed.find(t => path.resolve(t.fileName) === id);
 
 	if (file == null) {
 		throw new Error('No file found');

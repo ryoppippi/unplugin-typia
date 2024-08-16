@@ -1,5 +1,5 @@
 import typia from 'typia';
-import type { IMember } from './type.d.ts';
+import type { IMember } from './type.js';
 
 const is = typia.createIs<IMember>();
 
