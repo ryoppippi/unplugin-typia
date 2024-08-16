@@ -55,7 +55,7 @@ export default defineConfig({
 });
 ```
 
-> When using typia with types imported from non-relative paths like tsconfig `compilerOptions.paths` or relative to 
+> When using typia with types imported from non-relative paths like tsconfig `compilerOptions.paths` or relative to
 > tsconfig `compilerOptions.baseUrl`, they must be defined in vite.config.ts under [resolve.alias](https://vitejs.dev/config/shared-options#resolve-alias)
 > in order to be resolved, according to vite's resolution mechanism.
 
@@ -189,7 +189,6 @@ Examples:
 
 <details>
 <summary>Webpack</summary><br>
-
 > ⚠️ Note: Currently, this plugin works only with 'esm' target. If you want to use 'cjs' target, please use with [`jiti`](https://github.com/unjs/jiti). Refer [this issue](https://github.com/samchon/typia/issues/1094).
 
 ```sh
