@@ -9,11 +9,6 @@ import { isBun } from './utils.js';
 
 /** get typia version */
 let typiaVersion: string | undefined;
-try {
-	const { default: packageJson } = await import('typia/package.json');
-	typiaVersion = packageJson.version;
-}
-catch {}
 
 try {
 	if (typiaVersion == null) {
