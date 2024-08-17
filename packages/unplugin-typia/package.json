@@ -41,7 +41,7 @@
 		"check": "nr tsc --noEmit",
 		"release": "nr test run && nr lint && nr check && bumpp",
 		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
-		"publish:prepare": "nlx pkg-to-jsr && bun run --shell bun cp ../../LICENSE ."
+		"publish:prepare": "nlx pkg-to-jsr"
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
