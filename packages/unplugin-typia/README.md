@@ -226,6 +226,17 @@ You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin
 - This plugin is highly experimental and may not work as expected.
 - This plugin is not officially supported by Typia.
 
+## Development
+
+This repository is a monorepo managed by [Bun](https://bun.sh).
+
+- [unplugin-typia](https://github.com/ryoppippi/unplugin-typia/tree/main/packages/unplugin-typia)
+- [examples](https://github.com/ryoppippi/unplugin-typia/tree/main/examples)
+
+```sh
+bun i --frozen-lockfile
+```
+
 ## LICENSE
 
 [MIT](./LICENSE)
