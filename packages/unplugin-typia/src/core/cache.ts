@@ -8,7 +8,19 @@ import { wrap } from './types.js';
 import { isBun } from './utils.js';
 
 /** get typia version */
-const { version: typiaVersion } = createRequire(import.meta.url)('typia/package.json') as typeof import('typia/package.json');
+let typiaVersion: string | undefined;
+try {
+	const { default: packageJson } = await import('typia/package.json');
+	typiaVersion = packageJson.version;
+}
+catch {}
+
+try {
+	if (typiaVersion == null) {
+		typiaVersion = (createRequire(import.meta.url)('typia/package.json') as typeof import('typia/package.json')).version;
+	}
+}
+catch {}
 
 /**
  * Cache class
