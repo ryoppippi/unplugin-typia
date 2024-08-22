@@ -9,12 +9,14 @@ import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions
 export type Options = {
 	/**
 	 * The patterns of files to include.
+	 * This options is not merged but overridden.
 	 * @default [/\.[cm]?[jt]sx?$/]
 	 */
 	include?: FilterPattern;
 
 	/**
 	 * The patterns of files to exclude.
+	 * This options is not merged but overridden.
 	 * @default [/node_modules/]
 	 */
 	exclude?: FilterPattern;
