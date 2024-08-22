@@ -1,5 +1,5 @@
-import type { OverrideProperties, RequiredDeep } from 'type-fest';
-import { createDefu } from 'defu';
+import type { SetOptional } from 'type-fest';
+import { deepMerge } from '@std/collections';
 import type { FilterPattern } from '@rollup/pluginutils';
 import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions.js';
 
@@ -9,12 +9,14 @@ import type { ITransformOptions } from 'typia/lib/transformers/ITransformOptions
 export type Options = {
 	/**
 	 * The patterns of files to include.
+	 * This options is not merged but overridden.
 	 * @default [/\.[cm]?[jt]sx?$/]
 	 */
 	include?: FilterPattern;
 
 	/**
 	 * The patterns of files to exclude.
+	 * This options is not merged but overridden.
 	 * @default [/node_modules/]
 	 */
 	exclude?: FilterPattern;
@@ -54,12 +56,9 @@ export type Options = {
 };
 
 export type ResolvedOptions
-	= OverrideProperties<
-		RequiredDeep<Options>,
-		{
-			typia: Options['typia'];
-			tsconfig: Options['tsconfig'];
-		}
+	= SetOptional<
+		Required<Options>,
+		'tsconfig' | 'typia'
 	>;
 
 /** Default options */
@@ -67,20 +66,10 @@ export const defaultOptions = ({
 	include: [/\.[cm]?tsx?$/, /\.svelte$/],
 	exclude: [/node_modules/],
 	enforce: 'pre',
-	typia: { },
 	cache: false,
 	log: true,
 	tsconfig: undefined,
 }) as const satisfies ResolvedOptions;
-
-/** Create custom defu instance */
-const defu = createDefu((obj, key, value) => {
-	/** replace array instead of concat */
-	if (Array.isArray(obj[key])) {
-		obj[key] = value;
-		return true;
-	}
-});
 
 /**
  * Resolves the options for the plugin.
@@ -89,8 +78,9 @@ const defu = createDefu((obj, key, value) => {
  * @returns The resolved options.
  */
 export function resolveOptions(options: Options): ResolvedOptions {
-	return defu(
-		options,
+	return deepMerge<ResolvedOptions>(
 		defaultOptions,
+		options,
+		{ arrays: 'replace' },
 	);
 }

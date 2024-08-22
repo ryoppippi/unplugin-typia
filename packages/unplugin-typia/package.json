@@ -45,8 +45,8 @@
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
+		"@std/collections": "npm:@jsr/std__collections@1.0.5",
 		"consola": "^3.2.3",
-		"defu": "^6.1.4",
 		"find-cache-dir": "^5.0.0",
 		"magic-string": "^0.30.11",
 		"pathe": "^1.1.2",
