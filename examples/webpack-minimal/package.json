@@ -2,7 +2,7 @@
   "name": "webpack-minimal",
   "private": true,
   "devDependencies": {
-    "@types/node": "^20.14.15",
+    "@types/node": "^20.16.1",
     "@webpack-cli/generators": "^3.0.7",
     "html-webpack-plugin": "^5.6.0",
     "prettier": "^3.3.3",
@@ -28,6 +28,6 @@
   "dependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
     "cross-env": "^7.0.3",
-    "typia": "^6.8.0"
+    "typia": "^6.9.0"
   }
 }
