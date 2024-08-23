@@ -8,7 +8,9 @@
 		"strict": true,
 		"strictNullChecks": true,
 		"esModuleInterop": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"declaration": true,
+		"isolatedDeclarations": true
 	},
 	"exclude": ["dist", "eslint.config.js", "tests/fixtures"]
 }
