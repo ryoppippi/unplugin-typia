@@ -1,6 +1,7 @@
 {
-	"name": "@ryoppippi/unplugin-typia",
+	"name": "unplugin-typia",
 	"type": "module",
+	"repository": "ryoppippi/unplugin-typia",
 	"version": "0.6.22",
 	"private": true,
 	"description": "unplugin for typia",
@@ -14,34 +15,158 @@
 		"transform"
 	],
 	"exports": {
-		".": "./src/index.ts",
-		"./api": "./src/api.ts",
-		"./vite": "./src/vite.ts",
-		"./webpack": "./src/webpack.ts",
-		"./rollup": "./src/rollup.ts",
-		"./esbuild": "./src/esbuild.ts",
-		"./next": "./src/next.ts",
-		"./rolldown": "./src/rolldown.ts",
-		"./farm": "./src/farm.ts",
-		"./rspack": "./src/rspack.ts",
-		"./bun": "./src/bun.ts",
+		".": {
+			"types": "./dist/index.d.ts",
+			"bun": "./src/index.ts",
+			"jsr": "./src/index.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./api": {
+			"types": "./dist/api.d.ts",
+			"bun": "./src/api.ts",
+			"jsr": "./src/api.ts",
+			"import": "./dist/api.js",
+			"require": "./dist/api.cjs"
+		},
+		"./bun": {
+			"types": "./dist/bun.d.ts",
+			"bun": "./src/bun.ts",
+			"jsr": "./src/bun.ts",
+			"import": "./dist/bun.js",
+			"require": "./dist/bun.cjs"
+		},
+		"./esbuild": {
+			"types": "./dist/esbuild.d.ts",
+			"bun": "./src/esbuild.ts",
+			"jsr": "./src/esbuild.ts",
+			"import": "./dist/esbuild.js",
+			"require": "./dist/esbuild.cjs"
+		},
+		"./farm": {
+			"types": "./dist/farm.d.ts",
+			"bun": "./src/farm.ts",
+			"jsr": "./src/farm.ts",
+			"import": "./dist/farm.js",
+			"require": "./dist/farm.cjs"
+		},
+		"./index": {
+			"types": "./dist/index.d.ts",
+			"bun": "./src/index.ts",
+			"jsr": "./src/index.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./next": {
+			"types": "./dist/next.d.ts",
+			"bun": "./src/next.ts",
+			"jsr": "./src/next.ts",
+			"import": "./dist/next.js",
+			"require": "./dist/next.cjs"
+		},
+		"./rolldown": {
+			"types": "./dist/rolldown.d.ts",
+			"bun": "./src/rolldown.ts",
+			"jsr": "./src/rolldown.ts",
+			"import": "./dist/rolldown.js",
+			"require": "./dist/rolldown.cjs"
+		},
+		"./rollup": {
+			"types": "./dist/rollup.d.ts",
+			"bun": "./src/rollup.ts",
+			"jsr": "./src/rollup.ts",
+			"import": "./dist/rollup.js",
+			"require": "./dist/rollup.cjs"
+		},
+		"./rspack": {
+			"types": "./dist/rspack.d.ts",
+			"bun": "./src/rspack.ts",
+			"jsr": "./src/rspack.ts",
+			"import": "./dist/rspack.js",
+			"require": "./dist/rspack.cjs"
+		},
+		"./vite": {
+			"types": "./dist/vite.d.ts",
+			"bun": "./src/vite.ts",
+			"jsr": "./src/vite.ts",
+			"import": "./dist/vite.js",
+			"require": "./dist/vite.cjs"
+		},
+		"./webpack": {
+			"types": "./dist/webpack.d.ts",
+			"bun": "./src/webpack.ts",
+			"jsr": "./src/webpack.ts",
+			"import": "./dist/webpack.js",
+			"require": "./dist/webpack.cjs"
+		},
 		"./package.json": "./package.json"
+	},
+	"main": "dist/index.cjs",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"typesVersions": {
+		"*": {
+			"*": [
+				"./dist/*",
+				"./*"
+			]
+		}
 	},
 	"files": [
 		"LICENSE",
 		"README.md",
 		"jsr.json",
 		"package.json",
-		"src"
+		"src",
+		"dist"
 	],
 	"scripts": {
+		"build": "tsup",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
 		"release": "nr test run && nr lint && nr check && bumpp",
-		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
-		"publish:prepare": "nlx pkg-to-jsr"
+		"publish": "nr publish:prepare && nr test && nr publish:jsr && nr publish:npm",
+		"publish:jsr": "nlx jsr publish --allow-dirty",
+		"publish:npm": "npm publish",
+		"publish:prepare": "nlx publint && nlx pkg-to-jsr",
+		"prepublishOnly": "nr build"
+	},
+	"peerDependenciesMeta": {
+		"svelte": {
+			"optional": true
+		},
+		"typescript": {
+			"optional": true
+		},
+		"@types/bun": {
+			"optional": true
+		},
+		"esbuild": {
+			"optional": true
+		},
+		"farm": {
+			"optional": true
+		},
+		"next": {
+			"optional": true
+		},
+		"rolldown": {
+			"optional": true
+		},
+		"rollup": {
+			"optional": true
+		},
+		"rspack": {
+			"optional": true
+		},
+		"vite": {
+			"optional": true
+		},
+		"webpack": {
+			"optional": true
+		}
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
@@ -69,6 +194,7 @@
 		"eslint-plugin-format": "^0.1.2",
 		"rollup": "^4.20.0",
 		"ts-patch": "^3.2.1",
+		"tsup": "^8.2.4",
 		"vite": "^5.4.1",
 		"vitest": "^2.0.5"
 	}
