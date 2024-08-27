@@ -228,10 +228,6 @@ You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin
 - `.mtsx`
 - `.svelte` (only script tag with `lang="ts"`)
 
-## Limitations
-
-- This plugin is not officially supported by Typia.
-
 ## Development
 
 This repository is a monorepo managed by [Bun](https://bun.sh).
@@ -242,6 +238,11 @@ This repository is a monorepo managed by [Bun](https://bun.sh).
 ```sh
 bun i --frozen-lockfile
 ```
+
+## Acknowledgements
+
+This project started as an unofficial integration of Typia for bundlers.
+Now, this plugin is one of the official integrations of Typia and is sponsored by [@samchon](https://github.com/samchon) (the creator of Typia).
 
 ## LICENSE
 
