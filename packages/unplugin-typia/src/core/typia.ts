@@ -34,7 +34,6 @@ export async function transformTypia(
 	/**
 	 * **Use with caution.**
 	 *
-	 * This is an experimental feature and may be changed at any time.
 	 */
 	unpluginContext: UnContext,
 	options: ResolvedOptions,
