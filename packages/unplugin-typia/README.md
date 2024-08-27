@@ -5,8 +5,6 @@
 [![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia)](https://jsr.io/@ryoppippi/unplugin-typia)
 [![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia/score)](https://jsr.io/@ryoppippi/unplugin-typia)
 
-> ⚠️ Note: this is highly experimental software.
-
 ## Why
 
 Typia is fantastic, but it is hard to setup, even for frontend development.
@@ -232,7 +230,6 @@ You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin
 
 ## Limitations
 
-- This plugin is highly experimental and may not work as expected.
 - This plugin is not officially supported by Typia.
 
 ## Development
