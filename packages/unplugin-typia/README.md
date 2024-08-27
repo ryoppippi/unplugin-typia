@@ -5,8 +5,6 @@
 [![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia)](https://jsr.io/@ryoppippi/unplugin-typia)
 [![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia/score)](https://jsr.io/@ryoppippi/unplugin-typia)
 
-> ⚠️ Note: this is highly experimental software.
-
 ## Why
 
 Typia is fantastic, but it is hard to setup, even for frontend development.
@@ -230,11 +228,6 @@ You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin
 - `.mtsx`
 - `.svelte` (only script tag with `lang="ts"`)
 
-## Limitations
-
-- This plugin is highly experimental and may not work as expected.
-- This plugin is not officially supported by Typia.
-
 ## Development
 
 This repository is a monorepo managed by [Bun](https://bun.sh).
@@ -245,6 +238,11 @@ This repository is a monorepo managed by [Bun](https://bun.sh).
 ```sh
 bun i --frozen-lockfile
 ```
+
+## Acknowledgements
+
+This project started as an unofficial integration of Typia for bundlers.
+Now, this plugin is one of the official integrations of Typia and is sponsored by [@samchon](https://github.com/samchon) (the creator of Typia).
 
 ## LICENSE
 
