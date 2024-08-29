@@ -30,9 +30,11 @@
 		"LICENSE",
 		"README.md",
 		"dist",
-		"jsr.json",
 		"package.json",
 		"src"
+	],
+	"jsrInclude": [
+		"jsr.json"
 	],
 	"jsrExclude": [
 		"dist"
@@ -44,8 +46,8 @@
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
 		"release": "nr test run && nr lint && nr check && bumpp",
-		"publish:jsr": "nr prepublishOnly && nlx jsr publish --allow-dirty",
-		"prepublishOnly": "nlx pkg-to-jsr && nr test run && nr build && bun run ./update_package_json.ts && nlx publint"
+		"publish:jsr": "nlx pkg-to-jsr && nlx jsr publish --allow-dirty",
+		"prepublishOnly": "nr test run && nr build && bun run ./update_package_json.ts && nlx publint"
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
