@@ -2,7 +2,6 @@
 	"name": "@ryoppippi/unplugin-typia",
 	"type": "module",
 	"version": "1.0.0",
-	"private": true,
 	"description": "unplugin for typia",
 	"author": "ryoppippi",
 	"license": "MIT",
@@ -14,38 +13,155 @@
 		"transform"
 	],
 	"exports": {
-		".": "./src/index.ts",
-		"./api": "./src/api.ts",
-		"./vite": "./src/vite.ts",
-		"./webpack": "./src/webpack.ts",
-		"./rollup": "./src/rollup.ts",
-		"./esbuild": "./src/esbuild.ts",
-		"./next": "./src/next.ts",
-		"./rolldown": "./src/rolldown.ts",
-		"./farm": "./src/farm.ts",
-		"./rspack": "./src/rspack.ts",
-		"./bun": "./src/bun.ts",
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			},
+			"jsr": "./src/index.ts"
+		},
+		"./api": {
+			"import": {
+				"types": "./dist/api.d.ts",
+				"default": "./dist/api.js"
+			},
+			"require": {
+				"types": "./dist/api.d.cts",
+				"default": "./dist/api.cjs"
+			},
+			"jsr": "./src/api.ts"
+		},
+		"./vite": {
+			"import": {
+				"types": "./dist/vite.d.ts",
+				"default": "./dist/vite.js"
+			},
+			"require": {
+				"types": "./dist/vite.d.cts",
+				"default": "./dist/vite.cjs"
+			},
+			"jsr": "./src/vite.ts"
+		},
+		"./webpack": {
+			"import": {
+				"types": "./dist/webpack.d.ts",
+				"default": "./dist/webpack.js"
+			},
+			"require": {
+				"types": "./dist/webpack.d.cts",
+				"default": "./dist/webpack.cjs"
+			},
+			"jsr": "./src/webpack.ts"
+		},
+		"./rollup": {
+			"import": {
+				"types": "./dist/rollup.d.ts",
+				"default": "./dist/rollup.js"
+			},
+			"require": {
+				"types": "./dist/rollup.d.cts",
+				"default": "./dist/rollup.cjs"
+			},
+			"jsr": "./src/rollup.ts"
+		},
+		"./esbuild": {
+			"import": {
+				"types": "./dist/esbuild.d.ts",
+				"default": "./dist/esbuild.js"
+			},
+			"require": {
+				"types": "./dist/esbuild.d.cts",
+				"default": "./dist/esbuild.cjs"
+			},
+			"jsr": "./src/esbuild.ts"
+		},
+		"./next": {
+			"import": {
+				"types": "./dist/next.d.ts",
+				"default": "./dist/next.js"
+			},
+			"require": {
+				"types": "./dist/next.d.cts",
+				"default": "./dist/next.cjs"
+			},
+			"jsr": "./src/next.ts"
+		},
+		"./rolldown": {
+			"import": {
+				"types": "./dist/rolldown.d.ts",
+				"default": "./dist/rolldown.js"
+			},
+			"require": {
+				"types": "./dist/rolldown.d.cts",
+				"default": "./dist/rolldown.cjs"
+			},
+			"jsr": "./src/rolldown.ts"
+		},
+		"./farm": {
+			"import": {
+				"types": "./dist/farm.d.ts",
+				"default": "./dist/farm.js"
+			},
+			"require": {
+				"types": "./dist/farm.d.cts",
+				"default": "./dist/farm.cjs"
+			},
+			"jsr": "./src/farm.ts"
+		},
+		"./rspack": {
+			"import": {
+				"types": "./dist/rspack.d.ts",
+				"default": "./dist/rspack.js"
+			},
+			"require": {
+				"types": "./dist/rspack.d.cts",
+				"default": "./dist/rspack.cjs"
+			},
+			"jsr": "./src/rspack.ts"
+		},
+		"./bun": {
+			"import": {
+				"types": "./dist/bun.d.ts",
+				"default": "./dist/bun.js"
+			},
+			"require": {
+				"types": "./dist/bun.d.cts",
+				"default": "./dist/bun.cjs"
+			},
+			"jsr": "./src/bun.ts"
+		},
 		"./package.json": "./package.json"
 	},
 	"files": [
 		"LICENSE",
 		"README.md",
+		"dist",
 		"jsr.json",
 		"package.json",
 		"src"
 	],
+	"jsrExclude": [
+		"dist"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
+		"build": "tsup",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
 		"release": "nr test run && nr lint && nr check && bumpp",
-		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
-		"publish:prepare": "nlx pkg-to-jsr"
+		"publish:jsr": "nr prepublishOnly && nlx jsr publish --allow-dirty",
+		"prepublishOnly": "nlx pkg-to-jsr && nr test run && nr build"
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
-		"@std/collections": "npm:@jsr/std__collections@1.0.5",
 		"consola": "^3.2.3",
 		"find-cache-dir": "^5.0.0",
 		"magic-string": "^0.30.11",
@@ -59,6 +175,7 @@
 	"devDependencies": {
 		"@antfu/ni": "^0.22.4",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
+		"@std/collections": "npm:@jsr/std__collections@1.0.5",
 		"@types/bun": "^1.1.6",
 		"@types/node": "^20.14.15",
 		"@vue-macros/test-utils": "^1.6.0",
