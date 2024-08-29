@@ -19,8 +19,11 @@ This unplugin aims to make it easier to use Typia in your projects.
 First, install `unplugin-typia`:
 
 ```bash
-# jsr
+# jsr(recommended)
 npx jsr add -D @ryoppippi/unplugin-typia
+
+# npm
+npm install -D @ryoppippi/unplugin-typia
 ```
 
 Then, install `typia`:
@@ -191,7 +194,10 @@ Examples:
 <details>
 <summary>Webpack</summary><br>
 
-> ⚠️ Note: Currently, this plugin works only with 'esm' target.
+> ⚠️ Note: Currently, this plugin on JSR works only with 'esm' target.
+> If you want to use 'cjs' target, please download from npm and use it.
+
+> If you want to download from JSR, you have following options:
 > If you want to use 'cjs' target on Node < 20.17.0 , please use with [`jiti`](https://github.com/unjs/jiti).
 > If you want to use 'cjs' target on Node >= 20.17.0, please use with `require` and enable [`--experimental-require-modules` flag](https://github.com/nodejs/node/pull/51977).
 > If you want to use 'esm' target, don't worry! You can use this plugin without any additional setup.
