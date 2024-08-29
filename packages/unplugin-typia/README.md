@@ -2,6 +2,9 @@
 
 **unplugin for [Typia](https://typia.io/)**
 
+[![npm version](https://img.shields.io/npm/v/@ryoppippi/unplugin-typia?color=yellow)](https://npmjs.com/package/@ryoppippi/unplugin-typia)
+[![npm downloads](https://img.shields.io/npm/dm/@ryoppippi/unplugin-typia?color=yellow)](https://npmjs.com/package/@ryoppippi/unplugin-typia)
+
 [![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia)](https://jsr.io/@ryoppippi/unplugin-typia)
 [![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia/score)](https://jsr.io/@ryoppippi/unplugin-typia)
 
