@@ -1,6 +1,8 @@
 <script lang="ts">
 import typia, { type tags } from "typia";
 
+const { data } = $props();
+
 interface IMember {
   id: string & tags.Format<"uuid">;
   email: string & tags.Format<"email">;
@@ -11,14 +13,28 @@ const validate = typia.createValidate<IMember>();
 
 let member = $state<IMember>({
   id: crypto.randomUUID(),
-  email: "samchon.github@gmai19l.com",
+  email: "hi@examle.com",
   age: 20,
 })
 
 let validation = $derived(validate(member))
 </script>
 
-<h1> {validation.success ? "Valid" : "Invalid"} </h1>
+<h1> Typia + unplugin-typia + SvelteKit </h1>
+
+<h2> TypeScript Interface </h2>
+{@html data.tsInterface}
+
+<h2> Validation Result </h2>
+<h3> {validation.success ? "Valid" : "Invalid"} </h3>
+{#if !validation.success}
+  <p> errors: </p>
+  <ul style="color: red;">
+    {#each validation.errors as error, i}
+      <li>{JSON.stringify(error)}</li>
+    {/each}
+  </ul>
+{/if}
 
 <div style="display: flex; flex-direction: column; width: 100%;">
   <div>
@@ -35,11 +51,3 @@ let validation = $derived(validate(member))
   </div>
 </div>
 
-{#if !validation.success}
-  <p> errors: </p>
-  <ul style="color: red;">
-    {#each validation.errors as error, i}
-      <li>{JSON.stringify(error)}</li>
-    {/each}
-  </ul>
-{/if}
