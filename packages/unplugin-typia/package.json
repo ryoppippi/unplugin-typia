@@ -24,29 +24,35 @@
 		"./rolldown": "./src/rolldown.ts",
 		"./farm": "./src/farm.ts",
 		"./rspack": "./src/rspack.ts",
-		"./bun": "./src/bun.ts",
-		"./package.json": "./package.json"
+		"./bun": "./src/bun.ts"
 	},
 	"files": [
 		"LICENSE",
 		"README.md",
-		"jsr.json",
+		"dist",
 		"package.json",
 		"src"
 	],
+	"jsrInclude": [
+		"jsr.json"
+	],
+	"jsrExclude": [
+		"dist"
+	],
 	"scripts": {
+		"build": "tsup",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
 		"release": "nr test run && nr lint && nr check && bumpp",
-		"publish": "nr publish:prepare && nr test && nlx jsr publish --allow-dirty",
-		"publish:prepare": "nlx pkg-to-jsr"
+		"publish:jsr": "nlx pkg-to-jsr && nlx jsr publish --allow-dirty",
+		"prepublishOnly": "nr test run && nr build && bun run ./update_package_json.ts && nlx publint"
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
-		"@std/collections": "npm:@jsr/std__collections@1.0.5",
 		"consola": "^3.2.3",
+		"defu": "^6.1.4",
 		"find-cache-dir": "^5.0.0",
 		"magic-string": "^0.30.11",
 		"pathe": "^1.1.2",
@@ -59,6 +65,7 @@
 	"devDependencies": {
 		"@antfu/ni": "^0.22.4",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
+		"@std/collections": "npm:@jsr/std__collections@1.0.5",
 		"@types/bun": "^1.1.6",
 		"@types/node": "^20.14.15",
 		"@vue-macros/test-utils": "^1.6.0",
@@ -69,7 +76,125 @@
 		"eslint-plugin-format": "^0.1.2",
 		"rollup": "^4.20.0",
 		"ts-patch": "^3.2.1",
+		"tsup": "^8.2.4",
 		"vite": "^5.4.1",
 		"vitest": "^2.0.5"
-	}
+	},
+	"publishConfig": {
+		"exports": {
+			".": {
+				"import": {
+					"types": "./dist/index.d.ts",
+					"default": "./dist/index.js"
+				},
+				"require": {
+					"types": "./dist/index.d.cts",
+					"default": "./dist/index.cjs"
+				}
+			},
+			"./api": {
+				"import": {
+					"types": "./dist/api.d.ts",
+					"default": "./dist/api.js"
+				},
+				"require": {
+					"types": "./dist/api.d.cts",
+					"default": "./dist/api.cjs"
+				}
+			},
+			"./vite": {
+				"import": {
+					"types": "./dist/vite.d.ts",
+					"default": "./dist/vite.js"
+				},
+				"require": {
+					"types": "./dist/vite.d.cts",
+					"default": "./dist/vite.cjs"
+				}
+			},
+			"./webpack": {
+				"import": {
+					"types": "./dist/webpack.d.ts",
+					"default": "./dist/webpack.js"
+				},
+				"require": {
+					"types": "./dist/webpack.d.cts",
+					"default": "./dist/webpack.cjs"
+				},
+				"jsr": "./src/webpack.ts"
+			},
+			"./rollup": {
+				"import": {
+					"types": "./dist/rollup.d.ts",
+					"default": "./dist/rollup.js"
+				},
+				"require": {
+					"types": "./dist/rollup.d.cts",
+					"default": "./dist/rollup.cjs"
+				}
+			},
+			"./esbuild": {
+				"import": {
+					"types": "./dist/esbuild.d.ts",
+					"default": "./dist/esbuild.js"
+				},
+				"require": {
+					"types": "./dist/esbuild.d.cts",
+					"default": "./dist/esbuild.cjs"
+				}
+			},
+			"./next": {
+				"import": {
+					"types": "./dist/next.d.ts",
+					"default": "./dist/next.js"
+				},
+				"require": {
+					"types": "./dist/next.d.cts",
+					"default": "./dist/next.cjs"
+				}
+			},
+			"./rolldown": {
+				"import": {
+					"types": "./dist/rolldown.d.ts",
+					"default": "./dist/rolldown.js"
+				},
+				"require": {
+					"types": "./dist/rolldown.d.cts",
+					"default": "./dist/rolldown.cjs"
+				}
+			},
+			"./farm": {
+				"import": {
+					"types": "./dist/farm.d.ts",
+					"default": "./dist/farm.js"
+				},
+				"require": {
+					"types": "./dist/farm.d.cts",
+					"default": "./dist/farm.cjs"
+				}
+			},
+			"./rspack": {
+				"import": {
+					"types": "./dist/rspack.d.ts",
+					"default": "./dist/rspack.js"
+				},
+				"require": {
+					"types": "./dist/rspack.d.cts",
+					"default": "./dist/rspack.cjs"
+				}
+			},
+			"./bun": {
+				"import": {
+					"types": "./dist/bun.d.ts",
+					"default": "./dist/bun.js"
+				},
+				"require": {
+					"types": "./dist/bun.d.cts",
+					"default": "./dist/bun.cjs"
+				}
+			},
+			"./package.json": "./package.json"
+		}
+	},
+	"access": "public"
 }
