@@ -3,6 +3,7 @@ name: release
 env:
   NODE_VERSION: lts/*
   BUN_VERSION: latest
+  PACKAGE_DIR: ${{github.workspace}}/packages/unplugin-typia
 
 on:
   push:
@@ -15,8 +16,6 @@ permissions:
 
 jobs:
   jsr:
-    env:
-      PACKAGE_DIR: ${{github.workspace}}/packages/unplugin-typia
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
