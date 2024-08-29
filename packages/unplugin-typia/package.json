@@ -6,7 +6,7 @@
 	"description": "unplugin for typia",
 	"author": "ryoppippi",
 	"license": "MIT",
-	"repository": "https://ryoppippi.com/ryoppippi/unplugin-typia.git",
+	"repository": "https://github.com/ryoppippi/unplugin-typia.git",
 	"keywords": [
 		"unplugin",
 		"vite",
