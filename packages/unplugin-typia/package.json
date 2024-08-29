@@ -121,8 +121,7 @@
 				"require": {
 					"types": "./dist/webpack.d.cts",
 					"default": "./dist/webpack.cjs"
-				},
-				"jsr": "./src/webpack.ts"
+				}
 			},
 			"./rollup": {
 				"import": {
