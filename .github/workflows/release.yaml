@@ -54,9 +54,7 @@ jobs:
         with:
           bun-version: ${{ env.BUN_VERSION }}
       - run: bun i --frozen-lockfile
-      - run: |
-          bun prepublishOnly
-          npm publish --provenance --access public
+      - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         working-directory: ${{env.PACKAGE_DIR}}
