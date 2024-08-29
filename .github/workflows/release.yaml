@@ -28,7 +28,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun i --frozen-lockfile
-      - run: bun run publish
+      - run: bun run publish:jsr
         working-directory: ${{env.PACKAGE_DIR}}
 
   release:
