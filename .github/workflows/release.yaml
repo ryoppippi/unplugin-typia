@@ -35,36 +35,9 @@ jobs:
       - run: bun run publish:jsr
         working-directory: ${{env.PACKAGE_DIR}}
 
-
-  npm:
-    needs:
-      - jsr
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    environment: Release
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://registry.npmjs.org'
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-      - run: bun i --frozen-lockfile
-      - run: |
-          bun prepublishOnly
-          npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        working-directory: ${{env.PACKAGE_DIR}}
-
   release:
     needs:
       - jsr
-      - npm
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
