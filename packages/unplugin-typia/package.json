@@ -5,6 +5,7 @@
 	"private": true,
 	"description": "unplugin for typia",
 	"author": "ryoppippi",
+	"repository": "https://ryoppippi.com/ryoppippi/unplugin-typia.git",
 	"license": "MIT",
 	"keywords": [
 		"unplugin",
