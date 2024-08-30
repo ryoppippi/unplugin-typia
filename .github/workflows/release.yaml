@@ -58,6 +58,7 @@ jobs:
           PACKAGE_DESCRIPTION: "unplugin for typia"
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Set your npm token as a GitHub secret
           NPM_CONFIG_PROVENANCE: true # If you publish with provenance
+          NPM_OPTIONS: "--provenance --access public"
 
   release:
     needs:
