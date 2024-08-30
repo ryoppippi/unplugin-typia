@@ -66,28 +66,12 @@ jobs:
       - run: bun run publish:jsr --dry-run
         working-directory: packages/unplugin-typia
 
-  upload-pkg-pr-now:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-      - run: bun i --frozen-lockfile
-      - run: |
-          bun run prepublishOnly
-          bunx pkg-pr-new publish
-        working-directory: packages/unplugin-typia
-
   action-timeline:
     needs:
       - lint
       - test
       - build-examples
       - jsr-publish-dry-run
-      - upload-pkg-pr-now
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
