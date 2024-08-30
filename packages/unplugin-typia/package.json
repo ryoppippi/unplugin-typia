@@ -37,8 +37,7 @@
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
 		"release": "nr test run && nr lint && nr check && bumpp",
-		"publish:jsr": "nlx pkg-to-jsr && nlx jsr publish --allow-dirty",
-		"prepublishOnly": "nr test run && bun run ./update_package_json.ts && nlx publint"
+		"publish:jsr": "nr test run && nlx pkg-to-jsr && nlx jsr publish --allow-dirty"
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
