@@ -45,20 +45,19 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
         with:
-          fetch-depth: 0
+          deno-version: v1.x
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://registry.npmjs.org'
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-      - run: bun run jsr-to-npm-mirror.ts
-        working-directory: ${{github.workspace}}/.github
+      - name: Publish to npm
+        run: deno run -A jsr:@ryoppippi/mirror-jsr-to-npm
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          PACKAGE_NAME: "@ryoppippi/unplugin-typia"
+          PACKAGE_DESCRIPTION: "unplugin for typia"
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Set your npm token as a GitHub secret
+          NPM_CONFIG_PROVENANCE: true # If you publish with provenance
 
   release:
     needs:
