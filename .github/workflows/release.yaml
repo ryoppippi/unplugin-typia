@@ -56,7 +56,7 @@ jobs:
         with:
           bun-version: ${{ env.BUN_VERSION }}
       - run: bun run jsr-to-npm-mirror.ts
-        working-directory: ${{env.PACKAGE_DIR}}
+        working-directory: ${{github.workspace}}/.github
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
