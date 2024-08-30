@@ -3,6 +3,8 @@ name: release
 env:
   NODE_VERSION: lts/*
   BUN_VERSION: latest
+  DENO_VERSION: v1.x
+  NPM_REGISTRY: https://registry.npmjs.org
   PACKAGE_DIR: ${{github.workspace}}/packages/unplugin-typia
 
 on:
@@ -47,11 +49,11 @@ jobs:
     steps:
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version: ${{ env.DENO_VERSION }}
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: ${{ env.NPM_REGISTRY }}
       - name: Publish to npm
         run: deno run -A jsr:@ryoppippi/mirror-jsr-to-npm
         env:
@@ -59,7 +61,6 @@ jobs:
           PACKAGE_DESCRIPTION: "unplugin for typia"
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Set your npm token as a GitHub secret
           NPM_CONFIG_PROVENANCE: true # If you publish with provenance
-          NPM_OPTIONS: "--provenance --access public"
 
   release:
     needs:
