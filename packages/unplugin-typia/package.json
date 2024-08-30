@@ -7,13 +7,6 @@
 	"author": "ryoppippi",
 	"license": "MIT",
 	"repository": "https://github.com/ryoppippi/unplugin-typia.git",
-	"keywords": [
-		"unplugin",
-		"vite",
-		"webpack",
-		"rollup",
-		"transform"
-	],
 	"exports": {
 		".": "./src/index.ts",
 		"./api": "./src/api.ts",
@@ -38,18 +31,14 @@
 	"jsrInclude": [
 		"jsr.json"
 	],
-	"jsrExclude": [
-		"dist"
-	],
 	"scripts": {
-		"build": "tsup",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
 		"release": "nr test run && nr lint && nr check && bumpp",
 		"publish:jsr": "nlx pkg-to-jsr && nlx jsr publish --allow-dirty",
-		"prepublishOnly": "nr test run && nr build && bun run ./update_package_json.ts && nlx publint"
+		"prepublishOnly": "nr test run && bun run ./update_package_json.ts && nlx publint"
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.0",
@@ -78,7 +67,6 @@
 		"eslint-plugin-format": "^0.1.2",
 		"rollup": "^4.20.0",
 		"ts-patch": "^3.2.1",
-		"tsup": "^8.2.4",
 		"vite": "^5.4.1",
 		"vitest": "^2.0.5"
 	},
