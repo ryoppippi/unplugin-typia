@@ -2,6 +2,7 @@ import type { UnpluginFactory, UnpluginInstance } from 'unplugin';
 import { createUnplugin } from 'unplugin';
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import MagicString from 'magic-string';
+import Diff from 'diff-match-patch';
 import { resolve } from 'pathe';
 
 import type { ResolvedConfig } from 'vite';
@@ -15,6 +16,8 @@ import { Cache } from './cache.js';
 import { isSvelteFile, preprocess as sveltePreprocess } from './languages/svelte.js';
 
 const name = `unplugin-typia`;
+
+const dmp = new Diff();
 
 /**
  * Create a filter function from the given include and exclude patterns.
@@ -48,7 +51,44 @@ const unpluginFactory: UnpluginFactory<
 	function generateCodeWithMap({ source, code, id }: { source: Source; code: Data; id: ID }) {
 		/** generate Magic string */
 		const s = new MagicString(source);
-		s.overwrite(0, -1, code);
+
+		/** generate diff */
+		const diff = dmp.diff_main(source, code);
+
+		/** cleanup diff */
+		dmp.diff_cleanupSemantic(diff);
+
+		let offset = 0;
+		for (let index = 0; index < diff.length; index++) {
+			const [type, text] = diff[index];
+			const textLength = text.length;
+			if (type === 0) {
+				offset += textLength;
+			}
+			else if (type === 1) {
+				s.prependLeft(offset, text);
+			}
+			else if (type === -1) {
+				const next = diff.at(index + 1);
+
+				/** if next is equal to 1, then overwrite */
+				if (next != null && next[0] === 1) {
+					const replaceText = next[1];
+
+					/** get first non-whitespace character of text */
+					const firstNonWhitespaceIndexOfText = text.search(/\S/);
+					const offsetStart = offset + (firstNonWhitespaceIndexOfText > 0 ? firstNonWhitespaceIndexOfText : 0);
+
+					s.update(offsetStart, offset + textLength, replaceText);
+					offset += textLength;
+					index += 1;
+				}
+				else {
+					s.remove(offset, offset + textLength);
+					offset += textLength;
+				}
+			}
+		}
 
 		if (!s.hasChanged()) {
 			return;
