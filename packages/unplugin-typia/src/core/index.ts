@@ -62,12 +62,20 @@ const unpluginFactory: UnpluginFactory<
 		for (let index = 0; index < diff.length; index++) {
 			const [type, text] = diff[index];
 			const textLength = text.length;
+			/** skip */
 			if (type === 0) {
+				/* offset is increased  */
 				offset += textLength;
 			}
+
+			/** add text */
 			else if (type === 1) {
 				s.prependLeft(offset, text);
+
+				/* offset is not increased because text is prepended */
 			}
+
+			/** remove text */
 			else if (type === -1) {
 				const next = diff.at(index + 1);
 
@@ -75,18 +83,21 @@ const unpluginFactory: UnpluginFactory<
 				if (next != null && next[0] === 1) {
 					const replaceText = next[1];
 
-					/** get first non-whitespace character of text */
+					/** get first non-whitespace character of text (maybe bug of magic-string) */
 					const firstNonWhitespaceIndexOfText = text.search(/\S/);
 					const offsetStart = offset + (firstNonWhitespaceIndexOfText > 0 ? firstNonWhitespaceIndexOfText : 0);
 
 					s.update(offsetStart, offset + textLength, replaceText);
-					offset += textLength;
+
+					/** skip next */
 					index += 1;
 				}
 				else {
 					s.remove(offset, offset + textLength);
-					offset += textLength;
 				}
+
+				/* offset is increased  */
+				offset += textLength;
 			}
 		}
 
