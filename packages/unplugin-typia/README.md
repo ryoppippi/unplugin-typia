@@ -196,28 +196,22 @@ Examples:
 
 > ⚠️ Note: Currently, this plugin works only with 'esm' target.
 
-> If you want to use 'cjs' target on Node < 20.17.0 , please use with [`jiti`](https://github.com/unjs/jiti).
-> If you want to use 'cjs' target on Node >= 20.17.0, please use with `require` and enable [`--experimental-require-modules` flag](https://github.com/nodejs/node/pull/51977).
-> If you want to use 'esm' target, don't worry! You can use this plugin without any additional setup.
+> If you want to use 'cjs', use dynamic import.
 
-```sh
-npm install jiti
-```
+> If you want to use 'esm' target, don't worry! You can use this plugin without any additional setup.
 
 ```js
 // webpack.config.js
 
-// if you use Node < 20.17.0
-const jiti = require('jiti')(__filename);
-const { default: UnpluginTypia } = jiti('@ryoppippi/unplugin-typia/webpack');
-
-// if you use Node >= 20.17.0
-// const { default: UnpluginTypia } = require("@ryoppippi/unplugin-typia/webpack");
-
-module.exports = {
-	plugins: [
-		UnpluginTypia({ /* options */ }),
-	],
+module.exports = async () => {
+	const { default: UnpluginTypia } = await import('@ryoppippi/unplugin-typia/webpack');
+	return {
+		plugins: [
+			new UnpluginTypia({
+			// options
+			}),
+		],
+	};
 };
 ```
 
