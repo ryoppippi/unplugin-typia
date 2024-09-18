@@ -4,14 +4,15 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import { Configuration } from 'webpack';
-import * as tsx from 'tsx/cjs/api'
-
-const {default: UnpluginTypia}  = tsx.require('../../packages/unplugin-typia/src/webpack.ts', __filename)
+import { tsImport } from 'tsx/esm/api'
 
 const isProduction = process.env.NODE_ENV == 'production';
 
+module.exports = async () => {
+    /** we use tsImport because of development. However, in real-world projecct, just use `import` instead */
+    // const { default: UnpluginTypia } = await import('@ryoppippi/unplugin-typia/webpack');
+    const { default: UnpluginTypia } = await tsImport('@ryoppippi/unplugin-typia/webpack', __dirname);
 
-module.exports = () => {
     return {
         mode: isProduction ? 'production' : 'development',
         entry: './src/index.ts',
