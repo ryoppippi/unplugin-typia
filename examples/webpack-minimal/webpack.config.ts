@@ -6,7 +6,7 @@ import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import { Configuration } from 'webpack';
 import * as tsx from 'tsx/cjs/api'
 
-const {default: UnpluginTypia}  = tsx.require('../../packages/unplugin-typia/src/webpack.ts', __filename)
+const {default: UnpluginTypia}  = tsx.require('../../src/webpack.ts', __filename)
 
 const isProduction = process.env.NODE_ENV == 'production';
 
