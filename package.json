@@ -32,6 +32,8 @@
 		"jsr.json"
 	],
 	"scripts": {
+		"build": "pnpm --recursive build",
+		"deploy": "pnpm --recursive deploy",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
