@@ -32,7 +32,7 @@ const random = (() => { const $generator = (typia.createRandom as any).generator
             kind: "maximum",
             value: 100
         }
-    ]) ?? (_generator?.integer ?? $generator.integer)(19, 100)
+    ]) ?? (_generator?.integer ?? $generator.integer)(20, 100)
 }); let _generator: any; return (generator?: Partial<typia.IRandomGenerator>): import("typia").Resolved<IMember> => {
     _generator = generator;
     return $ro0();
