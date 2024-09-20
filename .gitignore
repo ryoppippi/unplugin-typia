@@ -17,3 +17,5 @@ yarn-error.log
 
 # eslint cache
 .eslintcache
+
+/jsr.json
