@@ -21,7 +21,7 @@
     "ts-patch": "^3.2.1",
     "tslib": "^2.6.3",
     "type-fest": "^4.24.0",
-    "typescript": "~5.5.4",
+    "typescript": "~5.6.2",
     "typia": "^6.9.0"
   }
 }
