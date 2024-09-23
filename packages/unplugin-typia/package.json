@@ -62,7 +62,7 @@
 		"@types/node": "^20.14.15",
 		"@vue-macros/test-utils": "^1.6.0",
 		"bumpp": "^9.5.1",
-		"dax-sh": "^0.41.0",
+		"dax-sh": "^0.42.0",
 		"esbuild": "^0.23.0",
 		"eslint": "^9.9.0",
 		"eslint-plugin-format": "^0.1.2",
