@@ -11,6 +11,7 @@
     "test": "bun run --filter '*' test",
     "deploy": "bun run --filter '*' deploy",
     "prepare": "bun x bunpare",
+    "preinstall": "npx only-allow bun",
     "taze": "bun x taze -r"
   },
   "workspaces": [
