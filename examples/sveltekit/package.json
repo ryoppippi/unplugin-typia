@@ -14,7 +14,7 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.2.4",
     "@sveltejs/adapter-static": "^3.0.4",
-    "@sveltejs/kit": "^2.5.25",
+    "@sveltejs/kit": "^2.7.1",
     "@sveltejs/vite-plugin-svelte": "4.0.0-next.6",
     "shiki": "^1.14.1",
     "svelte": "^5.0.0-next.222",
