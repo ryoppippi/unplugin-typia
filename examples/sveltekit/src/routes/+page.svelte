@@ -1,15 +1,7 @@
 <script lang="ts">
-import typia, { type tags } from "typia";
+import {type IMember, validate} from "./validate";
 
 const { data } = $props();
-
-interface IMember {
-  id: string & tags.Format<"uuid">;
-  email: string & tags.Format<"email">;
-  age: number & tags.ExclusiveMinimum<19> & tags.Maximum<100>;
-}
-
-const validate = typia.createValidate<IMember>();
 
 let member = $state<IMember>({
   id: crypto.randomUUID(),

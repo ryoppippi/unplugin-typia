@@ -34,7 +34,7 @@ const random = (() => {
           kind: "maximum",
           value: 100
         }
-      ])) ?? ((_generator == null ? void 0 : _generator.integer) ?? $generator.integer)(19, 100)
+      ])) ?? ((_generator == null ? void 0 : _generator.integer) ?? $generator.integer)(20, 100)
     };
   };
   let _generator;
