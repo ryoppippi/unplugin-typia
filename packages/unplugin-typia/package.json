@@ -68,7 +68,7 @@
 		"eslint-plugin-format": "^0.1.2",
 		"rollup": "^4.20.0",
 		"ts-patch": "^3.2.1",
-		"vite": "^5.4.1",
+		"vite": "^5.4.10",
 		"vitest": "^2.0.5"
 	},
 	"access": "public"
