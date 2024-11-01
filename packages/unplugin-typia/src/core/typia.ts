@@ -1,6 +1,6 @@
 import type { Alias } from 'vite';
 import ts from 'typescript';
-import { resolve } from 'pathe';
+import { dirname, resolve } from 'pathe';
 import { resolveTSConfig } from 'pkg-types';
 import { transform as typiaTransform } from 'typia/lib/transform.js';
 
@@ -74,7 +74,7 @@ async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Pro
 			throw new Error(tsconfigParseResult.error.messageText.toString());
 		}
 
-		const tsconfig = ts.parseJsonConfigFileContent(tsconfigParseResult.config, ts.sys, id);
+		const tsconfig = ts.parseJsonConfigFileContent(tsconfigParseResult.config, ts.sys, dirname(id));
 
 		return tsconfig.options;
 	};
