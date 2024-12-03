@@ -29,6 +29,6 @@
     "vite-vanilla",
     "workerd"
   ],
-  "packageManager": "bun@1.1.33",
+  "packageManager": "bun@1.1.38",
   "private": true
 }
