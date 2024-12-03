@@ -1,5 +1,5 @@
 // alias.js
-import typia from 'typia';
+import * as __typia_transform__validateReport from 'typia/lib/internal/_validateReport.js';
 
 const random = /* @__PURE__ */ (() => {
   let _generator;
@@ -14,7 +14,7 @@ const validate = /* @__PURE__ */ (() => {
   return (input) => {
     if (false === __is()) {
       errors = [];
-      typia.createValidate.report(errors);
+      __typia_transform__validateReport._validateReport(errors);
       const success = 0 === errors.length;
       return {
         success,

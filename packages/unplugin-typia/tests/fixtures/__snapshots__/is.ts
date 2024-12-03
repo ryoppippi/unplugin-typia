@@ -1,4 +1,7 @@
+import * as __typia_transform__isFormatEmail from "typia/lib/internal/_isFormatEmail.js";
+import * as __typia_transform__isFormatUuid from "typia/lib/internal/_isFormatUuid.js";
+import * as __typia_transform__isTypeUint32 from "typia/lib/internal/_isTypeUint32.js";
 import typia from 'typia';
 import type { IMember } from './type.js';
-const is = (() => { const $io0 = (input: any): boolean => "string" === typeof input.email && /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(input.email) && ("string" === typeof input.id && /^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(input.id)) && ("number" === typeof input.age && (Math.floor(input.age) === input.age && 0 <= input.age && input.age <= 4294967295 && 19 < input.age && input.age <= 100)); return (input: any): input is IMember => "object" === typeof input && null !== input && $io0(input); })();
+const is = (() => { const _io0 = (input: any): boolean => "string" === typeof input.email && __typia_transform__isFormatEmail._isFormatEmail(input.email) && ("string" === typeof input.id && __typia_transform__isFormatUuid._isFormatUuid(input.id)) && ("number" === typeof input.age && (__typia_transform__isTypeUint32._isTypeUint32(input.age) && 19 < input.age && input.age <= 100)); return (input: any): input is IMember => "object" === typeof input && null !== input && _io0(input); })();
 is({});

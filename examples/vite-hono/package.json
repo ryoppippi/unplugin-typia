@@ -10,17 +10,17 @@
     "prepare": "ts-patch install && typia patch"
   },
   "dependencies": {
-    "hono": "^4.6.8",
-    "uuid": "^9.0.1"
+    "hono": "^4.6.12",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@hono/typia-validator": "^0.0.5",
     "@hono/vite-cloudflare-pages": "^0.4.2",
-    "@hono/vite-dev-server": "^0.12.2",
+    "@hono/vite-dev-server": "^0.17.0",
     "@ryoppippi/unplugin-typia": "workspace:*",
     "ts-patch": "^3.2.1",
-    "typescript": "~5.5.4",
-    "typia": "^6.11.3",
-    "vite": "^5.4.10"
+    "typescript": "~5.7.2",
+    "typia": "^7.0.1",
+    "vite": "^6.0.2"
   }
 }

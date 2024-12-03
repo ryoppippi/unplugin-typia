@@ -65,7 +65,7 @@ export async function transformTypia(
  * @param tsconfigId - The tsconfig.json path. @default undefined
  */
 async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Promise<ts.CompilerOptions> {
-	const parseTsComilerOptions = async () => {
+	const parseTsCompilerOptions = async () => {
 		const readFile = (path: string) => ts.sys.readFile(path);
 		const id = (tsconfigId != null) ? resolve(tsconfigId) : await resolveTSConfig();
 
@@ -81,10 +81,10 @@ async function getTsCompilerOption(cacheEnable = true, tsconfigId?: string): Pro
 
 	/** parse tsconfig compilerOptions */
 	if (cacheEnable) {
-		compilerOptions ??= await parseTsComilerOptions();
+		compilerOptions ??= await parseTsCompilerOptions();
 	}
 	else {
-		compilerOptions = await parseTsComilerOptions();
+		compilerOptions = await parseTsCompilerOptions();
 	}
 
 	return compilerOptions;
