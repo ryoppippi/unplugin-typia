@@ -1,51 +1,54 @@
-import typia from "typia";
+import * as __typia_transform__isFormatEmail from "typia/lib/internal/_isFormatEmail.js";
+import * as __typia_transform__isFormatUuid from "typia/lib/internal/_isFormatUuid.js";
+import * as __typia_transform__isTypeUint32 from "typia/lib/internal/_isTypeUint32.js";
+import * as __typia_transform__validateReport from "typia/lib/internal/_validateReport.js";
 const validate = /* @__PURE__ */ (() => {
-  const $io0 = (input) => "string" === typeof input.email && /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(input.email) && ("string" === typeof input.id && /^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(input.id)) && ("number" === typeof input.age && (Math.floor(input.age) === input.age && 0 <= input.age && input.age <= 4294967295 && 19 < input.age && input.age <= 100));
-  const $vo0 = (input, _path, _exceptionable = true) => ["string" === typeof input.email && (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(input.email) || $report(_exceptionable, {
+  const _io0 = (input) => "string" === typeof input.email && __typia_transform__isFormatEmail._isFormatEmail(input.email) && ("string" === typeof input.id && __typia_transform__isFormatUuid._isFormatUuid(input.id)) && ("number" === typeof input.age && (__typia_transform__isTypeUint32._isTypeUint32(input.age) && 19 < input.age && input.age <= 100));
+  const _vo0 = (input, _path, _exceptionable = true) => ["string" === typeof input.email && (__typia_transform__isFormatEmail._isFormatEmail(input.email) || _report(_exceptionable, {
     path: _path + ".email",
     expected: 'string & Format<"email">',
     value: input.email
-  })) || $report(_exceptionable, {
+  })) || _report(_exceptionable, {
     path: _path + ".email",
     expected: '(string & Format<"email">)',
     value: input.email
-  }), "string" === typeof input.id && (/^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(input.id) || $report(_exceptionable, {
+  }), "string" === typeof input.id && (__typia_transform__isFormatUuid._isFormatUuid(input.id) || _report(_exceptionable, {
     path: _path + ".id",
     expected: 'string & Format<"uuid">',
     value: input.id
-  })) || $report(_exceptionable, {
+  })) || _report(_exceptionable, {
     path: _path + ".id",
     expected: '(string & Format<"uuid">)',
     value: input.id
-  }), "number" === typeof input.age && (Math.floor(input.age) === input.age && 0 <= input.age && input.age <= 4294967295 || $report(_exceptionable, {
+  }), "number" === typeof input.age && (__typia_transform__isTypeUint32._isTypeUint32(input.age) || _report(_exceptionable, {
     path: _path + ".age",
     expected: 'number & Type<"uint32">',
     value: input.age
-  })) && (19 < input.age || $report(_exceptionable, {
+  })) && (19 < input.age || _report(_exceptionable, {
     path: _path + ".age",
     expected: "number & ExclusiveMinimum<19>",
     value: input.age
-  })) && (input.age <= 100 || $report(_exceptionable, {
+  })) && (input.age <= 100 || _report(_exceptionable, {
     path: _path + ".age",
     expected: "number & Maximum<100>",
     value: input.age
-  })) || $report(_exceptionable, {
+  })) || _report(_exceptionable, {
     path: _path + ".age",
     expected: '(number & Type<"uint32"> & ExclusiveMinimum<19> & Maximum<100>)',
     value: input.age
   })].every((flag) => flag);
-  const __is = (input) => "object" === typeof input && null !== input && $io0(input);
+  const __is = (input) => "object" === typeof input && null !== input && _io0(input);
   let errors;
-  let $report;
+  let _report;
   return (input) => {
     if (false === __is(input)) {
       errors = [];
-      $report = typia.createValidate.report(errors);
-      ((input2, _path, _exceptionable = true) => ("object" === typeof input2 && null !== input2 || $report(true, {
+      _report = __typia_transform__validateReport._validateReport(errors);
+      ((input2, _path, _exceptionable = true) => ("object" === typeof input2 && null !== input2 || _report(true, {
         path: _path + "",
         expected: "IMember",
         value: input2
-      })) && $vo0(input2, _path + "", true) || $report(true, {
+      })) && _vo0(input2, _path + "", true) || _report(true, {
         path: _path + "",
         expected: "IMember",
         value: input2
