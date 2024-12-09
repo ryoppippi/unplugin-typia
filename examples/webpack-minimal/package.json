@@ -11,7 +11,7 @@
     "ts-patch": "^3.2.1",
     "tsx": "^4.19.2",
     "typescript": "~5.7.2",
-    "webpack": "^5.97.0",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0",
     "workbox-webpack-plugin": "^7.3.0"
