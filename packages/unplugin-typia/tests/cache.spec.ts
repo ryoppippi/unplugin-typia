@@ -14,7 +14,7 @@ function removeComments(data: string | undefined) {
 	}
 
 	// eslint-disable-next-line regexp/no-unused-capturing-group
-	return data.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');
+	return data.replace(/\/\*[\s\S]*?\*\/\n?|([^\\:]|^)\/\/.*$/gm, '');
 }
 
 it('return null if cache is not found', async () => {

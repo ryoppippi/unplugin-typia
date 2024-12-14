@@ -100,7 +100,7 @@ export class Cache {
 	}
 
 	private get hashComment() {
-		return `/* unplugin-typia-${typiaVersion ?? ''}-${this.#hashKey} */`;
+		return `/* unplugin-typia-${typiaVersion ?? ''}-${this.#hashKey} */\n`;
 	}
 
 	private isWritable(filename: string): boolean {
