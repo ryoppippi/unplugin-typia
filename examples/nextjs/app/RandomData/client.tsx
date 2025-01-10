@@ -1,11 +1,11 @@
 "use client";
 
-import { useFormState } from 'react-dom'
 import type { Entries } from 'type-fest';
 import  { type IMember, randomOnServer  } from './actions';
+import { useActionState } from "react";
 
 export default function RandomDataClient({ initialData }: { initialData: IMember }) {
-  const [state, formAction] = useFormState(randomOnServer, initialData);
+  const [state, formAction] = useActionState(randomOnServer, initialData);
 
   return (
     <div>
