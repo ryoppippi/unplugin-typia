@@ -50,15 +50,17 @@ const validate = (() => { const _io0 = (input: any): boolean => "string" === typ
             value: input
         }))(input, "$input", true);
         const success = 0 === errors.length;
-        return {
+        return success ? {
+            success,
+            data: input
+        } : {
             success,
             errors,
-            data: success ? input : undefined
+            data: input
         } as any;
     }
     return {
         success: true,
-        errors: [],
         data: input
     } as any;
 }; })();

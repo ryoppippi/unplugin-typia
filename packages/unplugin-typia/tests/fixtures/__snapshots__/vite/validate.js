@@ -114,15 +114,17 @@ const validate = /* @__PURE__ */ (() => {
         value: input2
       }))(input, "$input", true);
       const success = 0 === errors.length;
-      return {
+      return success ? {
+        success,
+        data: input
+      } : {
         success,
         errors,
-        data: success ? input : void 0
+        data: input
       };
     }
     return {
       success: true,
-      errors: [],
       data: input
     };
   };

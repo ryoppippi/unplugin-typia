@@ -19,15 +19,17 @@ const validate = /* @__PURE__ */ (() => {
       _report = __typia_transform__validateReport._validateReport(errors);
       /* @__PURE__ */ ((input2, _path, _exceptionable = true) => true)(input, "$input", true);
       const success = 0 === errors.length;
-      return {
+      return success ? {
+        success,
+        data: input
+      } : {
         success,
         errors,
-        data: success ? input : void 0
+        data: input
       };
     }
     return {
       success: true,
-      errors: [],
       data: input
     };
   };
