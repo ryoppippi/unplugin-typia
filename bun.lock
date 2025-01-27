@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 0,
+  "lockfileVersion": 1,
   "workspaces": {
     "": {
       "name": "unplugin-typia-monorepo",
@@ -12,7 +12,7 @@
         "typia": "^7.6.0",
       },
       "peerDependencies": {
-        "@ryoppippi/unplugin-typia": "packages/unplugin-typia",
+        "@ryoppippi/unplugin-typia": "workspace:*",
         "ts-patch": "^3.2.1",
         "tslib": "^2.4.1",
         "typescript": "~5.5.2",
@@ -27,7 +27,7 @@
         "react-dom": "19.0.0",
       },
       "devDependencies": {
-        "@ryoppippi/unplugin-typia": "packages/unplugin-typia",
+        "@ryoppippi/unplugin-typia": "workspace:*",
         "@types/node": "^20.17.9",
         "@types/react": "19.0.4",
         "@types/react-dom": "19.0.2",
@@ -69,7 +69,7 @@
         "@hono/typia-validator": "^0.0.5",
         "@hono/vite-cloudflare-pages": "^0.4.2",
         "@hono/vite-dev-server": "^0.17.0",
-        "@ryoppippi/unplugin-typia": "packages/unplugin-typia",
+        "@ryoppippi/unplugin-typia": "workspace:*",
         "ts-patch": "^3.2.1",
         "typescript": "~5.7.2",
         "typia": "^7.6.0",
@@ -85,7 +85,7 @@
         "uuid": "^11.0.3",
       },
       "devDependencies": {
-        "@ryoppippi/unplugin-typia": "packages/unplugin-typia",
+        "@ryoppippi/unplugin-typia": "workspace:*",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
         "@types/uuid": "^10.0.0",
@@ -100,7 +100,7 @@
     "examples/webpack-minimal": {
       "name": "webpack-minimal",
       "dependencies": {
-        "@ryoppippi/unplugin-typia": "packages/unplugin-typia",
+        "@ryoppippi/unplugin-typia": "workspace:*",
         "cross-env": "^7.0.3",
         "typia": "^7.6.0",
       },
@@ -122,7 +122,7 @@
     },
     "packages/unplugin-typia": {
       "name": "@ryoppippi/unplugin-typia",
-      "version": "1.1.1",
+      "version": "1.2.0",
       "dependencies": {
         "@rollup/pluginutils": "^5.1.3",
         "consola": "^3.2.3",
@@ -702,7 +702,7 @@
 
     "@ryoppippi/eslint-config": ["@jsr/ryoppippi__eslint-config@0.0.23", "https://npm.jsr.io/~/11/@jsr/ryoppippi__eslint-config/0.0.23.tgz", { "dependencies": { "@antfu/eslint-config": "^2.27.1", "defu": "^6.1.4", "pkg-types": "^1.2.0" } }, "sha512-2YGVhLJ1FEkbLzHyFoahaiIqOKZjW04Pi1j3mutgGOKIgOBvtjjQUkxsGB0BUyemgesfA5NS11X+QmemrIsQKQ=="],
 
-    "@ryoppippi/unplugin-typia": ["@ryoppippi/unplugin-typia@workspace:packages/unplugin-typia", { "dependencies": { "@rollup/pluginutils": "^5.1.3", "consola": "^3.2.3", "defu": "^6.1.4", "diff-match-patch": "^1.0.5", "find-cache-dir": "^5.0.0", "magic-string": "^0.30.14", "pathe": "^1.1.2", "pkg-types": "^1.2.1", "type-fest": "^4.30.0", "typescript": "~5.6.3", "typia": "^7.6.0", "unplugin": "^1.16.0" }, "devDependencies": { "@antfu/ni": "^0.23.1", "@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23", "@std/collections": "npm:@jsr/std__collections@1.0.5", "@types/bun": "^1.1.14", "@types/diff-match-patch": "^1.0.36", "@types/node": "^20.17.9", "@vue-macros/test-utils": "^1.7.0", "bumpp": "^9.8.1", "dax-sh": "^0.42.0", "esbuild": "^0.24.0", "eslint": "~9.14.0", "eslint-plugin-format": "^0.1.3", "rollup": "^4.28.0", "ts-patch": "^3.2.1", "vite": "^6.0.2", "vitest": "^2.1.8" } }],
+    "@ryoppippi/unplugin-typia": ["@ryoppippi/unplugin-typia@workspace:packages/unplugin-typia"],
 
     "@samchon/openapi": ["@samchon/openapi@2.4.0", "", {}, "sha512-PydX+pugPCagfaIfPW57z0M2V58fAer6aQqNZWsa6MgM9gm5ZWPx85z1Yt9VvqTpIXMNnzlvA9tg8C5ngqP/SA=="],
 
@@ -780,7 +780,7 @@
 
     "@types/bonjour": ["@types/bonjour@3.5.13", "", { "dependencies": { "@types/node": "*" } }, "sha512-z9fJ5Im06zvUL548KvYNecEVlA7cVDkGUi6kZusb04mpyEFKCIZJvloCcmpmLaIahDpOQGHaHmG6imtPMmPXGQ=="],
 
-    "@types/bun": ["@types/bun@1.1.17", "", { "dependencies": { "bun-types": "1.1.44" } }, "sha512-zZt0Kao/8hAwNOXh4bmt8nKbMEd4QD8n7PeTGF+NZTVY5ouXhU/TX7jUj4He1p7mgY+WdplnU1B6MB1j17vdzg=="],
+    "@types/bun": ["@types/bun@1.2.0", "", { "dependencies": { "bun-types": "1.2.0" } }, "sha512-5N1JqdahfpBlAv4wy6svEYcd/YfO2GNrbL95JOmFx8nkE6dbK4R0oSE5SpBA4vBRqgrOUAXF8Dpiz+gi7r80SA=="],
 
     "@types/connect": ["@types/connect@3.4.38", "", { "dependencies": { "@types/node": "*" } }, "sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug=="],
 
@@ -1082,9 +1082,9 @@
 
     "bumpp": ["bumpp@9.8.1", "", { "dependencies": { "@jsdevtools/ez-spawn": "^3.0.4", "c12": "^1.11.2", "cac": "^6.7.14", "escalade": "^3.2.0", "js-yaml": "^4.1.0", "jsonc-parser": "^3.3.1", "prompts": "^2.4.2", "semver": "^7.6.3", "tinyglobby": "^0.2.10" }, "bin": { "bumpp": "bin/bumpp.js" } }, "sha512-25W55DZI/rq6FboM0Q5y8eHbUk9eNn9oZ4bg/I5kiWn8/rdZCw6iqML076akQiUOQGhrm6QDvSSn4PgQ48bS4A=="],
 
-    "bun-types": ["bun-types@1.1.44", "", { "dependencies": { "@types/node": "~20.12.8", "@types/ws": "~8.5.10" } }, "sha512-jtcekoZeSINgEcHSISzhR13w/cyE+Fankw2Cpl4c0fN3lRmKVAX0i9ay4FyK4lOxUK1HG4HkuIlrPvXKz4Y7sw=="],
+    "bun-types": ["bun-types@1.2.0", "", { "dependencies": { "@types/node": "*", "@types/ws": "~8.5.10" } }, "sha512-KEaJxyZfbV/c4eyG0vyehDpYmBGreNiQbZIqvVHJwZ4BmeuWlNZ7EAzMN2Zcd7ailmS/tGVW0BgYbGf+lGEpWw=="],
 
-    "bunbuild": ["bunbuild@workspace:examples/bun-build", { "devDependencies": { "@types/bun": "latest", "std-env": "^3.8.0", "typia": "^7.6.0" }, "peerDependencies": { "@ryoppippi/unplugin-typia": "packages/unplugin-typia", "ts-patch": "^3.2.1", "tslib": "^2.4.1", "typescript": "~5.5.2" } }],
+    "bunbuild": ["bunbuild@workspace:examples/bun-build"],
 
     "bundle-name": ["bundle-name@4.1.0", "", { "dependencies": { "run-applescript": "^7.0.0" } }, "sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q=="],
 
@@ -1980,7 +1980,7 @@
 
     "next": ["next@15.1.4", "", { "dependencies": { "@next/env": "15.1.4", "@swc/counter": "0.1.3", "@swc/helpers": "0.5.15", "busboy": "1.6.0", "caniuse-lite": "^1.0.30001579", "postcss": "8.4.31", "styled-jsx": "5.1.6" }, "optionalDependencies": { "@next/swc-darwin-arm64": "15.1.4", "@next/swc-darwin-x64": "15.1.4", "@next/swc-linux-arm64-gnu": "15.1.4", "@next/swc-linux-arm64-musl": "15.1.4", "@next/swc-linux-x64-gnu": "15.1.4", "@next/swc-linux-x64-musl": "15.1.4", "@next/swc-win32-arm64-msvc": "15.1.4", "@next/swc-win32-x64-msvc": "15.1.4", "sharp": "^0.33.5" }, "peerDependencies": { "@opentelemetry/api": "^1.1.0", "@playwright/test": "^1.41.2", "babel-plugin-react-compiler": "*", "react": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "react-dom": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "sass": "^1.3.0" }, "optionalPeers": ["@opentelemetry/api", "@playwright/test", "babel-plugin-react-compiler", "sass"], "bin": { "next": "dist/bin/next" } }, "sha512-mTaq9dwaSuwwOrcu3ebjDYObekkxRnXpuVL21zotM8qE2W0HBOdVIdg2Li9QjMEZrj73LN96LcWcz62V19FjAg=="],
 
-    "nextjs": ["nextjs@workspace:examples/nextjs", { "dependencies": { "next": "15.1.4", "react": "19.0.0", "react-dom": "19.0.0" }, "devDependencies": { "@ryoppippi/unplugin-typia": "packages/unplugin-typia", "@types/node": "^20.17.9", "@types/react": "19.0.4", "@types/react-dom": "19.0.2", "ts-patch": "^3.2.1", "tslib": "^2.8.1", "type-fest": "^4.30.0", "typescript": "~5.7.2", "typia": "^7.6.0" } }],
+    "nextjs": ["nextjs@workspace:examples/nextjs"],
 
     "no-case": ["no-case@3.0.4", "", { "dependencies": { "lower-case": "^2.0.2", "tslib": "^2.0.3" } }, "sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg=="],
 
@@ -2450,7 +2450,7 @@
 
     "svelte-check": ["svelte-check@4.1.0", "", { "dependencies": { "@jridgewell/trace-mapping": "^0.3.25", "chokidar": "^4.0.1", "fdir": "^6.2.0", "picocolors": "^1.0.0", "sade": "^1.7.4" }, "peerDependencies": { "svelte": "^4.0.0 || ^5.0.0-next.0", "typescript": ">=5.0.0" }, "bin": { "svelte-check": "bin/svelte-check" } }, "sha512-AflEZYqI578KuDZcpcorPSf597LStxlkN7XqXi38u09zlHODVKd7c+7OuubGzbhgGRUqNTdQCZ+Ga96iRXEf2g=="],
 
-    "sveltekit": ["sveltekit@workspace:examples/sveltekit", { "dependencies": { "sakura.css": "^1.5.0" }, "devDependencies": { "@sveltejs/adapter-auto": "^3.3.1", "@sveltejs/adapter-static": "^3.0.6", "@sveltejs/kit": "^2.9.0", "@sveltejs/vite-plugin-svelte": "^5.0.1", "shiki": "^1.24.0", "svelte": "^5.4.0", "svelte-check": "^4.1.0", "ts-patch": "^3.2.1", "tslib": "^2.8.1", "typescript": "~5.7.2", "typia": "^7.6.0", "vite": "^6.0.2" } }],
+    "sveltekit": ["sveltekit@workspace:examples/sveltekit"],
 
     "svg-tags": ["svg-tags@1.0.0", "", {}, "sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA=="],
 
@@ -2620,13 +2620,13 @@
 
     "vite": ["vite@6.0.2", "", { "dependencies": { "esbuild": "^0.24.0", "postcss": "^8.4.49", "rollup": "^4.23.0" }, "optionalDependencies": { "fsevents": "~2.3.3" }, "peerDependencies": { "@types/node": "^18.0.0 || ^20.0.0 || >=22.0.0", "jiti": ">=1.21.0", "less": "*", "lightningcss": "^1.21.0", "sass": "*", "sass-embedded": "*", "stylus": "*", "sugarss": "*", "terser": "^5.16.0", "tsx": "^4.8.1", "yaml": "^2.4.2" }, "optionalPeers": ["@types/node", "jiti", "less", "lightningcss", "sass", "sass-embedded", "stylus", "sugarss", "terser", "tsx", "yaml"], "bin": { "vite": "bin/vite.js" } }, "sha512-XdQ+VsY2tJpBsKGs0wf3U/+azx8BBpYRHFAyKm5VeEZNOJZRB63q7Sc8Iup3k0TrN3KO6QgyzFf+opSbfY1y0g=="],
 
-    "vite-hono": ["vite-hono@workspace:examples/vite-hono", { "dependencies": { "hono": "^4.6.12", "uuid": "^11.0.3" }, "devDependencies": { "@hono/typia-validator": "^0.0.5", "@hono/vite-cloudflare-pages": "^0.4.2", "@hono/vite-dev-server": "^0.17.0", "@ryoppippi/unplugin-typia": "packages/unplugin-typia", "ts-patch": "^3.2.1", "typescript": "~5.7.2", "typia": "^7.6.0", "vite": "^6.0.2" } }],
+    "vite-hono": ["vite-hono@workspace:examples/vite-hono"],
 
     "vite-node": ["vite-node@2.1.8", "", { "dependencies": { "cac": "^6.7.14", "debug": "^4.3.7", "es-module-lexer": "^1.5.4", "pathe": "^1.1.2", "vite": "^5.0.0" }, "bin": { "vite-node": "vite-node.mjs" } }, "sha512-uPAwSr57kYjAUux+8E2j0q0Fxpn8M9VoyfGiRI8Kfktz9NcYMCenwY5RnZxnF1WTu3TGiYipirIzacLL3VVGFg=="],
 
     "vite-plugin-inspect": ["vite-plugin-inspect@0.10.3", "", { "dependencies": { "@antfu/utils": "^0.7.10", "@rollup/pluginutils": "^5.1.3", "debug": "^4.3.7", "error-stack-parser-es": "^0.1.5", "fs-extra": "^11.2.0", "open": "^10.1.0", "perfect-debounce": "^1.0.0", "picocolors": "^1.1.1", "sirv": "^3.0.0" }, "peerDependencies": { "vite": "^6.0.0" } }, "sha512-7scdthVsZLER/IPvqJddS0PeD+gTWqxls4w+Mob7IniJfeCiTn1qeCi4zyXvgKEuCh2CiNsTjoFhovOWxDXTuw=="],
 
-    "vite-react": ["vite-react@workspace:examples/vite-react", { "dependencies": { "react": "^18.3.1", "react-dom": "^18.3.1", "uuid": "^11.0.3" }, "devDependencies": { "@ryoppippi/unplugin-typia": "packages/unplugin-typia", "@types/react": "^18.3.12", "@types/react-dom": "^18.3.1", "@types/uuid": "^10.0.0", "@vitejs/plugin-react": "^4.3.4", "ts-patch": "^3.2.1", "typescript": "~5.7.2", "typia": "^7.6.0", "vite": "^6.0.2", "vite-plugin-inspect": "^0.10.3" } }],
+    "vite-react": ["vite-react@workspace:examples/vite-react"],
 
     "vitefu": ["vitefu@1.0.3", "", { "peerDependencies": { "vite": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0-beta.0" }, "optionalPeers": ["vite"] }, "sha512-iKKfOMBHob2WxEJbqbJjHAkmYgvFDPhuqrO82om83S8RLk+17FtyMBfcyeH8GqD0ihShtkMW/zzJgiA51hCNCQ=="],
 
@@ -2656,7 +2656,7 @@
 
     "webpack-merge": ["webpack-merge@5.10.0", "", { "dependencies": { "clone-deep": "^4.0.1", "flat": "^5.0.2", "wildcard": "^2.0.0" } }, "sha512-+4zXKdx7UnO+1jaN4l2lHVD+mFvnlZQP/6ljaJVb4SZiwIKeUnrT5l0gkT8z+n4hKpC+jpOv6O9R+gLtag7pSA=="],
 
-    "webpack-minimal": ["webpack-minimal@workspace:examples/webpack-minimal", { "dependencies": { "@ryoppippi/unplugin-typia": "packages/unplugin-typia", "cross-env": "^7.0.3", "typia": "^7.6.0" }, "devDependencies": { "@types/node": "^20.17.9", "@webpack-cli/generators": "^3.0.7", "html-webpack-plugin": "^5.6.3", "prettier": "^3.4.1", "ts-loader": "^9.5.1", "ts-node": "^10.9.2", "ts-patch": "^3.2.1", "tsx": "^4.19.2", "typescript": "~5.7.2", "webpack": "^5.97.0", "webpack-cli": "^5.1.4", "webpack-dev-server": "^5.1.0", "workbox-webpack-plugin": "^7.3.0" } }],
+    "webpack-minimal": ["webpack-minimal@workspace:examples/webpack-minimal"],
 
     "webpack-sources": ["webpack-sources@3.2.3", "", {}, "sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w=="],
 
@@ -3255,8 +3255,6 @@
     "body-parser/bytes": ["bytes@3.1.2", "", {}, "sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg=="],
 
     "body-parser/debug": ["debug@2.6.9", "", { "dependencies": { "ms": "2.0.0" } }, "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="],
-
-    "bun-types/@types/node": ["@types/node@20.12.14", "", { "dependencies": { "undici-types": "~5.26.4" } }, "sha512-scnD59RpYD91xngrQQLGkE+6UrHUPzeKZWhhjBSa3HSkwjbQc38+q3RoIVEwxQGRw3M+j5hpNAM+lgV3cVormg=="],
 
     "bunbuild/typescript": ["typescript@5.5.4", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q=="],
 
@@ -4073,8 +4071,6 @@
     "ajv-formats/ajv/json-schema-traverse": ["json-schema-traverse@1.0.0", "", {}, "sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug=="],
 
     "body-parser/debug/ms": ["ms@2.0.0", "", {}, "sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A=="],
-
-    "bun-types/@types/node/undici-types": ["undici-types@5.26.5", "", {}, "sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA=="],
 
     "c12/chokidar/glob-parent": ["glob-parent@5.1.2", "", { "dependencies": { "is-glob": "^4.0.1" } }, "sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow=="],
 
