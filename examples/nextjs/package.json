@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "bun -b next dev --turbopack",
+    "dev": "bun -b next dev",
     "build": "bun -b next build",
     "start": "bun -b next start",
     "prepare": "ts-patch install && typia patch"
