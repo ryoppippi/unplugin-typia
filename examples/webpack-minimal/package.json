@@ -17,12 +17,11 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "scripts": {
-    "build": "npm run register-config-webpack-to-ts-node webpack --mode=production --node-env=production",
-    "build:dev": "npm run register-config-webpack-to-ts-node webpack --mode=development",
-    "build:prod": "npm run register-config-webpack-to-ts-node webpack --mode=production --node-env=production",
-    "watch": "npm run register-config-webpack-to-ts-node webpack --watch",
-    "serve": "npm run register-config-webpack-to-ts-node webpack serve",
-    "register-config-webpack-to-ts-node": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\"",
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "register-config-webpack-to-ts-node webpack --watch",
+    "serve": "webpack serve",
     "prepare": "ts-patch install && typia patch"
   },
   "dependencies": {
