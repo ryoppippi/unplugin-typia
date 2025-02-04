@@ -4,6 +4,8 @@
  * @module
  */
 
+import type { NextConfig } from 'next';
+import type { WebpackConfigContext } from 'next/dist/server/config-shared.js';
 import webpack from './webpack.js';
 import type { Options } from './core/options.js';
 
@@ -28,10 +30,10 @@ import type { Options } from './core/options.js';
  * );
  * ```
  */
-function next(nextConfig: Record<string, unknown> = {}, options: Options): Record<string, unknown> {
+function next(nextConfig: NextConfig = {}, options: Options): NextConfig {
 	return {
 		...nextConfig,
-		webpack(config: Record<string, unknown>, webpackOptions: Record<string, unknown>) {
+		webpack(config: Record<string, unknown>, webpackOptions: WebpackConfigContext) {
 			if (Array.isArray(config?.plugins)) {
 				config.plugins.unshift(webpack(options));
 			}
