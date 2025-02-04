@@ -1,15 +1,17 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
+import type { Configuration } from 'webpack';
 import 'webpack-dev-server'
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
-import { Configuration } from 'webpack';
 import * as tsx from 'tsx/cjs/api'
+
+const __filename = import.meta.filename;
+const __dirname = import.meta.dirname;
 
 const {default: UnpluginTypia}  = tsx.require('../../packages/unplugin-typia/src/webpack.ts', __filename)
 
 const isProduction = process.env.NODE_ENV == 'production';
-
 
 const config: Configuration = {
     entry: './src/index.ts',
@@ -49,7 +51,7 @@ const config: Configuration = {
     },
 };
 
-module.exports = () => {
+export default () => {
     if (isProduction) {
         config.mode = 'production';
         
