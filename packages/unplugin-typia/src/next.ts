@@ -30,7 +30,7 @@ import type { Options } from './core/options.js';
  * );
  * ```
  */
-function next(nextConfig: NextConfig = {}, options: Options): NextConfig {
+function next(nextConfig: NextConfig = {}, options?: Options): NextConfig {
 	return {
 		...nextConfig,
 		webpack(config: Record<string, unknown>, webpackOptions: WebpackConfigContext) {
