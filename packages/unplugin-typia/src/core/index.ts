@@ -194,6 +194,7 @@ const unpluginFactory: UnpluginFactory<
 
 			/** transform code */
 			let code: Data | undefined;
+			// eslint-disable-next-line ts/switch-exhaustiveness-check
 			switch (true) {
 				case isSvelteFile(id):
 					({ code } = await sveltePreprocess({ id, source, transform: _transform }));

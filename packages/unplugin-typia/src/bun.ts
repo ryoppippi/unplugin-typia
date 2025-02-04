@@ -37,6 +37,7 @@ async function taggedTransform(
 
 	const result = await _transform(source, id);
 
+	// eslint-disable-next-line ts/switch-exhaustiveness-check
 	switch (true) {
 		case result == null:
 			return undefined;

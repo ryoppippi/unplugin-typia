@@ -11,12 +11,10 @@ async function transform(_id: ID) {
 	const result = await rollupBuild(
 		id,
 		[
-			// @ts-expect-error type does not match
 			UnpluginInlineTypia({
 				cache: false,
 				log: false,
 			}),
-			// @ts-expect-error type does not match
 			RollupEsbuildPlugin(),
 			{
 				name: 'test:mod-options',
