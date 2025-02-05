@@ -45,7 +45,7 @@
 		"defu": "^6.1.4",
 		"diff-match-patch": "^1.0.5",
 		"find-cache-dir": "^5.0.0",
-		"magic-string": "^0.30.14",
+		"magic-string": "^0.30.17",
 		"pathe": "^1.1.2",
 		"pkg-types": "^1.2.1",
 		"type-fest": "^4.30.0",
