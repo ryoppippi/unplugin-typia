@@ -14,7 +14,14 @@ import { type ID, type Source, wrap } from './core/types.js';
 /**
  * Options for bun plugin
  */
-export type BunOptions = Options;
+export type BunOptions = {
+	/**
+	 * Convert path of typia to mjs
+	 * even though typia provides mjs, bun cannot handle it (because typia's package.json has "type": "commonjs").
+	 * @default true
+	 */
+	forceImportTypiaMjs?: boolean;
+} & Options;
 
 if (!isBun()) {
 	throw new Error('You must use this plugin with bun');
@@ -104,7 +111,7 @@ function bunTypiaPlugin(
 	const bunPlugin = ({
 		name: 'unplugin-typia',
 		async setup(build) {
-			const { ...options } = bunOptions ?? {};
+			const { forceImportTypiaMjs = true, ...options } = bunOptions ?? {};
 			const resolvedOptions = resolveOptions(options ?? {});
 			const { include } = resolvedOptions;
 
@@ -141,6 +148,16 @@ function bunTypiaPlugin(
 					);
 
 					return { contents: code ?? source };
+				});
+			}
+
+			/** if input is ./node_modules/typia/lib/*, convert js to mjs */
+			if (forceImportTypiaMjs) {
+				build.onLoad({ filter: /.+\/node_modules\/typia\/lib\/.*\.js$/ }, async (args) => {
+					const { path } = args;
+					const mjsPath = path.replace(/\.js$/, '.mjs');
+
+					return { contents: await Bun.file(mjsPath).text() };
 				});
 			}
 		},
