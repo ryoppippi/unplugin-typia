@@ -9,7 +9,7 @@
       "devDependencies": {
         "@types/bun": "latest",
         "std-env": "^3.8.0",
-        "typia": "^7.6.0",
+        "typia": "^7.6.3",
       },
       "peerDependencies": {
         "@ryoppippi/unplugin-typia": "workspace:*",
@@ -28,14 +28,14 @@
       },
       "devDependencies": {
         "@ryoppippi/unplugin-typia": "workspace:*",
-        "@types/node": "^20.17.9",
+        "@types/node": "^20.17.16",
         "@types/react": "19.0.4",
         "@types/react-dom": "19.0.2",
         "ts-patch": "^3.2.1",
         "tslib": "^2.8.1",
         "type-fest": "^4.30.0",
         "typescript": "~5.7.2",
-        "typia": "^7.6.0",
+        "typia": "^7.6.3",
       },
     },
     "examples/sveltekit": {
@@ -46,16 +46,16 @@
       },
       "devDependencies": {
         "@sveltejs/adapter-auto": "^3.3.1",
-        "@sveltejs/adapter-static": "^3.0.6",
+        "@sveltejs/adapter-static": "^3.0.8",
         "@sveltejs/kit": "^2.9.0",
-        "@sveltejs/vite-plugin-svelte": "^5.0.1",
+        "@sveltejs/vite-plugin-svelte": "^5.0.3",
         "shiki": "^1.24.0",
         "svelte": "^5.4.0",
         "svelte-check": "^4.1.0",
         "ts-patch": "^3.2.1",
         "tslib": "^2.8.1",
         "typescript": "~5.7.2",
-        "typia": "^7.6.0",
+        "typia": "^7.6.3",
         "vite": "^6.0.2",
       },
     },
@@ -72,7 +72,7 @@
         "@ryoppippi/unplugin-typia": "workspace:*",
         "ts-patch": "^3.2.1",
         "typescript": "~5.7.2",
-        "typia": "^7.6.0",
+        "typia": "^7.6.3",
         "vite": "^6.0.2",
       },
     },
@@ -92,7 +92,7 @@
         "@vitejs/plugin-react": "^4.3.4",
         "ts-patch": "^3.2.1",
         "typescript": "~5.7.2",
-        "typia": "^7.6.0",
+        "typia": "^7.6.3",
         "vite": "^6.0.2",
         "vite-plugin-inspect": "^0.10.3",
       },
@@ -102,10 +102,10 @@
       "dependencies": {
         "@ryoppippi/unplugin-typia": "workspace:*",
         "cross-env": "^7.0.3",
-        "typia": "^7.6.0",
+        "typia": "^7.6.3",
       },
       "devDependencies": {
-        "@types/node": "^20.17.9",
+        "@types/node": "^20.17.16",
         "@webpack-cli/generators": "^3.0.7",
         "html-webpack-plugin": "^5.6.3",
         "prettier": "^3.4.1",
@@ -122,9 +122,9 @@
     },
     "packages/unplugin-typia": {
       "name": "@ryoppippi/unplugin-typia",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "dependencies": {
-        "@rollup/pluginutils": "^5.1.3",
+        "@rollup/pluginutils": "^5.1.4",
         "consola": "^3.2.3",
         "defu": "^6.1.4",
         "diff-match-patch": "^1.0.5",
@@ -134,7 +134,7 @@
         "pkg-types": "^1.2.1",
         "type-fest": "^4.30.0",
         "typescript": "~5.6.3",
-        "typia": "^7.6.0",
+        "typia": "^7.6.3",
         "unplugin": "^1.16.0",
       },
       "devDependencies": {
@@ -143,11 +143,11 @@
         "@std/collections": "npm:@jsr/std__collections@1.0.5",
         "@types/bun": "^1.1.14",
         "@types/diff-match-patch": "^1.0.36",
-        "@types/node": "^20.17.9",
-        "@vue-macros/test-utils": "^1.7.0",
+        "@types/node": "^20.17.16",
+        "@vue-macros/test-utils": "^1.7.1",
         "bumpp": "^9.8.1",
         "dax-sh": "^0.42.0",
-        "esbuild": "^0.24.0",
+        "esbuild": "^0.24.2",
         "eslint": "~9.14.0",
         "eslint-plugin-format": "^0.1.3",
         "rollup": "^4.28.0",
@@ -2530,7 +2530,7 @@
 
     "typescript": ["typescript@5.6.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="],
 
-    "typia": ["typia@7.6.1", "", { "dependencies": { "@samchon/openapi": "^2.4.2", "commander": "^10.0.0", "comment-json": "^4.2.3", "inquirer": "^8.2.5", "package-manager-detector": "^0.2.0", "randexp": "^0.5.3" }, "peerDependencies": { "typescript": ">=4.8.0 <5.8.0" }, "bin": { "typia": "lib/executable/typia.js" } }, "sha512-9NnX18AV0RpSWMydtFxMznK/RwfqSEh1Oq+HxDZzGFffVSuJI6YTkFaz4xcYsMm8z/UFgyL0B7ULiv/LQKB43g=="],
+    "typia": ["typia@7.6.3", "", { "dependencies": { "@samchon/openapi": "^2.4.2", "commander": "^10.0.0", "comment-json": "^4.2.3", "inquirer": "^8.2.5", "package-manager-detector": "^0.2.0", "randexp": "^0.5.3" }, "peerDependencies": { "typescript": ">=4.8.0 <5.8.0" }, "bin": { "typia": "lib/executable/typia.js" } }, "sha512-eS7a8wet0aYELqhgvgXQpdP/CrMeYa34kV9zIL6jKaBLDibGG0ju1KyVnbFFQ15qkfzYyab9eETrRra0HpFFSA=="],
 
     "ufo": ["ufo@1.5.4", "", {}, "sha512-UsUk3byDzKd04EyoZ7U4DOlxQaD14JUKQl6/P7wiX4FNvUfm3XL246n9W5AmqwW5RSFJ27NAuM0iLscAOYUiGQ=="],
 
@@ -2769,6 +2769,8 @@
     "@eslint/eslintrc/globals": ["globals@14.0.0", "", {}, "sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ=="],
 
     "@eslint/plugin-kit/@eslint/core": ["@eslint/core@0.10.0", "", { "dependencies": { "@types/json-schema": "^7.0.15" } }, "sha512-gFHJ+xBOo4G3WRlR1e/3G8A6/KZAH6zcE/hkLRCZTi/B9avAG365QhFA8uOGzTMqgTghpn7/fSnscW++dpMSAw=="],
+
+    "@hono/typia-validator/typia": ["typia@7.6.1", "", { "dependencies": { "@samchon/openapi": "^2.4.2", "commander": "^10.0.0", "comment-json": "^4.2.3", "inquirer": "^8.2.5", "package-manager-detector": "^0.2.0", "randexp": "^0.5.3" }, "peerDependencies": { "typescript": ">=4.8.0 <5.8.0" }, "bin": { "typia": "lib/executable/typia.js" } }, "sha512-9NnX18AV0RpSWMydtFxMznK/RwfqSEh1Oq+HxDZzGFffVSuJI6YTkFaz4xcYsMm8z/UFgyL0B7ULiv/LQKB43g=="],
 
     "@hono/vite-dev-server/minimatch": ["minimatch@9.0.5", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow=="],
 
