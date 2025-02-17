@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
-    "@types/node": "^20.17.17",
+    "@types/node": "^20.17.19",
     "@types/react": "19.0.4",
     "@types/react-dom": "19.0.2",
     "ts-patch": "^3.2.1",
