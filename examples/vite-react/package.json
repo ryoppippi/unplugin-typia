@@ -25,6 +25,6 @@
     "typescript": "~5.7.2",
     "typia": "^7.6.3",
     "vite": "^6.0.2",
-    "vite-plugin-inspect": "^0.10.3"
+    "vite-plugin-inspect": "^0.10.6"
   }
 }
