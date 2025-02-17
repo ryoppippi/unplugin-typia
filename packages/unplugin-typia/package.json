@@ -50,7 +50,7 @@
 		"pkg-types": "^1.2.1",
 		"type-fest": "^4.30.0",
 		"typescript": "~5.6.3",
-		"typia": "^7.6.3",
+		"typia": "^7.6.4",
 		"unplugin": "^1.16.1"
 	},
 	"devDependencies": {
