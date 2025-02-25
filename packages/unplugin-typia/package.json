@@ -61,7 +61,7 @@
 		"@types/diff-match-patch": "^1.0.36",
 		"@types/node": "^20.17.17",
 		"@vue-macros/test-utils": "^1.7.1",
-		"bumpp": "^9.8.1",
+		"bumpp": "^9.11.1",
 		"dax-sh": "^0.42.0",
 		"esbuild": "^0.24.2",
 		"eslint": "~9.14.0",
