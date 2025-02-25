@@ -2,7 +2,7 @@
   "name": "webpack-minimal",
   "private": true,
   "devDependencies": {
-    "@types/node": "^20.17.17",
+    "@types/node": "^20.17.19",
     "@webpack-cli/generators": "^3.0.7",
     "html-webpack-plugin": "^5.6.3",
     "prettier": "^3.4.1",
