@@ -57,7 +57,7 @@
 		"@antfu/ni": "^0.23.1",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@std/collections": "npm:@jsr/std__collections@1.0.5",
-		"@types/bun": "^1.1.14",
+		"@types/bun": "^1.2.3",
 		"@types/diff-match-patch": "^1.0.36",
 		"@types/node": "^20.17.17",
 		"@vue-macros/test-utils": "^1.7.1",
