@@ -27,6 +27,6 @@
   "dependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
     "cross-env": "^7.0.3",
-    "typia": "^7.6.3"
+    "typia": "^7.6.4"
   }
 }
