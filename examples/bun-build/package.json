@@ -12,8 +12,8 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "std-env": "^3.8.0",
-    "typia": "^7.6.3"
+    "std-env": "^3.8.1",
+    "typia": "^8.0.0"
   },
   "peerDependencies": {
     "ts-patch": "^3.2.1",

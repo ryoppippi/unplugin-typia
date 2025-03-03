@@ -2,18 +2,18 @@
   "name": "webpack-minimal",
   "private": true,
   "devDependencies": {
-    "@types/node": "^20.17.17",
+    "@types/node": "^20.17.23",
     "@webpack-cli/generators": "^3.0.7",
     "html-webpack-plugin": "^5.6.3",
-    "prettier": "^3.4.1",
+    "prettier": "^3.5.3",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
-    "ts-patch": "^3.2.1",
-    "tsx": "^4.19.2",
-    "typescript": "~5.7.2",
-    "webpack": "^5.97.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.1.0",
+    "ts-patch": "^3.3.0",
+    "tsx": "^4.19.3",
+    "typescript": "~5.8.2",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0",
     "workbox-webpack-plugin": "^7.3.0"
   },
   "scripts": {
@@ -27,6 +27,6 @@
   "dependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
     "cross-env": "^7.0.3",
-    "typia": "^7.6.3"
+    "typia": "^8.0.0"
   }
 }

@@ -54,7 +54,7 @@ import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 
 export default defineConfig({
 	plugins: [
-		UnpluginTypia({ tsconfig: "./tsconfig.app.json" /* options */ }), // should be placed before other plugins like `react`, `svetle`, etc.
+		UnpluginTypia({ tsconfig: './tsconfig.app.json' /* options */ }), // should be placed before other plugins like `react`, `svetle`, etc.
 	],
 });
 ```
