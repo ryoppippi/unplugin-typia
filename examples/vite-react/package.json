@@ -12,13 +12,13 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.0.0",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
     "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react-dom": "^19.0.4",
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "ts-patch": "^3.2.1",
