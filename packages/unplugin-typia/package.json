@@ -10,42 +10,52 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
+			"bun": "./src/index.ts",
 			"default": "./dist/index.js"
 		},
 		"./api": {
 			"types": "./dist/api.d.ts",
+			"bun": "./src/api.ts",
 			"default": "./dist/api.js"
 		},
 		"./vite": {
 			"types": "./dist/vite.d.ts",
+			"bun": "./src/vite.ts",
 			"default": "./dist/vite.js"
 		},
 		"./webpack": {
 			"types": "./dist/webpack.d.ts",
+			"bun": "./src/webpack.ts",
 			"default": "./dist/webpack.js"
 		},
 		"./rollup": {
 			"types": "./dist/rollup.d.ts",
+			"bun": "./src/rollup.ts",
 			"default": "./dist/rollup.js"
 		},
 		"./esbuild": {
 			"types": "./dist/esbuild.d.ts",
+			"bun": "./src/esbuild.ts",
 			"default": "./dist/esbuild.js"
 		},
 		"./next": {
 			"types": "./dist/next.d.ts",
+			"bun": "./src/next.ts",
 			"default": "./dist/next.js"
 		},
 		"./rolldown": {
 			"types": "./dist/rolldown.d.ts",
+			"bun": "./src/rolldown.ts",
 			"default": "./dist/rolldown.js"
 		},
 		"./farm": {
 			"types": "./dist/farm.d.ts",
+			"bun": "./src/farm.ts",
 			"default": "./dist/farm.js"
 		},
 		"./rspack": {
 			"types": "./dist/rspack.d.ts",
+			"bun": "./src/rspack.ts",
 			"default": "./dist/rspack.js"
 		},
 		"./bun": "./src/bun.ts",
