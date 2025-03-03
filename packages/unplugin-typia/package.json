@@ -32,6 +32,7 @@
 		"jsr.json"
 	],
 	"scripts": {
+		"build": "tsup",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
@@ -69,6 +70,7 @@
 		"eslint-plugin-format": "^1.0.1",
 		"rollup": "^4.34.9",
 		"ts-patch": "^3.3.0",
+		"tsup": "^8.4.0",
 		"typescript": "~5.8.2",
 		"typia": "^8.0.0",
 		"vite": "^6.2.0",
