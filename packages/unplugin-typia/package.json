@@ -8,16 +8,46 @@
 	"license": "MIT",
 	"repository": "https://github.com/ryoppippi/unplugin-typia.git",
 	"exports": {
-		".": "./src/index.ts",
-		"./api": "./src/api.ts",
-		"./vite": "./src/vite.ts",
-		"./webpack": "./src/webpack.ts",
-		"./rollup": "./src/rollup.ts",
-		"./esbuild": "./src/esbuild.ts",
-		"./next": "./src/next.ts",
-		"./rolldown": "./src/rolldown.ts",
-		"./farm": "./src/farm.ts",
-		"./rspack": "./src/rspack.ts",
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./api": {
+			"types": "./dist/api.d.ts",
+			"default": "./dist/api.js"
+		},
+		"./vite": {
+			"types": "./dist/vite.d.ts",
+			"default": "./dist/vite.js"
+		},
+		"./webpack": {
+			"types": "./dist/webpack.d.ts",
+			"default": "./dist/webpack.js"
+		},
+		"./rollup": {
+			"types": "./dist/rollup.d.ts",
+			"default": "./dist/rollup.js"
+		},
+		"./esbuild": {
+			"types": "./dist/esbuild.d.ts",
+			"default": "./dist/esbuild.js"
+		},
+		"./next": {
+			"types": "./dist/next.d.ts",
+			"default": "./dist/next.js"
+		},
+		"./rolldown": {
+			"types": "./dist/rolldown.d.ts",
+			"default": "./dist/rolldown.js"
+		},
+		"./farm": {
+			"types": "./dist/farm.d.ts",
+			"default": "./dist/farm.js"
+		},
+		"./rspack": {
+			"types": "./dist/rspack.d.ts",
+			"default": "./dist/rspack.js"
+		},
 		"./bun": "./src/bun.ts",
 		"./package.json": "./package.json"
 	},
