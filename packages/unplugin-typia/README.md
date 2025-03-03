@@ -5,9 +5,6 @@
 [![npm version](https://img.shields.io/npm/v/@ryoppippi/unplugin-typia?color=yellow)](https://npmjs.com/package/@ryoppippi/unplugin-typia)
 [![npm downloads](https://img.shields.io/npm/dm/@ryoppippi/unplugin-typia?color=yellow)](https://npmjs.com/package/@ryoppippi/unplugin-typia)
 
-[![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia)](https://jsr.io/@ryoppippi/unplugin-typia)
-[![JSR](https://jsr.io/badges/@ryoppippi/unplugin-typia/score)](https://jsr.io/@ryoppippi/unplugin-typia)
-
 ## Why
 
 Typia is fantastic, but it is hard to setup, even for frontend development.
@@ -19,9 +16,6 @@ This unplugin aims to make it easier to use Typia in your projects.
 First, install `unplugin-typia`:
 
 ```bash
-# jsr(recommended)
-npx jsr add -D @ryoppippi/unplugin-typia
-
 # npm
 npm install -D @ryoppippi/unplugin-typia
 ```
