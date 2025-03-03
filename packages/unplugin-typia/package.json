@@ -8,16 +8,56 @@
 	"license": "MIT",
 	"repository": "https://github.com/ryoppippi/unplugin-typia.git",
 	"exports": {
-		".": "./src/index.ts",
-		"./api": "./src/api.ts",
-		"./vite": "./src/vite.ts",
-		"./webpack": "./src/webpack.ts",
-		"./rollup": "./src/rollup.ts",
-		"./esbuild": "./src/esbuild.ts",
-		"./next": "./src/next.ts",
-		"./rolldown": "./src/rolldown.ts",
-		"./farm": "./src/farm.ts",
-		"./rspack": "./src/rspack.ts",
+		".": {
+			"types": "./dist/index.d.ts",
+			"bun": "./src/index.ts",
+			"default": "./dist/index.js"
+		},
+		"./api": {
+			"types": "./dist/api.d.ts",
+			"bun": "./src/api.ts",
+			"default": "./dist/api.js"
+		},
+		"./vite": {
+			"types": "./dist/vite.d.ts",
+			"bun": "./src/vite.ts",
+			"default": "./dist/vite.js"
+		},
+		"./webpack": {
+			"types": "./dist/webpack.d.ts",
+			"bun": "./src/webpack.ts",
+			"default": "./dist/webpack.js"
+		},
+		"./rollup": {
+			"types": "./dist/rollup.d.ts",
+			"bun": "./src/rollup.ts",
+			"default": "./dist/rollup.js"
+		},
+		"./esbuild": {
+			"types": "./dist/esbuild.d.ts",
+			"bun": "./src/esbuild.ts",
+			"default": "./dist/esbuild.js"
+		},
+		"./next": {
+			"types": "./dist/next.d.ts",
+			"bun": "./src/next.ts",
+			"default": "./dist/next.js"
+		},
+		"./rolldown": {
+			"types": "./dist/rolldown.d.ts",
+			"bun": "./src/rolldown.ts",
+			"default": "./dist/rolldown.js"
+		},
+		"./farm": {
+			"types": "./dist/farm.d.ts",
+			"bun": "./src/farm.ts",
+			"default": "./dist/farm.js"
+		},
+		"./rspack": {
+			"types": "./dist/rspack.d.ts",
+			"bun": "./src/rspack.ts",
+			"default": "./dist/rspack.js"
+		},
 		"./bun": "./src/bun.ts",
 		"./package.json": "./package.json"
 	},
@@ -28,16 +68,14 @@
 		"package.json",
 		"src"
 	],
-	"jsrInclude": [
-		"jsr.json"
-	],
 	"scripts": {
+		"build": "tsup",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
-		"release": "nr test run && nr lint && nr check && bumpp",
-		"publish:jsr": "nr test run && nlx pkg-to-jsr && nlx jsr publish --allow-dirty"
+		"release": "nr test run && nr lint && nr build && nlx publint && bumpp --ignore-scripts",
+		"prepublishOnly": "bun run build"
 	},
 	"peerDependencies": {
 		"typia": ">=8.0.0 <9.0.0"
@@ -69,6 +107,7 @@
 		"eslint-plugin-format": "^1.0.1",
 		"rollup": "^4.34.9",
 		"ts-patch": "^3.3.0",
+		"tsup": "^8.4.0",
 		"typescript": "~5.8.2",
 		"typia": "^8.0.0",
 		"vite": "^6.2.0",

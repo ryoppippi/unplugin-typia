@@ -3,43 +3,18 @@ name: release
 env:
   NODE_VERSION: lts/*
   BUN_VERSION: latest
-  DENO_VERSION: v1.x
-  NPM_REGISTRY: https://registry.npmjs.org
-  PACKAGE_DIR: ${{github.workspace}}/packages/unplugin-typia
+  PACKAGE_DIR: ./packages/unplugin-typia
 
 on:
   push:
     tags:
-      - "v*"
-  workflow_dispatch:
+      - 'v*'
 
 permissions:
   contents: write
 
 jobs:
-  jsr:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-      - run: bun i --frozen-lockfile
-      - run: bun run publish:jsr
-        working-directory: ${{env.PACKAGE_DIR}}
-
   npm:
-    needs:
-      - jsr
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: Release
@@ -47,36 +22,34 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: denoland/setup-deno@v1
+      - uses: actions/checkout@v4
         with:
-          deno-version: ${{ env.DENO_VERSION }}
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          registry-url: ${{ env.NPM_REGISTRY }}
-      - name: Publish to npm
-        run: deno run -A jsr:@ryoppippi/mirror-jsr-to-npm
+          registry-url: 'https://registry.npmjs.org'
+          node-version: ${{env.NODE_VERSION}}
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - run: bun install --frozen-lockfile
+      - run: |
+          npm pkg delete private
+          npm publish --provenance --no-git-checks --access public
         env:
-          PACKAGE_NAME: "@ryoppippi/unplugin-typia"
-          PACKAGE_DESCRIPTION: "unplugin for typia"
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Set your npm token as a GitHub secret
-          NPM_CONFIG_PROVENANCE: true # If you publish with provenance
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_CONFIG_PROVENANCE: true
+        working-directory: ${{env.PACKAGE_DIR}}
 
   release:
     needs:
-      - jsr
       - npm
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
       - run: bunx changelogithub
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
