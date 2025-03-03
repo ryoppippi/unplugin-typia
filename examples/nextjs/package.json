@@ -15,14 +15,14 @@
   },
   "devDependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
-    "@types/node": "^20.17.17",
+    "@types/node": "^20.17.23",
     "@types/react": "19.0.4",
     "@types/react-dom": "19.0.2",
-    "ts-patch": "^3.2.1",
+    "ts-patch": "^3.3.0",
     "tslib": "^2.8.1",
-    "type-fest": "^4.30.0",
-    "typescript": "~5.7.2",
-    "typia": "^7.6.3"
+    "type-fest": "^4.36.0",
+    "typescript": "~5.8.2",
+    "typia": "^8.0.0"
   },
   "overrides": {
     "@types/react": "19.0.4",
