@@ -53,28 +53,11 @@ jobs:
       - run: bun i --frozen-lockfile
       - run: bun run lint
 
-  jsr-publish-dry-run:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-      - run: bun i --frozen-lockfile
-      - run: bun run publish:jsr --dry-run
-        working-directory: packages/unplugin-typia
-
   action-timeline:
     needs:
       - lint
       - test
       - build-examples
-      - jsr-publish-dry-run
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:

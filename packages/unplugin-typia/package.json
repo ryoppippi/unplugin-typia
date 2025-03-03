@@ -58,17 +58,14 @@
 		"package.json",
 		"src"
 	],
-	"jsrInclude": [
-		"jsr.json"
-	],
 	"scripts": {
 		"build": "tsup",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
-		"release": "nr test run && nr lint && nr check && bumpp",
-		"publish:jsr": "nr test run && nlx pkg-to-jsr && nlx jsr publish --allow-dirty"
+		"release": "nr test run && nr lint && nr build && nlx publint && bumpp --ignore-scripts",
+		"prepublishOnly": "bun run build"
 	},
 	"peerDependencies": {
 		"typia": ">=8.0.0 <9.0.0"
