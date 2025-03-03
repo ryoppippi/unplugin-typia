@@ -63,7 +63,9 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run build
         working-directory: ${{env.PACKAGE_DIR}}
-      - run: bun x pkg-pr-new publish
+      - run: |
+          npm pkg delete private
+          bun x pkg-pr-new publish
         working-directory: ${{env.PACKAGE_DIR}}
 
   action-timeline:
