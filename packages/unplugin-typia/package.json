@@ -78,7 +78,18 @@
 		"prepublishOnly": "bun run build"
 	},
 	"peerDependencies": {
-		"typia": ">=8.0.0 <9.0.0"
+		"svelte": "^5.0.0",
+		"typescript": ">=4.8.0 <5.9.0",
+		"typia": ">=8.0.0 <9.0.0",
+		"vite": ">=3.0.0"
+	},
+	"peerDependenciesMeta": {
+		"svelte": {
+			"optional": true
+		},
+		"vite": {
+			"optional": true
+		}
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.4",
