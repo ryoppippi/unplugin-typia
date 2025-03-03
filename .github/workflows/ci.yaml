@@ -3,6 +3,7 @@ name: CI
 env:
   NODE_VERSION: lts/*
   BUN_VERSION: latest
+  PACKAGE_DIR: ./packages/unplugin-typia
 
 on:
   schedule:
@@ -53,11 +54,24 @@ jobs:
       - run: bun i --frozen-lockfile
       - run: bun run lint
 
+  npm-publish-dry-run-and-upload-pkg-pr-now:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+        working-directory: ${{env.PACKAGE_DIR}}
+      - run: bun x pkg-pr-new publish
+        working-directory: ${{env.PACKAGE_DIR}}
+
   action-timeline:
     needs:
       - lint
       - test
       - build-examples
+      - npm-publish-dry-run-and-upload-pkg-pr-now
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
