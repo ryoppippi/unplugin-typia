@@ -39,6 +39,9 @@
 		"release": "nr test run && nr lint && nr check && bumpp",
 		"publish:jsr": "nr test run && nlx pkg-to-jsr && nlx jsr publish --allow-dirty"
 	},
+	"peerDependencies": {
+		"typia": ">=8.0.0 <9.0.0"
+	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.4",
 		"consola": "^3.4.0",
@@ -70,9 +73,6 @@
 		"typia": "^8.0.0",
 		"vite": "^6.2.0",
 		"vitest": "^3.0.7"
-	},
-	"peerDependencies": {
-		"typia": ">=8.0.0 <9.0.0"
 	},
 	"access": "public"
 }
