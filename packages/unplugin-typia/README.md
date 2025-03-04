@@ -217,8 +217,6 @@ module.exports = {
 
 <br></details>
 
-More integration guides can be found in the [`JSR Doc`](https://jsr.io/@ryoppippi/unplugin-typia/doc)
-
 You can find examples in the [`examples/`](https://github.com/ryoppippi/unplugin-typia/tree/main/examples).
 
 ## Supported File Extensions
