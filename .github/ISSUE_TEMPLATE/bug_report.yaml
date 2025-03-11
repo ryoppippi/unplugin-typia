@@ -10,6 +10,8 @@ body:
         - Read the `README.md` of using the package
         - Search related issues and discussions in the repository
 
+        (mention to @ryoppippi)
+
   - type: input
     id: version
     attributes:
