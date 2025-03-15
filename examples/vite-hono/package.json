@@ -20,7 +20,7 @@
     "@ryoppippi/unplugin-typia": "workspace:*",
     "ts-patch": "^3.3.0",
     "typescript": "~5.8.2",
-    "typia": "^8.0.0",
+    "typia": "^8.0.2",
     "vite": "^6.2.0"
   }
 }
