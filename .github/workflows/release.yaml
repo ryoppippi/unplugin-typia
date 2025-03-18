@@ -22,14 +22,14 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           registry-url: 'https://registry.npmjs.org'
           node-version: ${{env.NODE_VERSION}}
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2.0.1
         with:
           bun-version: ${{ env.BUN_VERSION }}
       - run: bun install --frozen-lockfile
@@ -46,10 +46,10 @@ jobs:
       - npm
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2.0.1
       - run: bunx changelogithub
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

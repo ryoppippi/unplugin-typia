@@ -17,11 +17,11 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2.0.1
         with:
           bun-version: ${{ env.BUN_VERSION }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: bun i --frozen-lockfile
@@ -32,11 +32,11 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2.0.1
         with:
           bun-version: ${{ env.BUN_VERSION }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: bun i --frozen-lockfile
@@ -47,11 +47,11 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2.0.1
         with:
           bun-version: ${{ env.BUN_VERSION }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: bun i --frozen-lockfile
@@ -61,8 +61,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2.0.1
       - run: bun install --frozen-lockfile
       - run: bun run build
         working-directory: ${{env.PACKAGE_DIR}}
@@ -80,4 +80,4 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
-      - uses: Kesin11/actions-timeline@v2
+      - uses: Kesin11/actions-timeline@427ee2cf860166e404d0d69b4f2b24012bb7af4f # v2.2.3
