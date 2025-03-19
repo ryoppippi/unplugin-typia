@@ -105,6 +105,7 @@
 	},
 	"devDependencies": {
 		"@antfu/ni": "^23.3.1",
+		"@rslib/core": "^0.5.4",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@types/bun": "^1.2.4",
 		"@types/diff-match-patch": "^1.0.36",
@@ -120,6 +121,7 @@
 		"tsup": "^8.4.0",
 		"typescript": "~5.8.2",
 		"typia": "^8.0.0",
+		"unplugin-unused": "^0.4.3",
 		"vite": "^6.2.0",
 		"vitest": "^3.0.7"
 	},

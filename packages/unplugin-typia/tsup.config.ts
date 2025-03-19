@@ -1,4 +1,5 @@
 import type { Options } from 'tsup';
+import UnpluginUnused from 'unplugin-unused/esbuild';
 
 export default <Options>{
 	entry: [
@@ -12,4 +13,9 @@ export default <Options>{
 	cjsInterop: true,
 	splitting: true,
 	sourcemap: true,
+	plugins: [
+		UnpluginUnused({
+			level: 'error',
+		}),
+	],
 };
