@@ -2,7 +2,7 @@ import type { UnpluginFactory, UnpluginInstance } from 'unplugin';
 import { createUnplugin } from 'unplugin';
 import { createFilter as rollupCreateFilter } from '@rollup/pluginutils';
 import MagicString from 'magic-string';
-import Diff from 'diff-match-patch';
+import * as Diff from 'diff-match-patch-es';
 import { resolve } from 'pathe';
 
 import type { ResolvedConfig } from 'vite';
@@ -16,8 +16,6 @@ import { Cache } from './cache.js';
 import { isSvelteFile, preprocess as sveltePreprocess } from './languages/svelte.js';
 
 const name = `unplugin-typia`;
-
-const dmp = new Diff();
 
 /**
  * Create a filter function from the given include and exclude patterns.
@@ -53,10 +51,10 @@ const unpluginFactory: UnpluginFactory<
 		const s = new MagicString(source);
 
 		/** generate diff */
-		const diff = dmp.diff_main(source, code);
+		const diff = Diff.diff(source, code);
 
 		/** cleanup diff */
-		dmp.diff_cleanupSemantic(diff);
+		Diff.diffCleanupSemantic(diff);
 
 		let offset = 0;
 		for (let index = 0; index < diff.length; index++) {
