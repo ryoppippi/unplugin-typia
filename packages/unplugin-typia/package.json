@@ -122,7 +122,7 @@
 		"typia": "^8.0.0",
 		"unplugin-unused": "^0.4.3",
 		"vite": "^6.2.0",
-		"vitest": "^3.0.7"
+		"vitest": "^3.0.9"
 	},
 	"access": "public"
 }
