@@ -17,6 +17,13 @@ import { isSvelteFile, preprocess as sveltePreprocess } from './languages/svelte
 
 const name = `unplugin-typia`;
 
+function removeRslibPrefix(id: string) {
+	if (id.endsWith('?__rslib_entry__')) {
+		return id.replace('?__rslib_entry__', '');
+	}
+	return id;
+}
+
 /**
  * Create a filter function from the given include and exclude patterns.
  */
@@ -176,16 +183,15 @@ const unpluginFactory: UnpluginFactory<
 		},
 
 		transformInclude(id) {
-			let _id = id;
-			if (id.endsWith('?__rslib_entry__')) {
-				_id = id.replace('?__rslib_entry__', '');
-			}
+			const _id = removeRslibPrefix(id);
 			return filter(_id);
 		},
 
 		async transform(_source, _id) {
 			const source = wrap<Source>(_source);
-			const id = wrap<ID>(resolve(_id));
+			const resolvedId = resolve(_id);
+			const removeRslibPrefixId = removeRslibPrefix(resolvedId);
+			const id = wrap<ID>(removeRslibPrefixId);
 
 			/** skip if source does not include typia */
 			if (!source.includes('typia')) {
