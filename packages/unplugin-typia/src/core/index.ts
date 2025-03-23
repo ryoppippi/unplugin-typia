@@ -176,6 +176,9 @@ const unpluginFactory: UnpluginFactory<
 		},
 
 		transformInclude(id) {
+			if (id.endsWith('?__rslib_entry__')) {
+				id.replace('?__rslib_entry__', '');
+			}
 			return filter(id);
 		},
 
