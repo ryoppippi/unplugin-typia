@@ -176,10 +176,11 @@ const unpluginFactory: UnpluginFactory<
 		},
 
 		transformInclude(id) {
+			let _id = id;
 			if (id.endsWith('?__rslib_entry__')) {
-				id.replace('?__rslib_entry__', '');
+				_id = id.replace('?__rslib_entry__', '');
 			}
-			return filter(id);
+			return filter(_id);
 		},
 
 		async transform(_source, _id) {
