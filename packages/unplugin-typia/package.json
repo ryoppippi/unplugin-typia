@@ -107,7 +107,7 @@
 		"@antfu/ni": "^24.3.0",
 		"@rslib/core": "^0.5.5",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
-		"@types/bun": "^1.2.4",
+		"@types/bun": "^1.2.5",
 		"@types/node": "^20.17.24",
 		"@vue-macros/test-utils": "^1.7.1",
 		"bumpp": "^10.1.0",
