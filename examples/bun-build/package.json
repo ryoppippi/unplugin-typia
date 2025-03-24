@@ -17,7 +17,7 @@
   },
   "peerDependencies": {
     "ts-patch": "^3.2.1",
-    "tslib": "^2.4.1",
+    "tslib": "^2.8.1",
     "typescript": "~5.5.2",
     "@ryoppippi/unplugin-typia": "workspace:*"
   }
