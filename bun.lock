@@ -14,7 +14,7 @@
       "peerDependencies": {
         "@ryoppippi/unplugin-typia": "workspace:*",
         "ts-patch": "^3.2.1",
-        "tslib": "^2.4.1",
+        "tslib": "^2.8.1",
         "typescript": "~5.5.2",
       },
     },
@@ -28,7 +28,7 @@
       },
       "devDependencies": {
         "@ryoppippi/unplugin-typia": "workspace:*",
-        "@types/node": "^20.17.24",
+        "@types/node": "^20.17.25",
         "@types/react": "19.0.4",
         "@types/react-dom": "19.0.2",
         "ts-patch": "^3.3.0",
@@ -105,7 +105,7 @@
         "typia": "^8.0.3",
       },
       "devDependencies": {
-        "@types/node": "^20.17.24",
+        "@types/node": "^20.17.25",
         "@webpack-cli/generators": "^3.0.7",
         "html-webpack-plugin": "^5.6.3",
         "prettier": "^3.5.3",
@@ -122,7 +122,7 @@
     },
     "packages/unplugin-typia": {
       "name": "@ryoppippi/unplugin-typia",
-      "version": "2.1.0",
+      "version": "2.1.3",
       "dependencies": {
         "@rollup/pluginutils": "^5.1.4",
         "consola": "^3.4.2",
@@ -139,8 +139,8 @@
         "@antfu/ni": "^24.3.0",
         "@rslib/core": "^0.5.5",
         "@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
-        "@types/bun": "^1.2.4",
-        "@types/node": "^20.17.24",
+        "@types/bun": "^1.2.5",
+        "@types/node": "^20.17.25",
         "@vue-macros/test-utils": "^1.7.1",
         "bumpp": "^10.1.0",
         "dax-sh": "^0.42.0",
@@ -157,7 +157,7 @@
         "vitest": "^3.0.9",
       },
       "peerDependencies": {
-        "svelte": "^5.0.0",
+        "svelte": "^5.25.2",
         "typescript": ">=4.8.0 <5.9.0",
         "typia": ">=8.0.0 <9.0.0",
         "vite": ">=3.0.0",
@@ -817,7 +817,7 @@
 
     "@types/bonjour": ["@types/bonjour@3.5.13", "", { "dependencies": { "@types/node": "*" } }, "sha512-z9fJ5Im06zvUL548KvYNecEVlA7cVDkGUi6kZusb04mpyEFKCIZJvloCcmpmLaIahDpOQGHaHmG6imtPMmPXGQ=="],
 
-    "@types/bun": ["@types/bun@1.2.5", "", { "dependencies": { "bun-types": "1.2.5" } }, "sha512-w2OZTzrZTVtbnJew1pdFmgV99H0/L+Pvw+z1P67HaR18MHOzYnTYOi6qzErhK8HyT+DB782ADVPPE92Xu2/Opg=="],
+    "@types/bun": ["@types/bun@1.2.8", "", { "dependencies": { "bun-types": "1.2.7" } }, "sha512-t8L1RvJVUghW5V+M/fL3Thbxcs0HwNsXsnTEBEfEVqGteiJToOlZ/fyOEaR1kZsNqnu+3XA4RI/qmnX4w6+S+w=="],
 
     "@types/connect": ["@types/connect@3.4.38", "", { "dependencies": { "@types/node": "*" } }, "sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug=="],
 
@@ -1147,7 +1147,7 @@
 
     "bumpp": ["bumpp@10.1.0", "", { "dependencies": { "ansis": "^3.17.0", "args-tokenizer": "^0.3.0", "c12": "^3.0.2", "cac": "^6.7.14", "escalade": "^3.2.0", "jsonc-parser": "^3.3.1", "package-manager-detector": "^1.0.0", "semver": "^7.7.1", "tinyexec": "^0.3.2", "tinyglobby": "^0.2.12", "yaml": "^2.7.0" }, "bin": { "bumpp": "bin/bumpp.mjs" } }, "sha512-cM/4+kO2A2l3aDSL7tr/ALg8TWPihl1fDWHZyz55JlDmzd01Y+8Vq3YQ1ydeKDS4QFN+tKaLsVzhdDIb/cbsLQ=="],
 
-    "bun-types": ["bun-types@1.2.5", "", { "dependencies": { "@types/node": "*", "@types/ws": "~8.5.10" } }, "sha512-3oO6LVGGRRKI4kHINx5PIdIgnLRb7l/SprhzqXapmoYkFl5m4j6EvALvbDVuuBFaamB46Ap6HCUxIXNLCGy+tg=="],
+    "bun-types": ["bun-types@1.2.7", "", { "dependencies": { "@types/node": "*", "@types/ws": "*" } }, "sha512-P4hHhk7kjF99acXqKvltyuMQ2kf/rzIw3ylEDpCxDS9Xa0X0Yp/gJu/vDCucmWpiur5qJ0lwB2bWzOXa2GlHqA=="],
 
     "bunbuild": ["bunbuild@workspace:examples/bun-build"],
 
@@ -2994,8 +2994,6 @@
     "bumpp/package-manager-detector": ["package-manager-detector@1.1.0", "", {}, "sha512-Y8f9qUlBzW8qauJjd/eu6jlpJZsuPJm2ZAV0cDVd420o4EdpH5RPdoCv+60/TdJflGatr4sDfpAL6ArWZbM5tA=="],
 
     "bumpp/tinyexec": ["tinyexec@0.3.2", "", {}, "sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA=="],
-
-    "bun-types/@types/ws": ["@types/ws@8.5.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-bd/YFLW+URhBzMXurx7lWByOu+xzU9+kb3RboOteXYDfW+tr+JZa99OyNmPINEGB/ahzKrEuc8rcv4gnpJmxTw=="],
 
     "c12/confbox": ["confbox@0.1.8", "", {}, "sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w=="],
 
