@@ -9,8 +9,8 @@ const random = /* @__PURE__ */ (() => {
     id: (_generator?.uuid ?? __typia_transform__randomFormatUuid._randomFormatUuid)(),
     age: (_generator?.integer ?? __typia_transform__randomInteger._randomInteger)({
       type: "integer",
-      exclusiveMinimum: true,
-      minimum: 19,
+      minimum: 0,
+      exclusiveMinimum: 19,
       maximum: 100
     })
   });

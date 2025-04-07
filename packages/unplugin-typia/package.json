@@ -82,7 +82,7 @@
 	"peerDependencies": {
 		"svelte": "^5.25.2",
 		"typescript": ">=4.8.0 <5.9.0",
-		"typia": ">=8.0.0 <9.0.0",
+		"typia": ">=8.0.0",
 		"vite": ">=3.0.0"
 	},
 	"peerDependenciesMeta": {
@@ -121,7 +121,7 @@
 		"ts-patch": "^3.3.0",
 		"tsup": "^8.4.0",
 		"typescript": "~5.8.2",
-		"typia": "^8.0.3",
+		"typia": "^9.0.1",
 		"unplugin-unused": "^0.4.3",
 		"vite": "^6.2.2",
 		"vitest": "^3.0.9"

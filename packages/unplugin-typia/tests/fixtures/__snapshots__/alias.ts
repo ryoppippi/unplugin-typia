@@ -13,8 +13,8 @@ const random = (() => { const _ro0 = (_recursive: boolean = false, _depth: numbe
     id: (_generator?.uuid ?? __typia_transform__randomFormatUuid._randomFormatUuid)(),
     age: (_generator?.integer ?? __typia_transform__randomInteger._randomInteger)({
         type: "integer",
-        exclusiveMinimum: true,
-        minimum: 19,
+        minimum: 0,
+        exclusiveMinimum: 19,
         maximum: 100
     })
 }); let _generator: Partial<import("typia").IRandomGenerator> | undefined; return (generator?: Partial<import("typia").IRandomGenerator>): import("typia").Resolved<IMember> => {
