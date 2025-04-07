@@ -23,22 +23,22 @@ function getAugmentedNamespace(n) {
   return a;
 }
 var _randomFormatEmail = {};
-const _randomInteger$1 = (props) => {
-  let minimum = props.minimum ?? (props.multipleOf ?? 1) * (props.maximum === void 0 ? 0 : props.maximum - 100);
-  if (props.minimum !== void 0 && props.exclusiveMinimum === true)
+const _randomInteger$1 = (schema) => {
+  let minimum = schema.minimum ?? schema.exclusiveMinimum ?? (schema.multipleOf ?? 1) * (schema.maximum === void 0 && schema.exclusiveMaximum === void 0 ? 0 : (schema.maximum ?? schema.exclusiveMaximum) - 100);
+  if (schema.exclusiveMinimum !== void 0)
     minimum++;
-  let maximum = props.maximum ?? (props.multipleOf ?? 1) * (props.minimum === void 0 ? 100 : props.minimum + 100);
-  if (props.maximum !== void 0 && props.exclusiveMaximum === true)
+  let maximum = schema.maximum ?? schema.exclusiveMaximum ?? (schema.multipleOf ?? 1) * (schema.minimum === void 0 && schema.exclusiveMinimum === void 0 ? 100 : (schema.minimum ?? schema.exclusiveMinimum) + 100);
+  if (schema.exclusiveMaximum !== void 0)
     maximum--;
   if (minimum > maximum)
     throw new Error("Minimum value is greater than maximum value.");
-  return props.multipleOf === void 0 ? scalar({
+  return schema.multipleOf === void 0 ? scalar({
     minimum,
     maximum
   }) : multiple({
     minimum,
     maximum,
-    multipleOf: props.multipleOf
+    multipleOf: schema.multipleOf
   });
 };
 const scalar = (p) => Math.floor(Math.random() * (p.maximum - p.minimum + 1)) + p.minimum;
@@ -110,23 +110,23 @@ function require_randomInteger() {
   hasRequired_randomInteger = 1;
   Object.defineProperty(_randomInteger, "__esModule", { value: true });
   _randomInteger._randomInteger = void 0;
-  const _randomInteger$12 = (props) => {
-    var _a, _b, _c, _d;
-    let minimum = (_a = props.minimum) !== null && _a !== void 0 ? _a : ((_b = props.multipleOf) !== null && _b !== void 0 ? _b : 1) * (props.maximum === void 0 ? 0 : props.maximum - 100);
-    if (props.minimum !== void 0 && props.exclusiveMinimum === true)
+  const _randomInteger$12 = (schema) => {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    let minimum = (_b = (_a = schema.minimum) !== null && _a !== void 0 ? _a : schema.exclusiveMinimum) !== null && _b !== void 0 ? _b : ((_c = schema.multipleOf) !== null && _c !== void 0 ? _c : 1) * (schema.maximum === void 0 && schema.exclusiveMaximum === void 0 ? 0 : ((_d = schema.maximum) !== null && _d !== void 0 ? _d : schema.exclusiveMaximum) - 100);
+    if (schema.exclusiveMinimum !== void 0)
       minimum++;
-    let maximum = (_c = props.maximum) !== null && _c !== void 0 ? _c : ((_d = props.multipleOf) !== null && _d !== void 0 ? _d : 1) * (props.minimum === void 0 ? 100 : props.minimum + 100);
-    if (props.maximum !== void 0 && props.exclusiveMaximum === true)
+    let maximum = (_f = (_e = schema.maximum) !== null && _e !== void 0 ? _e : schema.exclusiveMaximum) !== null && _f !== void 0 ? _f : ((_g = schema.multipleOf) !== null && _g !== void 0 ? _g : 1) * (schema.minimum === void 0 && schema.exclusiveMinimum === void 0 ? 100 : ((_h = schema.minimum) !== null && _h !== void 0 ? _h : schema.exclusiveMinimum) + 100);
+    if (schema.exclusiveMaximum !== void 0)
       maximum--;
     if (minimum > maximum)
       throw new Error("Minimum value is greater than maximum value.");
-    return props.multipleOf === void 0 ? scalar2({
+    return schema.multipleOf === void 0 ? scalar2({
       minimum,
       maximum
     }) : multiple2({
       minimum,
       maximum,
-      multipleOf: props.multipleOf
+      multipleOf: schema.multipleOf
     });
   };
   _randomInteger._randomInteger = _randomInteger$12;
@@ -151,8 +151,8 @@ const random = /* @__PURE__ */ (() => {
     id: ((_generator == null ? void 0 : _generator.uuid) ?? _randomFormatUuidExports._randomFormatUuid)(),
     age: ((_generator == null ? void 0 : _generator.integer) ?? _randomIntegerExports._randomInteger)({
       type: "integer",
-      exclusiveMinimum: true,
-      minimum: 19,
+      minimum: 0,
+      exclusiveMinimum: 19,
       maximum: 100
     })
   });
