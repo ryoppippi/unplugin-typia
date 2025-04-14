@@ -117,7 +117,7 @@
 		"esbuild": "^0.25.1",
 		"eslint": "~9.23.0",
 		"eslint-plugin-format": "^1.0.1",
-		"rollup": "^4.36.0",
+		"rollup": "^4.40.0",
 		"ts-patch": "^3.3.0",
 		"tsup": "^8.4.0",
 		"typescript": "~5.8.2",
