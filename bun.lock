@@ -28,7 +28,7 @@
       },
       "devDependencies": {
         "@ryoppippi/unplugin-typia": "workspace:*",
-        "@types/node": "^20.17.25",
+        "@types/node": "^20.17.30",
         "@types/react": "19.0.4",
         "@types/react-dom": "19.0.2",
         "ts-patch": "^3.3.0",
@@ -105,7 +105,7 @@
         "typia": "^9.0.1",
       },
       "devDependencies": {
-        "@types/node": "^20.17.25",
+        "@types/node": "^20.17.30",
         "@webpack-cli/generators": "^3.0.7",
         "html-webpack-plugin": "^5.6.3",
         "prettier": "^3.5.3",
@@ -140,7 +140,7 @@
         "@rslib/core": "^0.5.5",
         "@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
         "@types/bun": "^1.2.5",
-        "@types/node": "^20.17.25",
+        "@types/node": "^20.17.30",
         "@vue-macros/test-utils": "^1.7.1",
         "bumpp": "^10.1.0",
         "dax-sh": "^0.42.0",
