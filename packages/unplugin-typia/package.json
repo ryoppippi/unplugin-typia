@@ -82,7 +82,7 @@
 	"peerDependencies": {
 		"svelte": "^5.28.2",
 		"typescript": ">=4.8.0 <5.9.0",
-		"typia": ">=8.2.0",
+		"typia": ">=9.1.1",
 		"vite": ">=3.0.0"
 	},
 	"peerDependenciesMeta": {
