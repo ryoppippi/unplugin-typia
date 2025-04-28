@@ -121,7 +121,7 @@
 		"ts-patch": "^3.3.0",
 		"tsup": "^8.4.0",
 		"typescript": "~5.8.2",
-		"typia": "^9.0.1",
+		"typia": "^9.1.1",
 		"unplugin-unused": "^0.4.3",
 		"vite": "^6.2.2",
 		"vitest": "^3.0.9"
