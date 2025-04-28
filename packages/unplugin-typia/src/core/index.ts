@@ -88,8 +88,12 @@ const unpluginFactory: UnpluginFactory<
 				if (next != null && next[0] === 1) {
 					const replaceText = next[1];
 
-					/** get first non-whitespace character of text (maybe bug of magic-string) */
-					const firstNonWhitespaceIndexOfText = text.search(/\S/);
+					/**
+					 * get first non-whitespace character of text (maybe bug of magic-string)
+					 * text.search(/\S/) ignore `\n`, but it is important (https://github.com/ryoppippi/unplugin-typia/issues/434)
+					 */
+					const firstNonWhitespaceIndexOfText = text.startsWith('\n') ? 0 : text.search(/\S/);
+
 					const offsetStart = offset + (firstNonWhitespaceIndexOfText > 0 ? firstNonWhitespaceIndexOfText : 0);
 
 					s.update(offsetStart, offset + textLength, replaceText);
