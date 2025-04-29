@@ -120,7 +120,7 @@
 		"rollup": "^4.36.0",
 		"ts-patch": "^3.3.0",
 		"tsup": "^8.4.0",
-		"typescript": "~5.8.2",
+		"typescript": "~5.8.3",
 		"typia": "^9.1.1",
 		"unplugin-unused": "^0.4.3",
 		"vite": "^6.2.2",
