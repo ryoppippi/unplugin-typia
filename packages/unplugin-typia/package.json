@@ -115,7 +115,7 @@
 		"bumpp": "^10.1.0",
 		"dax-sh": "^0.42.0",
 		"esbuild": "^0.25.3",
-		"eslint": "~9.23.0",
+		"eslint": "~9.26.0",
 		"eslint-plugin-format": "^1.0.1",
 		"rollup": "^4.36.0",
 		"ts-patch": "^3.3.0",
