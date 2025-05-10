@@ -19,18 +19,13 @@
   ],
   "trustedDependencies": [
     "@sveltejs/kit",
-    "bunbuild",
-    "core-js",
     "esbuild",
     "nextjs",
-    "sharp",
     "svelte-preprocess",
     "sveltekit",
-    "unrs-resolver",
     "vite-hono",
     "vite-react",
     "vite-vanilla",
-    "webpack-minimal",
     "workerd"
   ],
   "packageManager": "bun@1.2.5",
