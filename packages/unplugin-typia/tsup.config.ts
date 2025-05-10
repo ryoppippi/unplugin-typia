@@ -8,7 +8,7 @@ export default <Options>{
 	],
 	clean: true,
 	format: ['esm'],
-	target: 'es2020',
+	target: 'es2023',
 	dts: true,
 	cjsInterop: true,
 	splitting: true,
