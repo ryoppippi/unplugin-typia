@@ -33,7 +33,7 @@ async function taggedTransform(
 	}
 
 	// @ts-expect-error type of this function is not correct
-	const _transform = async (source: Source, id: ID) => transform(source, id);
+	const _transform = async (source: Source, id: ID) => transform(source, id) as Promise<string | { code: string }>;
 
 	const result = await _transform(source, id);
 
