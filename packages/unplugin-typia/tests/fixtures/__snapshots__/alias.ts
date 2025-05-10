@@ -5,6 +5,7 @@ import * as __typia_transform__randomFormatEmail from "typia/lib/internal/_rando
 import * as __typia_transform__randomFormatUuid from "typia/lib/internal/_randomFormatUuid.js";
 import * as __typia_transform__randomInteger from "typia/lib/internal/_randomInteger.js";
 import * as __typia_transform__validateReport from "typia/lib/internal/_validateReport.js";
+import * as __typia_transform__createStandardSchema from "typia/lib/internal/_createStandardSchema.js";
 import type { IMember } from '@/type.js';
 import typia from 'typia';
 const is = (() => { const _io0 = (input: any): boolean => "string" === typeof input.email && __typia_transform__isFormatEmail._isFormatEmail(input.email) && ("string" === typeof input.id && __typia_transform__isFormatUuid._isFormatUuid(input.id)) && ("number" === typeof input.age && (__typia_transform__isTypeUint32._isTypeUint32(input.age) && 19 < input.age && input.age <= 100)); return (input: any): input is IMember => "object" === typeof input && null !== input && _io0(input); })();
@@ -53,7 +54,7 @@ const validate = (() => { const _io0 = (input: any): boolean => "string" === typ
         path: _path + ".age",
         expected: "(number & Type<\"uint32\"> & ExclusiveMinimum<19> & Maximum<100>)",
         value: input.age
-    })].every((flag: boolean) => flag); const __is = (input: any): input is IMember => "object" === typeof input && null !== input && _io0(input); let errors: any; let _report: any; return (input: any): import("typia").IValidation<IMember> => {
+    })].every((flag: boolean) => flag); const __is = (input: any): input is IMember => "object" === typeof input && null !== input && _io0(input); let errors: any; let _report: any; return __typia_transform__createStandardSchema._createStandardSchema((input: any): import("typia").IValidation<IMember> => {
     if (false === __is(input)) {
         errors = [];
         _report = (__typia_transform__validateReport._validateReport as any)(errors);
@@ -80,7 +81,7 @@ const validate = (() => { const _io0 = (input: any): boolean => "string" === typ
         success: true,
         data: input
     } as any;
-}; })();
+}); })();
 is({});
 validate({});
 random();

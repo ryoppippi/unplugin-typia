@@ -3,8 +3,9 @@ import * as __typia_transform__isFormatEmail from 'typia/lib/internal/_isFormatE
 import * as __typia_transform__isFormatUuid from 'typia/lib/internal/_isFormatUuid.js';
 import * as __typia_transform__isTypeUint32 from 'typia/lib/internal/_isTypeUint32.js';
 import * as __typia_transform__validateReport from 'typia/lib/internal/_validateReport.js';
+import * as __typia_transform__createStandardSchema from 'typia/lib/internal/_createStandardSchema.js';
 
-const validate = /* @__PURE__ */ (() => {
+const validate = (() => {
   const _io0 = (input) => "string" === typeof input.email && __typia_transform__isFormatEmail._isFormatEmail(input.email) && ("string" === typeof input.id && __typia_transform__isFormatUuid._isFormatUuid(input.id)) && ("number" === typeof input.age && (__typia_transform__isTypeUint32._isTypeUint32(input.age) && 19 < input.age && input.age <= 100));
   const _vo0 = (input, _path, _exceptionable = true) => ["string" === typeof input.email && (__typia_transform__isFormatEmail._isFormatEmail(input.email) || _report(_exceptionable, {
     path: _path + ".email",
@@ -42,7 +43,7 @@ const validate = /* @__PURE__ */ (() => {
   const __is = (input) => "object" === typeof input && null !== input && _io0(input);
   let errors;
   let _report;
-  return (input) => {
+  return __typia_transform__createStandardSchema._createStandardSchema((input) => {
     if (false === __is(input)) {
       errors = [];
       _report = __typia_transform__validateReport._validateReport(errors);
@@ -69,6 +70,6 @@ const validate = /* @__PURE__ */ (() => {
       success: true,
       data: input
     };
-  };
+  });
 })();
 validate({});

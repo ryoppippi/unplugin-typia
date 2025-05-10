@@ -1,4 +1,5 @@
 import * as __typia_transform__validateReport from "typia/lib/internal/_validateReport.js";
+import * as __typia_transform__createStandardSchema from "typia/lib/internal/_createStandardSchema.js";
 const is = /* @__PURE__ */ (() => {
   return (input) => true;
 })();
@@ -9,11 +10,11 @@ const random = /* @__PURE__ */ (() => {
     return "any type used...";
   };
 })();
-const validate = /* @__PURE__ */ (() => {
+const validate = (() => {
   const __is = (input) => true;
   let errors;
   let _report;
-  return (input) => {
+  return __typia_transform__createStandardSchema._createStandardSchema((input) => {
     if (false === __is(input)) {
       errors = [];
       _report = __typia_transform__validateReport._validateReport(errors);
@@ -32,7 +33,7 @@ const validate = /* @__PURE__ */ (() => {
       success: true,
       data: input
     };
-  };
+  });
 })();
 is({});
 validate({});
