@@ -77,7 +77,7 @@
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
 		"prerelease": "nr test run && nr lint && nr build",
-		"release": "bumpp",
+		"release": "bumpp --ignore-scripts",
 		"prepack": "bun run build"
 	},
 	"peerDependencies": {
