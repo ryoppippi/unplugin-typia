@@ -71,14 +71,13 @@
 		"src"
 	],
 	"scripts": {
-		"build": "tsdown",
+		"build": "tsup",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
 		"test": "vitest --typecheck --testTimeout 150000",
 		"check": "nr tsc --noEmit",
-		"prerelease": "nr test run && nr lint && nr build",
-		"release": "bumpp --ignore-scripts",
-		"prepack": "bun run build"
+		"release": "nr test run && nr lint && nr build && nlx publint && bumpp --ignore-scripts",
+		"prepublishOnly": "bun run build"
 	},
 	"peerDependencies": {
 		"svelte": "^5.28.2",
@@ -118,13 +117,12 @@
 		"esbuild": "^0.25.3",
 		"eslint": "~9.23.0",
 		"eslint-plugin-format": "^1.0.1",
-		"publint": "^0.3.12",
 		"rollup": "^4.36.0",
 		"ts-patch": "^3.3.0",
-		"tsdown": "^0.11.2",
+		"tsup": "^8.4.0",
 		"typescript": "~5.8.3",
 		"typia": "^9.1.1",
-		"unplugin-unused": "^0.5.0",
+		"unplugin-unused": "^0.4.3",
 		"vite": "^6.2.2",
 		"vitest": "^3.0.9"
 	},
