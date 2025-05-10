@@ -11,8 +11,7 @@
     "test": "bun run --filter '*' test",
     "deploy": "bun run --filter '*' deploy",
     "preinstall": "npx only-allow bun",
-    "taze": "bun x taze -r",
-    "release": "cd ./packages/unplugin-typia && bun run release"
+    "taze": "bun x taze -r"
   },
   "workspaces": [
     "examples/*",
