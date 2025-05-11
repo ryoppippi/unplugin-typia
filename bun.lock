@@ -62,7 +62,7 @@
     "examples/vite-hono": {
       "name": "vite-hono",
       "dependencies": {
-        "hono": "^4.7.7",
+        "hono": "^4.7.9",
         "uuid": "^11.1.0",
       },
       "devDependencies": {
