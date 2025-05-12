@@ -22,4 +22,5 @@ import unplugin from './core/index.js';
  * })
  * ```
  */
-export default unplugin.esbuild;
+const esbuild: typeof unplugin.esbuild = unplugin.esbuild;
+export default esbuild;

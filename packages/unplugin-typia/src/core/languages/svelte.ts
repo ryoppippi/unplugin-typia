@@ -4,7 +4,7 @@ import { wrap } from '../types.js';
 /**
  * Check if a file is a Svelte file.
  */
-export function isSvelteFile(file: string) {
+export function isSvelteFile(file: string): boolean {
 	return file.endsWith('.svelte');
 }
 
