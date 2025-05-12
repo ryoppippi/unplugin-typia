@@ -78,7 +78,7 @@
 		"check": "nr tsc --noEmit",
 		"prerelease": "nr test run && nr lint && nr build",
 		"release": "bumpp",
-		"prepublishOnly": "bun run build"
+		"prepack": "bun run build"
 	},
 	"peerDependencies": {
 		"svelte": "^5.28.2",
