@@ -33,7 +33,7 @@ export class Cache {
 		this.#data = this.getCache();
 	}
 
-	[Symbol.dispose]() {
+	[Symbol.dispose](): void {
 		this.setCache();
 	}
 

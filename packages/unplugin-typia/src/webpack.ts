@@ -34,4 +34,6 @@ import unplugin from './core/index.js';
  * ```
  *
  */
-export default unplugin.webpack;
+const webpack: typeof unplugin.webpack = unplugin.webpack;
+
+export default webpack;

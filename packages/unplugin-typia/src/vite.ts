@@ -19,4 +19,5 @@ import unplugin from './core/index.js';
  * })
  * ```
  */
-export default unplugin.vite;
+const vite: typeof unplugin.vite = unplugin.vite;
+export default vite;

@@ -19,4 +19,5 @@ import unplugin from './core/index.js';
  * })
  * ```
  */
-export default unplugin.farm;
+const farm: typeof unplugin.farm = unplugin.farm;
+export default farm;

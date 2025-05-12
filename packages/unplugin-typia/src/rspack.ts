@@ -17,4 +17,5 @@ import unplugin from './core/index.js';
  * }
  * ```
  */
-export default unplugin.rspack;
+const rspack: typeof unplugin.rspack = unplugin.rspack;
+export default rspack;

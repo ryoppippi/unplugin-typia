@@ -3,7 +3,7 @@ import { $ } from 'dax-sh';
 import { resolve } from 'pathe';
 import type { ID, Source } from '../src/core/types.js';
 
-export const root = resolve(__dirname, 'fixtures');
+export const root: string = resolve(__dirname, 'fixtures');
 
 export function getFixtureID(id: string): ID {
 	return resolve(root, id) as ID;

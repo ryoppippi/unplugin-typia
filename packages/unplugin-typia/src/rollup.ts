@@ -19,4 +19,5 @@ import unplugin from './core/index.js';
  * }
  * ```
  */
-export default unplugin.rollup;
+const rollup: typeof unplugin.rollup = unplugin.rollup;
+export default rollup;
