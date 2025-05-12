@@ -79,7 +79,7 @@
 		"test": "vitest",
 		"prerelease": "run-p lint build 'test run'",
 		"release": "bumpp",
-		"prepack": "bun run build"
+		"prepack": "bun run build && nlx clean-pkg-json"
 	},
 	"peerDependencies": {
 		"svelte": "^5.28.2",
