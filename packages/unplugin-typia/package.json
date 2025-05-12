@@ -6,7 +6,7 @@
 	"description": "unplugin for typia",
 	"author": "ryoppippi",
 	"license": "MIT",
-	"funding": "https://github.com/sponsors/ryoppippi",
+	"funding": "https://github.com/ryoppippi/unplugin-typia?sponsor=1",
 	"repository": "ryoppippi/unplugin-typia",
 	"sideEffects": false,
 	"exports": {
