@@ -1,4 +1,3 @@
-import { expect, it } from 'vitest';
 import { $ } from 'dax-sh';
 import { build } from 'esbuild';
 
@@ -23,11 +22,9 @@ async function transform(_id: ID) {
 	return result.outputFiles[0].text;
 }
 
-for (const id of await getFixtureIDs()) {
-	it(`esbuild transform ${id}`, async () => {
-		const transformed = await transform(id);
-		const snapshot = getSnapshotID(id).replace('__snapshots__', '__snapshots__/esbuild');
-		await expect(transformed).toMatchFileSnapshot(snapshot);
-		await $`node ${snapshot}`;
-	});
-}
+it.each(await getFixtureIDs())(`esbuild transform %s`, async (id: ID) => {
+	const transformed = await transform(id);
+	const snapshot = getSnapshotID(id).replace('__snapshots__', '__snapshots__/esbuild');
+	await expect(transformed).toMatchFileSnapshot(snapshot);
+	await $`node ${snapshot}`;
+});

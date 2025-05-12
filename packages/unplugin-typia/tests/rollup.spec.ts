@@ -1,4 +1,3 @@
-import { expect, it } from 'vitest';
 import { $ } from 'dax-sh';
 import { RollupEsbuildPlugin, rollupBuild } from '@vue-macros/test-utils';
 
@@ -28,11 +27,9 @@ async function transform(_id: ID) {
 	return result;
 }
 
-for (const id of await getFixtureIDs()) {
-	it(`rollup transform ${id}`, async () => {
-		const transformed = await transform(id);
-		const snapshot = getSnapshotID(id).replace('__snapshots__', '__snapshots__/rollup');
-		await expect(transformed).toMatchFileSnapshot(snapshot);
-		await $`node ${snapshot}`;
-	});
-}
+it.each(await getFixtureIDs())(`rollup transform %s`, async (id: ID) => {
+	const transformed = await transform(id);
+	const snapshot = getSnapshotID(id).replace('__snapshots__', '__snapshots__/rollup');
+	await expect(transformed).toMatchFileSnapshot(snapshot);
+	await $`node ${snapshot}`;
+});

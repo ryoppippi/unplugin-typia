@@ -1,4 +1,3 @@
-import { expect, it } from 'vitest';
 import { $ } from 'dax-sh';
 
 import path from 'pathe';
@@ -16,7 +15,7 @@ class DummyContext {
 
 const ctx = new DummyContext() as UnpluginContext & UnpluginBuildContext;
 
-async function test(_id: string): Promise<Data> {
+async function _test(_id: string): Promise<Data> {
 	const id = getFixtureID(_id);
 	const code = await readFixture(_id);
 	const transformed = await transformTypia(
@@ -29,11 +28,9 @@ async function test(_id: string): Promise<Data> {
 	return transformed;
 }
 
-for (const id of await getFixtureIDs()) {
-	it(`typia transform ${id}`, async () => {
-		const transformed = await test(id);
-		const snapshot = getSnapshotID(id, 'ts');
-		await expect(transformed).toMatchFileSnapshot(snapshot);
-		await $`bun ${snapshot}`;
-	});
-}
+it.each(await getFixtureIDs())(`typia transform %s`, async (id: string) => {
+	const transformed = await _test(id);
+	const snapshot = getSnapshotID(id, 'ts');
+	await expect(transformed).toMatchFileSnapshot(snapshot);
+	await $`bun ${snapshot}`;
+});
