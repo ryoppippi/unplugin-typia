@@ -7,7 +7,7 @@
 	"author": "ryoppippi",
 	"license": "MIT",
 	"funding": "https://github.com/sponsors/ryoppippi",
-	"repository": "https://github.com/ryoppippi/unplugin-typia.git",
+	"repository": "ryoppippi/unplugin-typia",
 	"sideEffects": false,
 	"exports": {
 		".": {
