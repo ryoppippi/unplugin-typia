@@ -1,4 +1,3 @@
-import { expect, it } from 'vitest';
 import { build } from 'vite';
 
 import type { RollupOutput } from 'rollup';
@@ -36,15 +35,10 @@ async function transform(_id: ID): Promise<RollupOutput['output']> {
 	return output;
 }
 
-for (const id of await getFixtureIDs()) {
-	it(
-		`vite transform ${id}`,
-		async () => {
-			const transformed = await transform(id);
-			const code = transformed[0].code;
-			const snapshot = getSnapshotID(id).replace('__snapshots__', '__snapshots__/vite');
-			await expect(code).toMatchFileSnapshot(snapshot);
-			await $`node ${snapshot}`;
-		},
-	);
-}
+it.each(await getFixtureIDs())(`vite transform %s`, async (id: ID) => {
+	const transformed = await transform(id);
+	const code = transformed[0].code;
+	const snapshot = getSnapshotID(id).replace('__snapshots__', '__snapshots__/vite');
+	await expect(code).toMatchFileSnapshot(snapshot);
+	await $`node ${snapshot}`;
+});
