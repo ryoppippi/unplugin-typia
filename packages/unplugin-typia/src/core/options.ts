@@ -65,21 +65,15 @@ export type ResolvedOptions
 	>;
 
 /** Default options */
-export const defaultOptions = ({
-	include: [
-		/\.[cm]?tsx?$/,
-		/\.svelte$/,
-	] as NonNullable<FilterPattern>,
-	exclude: [
-		/node_modules/,
-	] as NonNullable<FilterPattern>,
+const _defaultOptions = ({
+	include: [/\.[cm]?tsx?$/, /\.svelte$/],
+	exclude: [/node_modules/],
 	enforce: 'pre',
 	typia: { },
 	cache: false,
 	log: true,
 	tsconfig: undefined,
-}) as const;
-defaultOptions satisfies ResolvedOptions;
+}) as const satisfies ResolvedOptions;
 
 /** Create custom defu instance */
 const defu = createDefu((obj, key, value) => {
@@ -99,6 +93,9 @@ const defu = createDefu((obj, key, value) => {
 export function resolveOptions(options: Options): ResolvedOptions {
 	return defu(
 		options,
-		defaultOptions,
+		_defaultOptions,
 	);
 }
+
+/** Default options */
+export const defaultOptions: ResolvedOptions = _defaultOptions;
