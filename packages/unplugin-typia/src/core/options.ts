@@ -65,7 +65,7 @@ export type ResolvedOptions
 	>;
 
 /** Default options */
-const _defaultOptions = ({
+const defaultOptions = ({
 	include: [/\.[cm]?tsx?$/, /\.svelte$/],
 	exclude: [/node_modules/],
 	enforce: 'pre',
@@ -93,9 +93,47 @@ const defu = createDefu((obj, key, value) => {
 export function resolveOptions(options: Options): ResolvedOptions {
 	return defu(
 		options,
-		_defaultOptions,
+		defaultOptions,
 	);
 }
 
-/** Default options */
-export const defaultOptions: ResolvedOptions = _defaultOptions;
+if (import.meta.vitest != null) {
+	test('return default options if empty object is passed', () => {
+		const options = resolveOptions({});
+		expect(options).toMatchObject(defaultOptions);
+	});
+
+	test('return default options if include option is passed', () => {
+		const options = resolveOptions({ include: [/\.js$/] });
+		expect(options.include).not.toBe(defaultOptions.include);
+		expect(options.include).toEqual([/\.js$/]);
+		expect(options).toMatchObject({ ...defaultOptions, include: [/\.js$/] });
+	});
+
+	test('return default options if log option is passed', () => {
+		const options = resolveOptions({ log: 'verbose' });
+		expect(options.log).toBe('verbose');
+		expect(options).toMatchObject({ ...defaultOptions, log: 'verbose' });
+	});
+
+	test('return default options if enforce option is passed', () => {
+		const options = resolveOptions({ enforce: 'post' });
+		expect(options.enforce).toBe('post');
+		expect(options).toMatchObject({ ...defaultOptions, enforce: 'post' });
+	});
+
+	test('return cache is false if cache key is false', () => {
+		const options = resolveOptions({ cache: false });
+		expect(options).toMatchObject({ ...defaultOptions, cache: false });
+	});
+
+	test('return cache is true if cache key is true', () => {
+		const options = resolveOptions({ cache: true });
+		expect(options).toMatchObject({ ...defaultOptions, cache: true });
+	});
+
+	test('return cache is false if cache key is not passed', () => {
+		const options = resolveOptions({});
+		expect(options).toMatchObject({ ...defaultOptions, cache: false });
+	});
+}
