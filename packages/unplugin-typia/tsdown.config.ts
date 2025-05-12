@@ -5,6 +5,9 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 		'src/*.ts',
 		'!src/bun.ts',
 	],
+	define: {
+		'import.meta.vitest': 'undefined',
+	},
 	clean: true,
 	format: ['esm'],
 	shims: true,
