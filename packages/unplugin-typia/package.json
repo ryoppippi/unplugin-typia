@@ -74,7 +74,7 @@
 		"build": "tsdown",
 		"lint": "nr check && eslint --cache .",
 		"format": "eslint --cache --fix .",
-		"test": "vitest --typecheck --testTimeout 150000",
+		"test": "vitest",
 		"check": "nr tsc --noEmit",
 		"prerelease": "nr test run && nr lint && nr build",
 		"release": "bumpp",
