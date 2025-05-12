@@ -18,17 +18,15 @@
     "examples/*",
     "packages/*"
   ],
+  "packageManager": "bun@1.2.5",
+  "private": true,
   "trustedDependencies": [
-    "@sveltejs/kit",
-    "esbuild",
+    "bunbuild",
     "nextjs",
-    "svelte-preprocess",
     "sveltekit",
+    "unrs-resolver",
     "vite-hono",
     "vite-react",
-    "vite-vanilla",
-    "workerd"
-  ],
-  "packageManager": "bun@1.2.5",
-  "private": true
+    "webpack-minimal"
+  ]
 }
