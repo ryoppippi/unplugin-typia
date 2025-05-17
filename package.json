@@ -22,7 +22,9 @@
   "private": true,
   "trustedDependencies": [
     "bunbuild",
+    "esbuild",
     "nextjs",
+    "sharp",
     "sveltekit",
     "unrs-resolver",
     "vite-hono",
