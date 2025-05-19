@@ -111,7 +111,7 @@
 		"@antfu/ni": "^24.3.0",
 		"@oxc-project/runtime": "^0.69.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
-		"@types/bun": "^1.2.12",
+		"@types/bun": "^1.2.13",
 		"@types/node": "^20.17.46",
 		"@vue-macros/test-utils": "^1.7.1",
 		"bumpp": "^10.1.0",
