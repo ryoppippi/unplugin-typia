@@ -142,7 +142,7 @@
         "@types/bun": "^1.2.13",
         "@types/node": "^20.17.47",
         "@vue-macros/test-utils": "^1.7.1",
-        "bumpp": "^10.1.0",
+        "bumpp": "^10.1.1",
         "dax-sh": "^0.42.0",
         "esbuild": "^0.25.4",
         "eslint": "~9.23.0",
