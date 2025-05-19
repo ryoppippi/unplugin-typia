@@ -14,7 +14,10 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 	target: 'es2023',
 	dts: true,
 	sourcemap: true,
-	unused: { level: 'error' },
+	unused: {
+		level: 'error',
+		ignore: ['bun-only'],
+	},
 	publint: true,
 });
 

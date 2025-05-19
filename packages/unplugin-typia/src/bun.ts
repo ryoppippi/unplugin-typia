@@ -4,21 +4,17 @@
  * @module
  */
 
+import 'bun-only';
 import type { BunPlugin } from 'bun';
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin';
-import { resolveOptions, unplugin } from './api.js';
 import type { Options } from './core/options.js';
-import { isBun } from './core/utils.js';
+import { resolveOptions, unplugin } from './api.js';
 import { type ID, type Source, wrap } from './core/types.js';
 
 /**
  * Options for bun plugin
  */
 export type BunOptions = Options;
-
-if (!isBun()) {
-	throw new Error('You must use this plugin with bun');
-}
 
 /** typia transform function with tagged types */
 async function taggedTransform(

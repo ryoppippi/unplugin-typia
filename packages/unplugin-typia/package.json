@@ -97,6 +97,7 @@
 	},
 	"dependencies": {
 		"@rollup/pluginutils": "^5.1.4",
+		"bun-only": "^0.0.1",
 		"consola": "^3.4.2",
 		"defu": "^6.1.4",
 		"diff-match-patch-es": "^1.0.1",
