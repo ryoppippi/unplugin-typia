@@ -2,22 +2,18 @@ import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, wri
 import { tmpdir } from 'node:os';
 import process from 'node:process';
 import { createHash } from 'node:crypto';
-import { createRequire } from 'node:module';
 import { basename, dirname, join } from 'pathe';
 import findCacheDirectory from 'find-cache-dir';
+import { quansync } from 'quansync/macro';
 import type { CacheKey, CachePath, Data, FilePath, ID, Source } from './types.js';
 import { wrap } from './types.js';
 import { isBun } from './utils.js';
 
-/** get typia version */
-let typiaVersion: string | undefined;
-
-try {
-	if (typiaVersion == null) {
-		typiaVersion = (createRequire(import.meta.url)('typia/package.json') as typeof import('typia/package.json')).version;
-	}
-}
-catch {}
+// /** get typia version */
+const getTypiaVersion = quansync(async () => {
+	const { default: json } = await import('typia/package.json');
+	return json.version;
+});
 
 /**
  * Cache class
@@ -102,7 +98,7 @@ export class Cache {
 	}
 
 	private get hashComment() {
-		return `/* unplugin-typia-${typiaVersion ?? ''}-${this.#hashKey} */\n`;
+		return `/* unplugin-typia-${getTypiaVersion.sync()}-${this.#hashKey} */\n`;
 	}
 
 	private isWritable(filename: string): boolean {

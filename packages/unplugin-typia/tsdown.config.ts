@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsdown';
+import Quansync from 'unplugin-quansync/rolldown';
 
 const config: ReturnType<typeof defineConfig> = defineConfig({
 	entry: [
@@ -8,6 +9,9 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 	define: {
 		'import.meta.vitest': 'undefined',
 	},
+	plugins: [
+		Quansync(),
+	],
 	clean: true,
 	format: ['esm'],
 	shims: true,
