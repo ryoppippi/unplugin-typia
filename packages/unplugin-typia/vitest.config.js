@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitest/config';
+import Quansync from 'unplugin-quansync/vite';
 
 export default defineConfig({
+	plugins: [Quansync()],
 	test: {
 		globals: true,
 		includeSource: ['src/**/*.{js,ts}'],
