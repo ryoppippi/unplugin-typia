@@ -18,6 +18,7 @@
 		"declaration": true,
 		"esModuleInterop": true,
 		"isolatedDeclarations": true,
+		"verbatimModuleSyntax": true,
 		"skipLibCheck": true
 	},
 	"exclude": [
