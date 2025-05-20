@@ -1,3 +1,4 @@
+import "typia";
 var _isFormatEmail = {};
 var hasRequired_isFormatEmail;
 function require_isFormatEmail() {
