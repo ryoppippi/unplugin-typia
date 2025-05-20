@@ -109,7 +109,7 @@
 		"unplugin": "^2.2.2"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^24.3.0",
+		"@antfu/ni": "^24.4.0",
 		"@oxc-project/runtime": "^0.69.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@types/bun": "^1.2.13",
