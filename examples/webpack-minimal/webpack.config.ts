@@ -4,12 +4,11 @@ import 'webpack-dev-server'
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
-import * as tsx from 'tsx/cjs/api'
+import UnpluginTypia from '@ryoppippi/unplugin-typia/webpack';
 
 const __filename = import.meta.filename;
 const __dirname = import.meta.dirname;
 
-const {default: UnpluginTypia}  = tsx.require('../../packages/unplugin-typia/src/webpack.ts', __filename)
 
 const isProduction = process.env.NODE_ENV == 'production';
 
