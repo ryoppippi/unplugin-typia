@@ -5,7 +5,8 @@
   "author": "ryoppippi",
   "license": "MIT",
   "scripts": {
-    "build": "bun run --filter '*' build",
+    "build": "bun run --filter '@ryoppippi/*' build",
+    "postbuild": "bun run --filter '!@ryoppippi/*' build",
     "lint": "bun run --filter '*' lint",
     "format": "bun run --filter '*' format",
     "test": "bun run --filter '*' test",
