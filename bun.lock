@@ -137,7 +137,7 @@
       },
       "devDependencies": {
         "@antfu/ni": "^24.4.0",
-        "@oxc-project/runtime": "^0.69.0",
+        "@oxc-project/runtime": "^0.72.0",
         "@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
         "@types/bun": "^1.2.14",
         "@types/node": "^20.17.47",
@@ -630,7 +630,7 @@
 
     "@octokit/types": ["@octokit/types@6.41.0", "", { "dependencies": { "@octokit/openapi-types": "^12.11.0" } }, "sha512-eJ2jbzjdijiL3B4PrSQaSjuF2sPEQPVCPzBvTHJD9Nz+9dw2SGH4K4xeQJ77YfTq5bRQ+bD8wT11JbeDPmxmGg=="],
 
-    "@oxc-project/runtime": ["@oxc-project/runtime@0.69.0", "", {}, "sha512-v4WCEJEktTuWY+DEaR1XNITKZD9S0BCyoBeCTyHUH3ppgrb4IlMeDTkwNyfvaIXBFfhlCX4DI445TJ4cqiK0FA=="],
+    "@oxc-project/runtime": ["@oxc-project/runtime@0.72.0", "", {}, "sha512-HSL4xYOb6/ntJqBFPmtTABdtk4tBbyTDuPi/I9VSmJcp9HVZSOdCDZxxeVXu0QeikjZyFbuNRUVugvoGfC3qFw=="],
 
     "@oxc-project/types": ["@oxc-project/types@0.69.0", "", {}, "sha512-bu3gzdAlLgncoaqyqWVpMAKx4axo+j3ewvvdAt5iCLtvHB/n3Qeif67NU+2TM/ami1nV5/KVO9lxCH8paPATBA=="],
 
@@ -3155,6 +3155,8 @@
     "regjsparser/jsesc": ["jsesc@0.5.0", "", { "bin": { "jsesc": "bin/jsesc" } }, "sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA=="],
 
     "resolve-cwd/resolve-from": ["resolve-from@5.0.0", "", {}, "sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw=="],
+
+    "rolldown/@oxc-project/runtime": ["@oxc-project/runtime@0.69.0", "", {}, "sha512-v4WCEJEktTuWY+DEaR1XNITKZD9S0BCyoBeCTyHUH3ppgrb4IlMeDTkwNyfvaIXBFfhlCX4DI445TJ4cqiK0FA=="],
 
     "safe-array-concat/isarray": ["isarray@2.0.5", "", {}, "sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw=="],
 
