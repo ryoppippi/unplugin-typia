@@ -147,7 +147,7 @@
         "esbuild": "^0.25.4",
         "eslint": "~9.23.0",
         "eslint-plugin-format": "^1.0.1",
-        "npm-run-all2": "^8.0.2",
+        "npm-run-all2": "^8.0.3",
         "publint": "^0.3.12",
         "rollup": "^4.36.0",
         "ts-patch": "^3.3.0",
@@ -2096,7 +2096,7 @@
 
     "npm-registry-fetch": ["npm-registry-fetch@12.0.2", "", { "dependencies": { "make-fetch-happen": "^10.0.1", "minipass": "^3.1.6", "minipass-fetch": "^1.4.1", "minipass-json-stream": "^1.0.1", "minizlib": "^2.1.2", "npm-package-arg": "^8.1.5" } }, "sha512-Df5QT3RaJnXYuOwtXBXS9BWs+tHH2olvkCLh6jcR/b/u3DvPMlp3J0TvvYwplPKxHMOwfg287PYih9QqaVFoKA=="],
 
-    "npm-run-all2": ["npm-run-all2@8.0.2", "", { "dependencies": { "ansi-styles": "^6.2.1", "cross-spawn": "^7.0.6", "memorystream": "^0.3.1", "picomatch": "^4.0.2", "pidtree": "^0.6.0", "read-package-json-fast": "^4.0.0", "shell-quote": "^1.7.3", "which": "^5.0.0" }, "bin": { "run-p": "bin/run-p/index.js", "run-s": "bin/run-s/index.js", "npm-run-all": "bin/npm-run-all/index.js", "npm-run-all2": "bin/npm-run-all/index.js" } }, "sha512-yU70kTcohhAETxUjJQxTdQbaDJWCyv+DlKHEWdOifxZ0hZUKRh26mY2mfzlPxfGbsTRbgBuEHeakB6wx0CvVaQ=="],
+    "npm-run-all2": ["npm-run-all2@8.0.4", "", { "dependencies": { "ansi-styles": "^6.2.1", "cross-spawn": "^7.0.6", "memorystream": "^0.3.1", "picomatch": "^4.0.2", "pidtree": "^0.6.0", "read-package-json-fast": "^4.0.0", "shell-quote": "^1.7.3", "which": "^5.0.0" }, "bin": { "run-p": "bin/run-p/index.js", "run-s": "bin/run-s/index.js", "npm-run-all": "bin/npm-run-all/index.js", "npm-run-all2": "bin/npm-run-all/index.js" } }, "sha512-wdbB5My48XKp2ZfJUlhnLVihzeuA1hgBnqB2J9ahV77wLS+/YAJAlN8I+X3DIFIPZ3m5L7nplmlbhNiFDmXRDA=="],
 
     "npm-run-path": ["npm-run-path@4.0.1", "", { "dependencies": { "path-key": "^3.0.0" } }, "sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw=="],
 
