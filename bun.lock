@@ -137,7 +137,7 @@
       },
       "devDependencies": {
         "@antfu/ni": "^24.4.0",
-        "@oxc-project/runtime": "^0.72.0",
+        "@oxc-project/runtime": "^0.72.2",
         "@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
         "@types/bun": "^1.2.15",
         "@types/node": "^20.17.51",
@@ -630,7 +630,7 @@
 
     "@octokit/types": ["@octokit/types@6.41.0", "", { "dependencies": { "@octokit/openapi-types": "^12.11.0" } }, "sha512-eJ2jbzjdijiL3B4PrSQaSjuF2sPEQPVCPzBvTHJD9Nz+9dw2SGH4K4xeQJ77YfTq5bRQ+bD8wT11JbeDPmxmGg=="],
 
-    "@oxc-project/runtime": ["@oxc-project/runtime@0.72.0", "", {}, "sha512-HSL4xYOb6/ntJqBFPmtTABdtk4tBbyTDuPi/I9VSmJcp9HVZSOdCDZxxeVXu0QeikjZyFbuNRUVugvoGfC3qFw=="],
+    "@oxc-project/runtime": ["@oxc-project/runtime@0.72.2", "", {}, "sha512-J2lsPDen2mFs3cOA1gIBd0wsHEhum2vTnuKIRwmj3HJJcIz/XgeNdzvgSOioIXOJgURIpcDaK05jwaDG1rhDwg=="],
 
     "@oxc-project/types": ["@oxc-project/types@0.69.0", "", {}, "sha512-bu3gzdAlLgncoaqyqWVpMAKx4axo+j3ewvvdAt5iCLtvHB/n3Qeif67NU+2TM/ami1nV5/KVO9lxCH8paPATBA=="],
 

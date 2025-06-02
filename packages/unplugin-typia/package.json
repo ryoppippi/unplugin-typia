@@ -110,7 +110,7 @@
 	},
 	"devDependencies": {
 		"@antfu/ni": "^24.4.0",
-		"@oxc-project/runtime": "^0.72.0",
+		"@oxc-project/runtime": "^0.72.2",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@types/bun": "^1.2.15",
 		"@types/node": "^20.17.51",
