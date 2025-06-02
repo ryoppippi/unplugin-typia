@@ -1,8 +1,8 @@
 import { accessSync, constants, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import process from 'node:process';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
+import { createFixture } from 'fs-fixture';
 import { basename, dirname, join } from 'pathe';
 import findCacheDirectory from 'find-cache-dir';
 import type { CacheKey, CachePath, Data, FilePath, ID, Source } from './types.js';
@@ -131,7 +131,8 @@ function getCacheDir(): FilePath {
 }
 
 if (import.meta.vitest != null) {
-	process.env.CACHE_DIR = tmpdir();
+	await using fixture = await createFixture();
+	process.env.CACHE_DIR = fixture.path;
 
 	function removeComments(data: string | undefined) {
 		if (data == null) {
