@@ -147,6 +147,7 @@
         "esbuild": "^0.25.4",
         "eslint": "~9.23.0",
         "eslint-plugin-format": "^1.0.1",
+        "fs-fixture": "^2.7.1",
         "npm-run-all2": "^8.0.3",
         "publint": "^0.3.12",
         "rollup": "^4.36.0",
@@ -1601,6 +1602,8 @@
     "fresh": ["fresh@0.5.2", "", {}, "sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q=="],
 
     "fs-extra": ["fs-extra@9.1.0", "", { "dependencies": { "at-least-node": "^1.0.0", "graceful-fs": "^4.2.0", "jsonfile": "^6.0.1", "universalify": "^2.0.0" } }, "sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ=="],
+
+    "fs-fixture": ["fs-fixture@2.7.1", "", {}, "sha512-fh9PEM+vCFvO8zPztFRW0c8kcG67AfDZ1aMfMO9i2dKFd2WpeNtmZyTDjfmB7AyPRWDPo+NcBj5Ng2llTS7SFA=="],
 
     "fs-minipass": ["fs-minipass@2.1.0", "", { "dependencies": { "minipass": "^3.0.0" } }, "sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg=="],
 

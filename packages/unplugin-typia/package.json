@@ -120,6 +120,7 @@
 		"esbuild": "^0.25.4",
 		"eslint": "~9.23.0",
 		"eslint-plugin-format": "^1.0.1",
+		"fs-fixture": "^2.7.1",
 		"npm-run-all2": "^8.0.3",
 		"publint": "^0.3.12",
 		"rollup": "^4.36.0",
