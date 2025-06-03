@@ -113,7 +113,7 @@
 		"@oxc-project/runtime": "^0.72.2",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@types/bun": "^1.2.15",
-		"@types/node": "^20.17.51",
+		"@types/node": "^20.17.57",
 		"@vue-macros/test-utils": "^1.7.1",
 		"bumpp": "^10.1.1",
 		"dax-sh": "^0.42.0",
