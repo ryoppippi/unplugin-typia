@@ -163,7 +163,7 @@
         "svelte": "^5.28.2",
         "typescript": ">=4.8.0 <5.9.0",
         "typia": ">=9.3.0",
-        "vite": ">=3.0.0",
+        "vite": ">=3.2.11",
       },
       "optionalPeers": [
         "svelte",
