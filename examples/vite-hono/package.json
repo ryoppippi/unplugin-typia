@@ -10,7 +10,7 @@
     "prepare": "ts-patch install && typia patch"
   },
   "dependencies": {
-    "hono": "^4.7.10",
+    "hono": "^4.7.11",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
