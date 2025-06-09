@@ -121,7 +121,7 @@
 		"eslint": "~9.23.0",
 		"eslint-plugin-format": "^1.0.1",
 		"fs-fixture": "^2.7.1",
-		"npm-run-all2": "^8.0.3",
+		"npm-run-all2": "^8.0.4",
 		"publint": "^0.3.12",
 		"rollup": "^4.36.0",
 		"ts-patch": "^3.3.0",
