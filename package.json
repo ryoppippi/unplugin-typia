@@ -12,6 +12,7 @@
   "scripts": {
     "build": "bun run --filter '@ryoppippi/*' build",
     "postbuild": "bun run --filter '!@ryoppippi/*' build",
+    "predeploy": "bun run build",
     "deploy": "bun run --filter '*' deploy",
     "format": "sort-package-json **/package.json && bun run --filter '*' format",
     "preinstall": "npx only-allow bun",
@@ -19,7 +20,8 @@
     "prepare": "simple-git-hooks",
     "release": "cd packages/unplugin-typia && bun run release",
     "taze": "bun x taze -r",
-    "test": "bun run build && bun run --filter '*' test"
+    "pretest": "bun run build",
+    "test": "bun run --filter '*' test"
   },
   "simple-git-hooks": {
     "pre-commit": "bun run format"
