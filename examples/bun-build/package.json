@@ -1,14 +1,14 @@
 {
   "name": "bunbuild",
-  "module": "index.ts",
   "type": "module",
+  "module": "index.ts",
   "scripts": {
-    "dev": "bun run --watch ./index.ts",
-    "test": "npm run test:build-run && npm run test:jit",
-    "test:jit": "bun run ./index.ts",
-    "test:build-run": "npm run build && node ./out/index.js",
     "build": "bun run ./build.ts",
-    "prepare": "ts-patch install && typia patch"
+    "dev": "bun run --watch ./index.ts",
+    "prepare": "ts-patch install && typia patch",
+    "test": "npm run test:build-run && npm run test:jit",
+    "test:build-run": "npm run build && node ./out/index.js",
+    "test:jit": "bun run ./index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -16,9 +16,9 @@
     "typia": "^9.3.0"
   },
   "peerDependencies": {
+    "@ryoppippi/unplugin-typia": "workspace:*",
     "ts-patch": "^3.2.1",
     "tslib": "^2.8.1",
-    "typescript": "~5.8.3",
-    "@ryoppippi/unplugin-typia": "workspace:*"
+    "typescript": "~5.8.3"
   }
 }
