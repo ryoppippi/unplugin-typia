@@ -10,59 +10,22 @@
 	"repository": "ryoppippi/unplugin-typia",
 	"sideEffects": false,
 	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"bun": "./src/index.ts",
-			"default": "./dist/index.js"
-		},
-		"./api": {
-			"types": "./dist/api.d.ts",
-			"bun": "./src/api.ts",
-			"default": "./dist/api.js"
-		},
-		"./vite": {
-			"types": "./dist/vite.d.ts",
-			"bun": "./src/vite.ts",
-			"default": "./dist/vite.js"
-		},
-		"./webpack": {
-			"types": "./dist/webpack.d.ts",
-			"bun": "./src/webpack.ts",
-			"default": "./dist/webpack.js"
-		},
-		"./rollup": {
-			"types": "./dist/rollup.d.ts",
-			"bun": "./src/rollup.ts",
-			"default": "./dist/rollup.js"
-		},
-		"./esbuild": {
-			"types": "./dist/esbuild.d.ts",
-			"bun": "./src/esbuild.ts",
-			"default": "./dist/esbuild.js"
-		},
-		"./next": {
-			"types": "./dist/next.d.ts",
-			"bun": "./src/next.ts",
-			"default": "./dist/next.js"
-		},
-		"./rolldown": {
-			"types": "./dist/rolldown.d.ts",
-			"bun": "./src/rolldown.ts",
-			"default": "./dist/rolldown.js"
-		},
-		"./farm": {
-			"types": "./dist/farm.d.ts",
-			"bun": "./src/farm.ts",
-			"default": "./dist/farm.js"
-		},
-		"./rspack": {
-			"types": "./dist/rspack.d.ts",
-			"bun": "./src/rspack.ts",
-			"default": "./dist/rspack.js"
-		},
-		"./bun": "./src/bun.ts",
+		".": "./dist/index.js",
+		"./api": "./dist/api.js",
+		"./bun": "./dist/bun.js",
+		"./esbuild": "./dist/esbuild.js",
+		"./farm": "./dist/farm.js",
+		"./next": "./dist/next.js",
+		"./rolldown": "./dist/rolldown.js",
+		"./rollup": "./dist/rollup.js",
+		"./rspack": "./dist/rspack.js",
+		"./vite": "./dist/vite.js",
+		"./webpack": "./dist/webpack.js",
 		"./package.json": "./package.json"
 	},
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"files": [
 		"LICENSE",
 		"README.md",
@@ -72,14 +35,14 @@
 	],
 	"scripts": {
 		"build": "tsdown",
+		"format": "eslint --cache --fix .",
 		"lint": "run-p lint:*",
 		"lint:eslint": "eslint --cache .",
 		"lint:ts": "tsc --noEmit",
-		"format": "eslint --cache --fix .",
-		"test": "vitest",
+		"prepack": "bun run build && nlx clean-pkg-json",
 		"prerelease": "run-p lint build 'test run'",
 		"release": "bumpp",
-		"prepack": "bun run build && nlx clean-pkg-json"
+		"test": "vitest"
 	},
 	"peerDependencies": {
 		"svelte": "^5.28.2",
@@ -125,7 +88,7 @@
 		"publint": "^0.3.12",
 		"rollup": "^4.36.0",
 		"ts-patch": "^3.3.0",
-		"tsdown": "^0.11.11",
+		"tsdown": "^0.12.7",
 		"typescript": "~5.8.3",
 		"typia": "^9.3.0",
 		"unplugin-unused": "^0.5.0",

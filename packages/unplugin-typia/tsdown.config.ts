@@ -3,7 +3,6 @@ import { defineConfig } from 'tsdown';
 const config: ReturnType<typeof defineConfig> = defineConfig({
 	entry: [
 		'src/*.ts',
-		'!src/bun.ts',
 	],
 	define: {
 		'import.meta.vitest': 'undefined',
@@ -16,9 +15,9 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 	sourcemap: true,
 	unused: {
 		level: 'error',
-		ignore: ['bun-only'],
 	},
 	publint: true,
+	exports: true,
 });
 
 export default config;
