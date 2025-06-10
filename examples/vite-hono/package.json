@@ -1,13 +1,13 @@
 {
-  "type": "module",
-  "private": true,
   "name": "vite-hono",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "bun -b vite",
     "build": "bun -b vite build",
-    "preview": "bun -b vite dev",
     "deploy": "bun run build && npx wrangler pages deploy",
-    "prepare": "ts-patch install && typia patch"
+    "dev": "bun -b vite",
+    "prepare": "ts-patch install && typia patch",
+    "preview": "bun -b vite dev"
   },
   "dependencies": {
     "hono": "^4.7.11",

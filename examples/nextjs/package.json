@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "bun -b next dev",
     "build": "bun -b next build",
-    "start": "bun -b next start",
-    "prepare": "ts-patch install && typia patch"
+    "dev": "bun -b next dev",
+    "prepare": "ts-patch install && typia patch",
+    "start": "bun -b next start"
+  },
+  "overrides": {
+    "@types/react": "19.0.4",
+    "@types/react-dom": "19.0.2"
   },
   "dependencies": {
     "next": "15.2.4",
@@ -23,9 +27,5 @@
     "type-fest": "^4.37.0",
     "typescript": "~5.8.3",
     "typia": "^9.3.0"
-  },
-  "overrides": {
-    "@types/react": "19.0.4",
-    "@types/react-dom": "19.0.2"
   }
 }

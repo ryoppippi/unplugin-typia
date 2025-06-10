@@ -1,6 +1,19 @@
 {
   "name": "webpack-minimal",
   "private": true,
+  "scripts": {
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "prepare": "ts-patch install && typia patch",
+    "serve": "webpack serve",
+    "watch": "register-config-webpack-to-ts-node webpack --watch"
+  },
+  "dependencies": {
+    "@ryoppippi/unplugin-typia": "workspace:*",
+    "cross-env": "^7.0.3",
+    "typia": "^9.3.0"
+  },
   "devDependencies": {
     "@types/node": "^20.17.57",
     "@webpack-cli/generators": "^3.0.7",
@@ -14,18 +27,5 @@
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2",
     "workbox-webpack-plugin": "^7.3.0"
-  },
-  "scripts": {
-    "build": "webpack --mode=production --node-env=production",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "register-config-webpack-to-ts-node webpack --watch",
-    "serve": "webpack serve",
-    "prepare": "ts-patch install && typia patch"
-  },
-  "dependencies": {
-    "@ryoppippi/unplugin-typia": "workspace:*",
-    "cross-env": "^7.0.3",
-    "typia": "^9.3.0"
   }
 }

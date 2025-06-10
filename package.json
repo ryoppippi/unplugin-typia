@@ -1,26 +1,34 @@
 {
   "name": "unplugin-typia-monorepo",
-  "type": "module",
+  "private": true,
   "description": "",
-  "author": "ryoppippi",
   "license": "MIT",
-  "scripts": {
-    "build": "bun run --filter '@ryoppippi/*' build",
-    "postbuild": "bun run --filter '!@ryoppippi/*' build",
-    "lint": "bun run --filter '*' lint",
-    "format": "bun run --filter '*' format",
-    "test": "bun run --filter '*' test",
-    "deploy": "bun run --filter '*' deploy",
-    "preinstall": "npx only-allow bun",
-    "taze": "bun x taze -r",
-    "release": "cd packages/unplugin-typia && bun run release"
-  },
+  "author": "ryoppippi",
+  "type": "module",
   "workspaces": [
     "examples/*",
     "packages/*"
   ],
+  "scripts": {
+    "build": "bun run --filter '@ryoppippi/*' build",
+    "postbuild": "bun run --filter '!@ryoppippi/*' build",
+    "deploy": "bun run --filter '*' deploy",
+    "format": "sort-package-json **/package.json && bun run --filter '*' format",
+    "preinstall": "npx only-allow bun",
+    "lint": "bun run --filter '*' lint",
+    "prepare": "simple-git-hooks",
+    "release": "cd packages/unplugin-typia && bun run release",
+    "taze": "bun x taze -r",
+    "test": "bun run --filter '*' test"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "bun run format"
+  },
+  "devDependencies": {
+    "simple-git-hooks": "^2.13.0",
+    "sort-package-json": "^3.2.1"
+  },
   "packageManager": "bun@1.2.5",
-  "private": true,
   "trustedDependencies": [
     "bunbuild",
     "esbuild",

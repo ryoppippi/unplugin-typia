@@ -1,14 +1,14 @@
 {
   "name": "vite-react",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun -b vite",
     "build": "bun -b tsc && bun -b vite build",
-    "preview": "bun -b vite preview",
     "deploy": "bun run build && npx wrangler pages deploy",
-    "prepare": "ts-patch install && typia patch"
+    "dev": "bun -b vite",
+    "prepare": "ts-patch install && typia patch",
+    "preview": "bun -b vite preview"
   },
   "dependencies": {
     "react": "^19.0.0",
