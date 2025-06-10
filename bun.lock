@@ -149,7 +149,7 @@
         "@vue-macros/test-utils": "^1.7.1",
         "bumpp": "^10.1.1",
         "dax-sh": "^0.42.0",
-        "esbuild": "^0.25.4",
+        "esbuild": "^0.25.5",
         "eslint": "~9.23.0",
         "eslint-plugin-format": "^1.0.1",
         "fs-fixture": "^2.7.1",
