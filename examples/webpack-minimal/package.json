@@ -12,7 +12,7 @@
   "dependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
     "cross-env": "^7.0.3",
-    "typia": "^9.3.0"
+    "typia": "^9.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.17.57",

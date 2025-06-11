@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/bun": "latest",
     "std-env": "^3.8.1",
-    "typia": "^9.3.0"
+    "typia": "^9.3.1"
   },
   "peerDependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
