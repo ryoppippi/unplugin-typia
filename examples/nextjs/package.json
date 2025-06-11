@@ -10,18 +10,18 @@
   },
   "overrides": {
     "@types/react": "19.0.4",
-    "@types/react-dom": "19.0.2"
+    "@types/react-dom": "19.1.6"
   },
   "dependencies": {
     "next": "15.2.4",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@ryoppippi/unplugin-typia": "workspace:*",
     "@types/node": "^20.17.57",
     "@types/react": "19.0.4",
-    "@types/react-dom": "19.0.2",
+    "@types/react-dom": "19.1.6",
     "ts-patch": "^3.3.0",
     "tslib": "^2.8.1",
     "type-fest": "^4.37.0",
